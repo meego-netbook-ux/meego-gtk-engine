@@ -1,0 +1,22 @@
+Version 0.3.1
+=============
+
+* Revert the clock colour change
+
+Version 0.3
+===========
+
+* Colour the clock applet from the style, so the applet doesn't have to do it
+  directly.
+
+Version 0.2
+===========
+
+* New optional cairo rendering
+* Refreshed visual style
+* Bug fixes, see ChangeLog for full details of changes
+
+Version 0.1
+===========
+
+* First release!

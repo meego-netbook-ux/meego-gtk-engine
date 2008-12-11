@@ -1,0 +1,33 @@
+Sato GTK+ Theme Engine
+======================
+
+Description
+
+Sato is a reference GTK+/Matchbox based environment aimed primarily at handheld
+devices with very high DPI displays. The Sato GTK+ Theme Engine provides the
+themeing for GTK+ widgets and is designed for speed and clarity on embedded
+hardware.
+
+
+Author
+
+Sato is developed by OpenedHand Ltd. For more information please contact
+info@openedhand.com.
+
+
+Reporting Bugs
+
+Please report bugs to http://bugzilla.gnome.org and file
+under the Sato product with gtk-engine component.
+
+
+Copyright
+
+Copyright © 2007 OpenedHand Ltd. This library is free software; you can
+redistribute it and/or modify it under the terms of the GNU Lesser General
+Public License as published by the Free Software Foundation; either version 2 of
+the License, or (at your option) any later version. You should have received a
+copy of the GNU Lesser General Public License along with this library; if not,
+write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+Boston, MA 02111-1307, USA.
+
