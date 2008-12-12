@@ -16,8 +16,5 @@ libsato_engine_la_SOURCES = \
 libsato_engine_la_LDFLAGS = -module -avoid-version -no-undefined -Werror
 libsato_engine_la_LIBADD = $(GTK_LIBS)
 
-themedir = $(datadir)/themes/Sato/
-dist_theme_DATA = data/index.theme
-
 gtkthemedir = $(themedir)/gtk-2.0
 dist_gtktheme_DATA = data/gtkrc
