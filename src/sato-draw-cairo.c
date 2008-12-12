@@ -34,15 +34,16 @@
 #define DEBUG(func) // g_printf ("%s: detail = '%s'; state = %d; x:%d; y:%d; w:%d; h:%d;\n", func, detail, state_type, x, y, width, height);
 #define DETAIL(foo) (detail && strcmp (foo, detail) == 0)
 
-#define LINE_WIDTH 2
+#define LINE_WIDTH 1
 #define RADIUS 6
 
 GtkStyleClass *parent_style_class;
 
 static void
-sato_rounded_rectangle (cairo_t *cr, gint x, gint y, gint width, gint height)
+sato_rounded_rectangle (cairo_t *cr, gdouble x, gdouble y, gdouble width, gdouble height)
 {
   int radius = RADIUS;
+
   if (width < RADIUS * 2)
   {
     radius = width / 2;
@@ -52,6 +53,8 @@ sato_rounded_rectangle (cairo_t *cr, gint x, gint y, gint width, gint height)
     radius = height / 2;
   }
 
+  x += 0.5;
+  y += 0.5;
 
   cairo_move_to (cr, x, y + height - radius);
   cairo_arc (cr, x + radius, y + radius, radius, M_PI, M_PI * 1.5);
@@ -280,7 +283,7 @@ sato_draw_check (GtkStyle * style, GdkWindow * window,
     gdk_cairo_set_source_color (cr, &style->base[GTK_STATE_SELECTED]);
   else
     gdk_cairo_set_source_color (cr, &style->base[state_type]);
-  cairo_rectangle (cr, x + LINE_WIDTH / 2, y + LINE_WIDTH / 2, width - LINE_WIDTH, height - LINE_WIDTH);
+  cairo_rectangle (cr, x + LINE_WIDTH / 2.0, y + LINE_WIDTH / 2.0, width - LINE_WIDTH, height - LINE_WIDTH);
   cairo_fill_preserve (cr);
 
   /* draw the border */
@@ -375,7 +378,7 @@ sato_draw_box_gap (GtkStyle * style, GdkWindow * window,
   gdk_cairo_set_source_color (cr, &style->fg[state_type]);
 
   /* start off with a rectangle... */
-  cairo_rectangle (cr, x + LINE_WIDTH / 2, y + LINE_WIDTH / 2, width - LINE_WIDTH, height - LINE_WIDTH);
+  cairo_rectangle (cr, x + LINE_WIDTH / 2.0, y + LINE_WIDTH / 2.0, width - LINE_WIDTH, height - LINE_WIDTH);
   cairo_stroke (cr);
 
   switch (gap_side)
@@ -423,14 +426,15 @@ sato_draw_extension (GtkStyle * style, GdkWindow * window,
 		     GtkPositionType gap_side)
 {
   cairo_t *cr;
+  gdouble cx, cy;
 
   cr = gdk_cairo_create (window);
   cairo_set_line_width (cr, LINE_WIDTH);
   cairo_set_line_cap (cr, CAIRO_LINE_CAP_SQUARE);
 
 
-  x += LINE_WIDTH / 2;
-  y += LINE_WIDTH / 2;
+  cx = x + LINE_WIDTH / 2.0;
+  cy = y + LINE_WIDTH / 2.0;
   width -= LINE_WIDTH;
   height -= LINE_WIDTH;
 
@@ -439,37 +443,37 @@ sato_draw_extension (GtkStyle * style, GdkWindow * window,
     case GTK_POS_TOP:     /* bottom tab */
       /* this allows for some overlap */
       if (state_type == GTK_STATE_NORMAL)
-        y -= LINE_WIDTH / 2;
+        cy -= LINE_WIDTH;
 
-      cairo_move_to (cr, x, y);
-      cairo_arc_negative (cr, x + RADIUS, y + height - RADIUS, RADIUS, M_PI, M_PI * 0.5);
-      cairo_arc_negative (cr, x + width - RADIUS, y + height - RADIUS, RADIUS, M_PI * 0.5, 0);
-      cairo_line_to (cr, x + width, y);
+      cairo_move_to (cr, cx, cy);
+      cairo_arc_negative (cr, cx + RADIUS, cy + height - RADIUS, RADIUS, M_PI, M_PI * 0.5);
+      cairo_arc_negative (cr, cx + width - RADIUS, cy + height - RADIUS, RADIUS, M_PI * 0.5, 0);
+      cairo_line_to (cr, cx + width, cy);
       break;
     case GTK_POS_BOTTOM: /* top tab */
       if (state_type == GTK_STATE_NORMAL)
         height += LINE_WIDTH;
 
-      cairo_move_to (cr, x, y + height);
-      cairo_arc (cr, x + RADIUS, y + RADIUS, RADIUS, M_PI, M_PI * 1.5);
-      cairo_arc (cr, x + width - RADIUS, y + RADIUS, RADIUS, M_PI * 1.5, 0);
-      cairo_line_to (cr, x + width, y + height);
+      cairo_move_to (cr, cx, cy + height);
+      cairo_arc (cr, cx + RADIUS, cy + RADIUS, RADIUS, M_PI, M_PI * 1.5);
+      cairo_arc (cr, cx + width - RADIUS, cy + RADIUS, RADIUS, M_PI * 1.5, 0);
+      cairo_line_to (cr, cx + width, cy + height);
       break;
     case GTK_POS_LEFT:	/* right tab */
       if (state_type == GTK_STATE_NORMAL)
-        x -= LINE_WIDTH / 2;
-      cairo_move_to (cr, x, y);
-      cairo_arc (cr, x + width - RADIUS, y + RADIUS, RADIUS, M_PI * 1.5, 0);
-      cairo_arc (cr, x + width - RADIUS, y + height - RADIUS, RADIUS, 0, M_PI * 0.5);
-      cairo_line_to (cr, x, y + height);
+        cx -= LINE_WIDTH;
+      cairo_move_to (cr, cx, cy);
+      cairo_arc (cr, cx + width - RADIUS, cy + RADIUS, RADIUS, M_PI * 1.5, 0);
+      cairo_arc (cr, cx + width - RADIUS, cy + height - RADIUS, RADIUS, 0, M_PI * 0.5);
+      cairo_line_to (cr, cx, cy + height);
       break;
     case GTK_POS_RIGHT:	/* left tab */
       if (state_type == GTK_STATE_NORMAL)
         width += LINE_WIDTH;
-      cairo_move_to (cr, x + width, y);
-      cairo_arc_negative (cr, x + RADIUS, y + RADIUS, RADIUS, M_PI * 1.5, M_PI);
-      cairo_arc_negative (cr, x + RADIUS, y + height - RADIUS, RADIUS, M_PI, M_PI * 0.5);
-      cairo_line_to (cr, x + width, y + height);
+      cairo_move_to (cr, cx + width, cy);
+      cairo_arc_negative (cr, cx + RADIUS, cy + RADIUS, RADIUS, M_PI * 1.5, M_PI);
+      cairo_arc_negative (cr, cx + RADIUS, cy + height - RADIUS, RADIUS, M_PI, M_PI * 0.5);
+      cairo_line_to (cr, cx + width, cy + height);
       break;
   }
 
@@ -498,8 +502,8 @@ sato_draw_vline (GtkStyle *style, GdkWindow *window, GtkStateType state_type,
   cairo_set_line_cap (cr, CAIRO_LINE_CAP_ROUND);
 
   gdk_cairo_set_source_color (cr, &style->dark[state_type]);
-  cairo_move_to (cr, x, y1);
-  cairo_line_to (cr, x, y2);
+  cairo_move_to (cr, x + LINE_WIDTH / 2.0, y1);
+  cairo_line_to (cr, x + LINE_WIDTH / 2.0, y2);
   cairo_stroke (cr);
 
   cairo_destroy (cr);
@@ -520,8 +524,8 @@ sato_draw_hline (GtkStyle *style, GdkWindow *window,  GtkStateType state_type,
   cairo_set_line_cap (cr, CAIRO_LINE_CAP_ROUND);
 
   gdk_cairo_set_source_color (cr, &style->dark[state_type]);
-  cairo_move_to (cr, x1, y);
-  cairo_line_to (cr, x2, y);
+  cairo_move_to (cr, x1, y + LINE_WIDTH / 2.0);
+  cairo_line_to (cr, x2, y + LINE_WIDTH / 2.0);
   cairo_stroke (cr);
 
   cairo_destroy (cr);
