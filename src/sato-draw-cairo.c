@@ -22,8 +22,6 @@
 
 #include "config.h"
 
-#ifdef ENABLE_CAIRO
-
 #include "sato-draw.h"
 #include "sato-style.h"
 
@@ -550,4 +548,4 @@ sato_draw_style_class_init (GtkStyleClass * style_class)
 
 }
 
-#endif /* ENABLE_CAIRO */
+
