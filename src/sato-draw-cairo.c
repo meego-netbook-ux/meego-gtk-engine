@@ -68,7 +68,6 @@ sato_rounded_rectangle (cairo_t *cr, gdouble x, gdouble y, gdouble width, gdoubl
 static void
 sato_draw_box (DRAW_ARGS)
 {
-  gboolean has_focus;
   cairo_t *cr;
   GdkColor border_color;
   
@@ -122,10 +121,6 @@ sato_draw_box (DRAW_ARGS)
     return;
   }
 
-  has_focus = (widget && GTK_WIDGET_HAS_FOCUS (widget));
-  if (has_focus && state_type != GTK_STATE_ACTIVE)
-      border_color = style->bg[GTK_STATE_SELECTED];
-
   /*** spin buttons ***/
   if (DETAIL ("spinbutton_down") || DETAIL ("spinbutton_up"))
     return;
@@ -147,13 +142,9 @@ sato_draw_box (DRAW_ARGS)
     {
       gtk_widget_queue_draw_area (entry, entry->allocation.x, entry->allocation.y,
                                   entry->allocation.width,entry->allocation.height);
-
-      has_focus = GTK_WIDGET_HAS_FOCUS (entry);
     }
 
     g_object_set_data (G_OBJECT (widget->parent), "sato-combo-button", widget);
-    if (has_focus)
-      border_color = style->bg[GTK_STATE_SELECTED];
 
     /* FIXME: RTL */
     width += 10;
@@ -269,11 +260,7 @@ sato_draw_shadow (DRAW_ARGS)
   /*** draw the border ***/
   sato_rounded_rectangle (cr, x, y, width, height);
 
-  /* draw a hilight shadow on focused widgets (i.e. entry widgets) */
-  if (widget && GTK_WIDGET_HAS_FOCUS (widget))
-    gdk_cairo_set_source_color (cr, &style->bg[GTK_STATE_SELECTED]);
-  else
-    gdk_cairo_set_source_color (cr, &style->fg[state_type]);
+
   cairo_stroke (cr);
 
   cairo_destroy (cr);
