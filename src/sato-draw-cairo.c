@@ -186,8 +186,20 @@ sato_draw_box (DRAW_ARGS)
   }
   else
   {
+    if (shadow_type == GTK_SHADOW_OUT)
+      {
+        /* outer shadow */
+        cairo_move_to (cr, x + RADIUS + 0.5, y + height + 0.5);
+        cairo_line_to (cr, x + width + 0.5 - RADIUS, y + height + 0.5);
+        cairo_set_source_rgba (cr, 0, 0, 0, 0.07);
+        cairo_stroke (cr);
+
+        /* reduce height for outer shadow */
+        height--;
+      }
+
     sato_rounded_rectangle (cr, x + LINE_WIDTH / 2, y + LINE_WIDTH / 2,
-        width - LINE_WIDTH, height - LINE_WIDTH);
+        width, height);
     gdk_cairo_set_source_color (cr, &style->bg[state_type]);
     cairo_fill_preserve (cr);
     gdk_cairo_set_source_color (cr, &border_color);
