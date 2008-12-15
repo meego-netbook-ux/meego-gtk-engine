@@ -33,7 +33,7 @@
 #define DETAIL(foo) (detail && strcmp (foo, detail) == 0)
 
 #define LINE_WIDTH 1
-#define RADIUS 6
+#define RADIUS 4
 
 GtkStyleClass *parent_style_class;
 
