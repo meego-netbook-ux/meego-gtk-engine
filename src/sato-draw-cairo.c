@@ -75,29 +75,6 @@ sato_draw_box (DRAW_ARGS)
 
   sato_shade_colour (&style->bg[GTK_STATE_NORMAL], &border_color, 0.48);
 
-
-  /* hack to remove PRELIGHT state */
-  if (!DETAIL ("menuitem") && state_type == GTK_STATE_PRELIGHT)
-  {
-    if (widget && GTK_IS_TOGGLE_BUTTON (widget) && shadow_type == GTK_SHADOW_IN)
-    {
-      state_type = GTK_STATE_ACTIVE;
-    }
-    else
-    {
-      if (widget && GTK_IS_BUTTON (widget)
-          && (gtk_button_get_relief (GTK_BUTTON (widget)) == GTK_RELIEF_NONE))
-      {
-        /* none relief buttons shouldn't draw anything for "normal" state */
-        return;
-      }
-      else
-      {
-        state_type == GTK_STATE_NORMAL;
-      }
-    }
-  }
-
   if (width <= 0 && DETAIL ("menu"))
   {
     /* we're allowed to set a mask on the window here */
