@@ -66,12 +66,15 @@ sato_draw_box (DRAW_ARGS)
 {
   gboolean has_focus;
   cairo_t *cr;
-  GdkColor *border_color = &style->fg[state_type];
-
+  GdkColor border_color;
+  
   DEBUG ("draw_box");
 
   if (DETAIL ("paned") || DETAIL ("vscrollbar") || DETAIL ("hscrollbar"))
     return;
+
+  sato_shade_colour (&style->bg[GTK_STATE_NORMAL], &border_color, 0.48);
+
 
   /* hack to remove PRELIGHT state */
   if (!DETAIL ("menuitem") && state_type == GTK_STATE_PRELIGHT)
@@ -140,7 +143,7 @@ sato_draw_box (DRAW_ARGS)
 
   has_focus = (widget && GTK_WIDGET_HAS_FOCUS (widget));
   if (has_focus && state_type != GTK_STATE_ACTIVE)
-      border_color = &style->bg[GTK_STATE_SELECTED];
+      border_color = style->bg[GTK_STATE_SELECTED];
 
   /*** spin buttons ***/
   if (DETAIL ("spinbutton_down") || DETAIL ("spinbutton_up"))
@@ -169,15 +172,27 @@ sato_draw_box (DRAW_ARGS)
 
     g_object_set_data (G_OBJECT (widget->parent), "sato-combo-button", widget);
     if (has_focus)
-      border_color = &style->bg[GTK_STATE_SELECTED];
-    else
-      border_color = &style->fg[state_type];
+      border_color = style->bg[GTK_STATE_SELECTED];
 
     /* FIXME: RTL */
     width += 10;
     x -= 10;
 
   }
+
+  if (widget && DETAIL ("trough") && GTK_IS_SCALE (widget))
+    {
+      if (width > height)
+        {
+          height = 6;
+          y += 4;
+        }
+      else
+        {
+          width = 6;
+          x += 4;
+        }
+    }
 
 
   cr = gdk_cairo_create (window);
@@ -187,7 +202,7 @@ sato_draw_box (DRAW_ARGS)
   /* menu and toolbars get just a single line at the bottom of the widget */
   if (DETAIL ("menubar") || DETAIL ("toolbar"))
   {
-    gdk_cairo_set_source_color (cr, border_color);
+    gdk_cairo_set_source_color (cr, &border_color);
     cairo_move_to (cr, x, y + height - LINE_WIDTH / 2);
     cairo_line_to (cr, x + width, y + height - LINE_WIDTH / 2);
     cairo_stroke (cr);
@@ -198,8 +213,29 @@ sato_draw_box (DRAW_ARGS)
         width - LINE_WIDTH, height - LINE_WIDTH);
     gdk_cairo_set_source_color (cr, &style->bg[state_type]);
     cairo_fill_preserve (cr);
-    gdk_cairo_set_source_color (cr, border_color);
+    gdk_cairo_set_source_color (cr, &border_color);
     cairo_stroke (cr);
+
+    if (shadow_type == GTK_SHADOW_IN)
+      {
+        cairo_move_to (cr, x + RADIUS / 2, y + 1);
+        cairo_line_to (cr, x + width - RADIUS / 2, y + 1);
+        cairo_set_source_rgba (cr,
+                               border_color.red / 0xffff,
+                               border_color.green / 0xffff,
+                               border_color.blue / 0xffff,
+                               0.2);
+        cairo_stroke (cr);
+
+        cairo_move_to (cr, x + RADIUS / 2, y + 2);
+        cairo_line_to (cr, x + width - RADIUS / 2, y + 2);
+        cairo_set_source_rgba (cr,
+                               border_color.red / 0xffff,
+                               border_color.green / 0xffff,
+                               border_color.blue / 0xffff,
+                               0.1);
+        cairo_stroke (cr);
+      }
   }
 
   cairo_destroy (cr);
