@@ -42,6 +42,13 @@ sato_rounded_rectangle (cairo_t *cr, gdouble x, gdouble y, gdouble width, gdoubl
 {
   int radius = RADIUS;
 
+  if (width < 1 || height < 1)
+    return;
+
+  /* this allows for calculating end co-ordinates */
+  width--;
+  height--;
+
   if (width < RADIUS * 2)
   {
     radius = width / 2;
@@ -50,9 +57,6 @@ sato_rounded_rectangle (cairo_t *cr, gdouble x, gdouble y, gdouble width, gdoubl
   {
     radius = height / 2;
   }
-
-  x += 0.5;
-  y += 0.5;
 
   cairo_move_to (cr, x, y + height - radius);
   cairo_arc (cr, x + radius, y + radius, radius, M_PI, M_PI * 1.5);
@@ -173,6 +177,7 @@ sato_draw_box (DRAW_ARGS)
 
 
   cr = gdk_cairo_create (window);
+  cairo_translate (cr, 0.5, 0.5);
   cairo_set_line_width (cr, LINE_WIDTH);
 
 
@@ -180,8 +185,8 @@ sato_draw_box (DRAW_ARGS)
   if (DETAIL ("menubar") || DETAIL ("toolbar"))
   {
     gdk_cairo_set_source_color (cr, &border_color);
-    cairo_move_to (cr, x, y + height - LINE_WIDTH / 2);
-    cairo_line_to (cr, x + width, y + height - LINE_WIDTH / 2);
+    cairo_move_to (cr, x, y + height);
+    cairo_line_to (cr, x + width, y + height);
     cairo_stroke (cr);
   }
   else
@@ -189,8 +194,8 @@ sato_draw_box (DRAW_ARGS)
     if (shadow_type == GTK_SHADOW_OUT)
       {
         /* outer shadow */
-        cairo_move_to (cr, x + RADIUS + 0.5, y + height + 0.5);
-        cairo_line_to (cr, x + width + 0.5 - RADIUS, y + height + 0.5);
+        cairo_move_to (cr, x + RADIUS, y + height - 1);
+        cairo_line_to (cr, x + width - RADIUS - 1, y + height - 1);
         cairo_set_source_rgba (cr, 0, 0, 0, 0.07);
         cairo_stroke (cr);
 
@@ -198,8 +203,7 @@ sato_draw_box (DRAW_ARGS)
         height--;
       }
 
-    sato_rounded_rectangle (cr, x + LINE_WIDTH / 2, y + LINE_WIDTH / 2,
-        width, height);
+    sato_rounded_rectangle (cr, x, y, width, height);
     gdk_cairo_set_source_color (cr, &style->bg[state_type]);
     cairo_fill_preserve (cr);
     gdk_cairo_set_source_color (cr, &border_color);
@@ -260,11 +264,7 @@ sato_draw_shadow (DRAW_ARGS)
 
   cr = gdk_cairo_create (window);
   cairo_set_line_width (cr, LINE_WIDTH);
-
-  x += LINE_WIDTH / 2;
-  y += LINE_WIDTH / 2;
-  width -= LINE_WIDTH;
-  height -= LINE_WIDTH;
+  cairo_translate (cr, 0.5, 0.5);
 
   /*** draw the border ***/
   sato_rounded_rectangle (cr, x, y, width, height);
