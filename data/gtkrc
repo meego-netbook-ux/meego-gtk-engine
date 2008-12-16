@@ -133,7 +133,10 @@ style "notebook"
 {
 # NORMAL = active tab, ACTIVE = inactive tabs
   bg[NORMAL] = @selected_bg_color
-  bg[ACTIVE] = lighter (@bg_color)
+
+  bg[ACTIVE] = @bg_color
+  fg[ACTIVE] = @fg_color
 }
 class "GtkNotebook" style "notebook"
+widget_class "*GtkNotebook*" style "notebook"
 
