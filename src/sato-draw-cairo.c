@@ -82,11 +82,18 @@ sato_draw_box (DRAW_ARGS)
 {
   cairo_t *cr;
   GdkColor border_color;
+  gboolean add_shadow = TRUE;
   
   DEBUG ("draw_box");
 
-  if (DETAIL ("paned") || DETAIL ("vscrollbar") || DETAIL ("hscrollbar"))
+  if (DETAIL ("paned"))
     return;
+    
+  if (DETAIL ("vscrollbar") || DETAIL ("hscrollbar") || DETAIL ("slider")
+     || DETAIL ("bar"))
+  {
+    add_shadow = FALSE;
+  }
 
   sato_shade_colour (&style->bg[GTK_STATE_NORMAL], &border_color, 0.48);
 
@@ -198,7 +205,7 @@ sato_draw_box (DRAW_ARGS)
   }
   else
   {
-    if (shadow_type == GTK_SHADOW_OUT)
+    if (shadow_type == GTK_SHADOW_OUT && add_shadow)
       {
         /* outer shadow */
         cairo_move_to (cr, x + RADIUS, y + height - 1);
