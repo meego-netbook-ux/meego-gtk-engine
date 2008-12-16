@@ -39,6 +39,16 @@ GtkStyleClass *parent_style_class;
 
 static void sato_draw_shadow (DRAW_ARGS);
 
+static inline void
+sato_set_border_color (cairo_t *cr, GtkStyle *style)
+{
+ GdkColor border_color; 
+ 
+ sato_shade_colour (&style->bg[GTK_STATE_NORMAL], &border_color, 0.48); 
+ gdk_cairo_set_source_color (cr, &border_color);
+}
+
+
 static void
 sato_rounded_rectangle (cairo_t *cr, gdouble x, gdouble y, gdouble width, gdouble height)
 {
@@ -301,46 +311,56 @@ sato_draw_check (GtkStyle * style, GdkWindow * window,
   DEBUG ("draw_check");
 
   cr = gdk_cairo_create (window);
+  cairo_translate (cr, 0.5, 0.5);
   cairo_set_line_width (cr, LINE_WIDTH);
 
-/* fill the background */
-  if (widget && GTK_WIDGET_HAS_FOCUS (widget) && !GTK_IS_TREE_VIEW (widget))
-    gdk_cairo_set_source_color (cr, &style->base[GTK_STATE_SELECTED]);
-  else
-    gdk_cairo_set_source_color (cr, &style->base[state_type]);
-  cairo_rectangle (cr, x + LINE_WIDTH / 2.0, y + LINE_WIDTH / 2.0, width - LINE_WIDTH, height - LINE_WIDTH);
-  cairo_fill_preserve (cr);
+  /* fill the background */
+  gdk_cairo_set_source_color (cr, &style->base[state_type]);
+  sato_rounded_rectangle (cr, x, y, width, height);
+  cairo_fill (cr);
+
+  /* inner shadow */
+  cairo_set_source_rgba (cr, 0, 0, 0, 0.1);
+  sato_rounded_rectangle (cr, x + 1, y + 1, width - 1, height - 1);
+  cairo_stroke (cr);
+  
+  cairo_set_source_rgba (cr, 0, 0, 0, 0.05);
+  sato_rounded_rectangle (cr, x + 2, y + 2, width - 2, height - 2);
+  cairo_stroke (cr);
+
 
   /* draw the border */
-  gdk_cairo_set_source_color (cr, &style->fg[state_type]);
+  sato_set_border_color (cr, style);
+  sato_rounded_rectangle (cr, x, y, width, height);
   cairo_stroke (cr);
+  
+  gdk_cairo_set_source_color (cr, &style->text[state_type]);
 
   /*** draw check mark ***/
   if (shadow_type == GTK_SHADOW_IN)
   {
-    x += LINE_WIDTH * 2;
-    y += LINE_WIDTH * 2;
-    width -= LINE_WIDTH * 4;
-    height -= LINE_WIDTH * 4;
+    x += 2;
+    y += 3;
+    width -= 5;
+    height -= 6;
+    
+    cairo_set_line_width (cr, 2);
 
     cairo_rectangle (cr, x, y, width, height);
     cairo_clip (cr);
     y += 1;
     height -= 2;
 
-    cairo_set_line_width (cr, LINE_WIDTH * 1.5);
-    cairo_set_line_join (cr, CAIRO_LINE_JOIN_BEVEL);
-
-    cairo_move_to (cr, x, y + height * 0.6);
+    cairo_move_to (cr, x, y + height * 0.53);
     cairo_line_to (cr, x + width * 0.3, y + height);
     cairo_line_to (cr, x + width, y);
 
-    gdk_cairo_set_source_color (cr, &style->text[state_type]);
     cairo_stroke (cr);
   }
   cairo_destroy (cr);
 
 }
+
 
 static void
 sato_draw_option (GtkStyle * style, GdkWindow * window,
