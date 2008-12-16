@@ -556,6 +556,72 @@ sato_draw_hline (GtkStyle *style, GdkWindow *window,  GtkStateType state_type,
   cairo_destroy (cr);
 }
 
+static void
+sato_draw_arrow (GtkStyle *style,
+                 GdkWindow *window,
+                 GtkStateType state_type,
+                 GtkShadowType shadow_type,
+                 GdkRectangle *area,
+                 GtkWidget *widget,
+                 const gchar *detail,
+                 GtkArrowType arrow_type,
+                 gboolean fill,
+                 gint x,
+                 gint y,
+                 gint width,
+                 gint height)
+{
+  cairo_t *cr;
+  
+  cr = gdk_cairo_create (window);
+  cairo_set_line_width (cr, 2);
+
+  cairo_set_line_cap (cr, CAIRO_LINE_CAP_ROUND);
+  gdk_cairo_set_source_color (cr, &style->bg[GTK_STATE_SELECTED]);
+  
+  /* ensure we have odd number of pixels for width or height to allow for
+   * correct centering
+   */
+  if (width % 2) width--;
+  if (height % 2) height--;
+
+  switch (arrow_type)
+  {
+    case GTK_ARROW_UP:
+      y = y + height / 2 - (width * 0.12);
+      height = width * 0.6;
+      cairo_move_to (cr, x, y + height);
+      cairo_line_to (cr, x + width / 2, y);
+      cairo_line_to (cr, x + width, y + height);
+      break;
+    case GTK_ARROW_DOWN:
+      y = y + height / 2 - (width * 0.12);
+      height = width * 0.6;
+      cairo_move_to (cr, x, y);
+      cairo_line_to (cr, x + width / 2, y + height);
+      cairo_line_to (cr, x + width, y);
+      break;
+    case GTK_ARROW_LEFT:
+      x = x + width / 2 - (height * 0.12);
+      width = height * 0.6;
+      cairo_move_to (cr, x + width, y);
+      cairo_line_to (cr, x, y + height / 2);
+      cairo_line_to (cr, x + width, y + height);
+      break;
+    case GTK_ARROW_RIGHT:
+       x = x + width / 2 - (height * 0.12);
+      width = height * 0.6;
+      cairo_move_to (cr, x, y);
+      cairo_line_to (cr, x + width, y + height / 2);
+      cairo_line_to (cr, x, y + height);
+      break;
+    case GTK_ARROW_NONE:
+    break;
+  }
+  cairo_stroke (cr);
+  cairo_destroy (cr);
+}
+
 void
 sato_draw_style_class_init (GtkStyleClass * style_class)
 {
@@ -572,6 +638,7 @@ sato_draw_style_class_init (GtkStyleClass * style_class)
   style_class->draw_hline = sato_draw_hline;
   style_class->draw_vline = sato_draw_vline;
   style_class->draw_focus = sato_draw_focus;
+  style_class->draw_arrow = sato_draw_arrow;
 
 }
 
