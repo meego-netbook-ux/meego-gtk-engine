@@ -32,8 +32,8 @@ style "default"
 
 	GtkToolbar::internal_padding = 2
 
-	GtkCheckButton::indicator_size = 16
-	GtkCheckMenuItem::indicator_size = 16
+	GtkCheckButton::indicator_size = 15
+	GtkCheckMenuItem::indicator_size = 15
 
 
 	fg [NORMAL] = @fg_color

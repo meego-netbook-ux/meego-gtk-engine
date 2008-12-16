@@ -375,29 +375,34 @@ sato_draw_option (GtkStyle * style, GdkWindow * window,
   DEBUG ("draw_option");
 
   cr = gdk_cairo_create (window);
-  cairo_set_line_width (cr, LINE_WIDTH);
+  cairo_set_line_width (cr, 1);
+  cairo_translate (cr, 0.5, 0.5);
 
   /* define radius and centre coordinates */
+  if (width % 2) width--;
   radius = width / 2;
   cx = x + radius;
   cy = y + radius;
 
   /* fill the background */
-  if (widget && GTK_WIDGET_HAS_FOCUS (widget) && !GTK_IS_TREE_VIEW (widget))
-    gdk_cairo_set_source_color (cr, &style->base[GTK_STATE_SELECTED]);
-  else
-    gdk_cairo_set_source_color (cr, &style->base[state_type]);
+  gdk_cairo_set_source_color (cr, &style->base[state_type]);
   cairo_arc (cr, cx, cy, radius, 0, M_PI * 2);
-  cairo_fill_preserve (cr);
+  cairo_fill (cr);
+  
+  /* inner shadow */
+  cairo_arc (cr, cx, cy, radius - 1, M_PI * 0.75, M_PI * 1.75);
+  cairo_set_source_rgba (cr, 0, 0, 0, 0.2);
+  cairo_stroke (cr);
 
   /* draw the border */
-  gdk_cairo_set_source_color (cr, &style->fg[state_type]);
+  cairo_arc (cr, cx, cy, radius, 0, M_PI * 2);
+  sato_set_border_color (cr, style);
   cairo_stroke (cr);
 
   /*** draw check mark ***/
   if (shadow_type == GTK_SHADOW_IN)
   {
-    cairo_arc (cr, cx, cy, radius - LINE_WIDTH * 2,  0, M_PI * 2);
+    cairo_arc (cr, cx, cy, radius - 4,  0, M_PI * 2);
     gdk_cairo_set_source_color (cr, &style->text[state_type]);
     cairo_fill (cr);
   }
