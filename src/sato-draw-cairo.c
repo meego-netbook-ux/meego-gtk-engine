@@ -554,6 +554,9 @@ sato_draw_vline (GtkStyle *style, GdkWindow *window, GtkStateType state_type,
   if (DETAIL ("vscale") || DETAIL ("hscale"))
     return;
 
+  if (DETAIL ("vseparator"))
+    return;
+
   cr = gdk_cairo_create (window);
   cairo_set_line_width (cr, LINE_WIDTH);
   cairo_set_line_cap (cr, CAIRO_LINE_CAP_ROUND);
