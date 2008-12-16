@@ -37,6 +37,8 @@
 
 GtkStyleClass *parent_style_class;
 
+static void sato_draw_shadow (DRAW_ARGS);
+
 static void
 sato_rounded_rectangle (cairo_t *cr, gdouble x, gdouble y, gdouble width, gdouble height)
 {
@@ -130,6 +132,8 @@ sato_draw_box (DRAW_ARGS)
     /* FIXME: for RTL */
     width += 10;
     x -= 10;
+    sato_draw_shadow (style, window, GTK_SHADOW_IN, shadow_type, area, widget, detail, x, y, width, height);
+    return;
   }
 
   /*** combo boxes ***/
@@ -150,6 +154,8 @@ sato_draw_box (DRAW_ARGS)
     width += 10;
     x -= 10;
 
+    sato_draw_shadow (style, window, GTK_SHADOW_IN, shadow_type, area, widget, detail, x, y, width, height);
+    return;
   }
 
   if (widget && DETAIL ("trough") && GTK_IS_SCALE (widget))
@@ -230,6 +236,7 @@ static void
 sato_draw_shadow (DRAW_ARGS)
 {
   cairo_t *cr;
+  GdkColor border_color;
 
   DEBUG ("draw_shadow");
 
@@ -238,11 +245,13 @@ sato_draw_shadow (DRAW_ARGS)
 
   SANITIZE_SIZE;
 
+  sato_shade_colour (&style->bg[GTK_STATE_NORMAL], &border_color, 0.48);
+
   /* FIXME: for RTL */
-  if (widget && (GTK_IS_SPIN_BUTTON (widget) || GTK_IS_COMBO_BOX_ENTRY (widget->parent)))
+  if (widget && DETAIL ("entry") && (GTK_IS_SPIN_BUTTON (widget) || GTK_IS_COMBO_BOX_ENTRY (widget->parent)))
       width += 10;
 
-  if (widget && GTK_IS_COMBO_BOX_ENTRY (widget->parent))
+  if (widget && DETAIL ("entry") && GTK_IS_COMBO_BOX_ENTRY (widget->parent))
   {
     GtkWidget *button;
     g_object_set_data (G_OBJECT (widget->parent), "sato-combo-entry", widget);
@@ -257,8 +266,14 @@ sato_draw_shadow (DRAW_ARGS)
   cairo_set_line_width (cr, LINE_WIDTH);
   cairo_translate (cr, 0.5, 0.5);
 
+  /* draw the shadow */
+  cairo_set_source_rgba (cr, 0, 0, 0, 0.20);
+  sato_rounded_rectangle (cr, x + 1, y + 1, width - 1, height - 1);
+  cairo_stroke (cr);
+
   /*** draw the border ***/
-  sato_rounded_rectangle (cr, x, y, width, height);
+  gdk_cairo_set_source_color (cr, &border_color);
+  sato_rounded_rectangle (cr, x, y, width - 1, height - 1);
 
 
   cairo_stroke (cr);
