@@ -65,13 +65,6 @@ style "default"
 
 class "GtkWidget" style "default"
 
-
-style "menubar"
-{
-	bg [NORMAL] = darker (@bg_color)
-}
-class "GtkMenuBar" style "menubar"
-
 style "button"
 {
 	bg[NORMAL] = lighter (@bg_color)
@@ -123,12 +116,8 @@ class "GtkProgressBar" style "progressbar"
 
 style "scrollbar"
 {
-  bg[NORMAL] = @selected_bg_color
-  bg[PRELIGHT] = @selected_bg_color
-
   bg[ACTIVE] = shade (0.9, @bg_color)
-
-  bg[SELECTED] = @fg_color
+  bg[INSENSITIVE] = @bg_color
 }
 class "GtkScrollbar" style "scrollbar"
 class "GtkScale" style "scrollbar"
