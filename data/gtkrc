@@ -38,7 +38,7 @@ style "default"
 
 	fg [NORMAL] = @fg_color
 	fg [PRELIGHT] = @fg_color
-	fg [ACTIVE] = @fg_color
+	fg [ACTIVE] = @selected_fg_color
 	fg [INSENSITIVE] = lighter (@fg_color)
 	fg [SELECTED] = @selected_fg_color
 
