@@ -118,7 +118,7 @@ sato_draw_box (DRAW_ARGS)
 
     /* create the mask as a white region */
     cairo_set_source_rgb (cm, 1.0, 1.0, 1.0);
-    sato_rounded_rectangle (cm, 0, 0, width, height);
+    sato_rounded_rectangle (cm, 0, 0, width + 1, height + 1);
     cairo_fill (cm);
     cairo_destroy (cm);
 
