@@ -173,6 +173,12 @@ sato_draw_box (DRAW_ARGS)
     width += 10;
     x -= 10;
 
+    cr = gdk_cairo_create (window);
+    cairo_rectangle (cr, x, y, width, height);
+    gdk_cairo_set_source_color (cr, &style->base[state_type]);
+    cairo_fill (cr);
+    cairo_destroy (cr);
+
     sato_draw_shadow (style, window, GTK_SHADOW_IN, shadow_type, area, widget, detail, x, y, width, height);
     return;
   }
