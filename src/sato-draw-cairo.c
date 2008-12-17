@@ -90,7 +90,7 @@ sato_draw_box (DRAW_ARGS)
     return;
     
   if (DETAIL ("vscrollbar") || DETAIL ("hscrollbar") || DETAIL ("slider")
-     || DETAIL ("bar"))
+     || DETAIL ("bar") || DETAIL ("handlebox"))
   {
     add_shadow = FALSE;
   }
