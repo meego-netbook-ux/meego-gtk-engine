@@ -141,3 +141,14 @@ style "notebook"
 class "GtkNotebook" style "notebook"
 widget_class "*GtkNotebook.GtkLabel" style "notebook"
 
+style "toolbar"
+{
+  bg[NORMAL] = shade (0.98, @bg_color)
+}
+class "GtkToolbar" style "toolbar"
+
+style "menubar"
+{
+  bg[NORMAL] = shade (0.9, @bg_color)
+}
+class "GtkMenuBar" style "menubar"
