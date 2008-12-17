@@ -229,32 +229,55 @@ sato_draw_box (DRAW_ARGS)
         height--;
       }
 
+    /* background fill */
     sato_rounded_rectangle (cr, x, y, width, height);
     gdk_cairo_set_source_color (cr, &style->bg[state_type]);
-    cairo_fill_preserve (cr);
-    gdk_cairo_set_source_color (cr, &border_color);
-    cairo_stroke (cr);
+    cairo_fill (cr);
 
     if (shadow_type == GTK_SHADOW_IN)
       {
-        cairo_move_to (cr, x + RADIUS / 2, y + 1);
-        cairo_line_to (cr, x + width - RADIUS / 2, y + 1);
-        cairo_set_source_rgba (cr,
-                               border_color.red / 0xffff,
-                               border_color.green / 0xffff,
-                               border_color.blue / 0xffff,
-                               0.2);
-        cairo_stroke (cr);
+          cairo_move_to (cr, x + 1, y + 1);
+          cairo_line_to (cr, x + width - 1, y + 1);
+          cairo_set_source_rgba (cr,
+                                 border_color.red / 0xffff,
+                                 border_color.green / 0xffff,
+                                 border_color.blue / 0xffff,
+                                 0.1);
+          cairo_stroke (cr);
 
-        cairo_move_to (cr, x + RADIUS / 2, y + 2);
-        cairo_line_to (cr, x + width - RADIUS / 2, y + 2);
-        cairo_set_source_rgba (cr,
-                               border_color.red / 0xffff,
-                               border_color.green / 0xffff,
-                               border_color.blue / 0xffff,
-                               0.1);
-        cairo_stroke (cr);
+          cairo_move_to (cr, x + 1, y + 2);
+          cairo_line_to (cr, x + width - 1, y + 2);
+          cairo_set_source_rgba (cr,
+                                 border_color.red / 0xffff,
+                                 border_color.green / 0xffff,
+                                 border_color.blue / 0xffff,
+                                 0.05);
+          cairo_stroke (cr);
+       
+          cairo_move_to (cr, x + 1, y + 1);
+          cairo_line_to (cr, x + 1, y + height);
+          cairo_set_source_rgba (cr,
+                                 border_color.red / 0xffff,
+                                 border_color.green / 0xffff,
+                                 border_color.blue / 0xffff,
+                                 0.1);
+          cairo_stroke (cr);
+
+          cairo_move_to (cr, x + 2, y + 1);
+          cairo_line_to (cr, x + 2, y + height);
+          cairo_set_source_rgba (cr,
+                                 border_color.red / 0xffff,
+                                 border_color.green / 0xffff,
+                                 border_color.blue / 0xffff,
+                                 0.05);
+          cairo_stroke (cr);
       }
+
+    /* border */
+    sato_rounded_rectangle (cr, x, y, width, height);
+    gdk_cairo_set_source_color (cr, &border_color);
+    cairo_stroke (cr);
+
   }
 
   cairo_destroy (cr);
