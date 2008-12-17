@@ -206,7 +206,7 @@ sato_draw_box (DRAW_ARGS)
   /* menu and toolbars get just a single line at the bottom of the widget */
   if (DETAIL ("menubar") || DETAIL ("toolbar"))
   {
-    cairo_rectangle (cr, x, y, width, height);
+    cairo_rectangle (cr, x - 0.5, y - 0.5, width, height);
     gdk_cairo_set_source_color (cr, &style->bg[state_type]);
     cairo_fill (cr);
 
