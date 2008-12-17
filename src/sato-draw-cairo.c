@@ -200,9 +200,13 @@ sato_draw_box (DRAW_ARGS)
   /* menu and toolbars get just a single line at the bottom of the widget */
   if (DETAIL ("menubar") || DETAIL ("toolbar"))
   {
+    cairo_rectangle (cr, x, y, width, height);
+    gdk_cairo_set_source_color (cr, &style->bg[state_type]);
+    cairo_fill (cr);
+
     gdk_cairo_set_source_color (cr, &border_color);
-    cairo_move_to (cr, x, y + height);
-    cairo_line_to (cr, x + width, y + height);
+    cairo_move_to (cr, x, y + height - 1);
+    cairo_line_to (cr, x + width, y + height - 1);
     cairo_stroke (cr);
   }
   else
