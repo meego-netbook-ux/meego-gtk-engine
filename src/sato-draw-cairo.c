@@ -289,16 +289,20 @@ sato_draw_shadow (DRAW_ARGS)
   cairo_set_line_width (cr, LINE_WIDTH);
   cairo_translate (cr, 0.5, 0.5);
 
-  /* draw the shadow */
-  cairo_set_source_rgba (cr, 0, 0, 0, 0.20);
-  sato_rounded_rectangle (cr, x + 1, y + 1, width - 1, height - 1);
+  /* draw the inner shadow */
+  cairo_set_source_rgba (cr, 0, 0, 0, 0.15);
+  sato_rounded_rectangle (cr, x + 1, y + 1, width - 1, height - 2);
   cairo_stroke (cr);
 
-  /*** draw the border ***/
+  /* draw the border */
   gdk_cairo_set_source_color (cr, &border_color);
-  sato_rounded_rectangle (cr, x, y, width - 1, height - 1);
+  sato_rounded_rectangle (cr, x, y, width, height - 1);
+  cairo_stroke (cr);
 
-
+  /* draw the outer shadow */
+  cairo_set_source_rgba (cr, 0, 0, 0, 0.07);
+  cairo_move_to (cr, x + 4, y + height - 1);
+  cairo_line_to (cr, x + width - 5, y + height - 1);
   cairo_stroke (cr);
 
   cairo_destroy (cr);
