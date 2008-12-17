@@ -127,6 +127,8 @@ sato_draw_box (DRAW_ARGS)
 
     gtk_widget_shape_combine_mask (toplevel, bm, 0, 0);
     g_object_unref (bm);
+
+    add_shadow = FALSE;
   }
   else
   {
