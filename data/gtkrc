@@ -137,6 +137,7 @@ style "notebook"
   bg[ACTIVE] = @bg_color
   fg[ACTIVE] = @fg_color
 }
+# match the notebook and the label in the tab of the notebook
 class "GtkNotebook" style "notebook"
-widget_class "*GtkNotebook*" style "notebook"
+widget_class "*GtkNotebook.GtkLabel" style "notebook"
 
