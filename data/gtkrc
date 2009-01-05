@@ -38,13 +38,13 @@ style "default"
 
 	fg [NORMAL] = @fg_color
 	fg [PRELIGHT] = @fg_color
-	fg [ACTIVE] = @selected_fg_color
+	fg [ACTIVE] = @fg_color
 	fg [INSENSITIVE] = lighter (@fg_color)
 	fg [SELECTED] = @selected_fg_color
 
 	bg [NORMAL] = @bg_color
 	bg [PRELIGHT] = @bg_color
-	bg [ACTIVE] = @selected_bg_color
+	bg [ACTIVE] = @bg_color
 	bg [INSENSITIVE] = darker (@bg_color)
 	bg [SELECTED] = @selected_bg_color
 
@@ -71,6 +71,9 @@ style "button"
 	bg[PRELIGHT] = lighter (@bg_color)
 	bg[INSENSITIVE] = @bg_color
 	fg[INSENSITIVE] = darker (@bg_color)
+	bg[ACTIVE] = @selected_bg_color
+	fg[ACTIVE] = @selected_fg_color
+
 }
 widget_class "*Button*" style "button"
 class "GtkScale" style "button"
@@ -133,13 +136,8 @@ style "notebook"
 {
 # NORMAL = active tab, ACTIVE = inactive tabs
   bg[NORMAL] = @selected_bg_color
-
-  bg[ACTIVE] = @bg_color
-  fg[ACTIVE] = @fg_color
 }
-# match the notebook and the label in the tab of the notebook
 class "GtkNotebook" style "notebook"
-widget_class "*GtkNotebook.GtkLabel" style "notebook"
 
 style "toolbar"
 {
