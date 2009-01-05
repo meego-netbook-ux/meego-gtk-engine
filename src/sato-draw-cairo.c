@@ -651,7 +651,11 @@ sato_draw_arrow (GtkStyle *style,
   cairo_set_line_width (cr, 2);
 
   cairo_set_line_cap (cr, CAIRO_LINE_CAP_ROUND);
-  gdk_cairo_set_source_color (cr, &style->bg[GTK_STATE_SELECTED]);
+
+  if (DETAIL ("menuitem") && state_type == GTK_STATE_PRELIGHT)
+    gdk_cairo_set_source_color (cr, &style->fg[state_type]);
+  else
+    gdk_cairo_set_source_color (cr, &style->bg[GTK_STATE_SELECTED]);
   
   /* ensure we have odd number of pixels for width or height to allow for
    * correct centering
