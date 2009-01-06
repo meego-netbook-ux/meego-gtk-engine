@@ -32,12 +32,17 @@
 #define DEBUG(func) // g_printf ("%s: detail = '%s'; state = %d; x:%d; y:%d; w:%d; h:%d;\n", func, detail, state_type, x, y, width, height);
 #define DETAIL(foo) (detail && strcmp (foo, detail) == 0)
 
+#define CAIRO_CLIP()  \
+  if (area)                                                               \
+    cairo_rectangle (cr, area->x, area->y, area->width, area->height);    \
+  else                                                                    \
+    cairo_rectangle (cr, x, y, width, height);    \
+  cairo_clip (cr);
+
 #define LINE_WIDTH 1
 #define RADIUS 4
 
 GtkStyleClass *parent_style_class;
-
-static void sato_draw_shadow (DRAW_ARGS);
 
 static inline void
 sato_set_border_color (cairo_t *cr, GtkStyle *style)
@@ -75,6 +80,29 @@ sato_rounded_rectangle (cairo_t *cr, gdouble x, gdouble y, gdouble width, gdoubl
   cairo_arc (cr, x + width - radius, y + radius, radius, M_PI * 1.5, 0);
   cairo_arc (cr, x + width - radius, y + height - radius, radius, 0, M_PI * 0.5);
   cairo_arc (cr, x + radius, y + height - radius, radius, M_PI * 0.5, M_PI);
+}
+
+static void
+sato_entry_shadow (cairo_t *cr, int x, int y, int width, int height, GdkColor *border_color)
+{
+  cairo_set_line_width (cr, LINE_WIDTH);
+  cairo_translate (cr, 0.5, 0.5);
+
+  /* draw the inner shadow */
+  cairo_set_source_rgba (cr, 0, 0, 0, 0.15);
+  sato_rounded_rectangle (cr, x + 1, y + 1, width - 1, height - 2);
+  cairo_stroke (cr);
+
+  /* draw the border */
+  gdk_cairo_set_source_color (cr, border_color);
+  sato_rounded_rectangle (cr, x, y, width, height - 1);
+  cairo_stroke (cr);
+
+  /* draw the outer shadow */
+  cairo_set_source_rgba (cr, 0, 0, 0, 0.07);
+  cairo_move_to (cr, x + 4, y + height - 1);
+  cairo_line_to (cr, x + width - 5, y + height - 1);
+  cairo_stroke (cr);
 }
 
 static void
@@ -148,10 +176,15 @@ sato_draw_box (DRAW_ARGS)
 
   if (DETAIL ("spinbutton"))
   {
+    cr = gdk_cairo_create (window);
+
+    CAIRO_CLIP ();
+
     /* FIXME: for RTL */
     width += 10;
     x -= 10;
-    sato_draw_shadow (style, window, GTK_SHADOW_IN, shadow_type, area, widget, detail, x, y, width, height);
+
+    sato_entry_shadow (cr, x, y, width, height, &border_color);
     return;
   }
 
@@ -169,17 +202,17 @@ sato_draw_box (DRAW_ARGS)
 
     g_object_set_data (G_OBJECT (widget->parent), "sato-combo-button", widget);
 
+    cr = gdk_cairo_create (window);
+
+
+    CAIRO_CLIP ();
+
     /* FIXME: RTL */
     width += 10;
     x -= 10;
 
-    cr = gdk_cairo_create (window);
-    cairo_rectangle (cr, x, y, width, height);
-    gdk_cairo_set_source_color (cr, &style->base[state_type]);
-    cairo_fill (cr);
+    sato_entry_shadow (cr, x, y, width, height, &border_color);
     cairo_destroy (cr);
-
-    sato_draw_shadow (style, window, GTK_SHADOW_IN, shadow_type, area, widget, detail, x, y, width, height);
     return;
   }
 
@@ -199,6 +232,9 @@ sato_draw_box (DRAW_ARGS)
 
 
   cr = gdk_cairo_create (window);
+
+  CAIRO_CLIP ();
+
   cairo_translate (cr, 0.5, 0.5);
   cairo_set_line_width (cr, LINE_WIDTH);
 
@@ -299,6 +335,10 @@ sato_draw_shadow (DRAW_ARGS)
 
   sato_shade_colour (&style->bg[GTK_STATE_NORMAL], &border_color, 0.48);
 
+  cr = gdk_cairo_create (window);
+
+  CAIRO_CLIP ();
+
   /* FIXME: for RTL */
   if (widget && DETAIL ("entry") && (GTK_IS_SPIN_BUTTON (widget) || GTK_IS_COMBO_BOX_ENTRY (widget->parent)))
       width += 10;
@@ -314,26 +354,7 @@ sato_draw_shadow (DRAW_ARGS)
                                   button->allocation.width,button->allocation.height);
   }
 
-  cr = gdk_cairo_create (window);
-  cairo_set_line_width (cr, LINE_WIDTH);
-  cairo_translate (cr, 0.5, 0.5);
-
-  /* draw the inner shadow */
-  cairo_set_source_rgba (cr, 0, 0, 0, 0.15);
-  sato_rounded_rectangle (cr, x + 1, y + 1, width - 1, height - 2);
-  cairo_stroke (cr);
-
-  /* draw the border */
-  gdk_cairo_set_source_color (cr, &border_color);
-  sato_rounded_rectangle (cr, x, y, width, height - 1);
-  cairo_stroke (cr);
-
-  /* draw the outer shadow */
-  cairo_set_source_rgba (cr, 0, 0, 0, 0.07);
-  cairo_move_to (cr, x + 4, y + height - 1);
-  cairo_line_to (cr, x + width - 5, y + height - 1);
-  cairo_stroke (cr);
-
+  sato_entry_shadow (cr, x, y, width, height, &border_color);
   cairo_destroy (cr);
 }
 
@@ -516,6 +537,7 @@ sato_draw_extension (GtkStyle * style, GdkWindow * window,
   gdouble cx, cy;
 
   cr = gdk_cairo_create (window);
+
   cairo_set_line_width (cr, LINE_WIDTH);
   cairo_set_line_cap (cr, CAIRO_LINE_CAP_SQUARE);
 
