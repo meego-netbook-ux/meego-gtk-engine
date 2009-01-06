@@ -25,9 +25,6 @@ style "default"
 	GtkProgressBar::xspacing = 0
 	GtkProgressBar::yspacing = 0
 	
-	GtkWidget::focus_line_width = 2
-	GtkWidget::focus_padding = 0
-	
 	GtkButton::default_border = {0, 0, 0, 0}
 
 	GtkToolbar::internal_padding = 2

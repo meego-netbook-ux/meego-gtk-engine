@@ -338,15 +338,6 @@ sato_draw_shadow (DRAW_ARGS)
 }
 
 static void
-sato_draw_focus (GtkStyle *style, GdkWindow *window, GtkStateType state_type,
-                 GdkRectangle *area, GtkWidget *widget, const gchar *detail,
-                 gint x, gint y, gint width, gint height)
-{
-  DEBUG ("draw_focus");
-  /* TODO */
-}
-
-static void
 sato_draw_check (GtkStyle * style, GdkWindow * window,
 		 GtkStateType state_type, GtkShadowType shadow_type,
 		 GdkRectangle * area, GtkWidget * widget,
@@ -715,7 +706,7 @@ sato_draw_style_class_init (GtkStyleClass * style_class)
   style_class->draw_extension = sato_draw_extension;
   style_class->draw_hline = sato_draw_hline;
   style_class->draw_vline = sato_draw_vline;
-  style_class->draw_focus = sato_draw_focus;
+  /* style_class->draw_focus = sato_draw_focus; */
   style_class->draw_arrow = sato_draw_arrow;
 
 }
