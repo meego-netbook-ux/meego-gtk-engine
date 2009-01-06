@@ -1,6 +1,7 @@
 *.la
 *.lo
 *.so
+*.swp
 .deps/*
 .libs/*
 INSTALL
