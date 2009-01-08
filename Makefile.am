@@ -16,5 +16,13 @@ libsato_engine_la_SOURCES = \
 libsato_engine_la_LDFLAGS = -module -avoid-version -no-undefined -Werror
 libsato_engine_la_LIBADD = $(GTK_LIBS)
 
+themedir = $(datadir)/themes/Moblin-Netbook
+
 gtkthemedir = $(themedir)/gtk-2.0
 dist_gtktheme_DATA = data/gtkrc
+
+metacitythemedir = $(themedir)/metacity-1
+dist_metacitytheme_DATA = data/metacity-theme-1.xml
+
+indexthemedir = $(themedir)/
+dist_indextheme_DATA = data/index.theme

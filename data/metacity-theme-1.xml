@@ -1,0 +1,235 @@
+<?xml version="1.0"?>
+<metacity_theme>
+<info>
+  <name>Moblin Netbook</name>
+  <author>Intel</author>
+  <copyright>&#194; Intel</copyright>
+  <date>Jan 2008</date>
+  <description>Theme for Moblin Netbooks</description>
+  <!-- Based on the Mist theme by Dave Camp, Copyright 2002 Ximian, Inc -->
+</info>
+ 
+<frame_geometry name="normal" rounded_top_left="false" rounded_top_right="false" rounded_bottom_left="false" rounded_bottom_right="false">
+  <distance name="left_width" value="4"/>
+  <distance name="right_width" value="4"/>
+  <distance name="bottom_height" value="4"/>
+  <distance name="left_titlebar_edge" value="1"/>
+  <distance name="right_titlebar_edge" value="1"/>
+  <aspect_ratio name="button" value="1"/>
+  <distance name="title_vertical_pad" value="2"/>
+  <border name="title_border" left="2" right="2" top="1" bottom="1"/>
+  <border name="button_border" left="1" right="1" top="1" bottom="1"/>
+</frame_geometry>
+
+<frame_geometry name="normal_maximized" parent="normal" rounded_top_left="false" rounded_top_right="false" rounded_bottom_left="false" rounded_bottom_right="false">
+	<distance name="left_width" value="0"/>
+	<distance name="right_width" value="0"/>
+	<distance name="bottom_height" value="0"/>
+	<distance name="left_titlebar_edge" value="0"/>
+	<distance name="right_titlebar_edge" value="0"/>
+</frame_geometry>
+
+<frame_geometry name="normal_small_borders" parent="normal">
+  <distance name="left_width" value="0"/>
+  <distance name="right_width" value="0"/>
+  <distance name="bottom_height" value="0"/>
+  <distance name="left_titlebar_edge" value="0"/>
+  <distance name="right_titlebar_edge" value="0"/>
+</frame_geometry>
+
+<frame_geometry name="border" has_title="false">
+  <distance name="left_width" value="4"/>
+  <distance name="right_width" value="4"/>
+  <distance name="bottom_height" value="4"/>
+  <distance name="left_titlebar_edge" value="0"/>
+  <distance name="right_titlebar_edge" value="0"/>
+  <distance name="button_width" value="0"/>
+  <distance name="button_height" value="0"/>
+  <distance name="title_vertical_pad" value="4"/>
+  <border name="title_border" left="0" right="0" top="0" bottom="0"/>
+  <border name="button_border" left="1" right="1" top="1" bottom="1"/>
+</frame_geometry>
+
+<!-- button inside padding -->
+<constant name="ButtonIPad" value="4"/>
+
+<draw_ops name="focus_outline">
+  <rectangle color="black"
+             x="0" y="0"
+             width="width-1"
+             height="height-1"/>
+</draw_ops>
+
+<draw_ops name="title_bg">
+  <rectangle color="gtk:bg[NORMAL]" filled="true"
+             x="0" y="0"
+             width="width"
+             height="height"/>
+  <rectangle color="gtk:bg[SELECTED]" filled="true"
+             x="0" y="0"
+             width="width"
+             height="top_height"/> 
+</draw_ops>
+
+<draw_ops name="title">
+  <include name="title_bg"/>
+  <include name="focus_outline"/>
+</draw_ops>
+
+<draw_ops name="title_unfocused">
+  <include name="focus_outline"/>
+</draw_ops>
+
+<draw_ops name="title_maximised">
+  <include name="title_bg"/>
+</draw_ops>
+
+<draw_ops name="title_maximised_unfocused">
+</draw_ops>
+
+
+<!-- Title Text -->
+
+<draw_ops name="title_text">
+  <title color="gtk:fg[SELECTED]"
+         x="0"
+         y="(((height - title_height) / 2) `max` 0)"/>
+</draw_ops>
+
+<draw_ops name="title_text_unfocused">
+  <title color="gtk:fg[ACTIVE]"
+         x="0"
+         y="(((height - title_height) / 2) `max` 0)"/>
+</draw_ops>
+
+<!-- Buttons -->
+
+<!-- we only care about a close icon -->
+
+<draw_ops name="close_button_icon">
+  <line color="gtk:fg[SELECTED]" width="2"
+        x1="ButtonIPad" y1="ButtonIPad" x2="width-ButtonIPad-1" y2="height - ButtonIPad-1"/>
+  <line color="gtk:fg[SELECTED]" width="1"
+        x1="ButtonIPad" y1="ButtonIPad" x2="width-ButtonIPad" y2="height - ButtonIPad"/>
+  <line color="gtk:fg[SELECTED]" width="2"
+        x1="ButtonIPad" y1="height - ButtonIPad-1" x2="width-ButtonIPad-1" y2="ButtonIPad"/>
+  <line color="gtk:fg[SELECTED]" width="1"
+        x1="ButtonIPad" y1="height - ButtonIPad-1" x2="width-ButtonIPad" y2="ButtonIPad - 1"/>
+</draw_ops>
+
+<draw_ops name="close_button_icon_unfocused">
+  <line color="gtk:fg[INSENSITIVE]" width="2"
+        x1="ButtonIPad" y1="ButtonIPad" x2="width-ButtonIPad-1" y2="height - ButtonIPad-1"/>
+  <line color="gtk:fg[INSENSITIVE]" width="1"
+        x1="ButtonIPad" y1="ButtonIPad" x2="width-ButtonIPad" y2="height - ButtonIPad"/>
+  <line color="gtk:fg[INSENSITIVE]" width="2"
+        x1="ButtonIPad" y1="height - ButtonIPad-1" x2="width-ButtonIPad-1" y2="ButtonIPad"/>
+  <line color="gtk:fg[INSENSITIVE]" width="1"
+        x1="ButtonIPad" y1="height - ButtonIPad-1" x2="width-ButtonIPad" y2="ButtonIPad - 1"/>
+</draw_ops>
+
+<draw_ops name="close_button_normal">
+   <include name="close_button_icon"/>
+</draw_ops>
+<draw_ops name="close_button_prelight">
+   <include name="close_button_icon"/>
+</draw_ops>
+<draw_ops name="close_button_pressed">
+  <include name="close_button_icon_unfocused"/>
+</draw_ops>
+<draw_ops name="close_button_unfocused">
+  <include name="close_button_icon_unfocused"/>
+</draw_ops>
+
+<draw_ops name="blank">
+<!-- nothing -->
+</draw_ops>
+
+<frame_style name="normal" geometry="normal">
+  <piece position="entire_background" draw_ops="title_unfocused"/>
+  <piece position="title" draw_ops="title_text_unfocused"/>
+  <button function="close" state="normal" draw_ops="close_button_unfocused"/>
+  <button function="close" state="pressed" draw_ops="close_button_pressed"/>
+  <button function="maximize" state="normal" draw_ops="blank"/>
+  <button function="maximize" state="pressed" draw_ops="blank"/>
+  <button function="minimize" state="normal" draw_ops="blank"/>
+  <button function="minimize" state="pressed" draw_ops="blank"/>
+  <button function="menu" state="normal" draw_ops="blank"/>
+  <button function="menu" state="pressed" draw_ops="blank"/>
+</frame_style>
+
+<frame_style name="focused" geometry="normal" parent="normal">
+  <piece position="entire_background" draw_ops="title"/>
+  <piece position="title" draw_ops="title_text"/>
+  <button function="close" state="normal" draw_ops="close_button_normal"/>
+  <button function="close" state="prelight" draw_ops="close_button_prelight"/>
+</frame_style>
+
+<frame_style name="normal_maximized" geometry="normal_maximized">
+  <piece position="entire_background" draw_ops="title_maximised_unfocused"/>
+  <piece position="title" draw_ops="title_text_unfocused"/>
+  <button function="close" state="normal" draw_ops="close_button_unfocused"/>
+  <button function="close" state="pressed" draw_ops="close_button_pressed"/>
+  <button function="maximize" state="normal" draw_ops="blank"/>
+  <button function="maximize" state="pressed" draw_ops="blank"/>
+  <button function="minimize" state="normal" draw_ops="blank"/>
+  <button function="minimize" state="pressed" draw_ops="blank"/>
+  <button function="menu" state="normal" draw_ops="blank"/>
+  <button function="menu" state="pressed" draw_ops="blank"/>
+</frame_style>
+
+<frame_style name="focused_maximized" geometry="normal_maximized" parent="normal_maximized">
+  <piece position="entire_background" draw_ops="title_maximised"/>
+  <piece position="title" draw_ops="title_text"/>
+  <button function="close" state="normal" draw_ops="close_button_normal"/>
+  <button function="close" state="prelight" draw_ops="close_button_prelight"/>
+</frame_style>
+
+<frame_style name="border" geometry="border" parent="normal">
+  <piece position="entire_background" draw_ops="title_unfocused"/>
+</frame_style>
+
+<frame_style_set name="normal">
+   <frame focus="yes" state="normal" resize="both" style="focused"/>
+   <frame focus="no" state="normal" resize="both" style="normal"/>
+   <frame focus="yes" state="maximized" style="focused_maximized"/>
+   <frame focus="no" state="maximized" style="normal_maximized"/>
+   <frame focus="yes" state="shaded" style="focused"/>
+   <frame focus="no" state="shaded" style="normal"/>
+   <frame focus="yes" state="maximized_and_shaded" style="focused_maximized"/>
+   <frame focus="no" state="maximized_and_shaded" style="normal_maximized"/>
+</frame_style_set>
+
+<frame_style_set name="utility" parent="normal">
+<frame focus="yes" state="normal" resize="both" style="focused"/>
+<frame focus="no" state="normal" resize="both" style="normal"/>
+<!-- this is a bunch of crack since utility windows shouldn't be maximized -->
+<frame focus="yes" state="maximized" style="focused"/>
+<frame focus="no" state="maximized" style="normal"/>
+<frame focus="yes" state="shaded" style="focused"/>
+<frame focus="no" state="shaded" style="normal"/>
+<frame focus="yes" state="maximized_and_shaded" style="focused"/>
+<frame focus="no" state="maximized_and_shaded" style="normal"/>
+</frame_style_set>
+
+<frame_style_set name="border">
+<frame focus="yes" state="normal" resize="both" style="border"/>
+<frame focus="no" state="normal" resize="both" style="border"/>
+<frame focus="yes" state="maximized" style="border"/>
+<frame focus="no" state="maximized" style="border"/>
+<frame focus="yes" state="shaded" style="border"/>
+<frame focus="no" state="shaded" style="border"/>
+<frame focus="yes" state="maximized_and_shaded" style="border"/>
+<frame focus="no" state="maximized_and_shaded" style="border"/>
+</frame_style_set>
+
+<window type="normal" style_set="normal"/>
+<window type="dialog" style_set="normal"/>
+<window type="modal_dialog" style_set="normal"/>
+<window type="menu" style_set="normal"/>
+<window type="utility" style_set="normal"/>
+<window type="border" style_set="border"/>
+
+<menu_icon function="close" state="normal" draw_ops="close_button_icon_unfocused"/>
+
+</metacity_theme>
