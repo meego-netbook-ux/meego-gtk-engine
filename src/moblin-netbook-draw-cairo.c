@@ -1,6 +1,6 @@
 /* vi: set expandtab sw=2 sts=2:
- * sato-draw.c
- * This file is part of sato-engine
+ * moblin_netbook-draw.c
+ * This file is part of moblin_netbook-engine
  *
  * Copyright (C) 2006,2007 - OpenedHand Ltd
  *
@@ -22,8 +22,8 @@
 
 #include "config.h"
 
-#include "sato-draw.h"
-#include "sato-style.h"
+#include "moblin-netbook-draw.h"
+#include "moblin-netbook-style.h"
 
 #include <stdio.h>
 #include <math.h>
@@ -45,17 +45,17 @@
 GtkStyleClass *parent_style_class;
 
 static inline void
-sato_set_border_color (cairo_t *cr, GtkStyle *style)
+moblin_netbook_set_border_color (cairo_t *cr, GtkStyle *style)
 {
  GdkColor border_color; 
  
- sato_shade_colour (&style->bg[GTK_STATE_NORMAL], &border_color, 0.48); 
+ moblin_netbook_shade_colour (&style->bg[GTK_STATE_NORMAL], &border_color, 0.48); 
  gdk_cairo_set_source_color (cr, &border_color);
 }
 
 
 static void
-sato_rounded_rectangle (cairo_t *cr, gdouble x, gdouble y, gdouble width, gdouble height)
+moblin_netbook_rounded_rectangle (cairo_t *cr, gdouble x, gdouble y, gdouble width, gdouble height)
 {
   int radius = RADIUS;
 
@@ -83,19 +83,19 @@ sato_rounded_rectangle (cairo_t *cr, gdouble x, gdouble y, gdouble width, gdoubl
 }
 
 static void
-sato_entry_shadow (cairo_t *cr, int x, int y, int width, int height, GdkColor *border_color)
+moblin_netbook_entry_shadow (cairo_t *cr, int x, int y, int width, int height, GdkColor *border_color)
 {
   cairo_set_line_width (cr, LINE_WIDTH);
   cairo_translate (cr, 0.5, 0.5);
 
   /* draw the inner shadow */
   cairo_set_source_rgba (cr, 0, 0, 0, 0.15);
-  sato_rounded_rectangle (cr, x + 1, y + 1, width - 1, height - 2);
+  moblin_netbook_rounded_rectangle (cr, x + 1, y + 1, width - 1, height - 2);
   cairo_stroke (cr);
 
   /* draw the border */
   gdk_cairo_set_source_color (cr, border_color);
-  sato_rounded_rectangle (cr, x, y, width, height - 1);
+  moblin_netbook_rounded_rectangle (cr, x, y, width, height - 1);
   cairo_stroke (cr);
 
   /* draw the outer shadow */
@@ -106,7 +106,7 @@ sato_entry_shadow (cairo_t *cr, int x, int y, int width, int height, GdkColor *b
 }
 
 static void
-sato_draw_box (DRAW_ARGS)
+moblin_netbook_draw_box (DRAW_ARGS)
 {
   cairo_t *cr;
   GdkColor border_color;
@@ -123,7 +123,7 @@ sato_draw_box (DRAW_ARGS)
     add_shadow = FALSE;
   }
 
-  sato_shade_colour (&style->bg[GTK_STATE_NORMAL], &border_color, 0.48);
+  moblin_netbook_shade_colour (&style->bg[GTK_STATE_NORMAL], &border_color, 0.48);
 
   if (width <= 0 && DETAIL ("menu"))
   {
@@ -146,7 +146,7 @@ sato_draw_box (DRAW_ARGS)
 
     /* create the mask as a white region */
     cairo_set_source_rgb (cm, 1.0, 1.0, 1.0);
-    sato_rounded_rectangle (cm, 0, 0, width + 1, height + 1);
+    moblin_netbook_rounded_rectangle (cm, 0, 0, width + 1, height + 1);
     cairo_fill (cm);
     cairo_destroy (cm);
 
@@ -184,7 +184,7 @@ sato_draw_box (DRAW_ARGS)
     width += 10;
     x -= 10;
 
-    sato_entry_shadow (cr, x, y, width, height, &border_color);
+    moblin_netbook_entry_shadow (cr, x, y, width, height, &border_color);
     return;
   }
 
@@ -193,14 +193,14 @@ sato_draw_box (DRAW_ARGS)
   {
     GtkWidget *entry;
 
-    entry = g_object_get_data (G_OBJECT (widget->parent), "sato-combo-entry");
+    entry = g_object_get_data (G_OBJECT (widget->parent), "moblin_netbook-combo-entry");
     if (GTK_IS_ENTRY (entry))
     {
       gtk_widget_queue_draw_area (entry, entry->allocation.x, entry->allocation.y,
                                   entry->allocation.width,entry->allocation.height);
     }
 
-    g_object_set_data (G_OBJECT (widget->parent), "sato-combo-button", widget);
+    g_object_set_data (G_OBJECT (widget->parent), "moblin_netbook-combo-button", widget);
 
     cr = gdk_cairo_create (window);
 
@@ -211,7 +211,7 @@ sato_draw_box (DRAW_ARGS)
     width += 10;
     x -= 10;
 
-    sato_entry_shadow (cr, x, y, width, height, &border_color);
+    moblin_netbook_entry_shadow (cr, x, y, width, height, &border_color);
     cairo_destroy (cr);
     return;
   }
@@ -266,7 +266,7 @@ sato_draw_box (DRAW_ARGS)
       }
 
     /* background fill */
-    sato_rounded_rectangle (cr, x, y, width, height);
+    moblin_netbook_rounded_rectangle (cr, x, y, width, height);
     gdk_cairo_set_source_color (cr, &style->bg[state_type]);
     cairo_fill (cr);
 
@@ -310,7 +310,7 @@ sato_draw_box (DRAW_ARGS)
       }
 
     /* border */
-    sato_rounded_rectangle (cr, x, y, width, height);
+    moblin_netbook_rounded_rectangle (cr, x, y, width, height);
     gdk_cairo_set_source_color (cr, &border_color);
     cairo_stroke (cr);
 
@@ -321,7 +321,7 @@ sato_draw_box (DRAW_ARGS)
 }
 
 static void
-sato_draw_shadow (DRAW_ARGS)
+moblin_netbook_draw_shadow (DRAW_ARGS)
 {
   cairo_t *cr;
   GdkColor border_color;
@@ -333,7 +333,7 @@ sato_draw_shadow (DRAW_ARGS)
 
   SANITIZE_SIZE;
 
-  sato_shade_colour (&style->bg[GTK_STATE_NORMAL], &border_color, 0.48);
+  moblin_netbook_shade_colour (&style->bg[GTK_STATE_NORMAL], &border_color, 0.48);
 
   cr = gdk_cairo_create (window);
 
@@ -346,20 +346,20 @@ sato_draw_shadow (DRAW_ARGS)
   if (widget && DETAIL ("entry") && GTK_IS_COMBO_BOX_ENTRY (widget->parent))
   {
     GtkWidget *button;
-    g_object_set_data (G_OBJECT (widget->parent), "sato-combo-entry", widget);
+    g_object_set_data (G_OBJECT (widget->parent), "moblin_netbook-combo-entry", widget);
 
-    button = g_object_get_data (G_OBJECT (widget->parent), "sato-combo-button");
+    button = g_object_get_data (G_OBJECT (widget->parent), "moblin_netbook-combo-button");
     if (GTK_IS_BUTTON (button))
       gtk_widget_queue_draw_area (button, button->allocation.x, button->allocation.y,
                                   button->allocation.width,button->allocation.height);
   }
 
-  sato_entry_shadow (cr, x, y, width, height, &border_color);
+  moblin_netbook_entry_shadow (cr, x, y, width, height, &border_color);
   cairo_destroy (cr);
 }
 
 static void
-sato_draw_check (GtkStyle * style, GdkWindow * window,
+moblin_netbook_draw_check (GtkStyle * style, GdkWindow * window,
 		 GtkStateType state_type, GtkShadowType shadow_type,
 		 GdkRectangle * area, GtkWidget * widget,
 		 const gchar * detail, gint x, gint y, gint width,
@@ -374,22 +374,22 @@ sato_draw_check (GtkStyle * style, GdkWindow * window,
 
   /* fill the background */
   gdk_cairo_set_source_color (cr, &style->base[state_type]);
-  sato_rounded_rectangle (cr, x, y, width, height);
+  moblin_netbook_rounded_rectangle (cr, x, y, width, height);
   cairo_fill (cr);
 
   /* inner shadow */
   cairo_set_source_rgba (cr, 0, 0, 0, 0.1);
-  sato_rounded_rectangle (cr, x + 1, y + 1, width - 1, height - 1);
+  moblin_netbook_rounded_rectangle (cr, x + 1, y + 1, width - 1, height - 1);
   cairo_stroke (cr);
   
   cairo_set_source_rgba (cr, 0, 0, 0, 0.05);
-  sato_rounded_rectangle (cr, x + 2, y + 2, width - 2, height - 2);
+  moblin_netbook_rounded_rectangle (cr, x + 2, y + 2, width - 2, height - 2);
   cairo_stroke (cr);
 
 
   /* draw the border */
-  sato_set_border_color (cr, style);
-  sato_rounded_rectangle (cr, x, y, width, height);
+  moblin_netbook_set_border_color (cr, style);
+  moblin_netbook_rounded_rectangle (cr, x, y, width, height);
   cairo_stroke (cr);
   
   gdk_cairo_set_source_color (cr, &style->text[state_type]);
@@ -421,7 +421,7 @@ sato_draw_check (GtkStyle * style, GdkWindow * window,
 
 
 static void
-sato_draw_option (GtkStyle * style, GdkWindow * window,
+moblin_netbook_draw_option (GtkStyle * style, GdkWindow * window,
 		  GtkStateType state_type, GtkShadowType shadow_type,
 		  GdkRectangle * area, GtkWidget * widget,
 		  const gchar * detail, gint x, gint y, gint width,
@@ -454,7 +454,7 @@ sato_draw_option (GtkStyle * style, GdkWindow * window,
 
   /* draw the border */
   cairo_arc (cr, cx, cy, radius, 0, M_PI * 2);
-  sato_set_border_color (cr, style);
+  moblin_netbook_set_border_color (cr, style);
   cairo_stroke (cr);
 
   /*** draw check mark ***/
@@ -468,7 +468,7 @@ sato_draw_option (GtkStyle * style, GdkWindow * window,
 }
 
 static void
-sato_draw_box_gap (GtkStyle * style, GdkWindow * window,
+moblin_netbook_draw_box_gap (GtkStyle * style, GdkWindow * window,
 		   GtkStateType state_type, GtkShadowType shadow_type,
 		   GdkRectangle * area, GtkWidget * widget, const gchar * detail,
 		   gint x, gint y, gint width, gint height,
@@ -527,7 +527,7 @@ sato_draw_box_gap (GtkStyle * style, GdkWindow * window,
 
 
 static void
-sato_draw_extension (GtkStyle * style, GdkWindow * window,
+moblin_netbook_draw_extension (GtkStyle * style, GdkWindow * window,
 		     GtkStateType state_type, GtkShadowType shadow_type,
 		     GdkRectangle * area, GtkWidget * widget,const gchar * detail,
 		     gint x, gint y, gint width, gint height,
@@ -597,7 +597,7 @@ sato_draw_extension (GtkStyle * style, GdkWindow * window,
 }
 
 static void
-sato_draw_vline (GtkStyle *style, GdkWindow *window, GtkStateType state_type,
+moblin_netbook_draw_vline (GtkStyle *style, GdkWindow *window, GtkStateType state_type,
                  GdkRectangle *area, GtkWidget *widget, const gchar *detail,
                  gint y1, gint y2, gint x)
 {
@@ -622,7 +622,7 @@ sato_draw_vline (GtkStyle *style, GdkWindow *window, GtkStateType state_type,
 }
 
 static void
-sato_draw_hline (GtkStyle *style, GdkWindow *window,  GtkStateType state_type,
+moblin_netbook_draw_hline (GtkStyle *style, GdkWindow *window,  GtkStateType state_type,
                  GdkRectangle *area,GtkWidget *widget, const gchar *detail,
                  gint x1, gint x2, gint y)
 {
@@ -644,7 +644,7 @@ sato_draw_hline (GtkStyle *style, GdkWindow *window,  GtkStateType state_type,
 }
 
 static void
-sato_draw_arrow (GtkStyle *style,
+moblin_netbook_draw_arrow (GtkStyle *style,
                  GdkWindow *window,
                  GtkStateType state_type,
                  GtkShadowType shadow_type,
@@ -714,22 +714,22 @@ sato_draw_arrow (GtkStyle *style,
 }
 
 void
-sato_draw_style_class_init (GtkStyleClass * style_class)
+moblin_netbook_draw_style_class_init (GtkStyleClass * style_class)
 {
 
   parent_style_class = g_type_class_peek_parent (style_class);
 
-  style_class->draw_shadow = sato_draw_shadow;
-  style_class->draw_box = sato_draw_box;
-  style_class->draw_check = sato_draw_check;
-  style_class->draw_option = sato_draw_option;
-  style_class->draw_box_gap = sato_draw_box_gap;
-  style_class->draw_shadow_gap = sato_draw_box_gap;
-  style_class->draw_extension = sato_draw_extension;
-  style_class->draw_hline = sato_draw_hline;
-  style_class->draw_vline = sato_draw_vline;
-  /* style_class->draw_focus = sato_draw_focus; */
-  style_class->draw_arrow = sato_draw_arrow;
+  style_class->draw_shadow = moblin_netbook_draw_shadow;
+  style_class->draw_box = moblin_netbook_draw_box;
+  style_class->draw_check = moblin_netbook_draw_check;
+  style_class->draw_option = moblin_netbook_draw_option;
+  style_class->draw_box_gap = moblin_netbook_draw_box_gap;
+  style_class->draw_shadow_gap = moblin_netbook_draw_box_gap;
+  style_class->draw_extension = moblin_netbook_draw_extension;
+  style_class->draw_hline = moblin_netbook_draw_hline;
+  style_class->draw_vline = moblin_netbook_draw_vline;
+  /* style_class->draw_focus = moblin_netbook_draw_focus; */
+  style_class->draw_arrow = moblin_netbook_draw_arrow;
 
 }
 

@@ -1,6 +1,6 @@
 /*
- * sato-draw.h
- * This file is part of sato-engine
+ * moblin_netbook-draw.h
+ * This file is part of moblin_netbook-engine
  *
  * Copyright (C) 2006,2007 - OpenedHand Ltd
  *
@@ -23,7 +23,7 @@
 
 #include <gtk/gtk.h>
 
-void sato_draw_style_class_init (GtkStyleClass *style_class);
+void moblin_netbook_draw_style_class_init (GtkStyleClass *style_class);
 
 #define DRAW_ARGS    GtkStyle       *style, \
                      GdkWindow      *window, \

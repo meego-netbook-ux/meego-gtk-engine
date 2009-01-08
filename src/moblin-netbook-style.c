@@ -1,6 +1,6 @@
 /*
- * sato-style.c
- * This file is part of sato-engine
+ * moblin_netbook-style.c
+ * This file is part of moblin_netbook-engine
  *
  * Copyright (C) 2006,2007 - OpenedHand Ltd
  *
@@ -24,23 +24,23 @@
 #include <gtk/gtk.h>
 #include <stdio.h>
 
-#include "sato-style.h"
+#include "moblin-netbook-style.h"
 
 /*** Gtk Style Class **********************************************************/
 
-GType sato_type_style = 0;
+GType moblin_netbook_type_style = 0;
 
-static void sato_style_class_init (SatoStyleClass *klass);
+static void moblin_netbook_style_class_init (SatoStyleClass *klass);
 
 void
-sato_style_register_type (GTypeModule *module)
+moblin_netbook_style_register_type (GTypeModule *module)
 {
   static const GTypeInfo object_info =
   {
     sizeof (SatoStyleClass),
     (GBaseInitFunc) NULL,
     (GBaseFinalizeFunc) NULL,
-    (GClassInitFunc) sato_style_class_init,
+    (GClassInitFunc) moblin_netbook_style_class_init,
     NULL,           /* class_finalize */
     NULL,           /* class_data */
     sizeof (SatoStyle),
@@ -48,43 +48,43 @@ sato_style_register_type (GTypeModule *module)
     (GInstanceInitFunc) NULL,
   };
 
-  sato_type_style = g_type_module_register_type (module,
+  moblin_netbook_type_style = g_type_module_register_type (module,
 						 GTK_TYPE_STYLE,
 						 "SatoStyle",
 						 &object_info, 0);
 }
 
 static void
-sato_style_class_init (SatoStyleClass *klass)
+moblin_netbook_style_class_init (SatoStyleClass *klass)
 {
   GtkStyleClass *style_class = GTK_STYLE_CLASS (klass);
-  sato_draw_style_class_init (style_class);
+  moblin_netbook_draw_style_class_init (style_class);
 }
 
 /******************************************************************************/
 
 /*** Gtk Style RC Class *******************************************************/
 
-GType sato_type_rc_style = 0;
+GType moblin_netbook_type_rc_style = 0;
 
-static GtkStyle *sato_rc_style_create_style (GtkRcStyle *rc_style);
+static GtkStyle *moblin_netbook_rc_style_create_style (GtkRcStyle *rc_style);
 
 static void
-sato_rc_style_class_init (SatoRcStyleClass *klass)
+moblin_netbook_rc_style_class_init (SatoRcStyleClass *klass)
 {
 	GtkRcStyleClass *rc_style_class = GTK_RC_STYLE_CLASS (klass);
-	rc_style_class->create_style = sato_rc_style_create_style;
+	rc_style_class->create_style = moblin_netbook_rc_style_create_style;
 }
 
 void
-sato_rc_style_register_type (GTypeModule *module)
+moblin_netbook_rc_style_register_type (GTypeModule *module)
 {
   static const GTypeInfo object_info =
   {
     sizeof (SatoRcStyleClass),
     (GBaseInitFunc) NULL,
     (GBaseFinalizeFunc) NULL,
-    (GClassInitFunc) sato_rc_style_class_init,
+    (GClassInitFunc) moblin_netbook_rc_style_class_init,
     NULL,           /* class_finalize */
     NULL,           /* class_data */
     sizeof (SatoRcStyle),
@@ -92,14 +92,14 @@ sato_rc_style_register_type (GTypeModule *module)
     (GInstanceInitFunc) NULL,
   };
 
-  sato_type_rc_style = g_type_module_register_type (module,
+  moblin_netbook_type_rc_style = g_type_module_register_type (module,
                                                       GTK_TYPE_RC_STYLE,
                                                       "SatoRcStyle",
                                                       &object_info, 0);
 }
 
 static GtkStyle *
-sato_rc_style_create_style (GtkRcStyle *rc_style)
+moblin_netbook_rc_style_create_style (GtkRcStyle *rc_style)
 {
   return GTK_STYLE (g_object_new (SATO_TYPE_STYLE, NULL));
 }

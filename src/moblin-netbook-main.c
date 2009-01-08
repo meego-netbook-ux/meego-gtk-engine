@@ -1,6 +1,6 @@
 /*
- * sato-main.c
- * This file is part of sato-engine
+ * moblin_netbook-main.c
+ * This file is part of moblin_netbook-engine
  *
  * Copyright (C) 2006,2007 - OpenedHand Ltd
  *
@@ -25,16 +25,16 @@
 #include <gmodule.h>
 #include <stdio.h>
 
-#include "sato-style.h"
-#include "sato-draw.h"
+#include "moblin-netbook-style.h"
+#include "moblin-netbook-draw.h"
 
 
 
 G_MODULE_EXPORT void
 theme_init (GTypeModule *module)
 {
-  sato_rc_style_register_type (module);
-  sato_style_register_type (module);
+  moblin_netbook_rc_style_register_type (module);
+  moblin_netbook_style_register_type (module);
 }
 
 G_MODULE_EXPORT void

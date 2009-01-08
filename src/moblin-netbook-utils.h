@@ -1,6 +1,6 @@
 /*
- * sato-utils.c
- * This file is part of sato-engine
+ * moblin_netbook-utils.c
+ * This file is part of moblin_netbook-engine
  *
  * Copyright (C) 2006,2007 - OpenedHand Ltd
  *
@@ -23,5 +23,5 @@
 
 #include <gtk/gtk.h>
 
-void sato_shade_colour (GdkColor *a, GdkColor *b, gdouble   k);
+void moblin_netbook_shade_colour (GdkColor *a, GdkColor *b, gdouble   k);
 

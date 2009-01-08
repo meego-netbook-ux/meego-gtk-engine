@@ -2,19 +2,19 @@ INCLUDES = $(GTK_CFLAGS) $(DEVELOPMENT_CFLAGS)
 
 enginedir = $(libdir)/gtk-2.0/$(GTK_VERSION)/engines
 
-engine_LTLIBRARIES = libsato-engine.la
+engine_LTLIBRARIES = libmoblin-netbook-engine.la
 
-libsato_engine_la_SOURCES = \
-	./src/sato-draw-cairo.c       \
-	./src/sato-draw.h             \
-	./src/sato-main.c             \
-	./src/sato-style.c            \
-	./src/sato-style.h \
-	./src/sato-utils.c \
-	./src/sato-utils.h
+libmoblin_netbook_engine_la_SOURCES = \
+	./src/moblin-netbook-draw-cairo.c       \
+	./src/moblin-netbook-draw.h             \
+	./src/moblin-netbook-main.c             \
+	./src/moblin-netbook-style.c            \
+	./src/moblin-netbook-style.h \
+	./src/moblin-netbook-utils.c \
+	./src/moblin-netbook-utils.h
 
-libsato_engine_la_LDFLAGS = -module -avoid-version -no-undefined -Werror
-libsato_engine_la_LIBADD = $(GTK_LIBS)
+libmoblin_netbook_engine_la_LDFLAGS = -module -avoid-version -no-undefined -Werror
+libmoblin_netbook_engine_la_LIBADD = $(GTK_LIBS)
 
 themedir = $(datadir)/themes/Moblin-Netbook
 

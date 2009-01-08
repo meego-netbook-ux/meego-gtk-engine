@@ -1,6 +1,6 @@
 /*
- * sato-style.h
- * This file is part of sato-engine
+ * moblin_netbook-style.h
+ * This file is part of moblin_netbook-engine
  *
  * Copyright (C) 2006,2007 - OpenedHand Ltd
  *
@@ -27,15 +27,15 @@
 #include <gtk/gtk.h>
 #include <gmodule.h>
 
-#include "sato-draw.h"
+#include "moblin-netbook-draw.h"
 
 G_BEGIN_DECLS
 
 /*** Gtk Style Class **********************************************************/
 
-extern GType sato_type_style;
+extern GType moblin_netbook_type_style;
 
-#define SATO_TYPE_STYLE              sato_type_style
+#define SATO_TYPE_STYLE              moblin_netbook_type_style
 #define SATO_STYLE(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), POKY_TYPE_STYLE, SatoStyle))
 #define SATO_STYLE_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), POKY_TYPE_STYLE, SatoStyleClass))
 #define SATO_IS_STYLE(object)        (G_TYPE_CHECK_INSTANCE_TYPE ((object), POKY_TYPE_STYLE))
@@ -55,15 +55,15 @@ struct _SatoStyleClass
   GtkStyleClass parent_class;
 };
 
-void sato_style_register_type (GTypeModule *module);
+void moblin_netbook_style_register_type (GTypeModule *module);
 
 /******************************************************************************/
 
 /*** Gtk Style RC Class *******************************************************/
 
-extern GType sato_type_rc_style;
+extern GType moblin_netbook_type_rc_style;
 
-#define SATO_TYPE_RC_STYLE              sato_type_rc_style
+#define SATO_TYPE_RC_STYLE              moblin_netbook_type_rc_style
 #define SATO_RC_STYLE(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), POKY_TYPE_RC_STYLE, SatoRcStyle))
 #define SATO_RC_STYLE_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), POKY_TYPE_RC_STYLE, SatoRcStyleClass))
 #define SATO_IS_RC_STYLE(object)        (G_TYPE_CHECK_INSTANCE_TYPE ((object), POKY_TYPE_RC_STYLE))
@@ -83,7 +83,7 @@ struct _SatoRcStyleClass
   GtkRcStyleClass parent_class;
 };
 
-void sato_rc_style_register_type (GTypeModule *engine);
+void moblin_netbook_rc_style_register_type (GTypeModule *engine);
 
 /******************************************************************************/
 

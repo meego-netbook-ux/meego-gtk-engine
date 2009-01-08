@@ -57,7 +57,7 @@ style "default"
 	base [ACTIVE] = @base_color
 	base [INSENSITIVE] = @bg_color
 
-	engine "sato-engine" {}
+	engine "moblin-netbook-engine" {}
 }
 
 class "GtkWidget" style "default"

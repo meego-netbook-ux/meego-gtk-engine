@@ -1,6 +1,6 @@
 /*
- * sato-utils.c
- * This file is part of sato-engine
+ * moblin_netbook-utils.c
+ * This file is part of moblin_netbook-engine
  *
  * Copyright (C) 2006,2007 - OpenedHand Ltd
  *
@@ -31,7 +31,7 @@ static void rgb_to_hls (gdouble *r, gdouble *g, gdouble *b);
 static void hls_to_rgb (gdouble *r, gdouble *g, gdouble *b);
 
 void
-sato_shade_colour (GdkColor *a,
+moblin_netbook_shade_colour (GdkColor *a,
                    GdkColor *b,
                    gdouble   k)
 {
