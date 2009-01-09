@@ -77,6 +77,10 @@
 </draw_ops>
 
 <draw_ops name="title_unfocused">
+  <rectangle color="gtk:bg[NORMAL]" filled="true"
+             x="0" y="0"
+             width="width"
+             height="height"/>
   <include name="focus_outline"/>
 </draw_ops>
 
