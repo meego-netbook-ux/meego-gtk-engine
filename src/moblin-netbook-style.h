@@ -18,8 +18,8 @@
  *
  */
 
-#ifndef SATO_STYLE_H
-#define SATO_STYLE_H
+#ifndef MOBLIN_NETBOOK_STYLE_H
+#define MOBLIN_NETBOOK_STYLE_H
 
 #include <gtk/gtk.h>
 #include <gmodule.h>
@@ -32,22 +32,22 @@ G_BEGIN_DECLS
 
 extern GType moblin_netbook_type_style;
 
-#define SATO_TYPE_STYLE              moblin_netbook_type_style
-#define SATO_STYLE(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), POKY_TYPE_STYLE, SatoStyle))
-#define SATO_STYLE_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), POKY_TYPE_STYLE, SatoStyleClass))
-#define SATO_IS_STYLE(object)        (G_TYPE_CHECK_INSTANCE_TYPE ((object), POKY_TYPE_STYLE))
-#define SATO_IS_STYLE_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), POKY_TYPE_STYLE))
-#define SATO_STYLE_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), POKY_TYPE_STYLE, SatoStyleClass))
+#define MOBLIN_NETBOOK_TYPE_STYLE              moblin_netbook_type_style
+#define MOBLIN_NETBOOK_STYLE(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), MOBLIN_NETBOOK_TYPE_STYLE, MoblinNetbookStyle))
+#define MOBLIN_NETBOOK_STYLE_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), MOBLIN_NETBOOK_TYPE_STYLE, MoblinNetbookStyleClass))
+#define MOBLIN_NETBOOK_IS_STYLE(object)        (G_TYPE_CHECK_INSTANCE_TYPE ((object), MOBLIN_NETBOOK_TYPE_STYLE))
+#define MOBLIN_NETBOOK_IS_STYLE_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), MOBLIN_NETBOOK_TYPE_STYLE))
+#define MOBLIN_NETBOOK_STYLE_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), MOBLIN_NETBOOK_TYPE_STYLE, MoblinNetbookStyleClass))
 
-typedef struct _SatoStyle SatoStyle;
-typedef struct _SatoStyleClass SatoStyleClass;
+typedef struct _MoblinNetbookStyle MoblinNetbookStyle;
+typedef struct _MoblinNetbookStyleClass MoblinNetbookStyleClass;
 
-struct _SatoStyle
+struct _MoblinNetbookStyle
 {
   GtkStyle parent_instance;
 };
 
-struct _SatoStyleClass
+struct _MoblinNetbookStyleClass
 {
   GtkStyleClass parent_class;
 };
@@ -60,22 +60,22 @@ void moblin_netbook_style_register_type (GTypeModule *module);
 
 extern GType moblin_netbook_type_rc_style;
 
-#define SATO_TYPE_RC_STYLE              moblin_netbook_type_rc_style
-#define SATO_RC_STYLE(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), POKY_TYPE_RC_STYLE, SatoRcStyle))
-#define SATO_RC_STYLE_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), POKY_TYPE_RC_STYLE, SatoRcStyleClass))
-#define SATO_IS_RC_STYLE(object)        (G_TYPE_CHECK_INSTANCE_TYPE ((object), POKY_TYPE_RC_STYLE))
-#define SATO_IS_RC_STYLE_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), POKY_TYPE_RC_STYLE))
-#define SATO_RC_STYLE_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), POKY_TYPE_RC_STYLE, SatoRcStyleClass))
+#define MOBLIN_NETBOOK_TYPE_RC_STYLE              moblin_netbook_type_rc_style
+#define MOBLIN_NETBOOK_RC_STYLE(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), MOBLIN_NETBOOK_TYPE_RC_STYLE, MoblinNetbookRcStyle))
+#define MOBLIN_NETBOOK_RC_STYLE_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), MOBLIN_NETBOOK_TYPE_RC_STYLE, MoblinNetbookRcStyleClass))
+#define MOBLIN_NETBOOK_IS_RC_STYLE(object)        (G_TYPE_CHECK_INSTANCE_TYPE ((object), MOBLIN_NETBOOK_TYPE_RC_STYLE))
+#define MOBLIN_NETBOOK_IS_RC_STYLE_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), MOBLIN_NETBOOK_TYPE_RC_STYLE))
+#define MOBLIN_NETBOOK_RC_STYLE_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), MOBLIN_NETBOOK_TYPE_RC_STYLE, MoblinNetbookRcStyleClass))
 
-typedef struct _SatoRcStyle SatoRcStyle;
-typedef struct _SatoRcStyleClass SatoRcStyleClass;
+typedef struct _MoblinNetbookRcStyle MoblinNetbookRcStyle;
+typedef struct _MoblinNetbookRcStyleClass MoblinNetbookRcStyleClass;
 
-struct _SatoRcStyle
+struct _MoblinNetbookRcStyle
 {
   GtkRcStyle parent_instance;
 };
 
-struct _SatoRcStyleClass
+struct _MoblinNetbookRcStyleClass
 {
   GtkRcStyleClass parent_class;
 };

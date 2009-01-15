@@ -27,32 +27,32 @@
 
 GType moblin_netbook_type_style = 0;
 
-static void moblin_netbook_style_class_init (SatoStyleClass *klass);
+static void moblin_netbook_style_class_init (MoblinNetbookStyleClass *klass);
 
 void
 moblin_netbook_style_register_type (GTypeModule *module)
 {
   static const GTypeInfo object_info =
   {
-    sizeof (SatoStyleClass),
+    sizeof (MoblinNetbookStyleClass),
     (GBaseInitFunc) NULL,
     (GBaseFinalizeFunc) NULL,
     (GClassInitFunc) moblin_netbook_style_class_init,
     NULL,           /* class_finalize */
     NULL,           /* class_data */
-    sizeof (SatoStyle),
+    sizeof (MoblinNetbookStyle),
     0,              /* n_preallocs */
     (GInstanceInitFunc) NULL,
   };
 
   moblin_netbook_type_style = g_type_module_register_type (module,
 						 GTK_TYPE_STYLE,
-						 "SatoStyle",
+						 "MoblinNetbookStyle",
 						 &object_info, 0);
 }
 
 static void
-moblin_netbook_style_class_init (SatoStyleClass *klass)
+moblin_netbook_style_class_init (MoblinNetbookStyleClass *klass)
 {
   GtkStyleClass *style_class = GTK_STYLE_CLASS (klass);
   moblin_netbook_draw_style_class_init (style_class);
@@ -67,7 +67,7 @@ GType moblin_netbook_type_rc_style = 0;
 static GtkStyle *moblin_netbook_rc_style_create_style (GtkRcStyle *rc_style);
 
 static void
-moblin_netbook_rc_style_class_init (SatoRcStyleClass *klass)
+moblin_netbook_rc_style_class_init (MoblinNetbookRcStyleClass *klass)
 {
 	GtkRcStyleClass *rc_style_class = GTK_RC_STYLE_CLASS (klass);
 	rc_style_class->create_style = moblin_netbook_rc_style_create_style;
@@ -78,27 +78,27 @@ moblin_netbook_rc_style_register_type (GTypeModule *module)
 {
   static const GTypeInfo object_info =
   {
-    sizeof (SatoRcStyleClass),
+    sizeof (MoblinNetbookRcStyleClass),
     (GBaseInitFunc) NULL,
     (GBaseFinalizeFunc) NULL,
     (GClassInitFunc) moblin_netbook_rc_style_class_init,
     NULL,           /* class_finalize */
     NULL,           /* class_data */
-    sizeof (SatoRcStyle),
+    sizeof (MoblinNetbookRcStyle),
     0,              /* n_preallocs */
     (GInstanceInitFunc) NULL,
   };
 
   moblin_netbook_type_rc_style = g_type_module_register_type (module,
                                                       GTK_TYPE_RC_STYLE,
-                                                      "SatoRcStyle",
+                                                      "MoblinNetbookRcStyle",
                                                       &object_info, 0);
 }
 
 static GtkStyle *
 moblin_netbook_rc_style_create_style (GtkRcStyle *rc_style)
 {
-  return GTK_STYLE (g_object_new (SATO_TYPE_STYLE, NULL));
+  return GTK_STYLE (g_object_new (MOBLIN_NETBOOK_TYPE_STYLE, NULL));
 }
 
 /******************************************************************************/

@@ -42,5 +42,5 @@ theme_exit(void)
 G_MODULE_EXPORT GtkRcStyle *
 theme_create_rc_style (void)
 {
-  return GTK_RC_STYLE (g_object_new (SATO_TYPE_RC_STYLE, NULL));
+  return GTK_RC_STYLE (g_object_new (MOBLIN_NETBOOK_TYPE_RC_STYLE, NULL));
 }
