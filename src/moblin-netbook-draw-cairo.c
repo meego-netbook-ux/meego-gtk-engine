@@ -112,6 +112,9 @@ moblin_netbook_draw_box (DRAW_ARGS)
   
   DEBUG ("draw_box");
 
+  if (shadow_type == GTK_SHADOW_NONE)
+    return;
+
   if (DETAIL ("paned"))
     return;
     
