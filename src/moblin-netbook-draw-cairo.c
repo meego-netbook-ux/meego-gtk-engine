@@ -217,7 +217,11 @@ moblin_netbook_draw_box (DRAW_ARGS)
     return;
   }
 
-  if (widget && DETAIL ("trough") && GTK_IS_SCALE (widget))
+  if (widget
+      && (DETAIL ("trough")
+          || DETAIL ("trough-fill-level")
+          || DETAIL ("trough-fill-level-full"))
+      && GTK_IS_SCALE (widget))
     {
       if (width > height)
         {
@@ -231,7 +235,6 @@ moblin_netbook_draw_box (DRAW_ARGS)
         }
     }
 
-
   cr = gdk_cairo_create (window);
 
   CAIRO_CLIP ();
@@ -239,6 +242,17 @@ moblin_netbook_draw_box (DRAW_ARGS)
   cairo_translate (cr, 0.5, 0.5);
   cairo_set_line_width (cr, LINE_WIDTH);
 
+
+  /* special "fill" indicator */
+  if (DETAIL ("trough-fill-level-full")
+      || DETAIL ("trough-fill-level"))
+    {
+      gdk_cairo_set_source_color (cr, &style->base[GTK_STATE_SELECTED]);
+      moblin_netbook_rounded_rectangle (cr, x+1, y+1, width-2, height-2);
+      cairo_fill (cr);
+      cairo_destroy (cr);
+      return;
+    }
 
   /* menu and toolbars get just a single line at the bottom of the widget */
   if (DETAIL ("menubar") || DETAIL ("toolbar"))
