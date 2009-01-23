@@ -112,9 +112,6 @@ moblin_netbook_draw_box (DRAW_ARGS)
   
   DEBUG ("draw_box");
 
-  if (shadow_type == GTK_SHADOW_NONE)
-    return;
-
   if (DETAIL ("paned"))
     return;
     
@@ -324,10 +321,13 @@ moblin_netbook_draw_box (DRAW_ARGS)
           cairo_stroke (cr);
       }
 
-    /* border */
-    moblin_netbook_rounded_rectangle (cr, x, y, width, height);
-    gdk_cairo_set_source_color (cr, &border_color);
-    cairo_stroke (cr);
+  if (shadow_type != GTK_SHADOW_NONE)
+    {
+      /* border */
+      moblin_netbook_rounded_rectangle (cr, x, y, width, height);
+      gdk_cairo_set_source_color (cr, &border_color);
+      cairo_stroke (cr);
+    }
 
   }
 
