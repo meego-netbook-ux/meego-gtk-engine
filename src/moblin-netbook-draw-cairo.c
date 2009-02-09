@@ -498,11 +498,13 @@ moblin_netbook_draw_box_gap (GtkStyle * style, GdkWindow * window,
 
   cr = gdk_cairo_create (window);
   cairo_set_line_width (cr, LINE_WIDTH);
+  cairo_translate (cr, 0.5, 0.5);
   gdk_cairo_set_source_color (cr, &style->fg[state_type]);
 
   /* start off with a rectangle... */
-  cairo_rectangle (cr, x + LINE_WIDTH / 2.0, y + LINE_WIDTH / 2.0, width - LINE_WIDTH, height - LINE_WIDTH);
+  cairo_rectangle (cr, x, y, width -1, height -1);
   cairo_stroke (cr);
+  cairo_destroy (cr);
 
   switch (gap_side)
   {
