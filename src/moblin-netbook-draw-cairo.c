@@ -549,60 +549,86 @@ moblin_netbook_draw_extension (GtkStyle * style, GdkWindow * window,
 		     GtkPositionType gap_side)
 {
   cairo_t *cr;
-  gdouble cx, cy;
+
+  /* initialise the background */
+  gtk_style_apply_default_background (style, window, TRUE, state_type, area,
+                                      x, y, width, height);
 
   cr = gdk_cairo_create (window);
 
+  /* set up for line drawing */
   cairo_set_line_width (cr, LINE_WIDTH);
   cairo_set_line_cap (cr, CAIRO_LINE_CAP_SQUARE);
+  cairo_translate (cr , 0.5, 0.5);
+
+  /* reduce with and height since we are using them for co-ordinate values */
+  width--; height--;
 
 
-  cx = x + LINE_WIDTH / 2.0;
-  cy = y + LINE_WIDTH / 2.0;
-  width -= LINE_WIDTH;
-  height -= LINE_WIDTH;
+  /* active tab hilight stripe */
+  if (state_type == GTK_STATE_NORMAL)
+    {
+      double strip_width = RADIUS - 0.5;
+      switch (gap_side)
+        {
+        case GTK_POS_BOTTOM: /* top tab */
+          cairo_move_to (cr, x, y + strip_width);
+          cairo_arc (cr, x + strip_width, y + strip_width, strip_width, M_PI, M_PI * 1.5);
+          cairo_arc (cr, x + width - strip_width, y + strip_width, strip_width, M_PI * 1.5, 0);
+          cairo_line_to (cr, x + width, y + strip_width);
+          break;
+        case GTK_POS_TOP: /* bottom tab */
+          cairo_move_to (cr, x, y + height - strip_width);
+          cairo_arc_negative (cr, x + strip_width, y + height - strip_width, strip_width, M_PI, M_PI * 0.5);
+          cairo_arc_negative (cr, x + width - strip_width, y + height - strip_width, strip_width, M_PI * 0.5, 0);
+          cairo_line_to (cr, x + width, y + height - strip_width);
+          break;
+        case GTK_POS_LEFT: /* right tab */
+          cairo_move_to (cr, x + width - strip_width, y);
+          cairo_arc (cr, x + width - strip_width, y + strip_width, strip_width, M_PI * 1.5, 0);
+          cairo_arc (cr, x + width - strip_width, y + height - strip_width, strip_width, 0, M_PI * 0.5);
+          cairo_line_to (cr, x + width - strip_width, y + height);
+          break;
+        case GTK_POS_RIGHT: /* left tab */
+          cairo_move_to (cr, x + strip_width, y);
+          cairo_arc_negative (cr, x + strip_width, y + strip_width, strip_width, M_PI * 1.5, M_PI);
+          cairo_arc_negative (cr, x + strip_width, y + height - strip_width, strip_width, M_PI, M_PI * 0.5);
+          cairo_line_to (cr, x + strip_width, y + height);
+          break;
+        }
+      gdk_cairo_set_source_color (cr, &style->bg[GTK_STATE_SELECTED]);
+      cairo_fill (cr);
+    }
 
+
+  /* tab border */
   switch (gap_side)
   {
     case GTK_POS_TOP:     /* bottom tab */
-      /* this allows for some overlap */
-      if (state_type == GTK_STATE_NORMAL)
-        cy -= LINE_WIDTH;
-
-      cairo_move_to (cr, cx, cy);
-      cairo_arc_negative (cr, cx + RADIUS, cy + height - RADIUS, RADIUS, M_PI, M_PI * 0.5);
-      cairo_arc_negative (cr, cx + width - RADIUS, cy + height - RADIUS, RADIUS, M_PI * 0.5, 0);
-      cairo_line_to (cr, cx + width, cy);
+      cairo_move_to (cr, x, y);
+      cairo_arc_negative (cr, x + RADIUS, y + height - RADIUS, RADIUS, M_PI, M_PI * 0.5);
+      cairo_arc_negative (cr, x + width - RADIUS, y + height - RADIUS, RADIUS, M_PI * 0.5, 0);
+      cairo_line_to (cr, x + width, y);
       break;
     case GTK_POS_BOTTOM: /* top tab */
-      if (state_type == GTK_STATE_NORMAL)
-        height += LINE_WIDTH;
-
-      cairo_move_to (cr, cx, cy + height);
-      cairo_arc (cr, cx + RADIUS, cy + RADIUS, RADIUS, M_PI, M_PI * 1.5);
-      cairo_arc (cr, cx + width - RADIUS, cy + RADIUS, RADIUS, M_PI * 1.5, 0);
-      cairo_line_to (cr, cx + width, cy + height);
+      cairo_move_to (cr, x, y + height);
+      cairo_arc (cr, x + RADIUS, y + RADIUS, RADIUS, M_PI, M_PI * 1.5);
+      cairo_arc (cr, x + width - RADIUS, y + RADIUS, RADIUS, M_PI * 1.5, 0);
+      cairo_line_to (cr, x + width, y + height);
       break;
     case GTK_POS_LEFT:	/* right tab */
-      if (state_type == GTK_STATE_NORMAL)
-        cx -= LINE_WIDTH;
-      cairo_move_to (cr, cx, cy);
-      cairo_arc (cr, cx + width - RADIUS, cy + RADIUS, RADIUS, M_PI * 1.5, 0);
-      cairo_arc (cr, cx + width - RADIUS, cy + height - RADIUS, RADIUS, 0, M_PI * 0.5);
-      cairo_line_to (cr, cx, cy + height);
+      cairo_move_to (cr, x, y);
+      cairo_arc (cr, x + width - RADIUS, y + RADIUS, RADIUS, M_PI * 1.5, 0);
+      cairo_arc (cr, x + width - RADIUS, y + height - RADIUS, RADIUS, 0, M_PI * 0.5);
+      cairo_line_to (cr, x, y + height);
       break;
     case GTK_POS_RIGHT:	/* left tab */
-      if (state_type == GTK_STATE_NORMAL)
-        width += LINE_WIDTH;
-      cairo_move_to (cr, cx + width, cy);
-      cairo_arc_negative (cr, cx + RADIUS, cy + RADIUS, RADIUS, M_PI * 1.5, M_PI);
-      cairo_arc_negative (cr, cx + RADIUS, cy + height - RADIUS, RADIUS, M_PI, M_PI * 0.5);
-      cairo_line_to (cr, cx + width, cy + height);
+      cairo_move_to (cr, x + width, y);
+      cairo_arc_negative (cr, x + RADIUS, y + RADIUS, RADIUS, M_PI * 1.5, M_PI);
+      cairo_arc_negative (cr, x + RADIUS, y + height - RADIUS, RADIUS, M_PI, M_PI * 0.5);
+      cairo_line_to (cr, x + width, y + height);
       break;
   }
-
-  gdk_cairo_set_source_color (cr, &style->bg[state_type]);
-  cairo_fill_preserve (cr);
 
   gdk_cairo_set_source_color (cr, &style->fg[state_type]);
   cairo_stroke (cr);

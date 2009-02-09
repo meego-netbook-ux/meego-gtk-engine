@@ -129,13 +129,6 @@ style "treeview_headers"
 }
 widget_class "*.GtkTreeView.GtkButton*" style "treeview_headers"
 
-style "notebook"
-{
-# NORMAL = active tab, ACTIVE = inactive tabs
-  bg[NORMAL] = @selected_bg_color
-}
-class "GtkNotebook" style "notebook"
-
 style "toolbar"
 {
   bg[NORMAL] = shade (0.98, @bg_color)
