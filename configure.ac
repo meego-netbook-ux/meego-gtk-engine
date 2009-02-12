@@ -1,4 +1,4 @@
-AC_INIT([moblin_netbook-engine], [0.3.1])
+AC_INIT([moblin-netbook-engine], [0.1])
 AC_CONFIG_SRCDIR([README])
 AM_CONFIG_HEADER(config.h)
 
@@ -18,7 +18,7 @@ AM_MAINTAINER_MODE
 
 PKG_PROG_PKG_CONFIG()
 
-PKG_CHECK_MODULES(GTK, gtk+-2.0 >= 2.8.0,, AC_MSG_ERROR([GTK+-2.8 is required to compile moblin_netbook-engine]))
+PKG_CHECK_MODULES(GTK, gtk+-2.0 >= 2.8.0,, AC_MSG_ERROR([GTK+-2.8 is required to compile moblin-netbook-engine]))
 AC_SUBST(GTK_CFLAGS)
 AC_SUBST(GTK_LIBS)
 
@@ -27,7 +27,7 @@ AC_SUBST(GTK_VERSION)
 
 AC_CONFIG_FILES([
 Makefile
-]) 
+])
 
 
 AC_OUTPUT
