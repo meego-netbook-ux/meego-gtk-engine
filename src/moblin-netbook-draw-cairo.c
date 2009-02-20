@@ -384,6 +384,8 @@ moblin_netbook_draw_check (GtkStyle * style, GdkWindow * window,
   DEBUG ("draw_check");
 
   cr = gdk_cairo_create (window);
+  CAIRO_CLIP();
+
   cairo_translate (cr, 0.5, 0.5);
   cairo_set_line_width (cr, LINE_WIDTH);
 
@@ -448,6 +450,8 @@ moblin_netbook_draw_option (GtkStyle * style, GdkWindow * window,
   DEBUG ("draw_option");
 
   cr = gdk_cairo_create (window);
+  CAIRO_CLIP();
+
   cairo_set_line_width (cr, 1);
   cairo_translate (cr, 0.5, 0.5);
 
@@ -497,6 +501,8 @@ moblin_netbook_draw_box_gap (GtkStyle * style, GdkWindow * window,
 
 
   cr = gdk_cairo_create (window);
+  CAIRO_CLIP();
+
   cairo_set_line_width (cr, LINE_WIDTH);
   cairo_translate (cr, 0.5, 0.5);
   gdk_cairo_set_source_color (cr, &style->fg[state_type]);
@@ -557,6 +563,7 @@ moblin_netbook_draw_extension (GtkStyle * style, GdkWindow * window,
                                       x, y, width, height);
 
   cr = gdk_cairo_create (window);
+  CAIRO_CLIP();
 
   /* set up for line drawing */
   cairo_set_line_width (cr, LINE_WIDTH);
@@ -653,6 +660,7 @@ moblin_netbook_draw_vline (GtkStyle *style, GdkWindow *window, GtkStateType stat
     return;
 
   cr = gdk_cairo_create (window);
+
   cairo_set_line_width (cr, LINE_WIDTH);
   cairo_set_line_cap (cr, CAIRO_LINE_CAP_ROUND);
 
@@ -675,6 +683,7 @@ moblin_netbook_draw_hline (GtkStyle *style, GdkWindow *window,  GtkStateType sta
     return;
 
   cr = gdk_cairo_create (window);
+
   cairo_set_line_width (cr, LINE_WIDTH);
   cairo_set_line_cap (cr, CAIRO_LINE_CAP_ROUND);
 
@@ -704,6 +713,8 @@ moblin_netbook_draw_arrow (GtkStyle *style,
   cairo_t *cr;
   
   cr = gdk_cairo_create (window);
+  CAIRO_CLIP();
+
   cairo_set_line_width (cr, 2);
 
   cairo_set_line_cap (cr, CAIRO_LINE_CAP_ROUND);
