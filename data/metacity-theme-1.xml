@@ -65,7 +65,7 @@
              x="0" y="0"
              width="width"
              height="height"/>
-  <rectangle color="gtk:bg[SELECTED]" filled="true"
+  <rectangle color="#202e31" filled="true"
              x="0" y="0"
              width="width"
              height="top_height"/> 
