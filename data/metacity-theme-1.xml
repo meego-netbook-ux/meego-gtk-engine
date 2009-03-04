@@ -10,9 +10,9 @@
 </info>
  
 <frame_geometry name="normal" rounded_top_left="false" rounded_top_right="false" rounded_bottom_left="false" rounded_bottom_right="false">
-  <distance name="left_width" value="4"/>
-  <distance name="right_width" value="4"/>
-  <distance name="bottom_height" value="4"/>
+  <distance name="left_width" value="2"/>
+  <distance name="right_width" value="2"/>
+  <distance name="bottom_height" value="2"/>
   <distance name="left_titlebar_edge" value="1"/>
   <distance name="right_titlebar_edge" value="1"/>
   <aspect_ratio name="button" value="1"/>
@@ -38,9 +38,9 @@
 </frame_geometry>
 
 <frame_geometry name="border" has_title="false">
-  <distance name="left_width" value="4"/>
-  <distance name="right_width" value="4"/>
-  <distance name="bottom_height" value="4"/>
+  <distance name="left_width" value="2"/>
+  <distance name="right_width" value="2"/>
+  <distance name="bottom_height" value="2"/>
   <distance name="left_titlebar_edge" value="0"/>
   <distance name="right_titlebar_edge" value="0"/>
   <distance name="button_width" value="0"/>
@@ -54,10 +54,14 @@
 <constant name="ButtonIPad" value="4"/>
 
 <draw_ops name="focus_outline">
-  <rectangle color="black"
+  <rectangle color="#202e31"
              x="0" y="0"
              width="width-1"
-             height="height-1"/>
+             height="height-1" />
+  <rectangle color="#202e31"
+             x="1" y="1"
+             width="width-3"
+             height="height-3" />
 </draw_ops>
 
 <draw_ops name="title_bg">
