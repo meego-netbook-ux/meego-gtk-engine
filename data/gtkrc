@@ -13,65 +13,65 @@ gtk_color_scheme = "bg_color:#f9f9f9;fg_color:#4a4a4a;text_color:#4a4a4a;base_co
 style "default"
 {
 
-	xthickness = 3
-	ythickness = 3
+  xthickness = 3
+  ythickness = 3
 
-	GtkRange::trough_border = 0
-	GtkScrollbar::slider_width = 20
-	GtkScrollbar::stepper_size = 20
-	GtkScale::slider_length = 23
-	GtkScale::slider_width = 14
+  GtkRange::trough_border = 0
+  GtkScrollbar::slider_width = 20
+  GtkScrollbar::stepper_size = 20
+  GtkScale::slider_length = 23
+  GtkScale::slider_width = 14
 
-	GtkProgressBar::xspacing = 0
-	GtkProgressBar::yspacing = 0
+  GtkProgressBar::xspacing = 0
+  GtkProgressBar::yspacing = 0
 
-	GtkButton::default_border = {0, 0, 0, 0}
-	# allow for bottom shadow in buttons
-	GtkButton::inner-border = { 0, 0, 0, 2 }
+  GtkButton::default_border = {0, 0, 0, 0}
+  # allow for bottom shadow in buttons
+  GtkButton::inner-border = { 0, 0, 0, 2 }
 
-	GtkToolbar::internal_padding = 2
+  GtkToolbar::internal_padding = 2
 
-	GtkCheckButton::indicator_size = 15
-	GtkCheckMenuItem::indicator_size = 15
+  GtkCheckButton::indicator_size = 15
+  GtkCheckMenuItem::indicator_size = 15
 
 
-	fg [NORMAL] = @fg_color
-	fg [PRELIGHT] = @fg_color
-	fg [ACTIVE] = @fg_color
-	fg [INSENSITIVE] = lighter (@fg_color)
-	fg [SELECTED] = @selected_fg_color
+  fg [NORMAL] = @fg_color
+  fg [PRELIGHT] = @fg_color
+  fg [ACTIVE] = @fg_color
+  fg [INSENSITIVE] = lighter (@fg_color)
+  fg [SELECTED] = @selected_fg_color
 
-	bg [NORMAL] = @bg_color
-	bg [PRELIGHT] = @bg_color
-	bg [ACTIVE] = @bg_color
-	bg [INSENSITIVE] = darker (@bg_color)
-	bg [SELECTED] = @selected_bg_color
+  bg [NORMAL] = @bg_color
+  bg [PRELIGHT] = @bg_color
+  bg [ACTIVE] = @bg_color
+  bg [INSENSITIVE] = darker (@bg_color)
+  bg [SELECTED] = @selected_bg_color
 
-	text [NORMAL] = @text_color
-	text [PRELIGHT] = @text_color
-	text [SELECTED] = @selected_fg_color
-	text [ACTIVE] = @fg_color
-	text [INSENSITIVE] = shade (2.0, @text_color)
+  text [NORMAL] = @text_color
+  text [PRELIGHT] = @text_color
+  text [SELECTED] = @selected_fg_color
+  text [ACTIVE] = @fg_color
+  text [INSENSITIVE] = shade (2.0, @text_color)
 
-	base [NORMAL] = @base_color
-	base [PRELIGHT] = @base_color
-	base [SELECTED] = @selected_bg_color
-	base [ACTIVE] = shade (0.9, @bg_color)
-	base [INSENSITIVE] = @bg_color
+  base [NORMAL] = @base_color
+  base [PRELIGHT] = @base_color
+  base [SELECTED] = @selected_bg_color
+  base [ACTIVE] = shade (0.9, @bg_color)
+  base [INSENSITIVE] = @bg_color
 
-	engine "moblin-netbook-engine" {}
+  engine "moblin-netbook-engine" {}
 }
 
 class "GtkWidget" style "default"
 
 style "button"
 {
-	bg[NORMAL] = lighter (@bg_color)
-	bg[PRELIGHT] = lighter (@bg_color)
-	bg[INSENSITIVE] = @bg_color
-	fg[INSENSITIVE] = darker (@bg_color)
-	bg[ACTIVE] = @selected_bg_color
-	fg[ACTIVE] = @selected_fg_color
+  bg[NORMAL] = lighter (@bg_color)
+  bg[PRELIGHT] = lighter (@bg_color)
+  bg[INSENSITIVE] = @bg_color
+  fg[INSENSITIVE] = darker (@bg_color)
+  bg[ACTIVE] = @selected_bg_color
+  fg[ACTIVE] = @selected_fg_color
 
 }
 widget_class "*Button*" style "button"
@@ -79,16 +79,16 @@ class "GtkScale" style "button"
 
 style "checkbutton"
 {
-	fg [NORMAL] = @fg_color
-	fg [PRELIGHT] = @fg_color
-	fg [ACTIVE] = @fg_color
+  fg [NORMAL] = @fg_color
+  fg [PRELIGHT] = @fg_color
+  fg [ACTIVE] = @fg_color
 
-	bg [NORMAL] = @bg_color
-	bg [PRELIGHT] = @bg_color
+  bg [NORMAL] = @bg_color
+  bg [PRELIGHT] = @bg_color
 
-        text [NORMAL] = @selected_bg_color
-        text [ACTIVE] = @selected_bg_color
-        text [PRELIGHT] = @selected_bg_color
+  text [NORMAL] = @selected_bg_color
+  text [ACTIVE] = @selected_bg_color
+  text [PRELIGHT] = @selected_bg_color
 }
 widget_class "*CheckButton*" style "checkbutton"
 widget_class "*RadioButton*" style "checkbutton"
@@ -96,23 +96,23 @@ widget_class "*ToolButton*" style "checkbutton"
 
 style "menuitem"
 {
-	fg[PRELIGHT] = @selected_fg_color
-	bg[PRELIGHT] = @selected_bg_color
+  fg[PRELIGHT] = @selected_fg_color
+  bg[PRELIGHT] = @selected_bg_color
 }
 widget_class "*MenuItem*" style "menuitem"
 
 style "menu"
 {
-	bg[NORMAL] = lighter (@bg_color)
+  bg[NORMAL] = lighter (@bg_color)
 }
 class "GtkMenu" style "menu"
 
 style "progressbar"
 {
-	xthickness = 0
-	ythickness = 0
-	bg[NORMAL] = shade (0.9, @bg_color)
-	bg[PRELIGHT] = @selected_bg_color
+  xthickness = 0
+  ythickness = 0
+  bg[NORMAL] = shade (0.9, @bg_color)
+  bg[PRELIGHT] = @selected_bg_color
 }
 class "GtkProgressBar" style "progressbar"
 
