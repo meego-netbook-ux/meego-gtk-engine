@@ -38,7 +38,7 @@
   cairo_clip (cr);
 
 #define LINE_WIDTH 1
-#define RADIUS 4
+#define RADIUS 5
 
 GtkStyleClass *parent_style_class;
 
