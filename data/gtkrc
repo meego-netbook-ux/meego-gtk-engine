@@ -24,8 +24,10 @@ style "default"
 
 	GtkProgressBar::xspacing = 0
 	GtkProgressBar::yspacing = 0
-	
+
 	GtkButton::default_border = {0, 0, 0, 0}
+	# allow for bottom shadow in buttons
+	GtkButton::inner-border = { 0, 0, 0, 2 }
 
 	GtkToolbar::internal_padding = 2
 
