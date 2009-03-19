@@ -1,4 +1,4 @@
-AC_INIT([moblin-netbook-engine], [0.1.1])
+AC_INIT([moblin-netbook-engine], [0.1.2])
 AC_CONFIG_SRCDIR([README])
 AM_CONFIG_HEADER(config.h)
 
