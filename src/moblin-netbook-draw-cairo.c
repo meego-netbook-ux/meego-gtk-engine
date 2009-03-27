@@ -724,6 +724,17 @@ moblin_netbook_draw_arrow (GtkStyle *style,
     gdk_cairo_set_source_color (cr, &style->fg[state_type]);
   else
     gdk_cairo_set_source_color (cr, &style->bg[GTK_STATE_SELECTED]);
+
+  if (DETAIL ("vscrollbar"))
+    {
+      x += (width - 6) / 2;
+      width = 6;
+    }
+  else if (DETAIL ("hscrollbar"))
+    {
+      y += (height - 6) / 2;
+      height = 6;
+    }
   
   /* ensure we have odd number of pixels for width or height to allow for
    * correct centering
