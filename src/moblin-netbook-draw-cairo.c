@@ -28,7 +28,7 @@
 #include <math.h>
 #include <string.h>
 
-#define DEBUG(func) // g_printf ("%s: detail = '%s'; state = %d; x:%d; y:%d; w:%d; h:%d;\n", func, detail, state_type, x, y, width, height);
+#define DEBUG // g_printf ("%s: detail = '%s'; state = %d; x:%d; y:%d; w:%d; h:%d;\n", __FUNCTION__, detail, state_type, x, y, width, height);
 #define DETAIL(foo) (detail && strcmp (foo, detail) == 0)
 
 #define CAIRO_CLIP()  \
@@ -111,7 +111,7 @@ moblin_netbook_draw_box (DRAW_ARGS)
   GdkColor border_color;
   gboolean add_shadow = TRUE;
   
-  DEBUG ("draw_box");
+  DEBUG;
 
   if (DETAIL ("paned"))
     return;
@@ -342,7 +342,7 @@ moblin_netbook_draw_shadow (DRAW_ARGS)
   cairo_t *cr;
   GdkColor border_color;
 
-  DEBUG ("draw_shadow");
+  DEBUG;
 
   if (shadow_type == GTK_SHADOW_NONE)
     return;
@@ -382,7 +382,7 @@ moblin_netbook_draw_check (GtkStyle * style, GdkWindow * window,
 		 gint height)
 {
   cairo_t *cr;
-  DEBUG ("draw_check");
+  DEBUG;
 
   cr = gdk_cairo_create (window);
   CAIRO_CLIP();
@@ -448,7 +448,7 @@ moblin_netbook_draw_option (GtkStyle * style, GdkWindow * window,
   cairo_t *cr;
   gint cx, cy, radius;
 
-  DEBUG ("draw_option");
+  DEBUG;
 
   cr = gdk_cairo_create (window);
   CAIRO_CLIP();
@@ -712,7 +712,10 @@ moblin_netbook_draw_arrow (GtkStyle *style,
                  gint height)
 {
   cairo_t *cr;
-  
+
+  DEBUG;
+
+
   cr = gdk_cairo_create (window);
   CAIRO_CLIP();
 
