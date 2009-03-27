@@ -22,6 +22,7 @@
 
 #include "moblin-netbook-draw.h"
 #include "moblin-netbook-style.h"
+#include "moblin-netbook-utils.h"
 
 #include <stdio.h>
 #include <math.h>
