@@ -13,6 +13,9 @@ gtk_color_scheme = "bg_color:#f9f9f9;fg_color:#4a4a4a;text_color:#4a4a4a;base_co
 style "default"
 {
 
+  GtkWidget::cursor-color    = @selected_bg_color
+  GtkWidget::secondary-cursor-color = @selected_bg_color
+
   xthickness = 3
   ythickness = 3
 
@@ -38,7 +41,7 @@ style "default"
   fg [NORMAL] = @fg_color
   fg [PRELIGHT] = @fg_color
   fg [ACTIVE] = @fg_color
-  fg [INSENSITIVE] = lighter (@fg_color)
+  fg [INSENSITIVE] = @selected_fg_color
   fg [SELECTED] = @selected_fg_color
 
   bg [NORMAL] = @bg_color
@@ -48,10 +51,10 @@ style "default"
   bg [SELECTED] = @selected_bg_color
 
   text [NORMAL] = @text_color
-  text [PRELIGHT] = @text_color
+  text [PRELIGHT] = @selected_fg_color
   text [SELECTED] = @selected_fg_color
   text [ACTIVE] = @fg_color
-  text [INSENSITIVE] = shade (2.0, @text_color)
+  text [INSENSITIVE] = @selected_fg_color
 
   base [NORMAL] = @base_color
   base [PRELIGHT] = @base_color
