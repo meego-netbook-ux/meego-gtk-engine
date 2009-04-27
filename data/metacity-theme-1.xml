@@ -9,15 +9,15 @@
   <!-- Based on the Mist theme by Dave Camp, Copyright 2002 Ximian, Inc -->
 </info>
  
-<frame_geometry name="normal" rounded_top_left="false" rounded_top_right="false" rounded_bottom_left="false" rounded_bottom_right="false">
+<frame_geometry name="normal" rounded_top_left="true" rounded_top_right="true" rounded_bottom_left="false" rounded_bottom_right="false">
   <distance name="left_width" value="2"/>
   <distance name="right_width" value="2"/>
   <distance name="bottom_height" value="2"/>
-  <distance name="left_titlebar_edge" value="1"/>
+  <distance name="left_titlebar_edge" value="0"/>
   <distance name="right_titlebar_edge" value="1"/>
   <aspect_ratio name="button" value="1"/>
   <distance name="title_vertical_pad" value="2"/>
-  <border name="title_border" left="6" right="6" top="6" bottom="6"/>
+  <border name="title_border" left="0" right="6" top="6" bottom="6"/>
   <border name="button_border" left="6" right="6" top="6" bottom="6"/>
 </frame_geometry>
 
@@ -29,7 +29,7 @@
 	<distance name="right_titlebar_edge" value="0"/>
 </frame_geometry>
 
-<frame_geometry name="normal_small_borders" parent="normal">
+<frame_geometry name="normal_small_borders" parent="normal" rounded_top_left="true" rounded_top_right="true" rounded_bottom_left="false" rounded_bottom_right="false">
   <distance name="left_width" value="0"/>
   <distance name="right_width" value="0"/>
   <distance name="bottom_height" value="0"/>
@@ -37,7 +37,7 @@
   <distance name="right_titlebar_edge" value="0"/>
 </frame_geometry>
 
-<frame_geometry name="border" has_title="false">
+<frame_geometry name="border" has_title="false" rounded_top_left="true" rounded_top_right="true" rounded_bottom_left="false" rounded_bottom_right="false">
   <distance name="left_width" value="2"/>
   <distance name="right_width" value="2"/>
   <distance name="bottom_height" value="2"/>
@@ -65,7 +65,7 @@
 </draw_ops>
 
 <draw_ops name="title_bg">
-  <rectangle color="gtk:bg[NORMAL]" filled="true"
+  <rectangle color="#202e31" filled="true"
              x="0" y="0"
              width="width"
              height="height"/>
@@ -81,7 +81,7 @@
 </draw_ops>
 
 <draw_ops name="title_unfocused">
-  <rectangle color="gtk:bg[NORMAL]" filled="true"
+  <rectangle color="#202e31" filled="true"
              x="0" y="0"
              width="width"
              height="height"/>
@@ -93,19 +93,20 @@
 </draw_ops>
 
 <draw_ops name="title_maximised_unfocused">
+  <include name="title_bg"/>
 </draw_ops>
 
 
 <!-- Title Text -->
 
 <draw_ops name="title_text">
-  <title color="gtk:fg[SELECTED]"
+  <title color="#ffffff"
          x="0"
          y="(((height - title_height) / 2) `max` 0)"/>
 </draw_ops>
 
 <draw_ops name="title_text_unfocused">
-  <title color="gtk:fg[ACTIVE]"
+  <title color="#666666"
          x="0"
          y="(((height - title_height) / 2) `max` 0)"/>
 </draw_ops>
@@ -115,24 +116,35 @@
 <!-- we only care about a close icon -->
 
 <draw_ops name="close_button_icon">
-  <line color="gtk:fg[SELECTED]" width="2"
+  <line color="#bbbbbb" width="2"
         x1="ButtonIPad" y1="ButtonIPad" x2="width-ButtonIPad-1" y2="height - ButtonIPad-1"/>
-  <line color="gtk:fg[SELECTED]" width="1"
+  <line color="#bbbbbb" width="1"
         x1="ButtonIPad" y1="ButtonIPad" x2="width-ButtonIPad" y2="height - ButtonIPad"/>
-  <line color="gtk:fg[SELECTED]" width="2"
+  <line color="#bbbbbb" width="2"
         x1="ButtonIPad" y1="height - ButtonIPad-1" x2="width-ButtonIPad-1" y2="ButtonIPad"/>
-  <line color="gtk:fg[SELECTED]" width="1"
+  <line color="#bbbbbb" width="1"
         x1="ButtonIPad" y1="height - ButtonIPad-1" x2="width-ButtonIPad" y2="ButtonIPad - 1"/>
 </draw_ops>
 
 <draw_ops name="close_button_icon_unfocused">
-  <line color="gtk:fg[INSENSITIVE]" width="2"
+  <line color="#666666" width="2"
         x1="ButtonIPad" y1="ButtonIPad" x2="width-ButtonIPad-1" y2="height - ButtonIPad-1"/>
-  <line color="gtk:fg[INSENSITIVE]" width="1"
+  <line color="#666666" width="1"
         x1="ButtonIPad" y1="ButtonIPad" x2="width-ButtonIPad" y2="height - ButtonIPad"/>
-  <line color="gtk:fg[INSENSITIVE]" width="2"
+  <line color="#666666" width="2"
         x1="ButtonIPad" y1="height - ButtonIPad-1" x2="width-ButtonIPad-1" y2="ButtonIPad"/>
-  <line color="gtk:fg[INSENSITIVE]" width="1"
+  <line color="#666666" width="1"
+        x1="ButtonIPad" y1="height - ButtonIPad-1" x2="width-ButtonIPad" y2="ButtonIPad - 1"/>
+</draw_ops>
+
+<draw_ops name="close_button_icon_prelight">
+  <line color="#ffffff" width="2"
+        x1="ButtonIPad" y1="ButtonIPad" x2="width-ButtonIPad-1" y2="height - ButtonIPad-1"/>
+  <line color="#ffffff" width="1"
+        x1="ButtonIPad" y1="ButtonIPad" x2="width-ButtonIPad" y2="height - ButtonIPad"/>
+  <line color="#ffffff" width="2"
+        x1="ButtonIPad" y1="height - ButtonIPad-1" x2="width-ButtonIPad-1" y2="ButtonIPad"/>
+  <line color="#ffffff" width="1"
         x1="ButtonIPad" y1="height - ButtonIPad-1" x2="width-ButtonIPad" y2="ButtonIPad - 1"/>
 </draw_ops>
 
@@ -140,7 +152,7 @@
    <include name="close_button_icon"/>
 </draw_ops>
 <draw_ops name="close_button_prelight">
-   <include name="close_button_icon"/>
+   <include name="close_button_icon_prelight"/>
 </draw_ops>
 <draw_ops name="close_button_pressed">
   <include name="close_button_icon_unfocused"/>
