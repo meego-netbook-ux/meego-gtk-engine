@@ -30,8 +30,8 @@
 G_MODULE_EXPORT void
 theme_init (GTypeModule *module)
 {
-  moblin_netbook_rc_style_register_type (module);
-  moblin_netbook_style_register_type (module);
+  _moblin_netbook_rc_style_register_type (module);
+  _moblin_netbook_style_register_type (module);
 }
 
 G_MODULE_EXPORT void

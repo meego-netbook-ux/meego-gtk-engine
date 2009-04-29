@@ -24,40 +24,9 @@
 #include "moblin-netbook-rc-style.h"
 #include "moblin-netbook-style.h"
 
-/*** Gtk Style RC Class *******************************************************/
 
-GType moblin_netbook_type_rc_style = 0;
+G_DEFINE_DYNAMIC_TYPE (MoblinNetbookRcStyle, moblin_netbook_rc_style, GTK_TYPE_RC_STYLE)
 
-static GtkStyle *moblin_netbook_rc_style_create_style (GtkRcStyle *rc_style);
-
-static void
-moblin_netbook_rc_style_class_init (MoblinNetbookRcStyleClass *klass)
-{
-	GtkRcStyleClass *rc_style_class = GTK_RC_STYLE_CLASS (klass);
-	rc_style_class->create_style = moblin_netbook_rc_style_create_style;
-}
-
-void
-moblin_netbook_rc_style_register_type (GTypeModule *module)
-{
-  static const GTypeInfo object_info =
-  {
-    sizeof (MoblinNetbookRcStyleClass),
-    (GBaseInitFunc) NULL,
-    (GBaseFinalizeFunc) NULL,
-    (GClassInitFunc) moblin_netbook_rc_style_class_init,
-    NULL,           /* class_finalize */
-    NULL,           /* class_data */
-    sizeof (MoblinNetbookRcStyle),
-    0,              /* n_preallocs */
-    (GInstanceInitFunc) NULL,
-  };
-
-  moblin_netbook_type_rc_style = g_type_module_register_type (module,
-                                                      GTK_TYPE_RC_STYLE,
-                                                      "MoblinNetbookRcStyle",
-                                                      &object_info, 0);
-}
 
 static GtkStyle *
 moblin_netbook_rc_style_create_style (GtkRcStyle *rc_style)
@@ -65,4 +34,25 @@ moblin_netbook_rc_style_create_style (GtkRcStyle *rc_style)
   return GTK_STYLE (g_object_new (MOBLIN_NETBOOK_TYPE_STYLE, NULL));
 }
 
-/******************************************************************************/
+static void
+moblin_netbook_rc_style_class_init (MoblinNetbookRcStyleClass *klass)
+{
+  GtkRcStyleClass *rc_style_class = GTK_RC_STYLE_CLASS (klass);
+  rc_style_class->create_style = moblin_netbook_rc_style_create_style;
+}
+
+static void
+moblin_netbook_rc_style_class_finalize (MoblinNetbookRcStyleClass *rc_style)
+{
+}
+
+static void
+moblin_netbook_rc_style_init (MoblinNetbookRcStyle *rc_style)
+{
+}
+
+void
+_moblin_netbook_rc_style_register_type (GTypeModule *module)
+{
+  moblin_netbook_rc_style_register_type (module);
+}

@@ -26,11 +26,7 @@
 
 G_BEGIN_DECLS
 
-/*** Gtk Style RC Class *******************************************************/
-
-extern GType moblin_netbook_type_rc_style;
-
-#define MOBLIN_NETBOOK_TYPE_RC_STYLE              moblin_netbook_type_rc_style
+#define MOBLIN_NETBOOK_TYPE_RC_STYLE              moblin_netbook_rc_style_get_type()
 #define MOBLIN_NETBOOK_RC_STYLE(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), MOBLIN_NETBOOK_TYPE_RC_STYLE, MoblinNetbookRcStyle))
 #define MOBLIN_NETBOOK_RC_STYLE_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), MOBLIN_NETBOOK_TYPE_RC_STYLE, MoblinNetbookRcStyleClass))
 #define MOBLIN_NETBOOK_IS_RC_STYLE(object)        (G_TYPE_CHECK_INSTANCE_TYPE ((object), MOBLIN_NETBOOK_TYPE_RC_STYLE))
@@ -50,9 +46,7 @@ struct _MoblinNetbookRcStyleClass
   GtkRcStyleClass parent_class;
 };
 
-void moblin_netbook_rc_style_register_type (GTypeModule *engine);
-
-/******************************************************************************/
+void _moblin_netbook_rc_style_register_type (GTypeModule *engine);
 
 G_END_DECLS
 

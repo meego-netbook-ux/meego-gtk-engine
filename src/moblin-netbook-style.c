@@ -40,45 +40,13 @@
 #define LINE_WIDTH 1
 #define RADIUS 5
 
-GtkStyleClass *parent_style_class;
-
-/*** Gtk Style Class **********************************************************/
-
-GType moblin_netbook_type_style = 0;
-
-static void moblin_netbook_style_class_init (MoblinNetbookStyleClass *klass);
+G_DEFINE_DYNAMIC_TYPE (MoblinNetbookStyle, moblin_netbook_style, GTK_TYPE_STYLE)
 
 void
-moblin_netbook_style_register_type (GTypeModule *module)
+_moblin_netbook_style_register_type (GTypeModule *module)
 {
-  static const GTypeInfo object_info =
-  {
-    sizeof (MoblinNetbookStyleClass),
-    (GBaseInitFunc) NULL,
-    (GBaseFinalizeFunc) NULL,
-    (GClassInitFunc) moblin_netbook_style_class_init,
-    NULL,           /* class_finalize */
-    NULL,           /* class_data */
-    sizeof (MoblinNetbookStyle),
-    0,              /* n_preallocs */
-    (GInstanceInitFunc) NULL,
-  };
-
-  moblin_netbook_type_style = g_type_module_register_type (module,
-						 GTK_TYPE_STYLE,
-						 "MoblinNetbookStyle",
-						 &object_info, 0);
+  moblin_netbook_style_register_type (module);
 }
-
-static void
-moblin_netbook_style_class_init (MoblinNetbookStyleClass *klass)
-{
-  GtkStyleClass *style_class = GTK_STYLE_CLASS (klass);
-  moblin_netbook_draw_style_class_init (style_class);
-}
-
-/******************************************************************************/
-
 
 
 static inline void
@@ -820,11 +788,10 @@ moblin_netbook_draw_arrow (GtkStyle *style,
   cairo_destroy (cr);
 }
 
-void
-moblin_netbook_draw_style_class_init (GtkStyleClass * style_class)
+static void
+moblin_netbook_style_class_init (MoblinNetbookStyleClass *klass)
 {
-
-  parent_style_class = g_type_class_peek_parent (style_class);
+  GtkStyleClass *style_class = GTK_STYLE_CLASS (klass);
 
   style_class->draw_shadow = moblin_netbook_draw_shadow;
   style_class->draw_box = moblin_netbook_draw_box;
@@ -837,7 +804,14 @@ moblin_netbook_draw_style_class_init (GtkStyleClass * style_class)
   style_class->draw_vline = moblin_netbook_draw_vline;
   /* style_class->draw_focus = moblin_netbook_draw_focus; */
   style_class->draw_arrow = moblin_netbook_draw_arrow;
-
 }
 
+static void
+moblin_netbook_style_class_finalize (MoblinNetbookStyleClass *klass)
+{
+}
 
+static void
+moblin_netbook_style_init (MoblinNetbookStyle *style)
+{
+}

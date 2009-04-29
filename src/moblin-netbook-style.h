@@ -18,6 +18,9 @@
  *
  */
 
+#ifndef _MOBLIN_NETBOOK_STYLE_H
+#define _MOBLIN_NETBOOK_STYLE_H
+
 #include <gtk/gtk.h>
 
 #define DRAW_ARGS    GtkStyle       *style, \
@@ -43,11 +46,7 @@
   else if (height == -1)				\
     gdk_drawable_get_size (window, NULL, &height);
 
-/*** Gtk Style Class **********************************************************/
-
-extern GType moblin_netbook_type_style;
-
-#define MOBLIN_NETBOOK_TYPE_STYLE              moblin_netbook_type_style
+#define MOBLIN_NETBOOK_TYPE_STYLE              moblin_netbook_style_get_type()
 #define MOBLIN_NETBOOK_STYLE(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), MOBLIN_NETBOOK_TYPE_STYLE, MoblinNetbookStyle))
 #define MOBLIN_NETBOOK_STYLE_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), MOBLIN_NETBOOK_TYPE_STYLE, MoblinNetbookStyleClass))
 #define MOBLIN_NETBOOK_IS_STYLE(object)        (G_TYPE_CHECK_INSTANCE_TYPE ((object), MOBLIN_NETBOOK_TYPE_STYLE))
@@ -67,8 +66,6 @@ struct _MoblinNetbookStyleClass
   GtkStyleClass parent_class;
 };
 
-void moblin_netbook_style_register_type (GTypeModule *module);
+void _moblin_netbook_style_register_type (GTypeModule *module);
 
-/******************************************************************************/
-
-
+#endif /* _MOBLIN_NETBOOK_STYLE_H_ */
