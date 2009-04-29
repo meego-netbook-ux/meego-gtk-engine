@@ -18,15 +18,30 @@
  *
  */
 
-#ifndef MOBLIN_NETBOOK_STYLE_H
-#define MOBLIN_NETBOOK_STYLE_H
-
 #include <gtk/gtk.h>
-#include <gmodule.h>
 
-#include "moblin-netbook-draw.h"
+#define DRAW_ARGS    GtkStyle       *style, \
+                     GdkWindow      *window, \
+                     GtkStateType    state_type, \
+                     GtkShadowType   shadow_type, \
+                     GdkRectangle   *area, \
+                     GtkWidget      *widget, \
+                     const gchar    *detail, \
+                     gint            x, \
+                     gint            y, \
+                     gint            width, \
+                     gint            height
 
-G_BEGIN_DECLS
+#define SANITIZE_SIZE					\
+  g_return_if_fail (width  >= -1);			\
+  g_return_if_fail (height >= -1);			\
+                                                        \
+  if ((width == -1) && (height == -1))			\
+    gdk_drawable_get_size (window, &width, &height);	\
+  else if (width == -1)					\
+    gdk_drawable_get_size (window, &width, NULL);	\
+  else if (height == -1)				\
+    gdk_drawable_get_size (window, NULL, &height);
 
 /*** Gtk Style Class **********************************************************/
 
@@ -56,34 +71,4 @@ void moblin_netbook_style_register_type (GTypeModule *module);
 
 /******************************************************************************/
 
-/*** Gtk Style RC Class *******************************************************/
 
-extern GType moblin_netbook_type_rc_style;
-
-#define MOBLIN_NETBOOK_TYPE_RC_STYLE              moblin_netbook_type_rc_style
-#define MOBLIN_NETBOOK_RC_STYLE(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), MOBLIN_NETBOOK_TYPE_RC_STYLE, MoblinNetbookRcStyle))
-#define MOBLIN_NETBOOK_RC_STYLE_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), MOBLIN_NETBOOK_TYPE_RC_STYLE, MoblinNetbookRcStyleClass))
-#define MOBLIN_NETBOOK_IS_RC_STYLE(object)        (G_TYPE_CHECK_INSTANCE_TYPE ((object), MOBLIN_NETBOOK_TYPE_RC_STYLE))
-#define MOBLIN_NETBOOK_IS_RC_STYLE_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), MOBLIN_NETBOOK_TYPE_RC_STYLE))
-#define MOBLIN_NETBOOK_RC_STYLE_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), MOBLIN_NETBOOK_TYPE_RC_STYLE, MoblinNetbookRcStyleClass))
-
-typedef struct _MoblinNetbookRcStyle MoblinNetbookRcStyle;
-typedef struct _MoblinNetbookRcStyleClass MoblinNetbookRcStyleClass;
-
-struct _MoblinNetbookRcStyle
-{
-  GtkRcStyle parent_instance;
-};
-
-struct _MoblinNetbookRcStyleClass
-{
-  GtkRcStyleClass parent_class;
-};
-
-void moblin_netbook_rc_style_register_type (GTypeModule *engine);
-
-/******************************************************************************/
-
-G_END_DECLS
-
-#endif

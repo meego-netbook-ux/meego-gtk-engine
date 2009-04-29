@@ -23,7 +23,7 @@
 #include <stdio.h>
 
 #include "moblin-netbook-style.h"
-#include "moblin-netbook-draw.h"
+#include "moblin-netbook-rc-style.h"
 
 
 

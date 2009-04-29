@@ -4,13 +4,13 @@ enginedir = $(libdir)/gtk-2.0/$(GTK_VERSION)/engines
 
 engine_LTLIBRARIES = libmoblin-netbook-engine.la
 
-libmoblin_netbook_engine_la_SOURCES = \
-	./src/moblin-netbook-draw-cairo.c       \
-	./src/moblin-netbook-draw.h             \
-	./src/moblin-netbook-main.c             \
-	./src/moblin-netbook-style.c            \
-	./src/moblin-netbook-style.h \
-	./src/moblin-netbook-utils.c \
+libmoblin_netbook_engine_la_SOURCES =   \
+	./src/moblin-netbook-style.c    \
+	./src/moblin-netbook-style.h    \
+	./src/moblin-netbook-rc-style.c \
+	./src/moblin-netbook-rc-style.h \
+	./src/moblin-netbook-main.c     \
+	./src/moblin-netbook-utils.c    \
 	./src/moblin-netbook-utils.h
 
 libmoblin_netbook_engine_la_LDFLAGS = -module -avoid-version -no-undefined -Werror
