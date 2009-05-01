@@ -19,28 +19,40 @@
  */
 
 #include <gtk/gtk.h>
-#include <gmodule.h>
 #include <stdio.h>
 
-#include "moblin-netbook-style.h"
 #include "moblin-netbook-rc-style.h"
+#include "moblin-netbook-style.h"
 
 
+G_DEFINE_DYNAMIC_TYPE (MoblinNetbookRcStyle, moblin_netbook_rc_style, GTK_TYPE_RC_STYLE)
 
-G_MODULE_EXPORT void
-theme_init (GTypeModule *module)
+
+static GtkStyle *
+moblin_netbook_rc_style_create_style (GtkRcStyle *rc_style)
 {
-  _moblin_netbook_rc_style_register_type (module);
-  _moblin_netbook_style_register_type (module);
+  return GTK_STYLE (g_object_new (MOBLIN_NETBOOK_TYPE_STYLE, NULL));
 }
 
-G_MODULE_EXPORT void
-theme_exit(void)
+static void
+moblin_netbook_rc_style_class_init (MoblinNetbookRcStyleClass *klass)
+{
+  GtkRcStyleClass *rc_style_class = GTK_RC_STYLE_CLASS (klass);
+  rc_style_class->create_style = moblin_netbook_rc_style_create_style;
+}
+
+static void
+moblin_netbook_rc_style_class_finalize (MoblinNetbookRcStyleClass *rc_style)
 {
 }
 
-G_MODULE_EXPORT GtkRcStyle *
-theme_create_rc_style (void)
+static void
+moblin_netbook_rc_style_init (MoblinNetbookRcStyle *rc_style)
 {
-  return GTK_RC_STYLE (g_object_new (MOBLIN_NETBOOK_TYPE_RC_STYLE, NULL));
+}
+
+void
+_moblin_netbook_rc_style_register_type (GTypeModule *module)
+{
+  moblin_netbook_rc_style_register_type (module);
 }
