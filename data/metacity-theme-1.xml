@@ -13,7 +13,7 @@
   <distance name="left_width" value="2"/>
   <distance name="right_width" value="2"/>
   <distance name="bottom_height" value="2"/>
-  <distance name="left_titlebar_edge" value="0"/>
+  <distance name="left_titlebar_edge" value="10"/>
   <distance name="right_titlebar_edge" value="1"/>
   <aspect_ratio name="button" value="1"/>
   <distance name="title_vertical_pad" value="2"/>
