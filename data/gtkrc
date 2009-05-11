@@ -142,6 +142,8 @@ class "GtkToolbar" style "toolbar"
 
 style "menubar"
 {
-  bg[NORMAL] = shade (0.9, @bg_color)
+  bg[NORMAL] = "#202e31"
+  fg[NORMAL] = "#ffffff"
 }
 class "GtkMenuBar" style "menubar"
+widget_class "*.GtkMenuBar.*" style "menubar"
