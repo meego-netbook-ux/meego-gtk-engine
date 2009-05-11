@@ -274,17 +274,12 @@ moblin_netbook_draw_box (DRAW_ARGS)
       return;
     }
 
-  /* menu and toolbars get just a single line at the bottom of the widget */
+  /* menu and toolbars get no borders */
   if (DETAIL ("menubar") || DETAIL ("toolbar"))
   {
     cairo_rectangle (cr, x - 0.5, y - 0.5, width, height);
     gdk_cairo_set_source_color (cr, &style->bg[state_type]);
     cairo_fill (cr);
-
-    gdk_cairo_set_source_color (cr, &border_color);
-    cairo_move_to (cr, x, y + height - 1);
-    cairo_line_to (cr, x + width, y + height - 1);
-    cairo_stroke (cr);
   }
   else
   {
