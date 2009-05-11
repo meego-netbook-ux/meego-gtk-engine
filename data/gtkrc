@@ -103,6 +103,11 @@ style "menuitem"
 {
   fg[PRELIGHT] = @selected_fg_color
   bg[PRELIGHT] = @selected_bg_color
+
+# this is for check box items
+  text [NORMAL] = @selected_bg_color
+  text [ACTIVE] = @selected_bg_color
+  text [PRELIGHT] = @selected_bg_color
 }
 widget_class "*MenuItem*" style "menuitem"
 
