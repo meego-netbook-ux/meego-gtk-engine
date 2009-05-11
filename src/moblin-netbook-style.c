@@ -144,7 +144,29 @@ moblin_netbook_draw_box (DRAW_ARGS)
       return;
     }
 
-  moblin_netbook_shade_colour (&style->bg[GTK_STATE_NORMAL], &border_color, 0.48);
+  if (DETAIL ("menuitem"))
+    {
+      gint radius = MAX (0, RADIUS - 2);
+
+      cr = gdk_cairo_create (window);
+
+      CAIRO_CLIP ();
+
+      cairo_move_to (cr, x, y + height - radius);
+      cairo_arc (cr, x + radius, y + radius, radius, M_PI, M_PI * 1.5);
+      cairo_arc (cr, x + width - radius, y + radius, radius, M_PI * 1.5, 0);
+      cairo_arc (cr, x + width - radius, y + height - radius, radius, 0, M_PI * 0.5);
+      cairo_arc (cr, x + radius, y + height - radius, radius, M_PI * 0.5, M_PI);
+
+      gdk_cairo_set_source_color (cr, &style->bg[state_type]);
+      cairo_fill (cr);
+
+      cairo_destroy (cr);
+
+      return;
+    }
+
+  moblin_netbook_shade_colour (&style->bg[state_type], &border_color, 0.48);
 
   if (width <= 0 && DETAIL ("menu"))
   {
