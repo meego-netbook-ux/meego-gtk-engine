@@ -128,6 +128,22 @@ moblin_netbook_draw_box (DRAW_ARGS)
     add_shadow = FALSE;
   }
 
+  /* scrollbar troughs are a plain rectangle */
+  if (widget && GTK_IS_SCROLLBAR (widget) && DETAIL ("trough"))
+    {
+      cr = gdk_cairo_create (window);
+
+      CAIRO_CLIP ();
+
+      cairo_rectangle (cr, x, y, width, height);
+      gdk_cairo_set_source_color (cr, &style->bg[state_type]);
+      cairo_fill (cr);
+
+      cairo_destroy (cr);
+
+      return;
+    }
+
   moblin_netbook_shade_colour (&style->bg[GTK_STATE_NORMAL], &border_color, 0.48);
 
   if (width <= 0 && DETAIL ("menu"))

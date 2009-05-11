@@ -19,7 +19,7 @@ style "default"
   xthickness = 3
   ythickness = 3
 
-  GtkRange::trough_border = 0
+  GtkRange::trough_border = 2
   GtkScrollbar::slider_width = 20
   GtkScrollbar::stepper_size = 20
   GtkScale::slider_length = 23
