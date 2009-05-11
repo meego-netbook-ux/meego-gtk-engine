@@ -38,7 +38,7 @@
   cairo_clip (cr);
 
 #define LINE_WIDTH 1
-#define RADIUS 5
+#define RADIUS 4
 
 G_DEFINE_DYNAMIC_TYPE (MoblinNetbookStyle, moblin_netbook_style, GTK_TYPE_STYLE)
 
