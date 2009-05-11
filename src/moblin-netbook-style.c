@@ -267,13 +267,13 @@ moblin_netbook_draw_box (DRAW_ARGS)
     {
       if (width > height)
         {
-          height = 6;
-          y += 4;
+          height = 5;
+          y += 6;
         }
       else
         {
-          width = 6;
-          x += 4;
+          width = 5;
+          x += 6;
         }
     }
 
