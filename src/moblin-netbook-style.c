@@ -789,7 +789,7 @@ moblin_netbook_draw_arrow (GtkStyle *style,
   switch (arrow_type)
   {
     case GTK_ARROW_UP:
-      y = y + height / 2 - (width * 0.12);
+      y = y + height / 2 - (width * 0.12) - 1;
       height = width * 0.6;
       cairo_move_to (cr, x, y + height);
       cairo_line_to (cr, x + width / 2, y);
@@ -803,7 +803,7 @@ moblin_netbook_draw_arrow (GtkStyle *style,
       cairo_line_to (cr, x + width, y);
       break;
     case GTK_ARROW_LEFT:
-      x = x + width / 2 - (height * 0.12);
+      x = x + width / 2 - (height * 0.12) - 1;
       width = height * 0.6;
       cairo_move_to (cr, x + width, y);
       cairo_line_to (cr, x, y + height / 2);
