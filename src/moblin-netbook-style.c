@@ -598,6 +598,7 @@ moblin_netbook_draw_extension (GtkStyle * style, GdkWindow * window,
 
 
   /* active tab hilight stripe */
+#if 0 /* not wanted any more :-( */
   if (state_type == GTK_STATE_NORMAL)
     {
       double strip_width = RADIUS - 0.5;
@@ -631,6 +632,7 @@ moblin_netbook_draw_extension (GtkStyle * style, GdkWindow * window,
       gdk_cairo_set_source_color (cr, &style->bg[GTK_STATE_SELECTED]);
       cairo_fill (cr);
     }
+#endif
 
 
   /* tab border */
