@@ -774,7 +774,7 @@ moblin_netbook_draw_arrow (GtkStyle *style,
       x += (width - 6) / 2;
       width = 6;
     }
-  else if (DETAIL ("hscrollbar"))
+  else if (DETAIL ("hscrollbar") || DETAIL ("menuitem"))
     {
       y += (height - 6) / 2;
       height = 6;
