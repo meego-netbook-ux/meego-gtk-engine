@@ -56,13 +56,13 @@ style "default"
   text [PRELIGHT] = @selected_fg_color
   text [SELECTED] = @selected_fg_color
   text [ACTIVE] = @fg_color
-  text [INSENSITIVE] = @selected_fg_color
+  text [INSENSITIVE] = shade (0.5, @base_color)
 
   base [NORMAL] = @base_color
   base [PRELIGHT] = @base_color
   base [SELECTED] = @selected_bg_color
   base [ACTIVE] = shade (0.9, @bg_color)
-  base [INSENSITIVE] = @bg_color
+  base [INSENSITIVE] = shade (0.9, @base_color)
 
   engine "moblin-netbook-engine" {}
 }
