@@ -115,17 +115,16 @@ moblin_netbook_draw_box (DRAW_ARGS)
 {
   cairo_t *cr;
   GdkColor border_color;
-  gboolean add_shadow = TRUE;
+  gboolean add_shadow = FALSE;
   
   DEBUG;
 
   if (DETAIL ("paned"))
     return;
     
-  if (DETAIL ("vscrollbar") || DETAIL ("hscrollbar") || DETAIL ("slider")
-     || DETAIL ("bar") || DETAIL ("handlebox"))
+  if (DETAIL ("button") || DETAIL ("vscale") || DETAIL ("hscale"))
   {
-    add_shadow = FALSE;
+    add_shadow = TRUE;
   }
 
   /* scrollbar troughs are a plain rectangle */
@@ -199,7 +198,6 @@ moblin_netbook_draw_box (DRAW_ARGS)
     gtk_widget_shape_combine_mask (toplevel, bm, 0, 0);
     g_object_unref (bm);
 
-    add_shadow = FALSE;
   }
   else
   {
@@ -305,7 +303,7 @@ moblin_netbook_draw_box (DRAW_ARGS)
   }
   else
   {
-    if (shadow_type == GTK_SHADOW_OUT && add_shadow)
+    if (add_shadow && shadow_type == GTK_SHADOW_OUT)
       {
         /* outer shadow */
         cairo_move_to (cr, x + RADIUS, y + height - 1);
