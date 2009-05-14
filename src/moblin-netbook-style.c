@@ -119,7 +119,7 @@ moblin_netbook_draw_box (DRAW_ARGS)
   
   DEBUG;
 
-  if (DETAIL ("paned"))
+  if (DETAIL ("paned") || DETAIL ("buttondefault"))
     return;
     
   if (DETAIL ("button") || DETAIL ("vscale") || DETAIL ("hscale"))
