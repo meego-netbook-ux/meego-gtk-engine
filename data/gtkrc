@@ -169,6 +169,7 @@ style "combo-box-entry-arrow"
   fg[ACTIVE] = shade (2.5, @fg_color)
 }
 widget_class "*.GtkComboBoxEntry*GtkArrow" style "combo-box-entry-arrow"
+widget_class "*.GtkSpinButton" style "combo-box-entry-arrow"
 
 # Work around for http://bugzilla.gnome.org/show_bug.cgi?id=382646
 # Note that the work around assumes that the combobox is _not_ in
