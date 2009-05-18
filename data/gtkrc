@@ -72,11 +72,12 @@ class "GtkWidget" style "default"
 style "button"
 {
   bg[NORMAL] = lighter (@bg_color)
-  bg[PRELIGHT] = lighter (@bg_color)
+  bg[PRELIGHT] = @selected_bg_color
+  fg[PRELIGHT] = @selected_fg_color
   bg[INSENSITIVE] = @bg_color
   fg[INSENSITIVE] = darker (@bg_color)
-  bg[ACTIVE] = @selected_bg_color
-  fg[ACTIVE] = @selected_fg_color
+  bg[ACTIVE] = "#189bd7"
+  fg[ACTIVE] = "#fff"
 
 }
 widget_class "*Button*" style "button"
