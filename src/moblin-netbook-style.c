@@ -762,10 +762,7 @@ moblin_netbook_draw_arrow (GtkStyle *style,
 
   cairo_set_line_cap (cr, CAIRO_LINE_CAP_ROUND);
 
-  if (DETAIL ("menuitem") && state_type == GTK_STATE_PRELIGHT)
-    gdk_cairo_set_source_color (cr, &style->fg[state_type]);
-  else
-    gdk_cairo_set_source_color (cr, &style->bg[GTK_STATE_SELECTED]);
+  gdk_cairo_set_source_color (cr, &style->fg[state_type]);
 
   if (DETAIL ("vscrollbar"))
     {
