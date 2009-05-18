@@ -194,3 +194,17 @@ style "clearlooks-menuitem-text-is-fg-color-workaround"
 	text[INSENSITIVE]   = darker (@bg_color)
 }
 widget "*.gtk-combobox-popup-menu.*"   style "clearlooks-menuitem-text-is-fg-color-workaround"
+
+
+style "mux-banner"
+{
+  base[NORMAL] = "#eeeeec"
+  text[NORMAL] = "#000000"
+}
+class "MuxBanner" style "mux-banner"
+
+style "mux-frame"
+{
+  bg[NORMAL]="#ffffff"
+}
+class "MuxFrame" style "mux-frame"
