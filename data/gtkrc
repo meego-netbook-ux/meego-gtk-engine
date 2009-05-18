@@ -129,6 +129,7 @@ class "GtkProgressBar" style "progressbar"
 
 style "scrollbar"
 {
+  fg[NORMAL] = shade (2.5, @fg_color)
   bg[ACTIVE] = shade (0.9, @bg_color)
   bg[INSENSITIVE] = @bg_color
 }
@@ -156,7 +157,18 @@ style "menubar"
 class "GtkMenuBar" style "menubar"
 widget_class "*.GtkMenuBar.*" style "menubar"
 
+style "arrow"
+{
+  fg[NORMAL] = shade (2.5, @fg_color)
+}
+class "GtkArrow" style "arrow"
 
+style "combo-box-entry-arrow"
+{
+  fg[PRELIGHT] = shade (2.5, @fg_color)
+  fg[ACTIVE] = shade (2.5, @fg_color)
+}
+widget_class "*.GtkComboBoxEntry*GtkArrow" style "combo-box-entry-arrow"
 
 # Work around for http://bugzilla.gnome.org/show_bug.cgi?id=382646
 # Note that the work around assumes that the combobox is _not_ in
