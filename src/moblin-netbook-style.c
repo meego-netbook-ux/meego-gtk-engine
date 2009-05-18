@@ -234,14 +234,14 @@ moblin_netbook_draw_box (DRAW_ARGS)
   {
     GtkWidget *entry;
 
-    entry = g_object_get_data (G_OBJECT (widget->parent), "moblin_netbook-combo-entry");
+    entry = g_object_get_data (G_OBJECT (widget->parent), "moblin-netbook-combo-entry");
     if (GTK_IS_ENTRY (entry))
     {
       gtk_widget_queue_draw_area (entry, entry->allocation.x, entry->allocation.y,
                                   entry->allocation.width,entry->allocation.height);
     }
 
-    g_object_set_data (G_OBJECT (widget->parent), "moblin_netbook-combo-button", widget);
+    g_object_set_data (G_OBJECT (widget->parent), "moblin-netbook-combo-button", widget);
 
     cr = gdk_cairo_create (window);
 
@@ -399,9 +399,9 @@ moblin_netbook_draw_shadow (DRAW_ARGS)
   if (widget && DETAIL ("entry") && GTK_IS_COMBO_BOX_ENTRY (widget->parent))
   {
     GtkWidget *button;
-    g_object_set_data (G_OBJECT (widget->parent), "moblin_netbook-combo-entry", widget);
+    g_object_set_data (G_OBJECT (widget->parent), "moblin-netbook-combo-entry", widget);
 
-    button = g_object_get_data (G_OBJECT (widget->parent), "moblin_netbook-combo-button");
+    button = g_object_get_data (G_OBJECT (widget->parent), "moblin-netbook-combo-button");
     if (GTK_IS_BUTTON (button))
       gtk_widget_queue_draw_area (button, button->allocation.x, button->allocation.y,
                                   button->allocation.width,button->allocation.height);
