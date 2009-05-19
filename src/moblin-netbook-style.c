@@ -208,6 +208,19 @@ moblin_netbook_draw_box (DRAW_ARGS)
   /*** treeview headers ***/
   if (widget && GTK_IS_TREE_VIEW (widget->parent))
   {
+    gint radius = MAX (0, RADIUS - 2);
+
+    cr = gdk_cairo_create (window);
+
+    CAIRO_CLIP ();
+
+    cairo_rectangle (cr, x, y, width, height);
+    gdk_cairo_set_source_color (cr, &style->bg[state_type]);
+    cairo_fill (cr);
+    cairo_destroy (cr);
+
+    gtk_paint_vline (style, window, state_type, area, widget, detail,
+                     y + 5, y + height - 5, x + width - 1);
     return;
   }
 
