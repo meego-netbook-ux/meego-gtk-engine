@@ -155,6 +155,8 @@ style "menubar"
   fg[NORMAL] = "#ffffff"
 }
 class "GtkMenuBar" style "menubar"
+class "GtkToolbar" style "menubar"
+class "GtkToolItem" style "menubar"
 widget_class "*.GtkMenuBar.*" style "menubar"
 
 style "arrow"
