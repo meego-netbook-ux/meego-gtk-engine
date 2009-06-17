@@ -402,8 +402,16 @@ moblin_netbook_draw_shadow (DRAW_ARGS)
   moblin_netbook_shade_colour (&style->bg[GTK_STATE_NORMAL], &border_color, 0.48);
 
   cr = gdk_cairo_create (window);
-
   CAIRO_CLIP ();
+
+  if (widget && GTK_IS_FRAME (widget))
+    {
+      cairo_set_line_width (cr, 5.0);
+      cairo_rectangle (cr, x + 2.5, y + 2.5, width - 2.5, height - 2.5);
+      cairo_stroke (cr);
+      cairo_destroy (cr);
+      return;
+    }
 
   /* FIXME: for RTL */
   if (widget && DETAIL ("entry") && (GTK_IS_SPIN_BUTTON (widget) || GTK_IS_COMBO_BOX_ENTRY (widget->parent)))

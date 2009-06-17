@@ -39,6 +39,11 @@ typedef struct _MoblinNetbookRcStyleClass MoblinNetbookRcStyleClass;
 struct _MoblinNetbookRcStyle
 {
   GtkRcStyle parent_instance;
+
+  /* engine options */
+  gint      radius;
+  GdkColor *border_color;
+  GdkColor *shadow_color;
 };
 
 struct _MoblinNetbookRcStyleClass
