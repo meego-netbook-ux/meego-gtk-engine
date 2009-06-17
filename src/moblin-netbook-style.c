@@ -39,7 +39,6 @@
   cairo_clip (cr);
 
 #define LINE_WIDTH 1
-#define RADIUS 4
 
 G_DEFINE_DYNAMIC_TYPE (MoblinNetbookStyle, moblin_netbook_style, GTK_TYPE_STYLE)
 
@@ -61,10 +60,8 @@ moblin_netbook_set_border_color (cairo_t *cr, GtkStyle *style)
 
 
 static void
-moblin_netbook_rounded_rectangle (cairo_t *cr, gdouble x, gdouble y, gdouble width, gdouble height)
+moblin_netbook_rounded_rectangle (cairo_t *cr, gdouble x, gdouble y, gdouble width, gdouble height, gdouble radius)
 {
-  int radius = RADIUS;
-
   if (width < 1 || height < 1)
     return;
 
@@ -72,11 +69,11 @@ moblin_netbook_rounded_rectangle (cairo_t *cr, gdouble x, gdouble y, gdouble wid
   width--;
   height--;
 
-  if (width < RADIUS * 2)
+  if (width < radius * 2)
   {
     radius = width / 2;
   }
-  else if (height < RADIUS * 2)
+  else if (height < radius * 2)
   {
     radius = height / 2;
   }
@@ -89,19 +86,20 @@ moblin_netbook_rounded_rectangle (cairo_t *cr, gdouble x, gdouble y, gdouble wid
 }
 
 static void
-moblin_netbook_entry_shadow (cairo_t *cr, int x, int y, int width, int height, GdkColor *border_color)
+moblin_netbook_entry_shadow (cairo_t *cr, int x, int y, int width, int height, GdkColor *border_color, int radius)
 {
   cairo_set_line_width (cr, LINE_WIDTH);
   cairo_translate (cr, 0.5, 0.5);
 
   /* draw the inner shadow */
   cairo_set_source_rgba (cr, 0, 0, 0, 0.15);
-  moblin_netbook_rounded_rectangle (cr, x + 1, y + 1, width - 1, height - 2);
+  moblin_netbook_rounded_rectangle (cr, x + 1, y + 1, width - 1, height - 2,
+                                    radius);
   cairo_stroke (cr);
 
   /* draw the border */
   gdk_cairo_set_source_color (cr, border_color);
-  moblin_netbook_rounded_rectangle (cr, x, y, width, height - 1);
+  moblin_netbook_rounded_rectangle (cr, x, y, width, height - 1, radius);
   cairo_stroke (cr);
 
   /* draw the outer shadow */
@@ -117,6 +115,7 @@ moblin_netbook_draw_box (DRAW_ARGS)
   cairo_t *cr;
   GdkColor border_color;
   gboolean add_shadow = FALSE;
+  gint radius = MOBLIN_NETBOOK_STYLE (style)->radius;
   
   DEBUG;
 
@@ -146,8 +145,6 @@ moblin_netbook_draw_box (DRAW_ARGS)
 
   if (DETAIL ("menuitem"))
     {
-      gint radius = MAX (0, RADIUS - 2);
-
       cr = gdk_cairo_create (window);
 
       CAIRO_CLIP ();
@@ -189,7 +186,7 @@ moblin_netbook_draw_box (DRAW_ARGS)
 
     /* create the mask as a white region */
     cairo_set_source_rgb (cm, 1.0, 1.0, 1.0);
-    moblin_netbook_rounded_rectangle (cm, 0, 0, width + 1, height + 1);
+    moblin_netbook_rounded_rectangle (cm, 0, 0, width + 1, height + 1, radius);
     cairo_fill (cm);
     cairo_destroy (cm);
 
@@ -209,8 +206,6 @@ moblin_netbook_draw_box (DRAW_ARGS)
   /*** treeview headers ***/
   if (widget && GTK_IS_TREE_VIEW (widget->parent))
   {
-    gint radius = MAX (0, RADIUS - 2);
-
     cr = gdk_cairo_create (window);
 
     CAIRO_CLIP ();
@@ -239,7 +234,7 @@ moblin_netbook_draw_box (DRAW_ARGS)
     width += 10;
     x -= 10;
 
-    moblin_netbook_entry_shadow (cr, x, y, width, height, &border_color);
+    moblin_netbook_entry_shadow (cr, x, y, width, height, &border_color, radius);
     return;
   }
 
@@ -266,7 +261,7 @@ moblin_netbook_draw_box (DRAW_ARGS)
     width += 10;
     x -= 10;
 
-    moblin_netbook_entry_shadow (cr, x, y, width, height, &border_color);
+    moblin_netbook_entry_shadow (cr, x, y, width, height, &border_color, radius);
     cairo_destroy (cr);
     return;
   }
@@ -302,7 +297,7 @@ moblin_netbook_draw_box (DRAW_ARGS)
       || DETAIL ("trough-fill-level"))
     {
       gdk_cairo_set_source_color (cr, &style->base[GTK_STATE_SELECTED]);
-      moblin_netbook_rounded_rectangle (cr, x+1, y+1, width-2, height-2);
+      moblin_netbook_rounded_rectangle (cr, x+1, y+1, width-2, height-2, radius);
       cairo_fill (cr);
       cairo_destroy (cr);
       return;
@@ -320,8 +315,8 @@ moblin_netbook_draw_box (DRAW_ARGS)
     if (add_shadow && shadow_type == GTK_SHADOW_OUT)
       {
         /* outer shadow */
-        cairo_move_to (cr, x + RADIUS, y + height - 1);
-        cairo_line_to (cr, x + width - RADIUS - 1, y + height - 1);
+        cairo_move_to (cr, x + radius, y + height - 1);
+        cairo_line_to (cr, x + width - radius - 1, y + height - 1);
         cairo_set_source_rgba (cr, 0, 0, 0, 0.07);
         cairo_stroke (cr);
 
@@ -330,7 +325,7 @@ moblin_netbook_draw_box (DRAW_ARGS)
       }
 
     /* background fill */
-    moblin_netbook_rounded_rectangle (cr, x, y, width, height);
+    moblin_netbook_rounded_rectangle (cr, x, y, width, height, radius);
     gdk_cairo_set_source_color (cr, &style->bg[state_type]);
     cairo_fill (cr);
 
@@ -376,7 +371,7 @@ moblin_netbook_draw_box (DRAW_ARGS)
   if (shadow_type != GTK_SHADOW_NONE)
     {
       /* border */
-      moblin_netbook_rounded_rectangle (cr, x, y, width, height);
+      moblin_netbook_rounded_rectangle (cr, x, y, width, height, radius);
       gdk_cairo_set_source_color (cr, &border_color);
       cairo_stroke (cr);
     }
@@ -392,6 +387,7 @@ moblin_netbook_draw_shadow (DRAW_ARGS)
 {
   cairo_t *cr;
   GdkColor border_color;
+  gint radius = MOBLIN_NETBOOK_STYLE (style)->radius;
 
   DEBUG;
 
@@ -429,7 +425,7 @@ moblin_netbook_draw_shadow (DRAW_ARGS)
                                   button->allocation.width,button->allocation.height);
   }
 
-  moblin_netbook_entry_shadow (cr, x, y, width, height, &border_color);
+  moblin_netbook_entry_shadow (cr, x, y, width, height, &border_color, radius);
   cairo_destroy (cr);
 }
 
@@ -441,6 +437,7 @@ moblin_netbook_draw_check (GtkStyle * style, GdkWindow * window,
 		 gint height)
 {
   cairo_t *cr;
+  gint radius = MOBLIN_NETBOOK_STYLE (style)->radius;
   DEBUG;
 
   cr = gdk_cairo_create (window);
@@ -451,22 +448,24 @@ moblin_netbook_draw_check (GtkStyle * style, GdkWindow * window,
 
   /* fill the background */
   gdk_cairo_set_source_color (cr, &style->base[state_type]);
-  moblin_netbook_rounded_rectangle (cr, x, y, width, height);
+  moblin_netbook_rounded_rectangle (cr, x, y, width, height, radius);
   cairo_fill (cr);
 
   /* inner shadow */
   cairo_set_source_rgba (cr, 0, 0, 0, 0.1);
-  moblin_netbook_rounded_rectangle (cr, x + 1, y + 1, width - 1, height - 1);
+  moblin_netbook_rounded_rectangle (cr, x + 1, y + 1, width - 1, height - 1,
+                                    radius);
   cairo_stroke (cr);
   
   cairo_set_source_rgba (cr, 0, 0, 0, 0.05);
-  moblin_netbook_rounded_rectangle (cr, x + 2, y + 2, width - 2, height - 2);
+  moblin_netbook_rounded_rectangle (cr, x + 2, y + 2, width - 2, height - 2,
+                                    radius);
   cairo_stroke (cr);
 
 
   /* draw the border */
   moblin_netbook_set_border_color (cr, style);
-  moblin_netbook_rounded_rectangle (cr, x, y, width, height);
+  moblin_netbook_rounded_rectangle (cr, x, y, width, height, radius);
   cairo_stroke (cr);
   
   gdk_cairo_set_source_color (cr, &style->text[state_type]);
@@ -617,6 +616,7 @@ moblin_netbook_draw_extension (GtkStyle * style, GdkWindow * window,
 		     GtkPositionType gap_side)
 {
   cairo_t *cr;
+  gint radius = MOBLIN_NETBOOK_STYLE (style)->radius;
 
   /* initialise the background */
   gtk_style_apply_default_background (style, window, TRUE, state_type, area,
@@ -677,26 +677,26 @@ moblin_netbook_draw_extension (GtkStyle * style, GdkWindow * window,
   {
     case GTK_POS_TOP:     /* bottom tab */
       cairo_move_to (cr, x, y);
-      cairo_arc_negative (cr, x + RADIUS, y + height - RADIUS, RADIUS, M_PI, M_PI * 0.5);
-      cairo_arc_negative (cr, x + width - RADIUS, y + height - RADIUS, RADIUS, M_PI * 0.5, 0);
+      cairo_arc_negative (cr, x + radius, y + height - radius, radius, M_PI, M_PI * 0.5);
+      cairo_arc_negative (cr, x + width - radius, y + height - radius, radius, M_PI * 0.5, 0);
       cairo_line_to (cr, x + width, y);
       break;
     case GTK_POS_BOTTOM: /* top tab */
       cairo_move_to (cr, x, y + height);
-      cairo_arc (cr, x + RADIUS, y + RADIUS, RADIUS, M_PI, M_PI * 1.5);
-      cairo_arc (cr, x + width - RADIUS, y + RADIUS, RADIUS, M_PI * 1.5, 0);
+      cairo_arc (cr, x + radius, y + radius, radius, M_PI, M_PI * 1.5);
+      cairo_arc (cr, x + width - radius, y + radius, radius, M_PI * 1.5, 0);
       cairo_line_to (cr, x + width, y + height);
       break;
     case GTK_POS_LEFT:	/* right tab */
       cairo_move_to (cr, x, y);
-      cairo_arc (cr, x + width - RADIUS, y + RADIUS, RADIUS, M_PI * 1.5, 0);
-      cairo_arc (cr, x + width - RADIUS, y + height - RADIUS, RADIUS, 0, M_PI * 0.5);
+      cairo_arc (cr, x + width - radius, y + radius, radius, M_PI * 1.5, 0);
+      cairo_arc (cr, x + width - radius, y + height - radius, radius, 0, M_PI * 0.5);
       cairo_line_to (cr, x, y + height);
       break;
     case GTK_POS_RIGHT:	/* left tab */
       cairo_move_to (cr, x + width, y);
-      cairo_arc_negative (cr, x + RADIUS, y + RADIUS, RADIUS, M_PI * 1.5, M_PI);
-      cairo_arc_negative (cr, x + RADIUS, y + height - RADIUS, RADIUS, M_PI, M_PI * 0.5);
+      cairo_arc_negative (cr, x + radius, y + radius, radius, M_PI * 1.5, M_PI);
+      cairo_arc_negative (cr, x + radius, y + height - radius, radius, M_PI, M_PI * 0.5);
       cairo_line_to (cr, x + width, y + height);
       break;
   }
