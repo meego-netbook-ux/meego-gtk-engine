@@ -22,6 +22,7 @@
 
 #include "moblin-netbook-style.h"
 #include "moblin-netbook-utils.h"
+#include "moblin-netbook-rc-style.h"
 
 #include <stdio.h>
 #include <math.h>
@@ -840,9 +841,72 @@ moblin_netbook_draw_arrow (GtkStyle *style,
 }
 
 static void
+moblin_netbook_init_from_rc (GtkStyle   *style,
+                             GtkRcStyle *rc_style)
+{
+  MoblinNetbookStyle *mb_style;
+  MoblinNetbookRcStyle *mb_rc_style;
+
+  GTK_STYLE_CLASS (moblin_netbook_style_parent_class)->init_from_rc (style, rc_style);
+
+  mb_rc_style = MOBLIN_NETBOOK_RC_STYLE (rc_style);
+  mb_style = MOBLIN_NETBOOK_STYLE (style);
+
+  mb_style->radius = mb_rc_style->radius;
+
+  if (mb_rc_style->border_color)
+    mb_style->border_color = gdk_color_copy (mb_rc_style->border_color);
+
+  if (mb_rc_style->shadow_color)
+  mb_style->shadow_color = gdk_color_copy (mb_rc_style->shadow_color);
+}
+
+static void
+moblin_netbook_style_copy (GtkStyle *dest,
+                           GtkStyle *src)
+{
+  MoblinNetbookStyle *mb_dest = MOBLIN_NETBOOK_STYLE (dest);
+  MoblinNetbookStyle *mb_src = MOBLIN_NETBOOK_STYLE (src);
+
+  mb_dest->radius = mb_src->radius;
+
+  if (mb_src->border_color)
+    mb_dest->border_color = gdk_color_copy (mb_src->border_color);
+
+  if (mb_src->shadow_color)
+    mb_dest->shadow_color = gdk_color_copy (mb_src->shadow_color);
+
+  GTK_STYLE_CLASS (moblin_netbook_style_parent_class)->copy (dest, src);
+}
+
+static void
+moblin_netbook_style_finalise (GObject *style)
+{
+  MoblinNetbookStyle *mb_style = MOBLIN_NETBOOK_STYLE (style);
+
+  if (mb_style->border_color)
+    {
+      gdk_color_free (mb_style->border_color);
+      mb_style->border_color = NULL;
+    }
+
+  if (mb_style->shadow_color)
+    {
+      gdk_color_free (mb_style->shadow_color);
+      mb_style->shadow_color = NULL;
+    }
+}
+
+static void
 moblin_netbook_style_class_init (MoblinNetbookStyleClass *klass)
 {
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkStyleClass *style_class = GTK_STYLE_CLASS (klass);
+
+  object_class->finalize = moblin_netbook_style_finalise;
+
+  style_class->init_from_rc = moblin_netbook_init_from_rc;
+  style_class->copy = moblin_netbook_style_copy;
 
   style_class->draw_shadow = moblin_netbook_draw_shadow;
   style_class->draw_box = moblin_netbook_draw_box;

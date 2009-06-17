@@ -59,6 +59,11 @@ typedef struct _MoblinNetbookStyleClass MoblinNetbookStyleClass;
 struct _MoblinNetbookStyle
 {
   GtkStyle parent_instance;
+
+  gint radius;
+  GdkColor *border_color;
+  GdkColor *shadow_color;
+
 };
 
 struct _MoblinNetbookStyleClass
