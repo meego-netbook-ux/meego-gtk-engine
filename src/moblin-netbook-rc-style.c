@@ -28,10 +28,47 @@
 G_DEFINE_DYNAMIC_TYPE (MoblinNetbookRcStyle, moblin_netbook_rc_style, GTK_TYPE_RC_STYLE)
 
 
+enum
+{
+  TOKEN_BORDER_COLOR = G_TOKEN_LAST + 1,
+  TOKEN_RADIUS,
+  TOKEN_SHADOW_COLOR,
+};
+
+static struct
+{
+  gchar *name;
+  guint  token;
+}
+moblin_rc_symbols[] =
+{
+    { "border-color", TOKEN_BORDER_COLOR },
+    { "radius",       TOKEN_RADIUS },
+    { "shadow-color", TOKEN_SHADOW_COLOR },
+    { NULL, 0 }
+};
+
 static GtkStyle *
 moblin_netbook_rc_style_create_style (GtkRcStyle *rc_style)
 {
   return GTK_STYLE (g_object_new (MOBLIN_NETBOOK_TYPE_STYLE, NULL));
+}
+
+static guint
+moblin_get_token (GScanner *scanner, guint expected)
+{
+  guint token;
+
+  token = g_scanner_peek_next_token (scanner);
+  if (token != expected)
+    {
+      return expected;
+    }
+  else
+    {
+      g_scanner_get_next_token (scanner);
+      return G_TOKEN_NONE;
+    }
 }
 
 static guint
@@ -40,13 +77,99 @@ moblin_netbook_rc_style_parse (GtkRcStyle  *rc_style,
                                GScanner    *scanner)
 {
   GTokenType token;
+  static GQuark scope_id;
+  guint old_scope;
+  int i;
+  MoblinNetbookRcStyle *mb_style = MOBLIN_NETBOOK_RC_STYLE (rc_style);
+  GdkColor color;
 
-  token = g_scanner_get_next_token (scanner);
+  if (!scope_id)
+    scope_id = g_quark_from_string ("moblin-gtk-engine");
 
-  if (token == G_TOKEN_RIGHT_CURLY)
-    return G_TOKEN_NONE;
-  else
-    return token;
+  /* set the new scope and store the old scope id */
+  old_scope = g_scanner_set_scope (scanner, scope_id);
+
+  /* register the symbols if we haven't already done so */
+  if (!g_scanner_lookup_symbol (scanner, moblin_rc_symbols[0].name))
+    {
+      for (i = 0; moblin_rc_symbols[i].name; i++)
+        {
+          g_scanner_scope_add_symbol (scanner,
+                                      scope_id,
+                                      moblin_rc_symbols[i].name,
+                                      GINT_TO_POINTER (moblin_rc_symbols[i].token));
+        }
+    }
+
+  token = g_scanner_peek_next_token (scanner);
+  while (token != G_TOKEN_RIGHT_CURLY)
+    {
+      switch (token)
+        {
+        case TOKEN_BORDER_COLOR:
+          g_scanner_get_next_token (scanner);
+
+          token = moblin_get_token (scanner, G_TOKEN_EQUAL_SIGN);
+          if (token != G_TOKEN_NONE)
+            break;
+
+          token = gtk_rc_parse_color_full (scanner, rc_style, &color);
+          if (token != G_TOKEN_NONE)
+            break;
+
+          if (mb_style->border_color)
+            gdk_color_free (mb_style->border_color);
+          mb_style->border_color = gdk_color_copy (&color);
+          break;
+
+        case TOKEN_RADIUS:
+          g_scanner_get_next_token (scanner);
+
+          token = moblin_get_token (scanner, G_TOKEN_EQUAL_SIGN);
+          if (token != G_TOKEN_NONE)
+            break;
+
+          token = moblin_get_token (scanner, G_TOKEN_INT);
+          if (token != G_TOKEN_NONE)
+            break;
+
+          mb_style->radius = scanner->value.v_int;
+          break;
+
+        case TOKEN_SHADOW_COLOR:
+          g_scanner_get_next_token (scanner);
+
+          token = moblin_get_token (scanner, G_TOKEN_EQUAL_SIGN);
+          if (token != G_TOKEN_NONE)
+            break;
+
+          token = gtk_rc_parse_color_full (scanner, rc_style, &color);
+          if (token != G_TOKEN_NONE)
+            break;
+
+          if (mb_style->shadow_color)
+            gdk_color_free (mb_style->shadow_color);
+          mb_style->shadow_color = gdk_color_copy (&color);
+          break;
+
+        default:
+          g_scanner_get_next_token (scanner);
+          token = G_TOKEN_RIGHT_CURLY;
+          break;
+
+        }
+
+      if (token != G_TOKEN_NONE)
+        {
+          return token;
+        }
+
+      token = g_scanner_peek_next_token (scanner);
+    }
+
+  g_scanner_get_next_token (scanner);
+  g_scanner_set_scope (scanner, old_scope);
+  return G_TOKEN_NONE;
 }
 
 static void
