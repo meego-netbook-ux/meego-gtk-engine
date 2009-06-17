@@ -103,6 +103,11 @@ style "checkbutton"
   text [NORMAL] = @selected_bg_color
   text [ACTIVE] = @selected_bg_color
   text [PRELIGHT] = @selected_bg_color
+
+  engine "moblin-netbook-engine"
+  {
+    radius = 2
+  }
 }
 widget_class "*CheckButton*" style "checkbutton"
 widget_class "*RadioButton*" style "checkbutton"
@@ -206,6 +211,14 @@ style "clearlooks-menuitem-text-is-fg-color-workaround"
 }
 widget "*.gtk-combobox-popup-menu.*"   style "clearlooks-menuitem-text-is-fg-color-workaround"
 
+style "notebook"
+{
+  engine "moblin-netbook-engine"
+  {
+    radius = 6
+  }
+}
+class "GtkNotebook" style "notebook"
 
 style "mux-banner"
 {
