@@ -64,7 +64,10 @@ style "default"
   base [ACTIVE] = shade (0.9, @bg_color)
   base [INSENSITIVE] = shade (0.9, @base_color)
 
-  engine "moblin-netbook-engine" {}
+  engine "moblin-netbook-engine"
+  {
+    radius = 3
+  }
 }
 
 class "GtkWidget" style "default"
@@ -78,6 +81,11 @@ style "button"
   fg[INSENSITIVE] = darker (@bg_color)
   bg[ACTIVE] = "#189bd7"
   fg[ACTIVE] = "#fff"
+
+  engine "moblin-netbook-engine"
+  {
+    radius = 4
+  }
 
 }
 widget_class "*Button*" style "button"
