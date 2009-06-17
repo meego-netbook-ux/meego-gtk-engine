@@ -196,13 +196,15 @@ moblin_netbook_rc_style_merge (GtkRcStyle *adest,
 
   if (src->border_color)
     {
-      gdk_color_free (dest->border_color);
+      if (dest->border_color)
+        gdk_color_free (dest->border_color);
       dest->border_color = gdk_color_copy (src->border_color);
     }
 
   if (src->shadow_color)
     {
-      gdk_color_free (dest->shadow_color);
+      if (dest->shadow_color)
+        gdk_color_free (dest->shadow_color);
       dest->shadow_color = gdk_color_copy (src->shadow_color);
     }
 }
