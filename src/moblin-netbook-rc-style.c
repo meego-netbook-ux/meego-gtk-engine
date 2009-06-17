@@ -216,9 +216,30 @@ moblin_netbook_rc_style_merge (GtkRcStyle *adest,
 }
 
 static void
+moblin_netbook_rc_style_finalize (GObject *object)
+{
+  MoblinNetbookRcStyle *style = MOBLIN_NETBOOK_RC_STYLE (object);
+
+  if (style->border_color)
+    {
+      gdk_color_free (style->border_color);
+      style->border_color = 0;
+    }
+
+  if (style->shadow_color)
+    {
+      gdk_color_free (style->shadow_color);
+      style->shadow_color = NULL;
+    }
+}
+
+static void
 moblin_netbook_rc_style_class_init (MoblinNetbookRcStyleClass *klass)
 {
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkRcStyleClass *rc_style_class = GTK_RC_STYLE_CLASS (klass);
+
+  object_class->finalize = moblin_netbook_rc_style_finalize;
 
   rc_style_class->create_style = moblin_netbook_rc_style_create_style;
   rc_style_class->parse = moblin_netbook_rc_style_parse;
