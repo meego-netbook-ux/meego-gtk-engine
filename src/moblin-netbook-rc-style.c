@@ -192,20 +192,26 @@ moblin_netbook_rc_style_merge (GtkRcStyle *adest,
   dest = (MoblinNetbookRcStyle *) adest;
   src = (MoblinNetbookRcStyle *) asrc;
 
-  dest->radius = src->radius;
+  if (!dest->radius_set)
+    {
+      dest->radius = src->radius;
+      dest->radius_set = 1;
+    }
 
-  if (src->border_color)
+  if (src->border_color && !dest->border_color_set)
     {
       if (dest->border_color)
         gdk_color_free (dest->border_color);
       dest->border_color = gdk_color_copy (src->border_color);
+      dest->border_color_set = 1;
     }
 
-  if (src->shadow_color)
+  if (src->shadow_color && !dest->shadow_color_set)
     {
       if (dest->shadow_color)
         gdk_color_free (dest->shadow_color);
       dest->shadow_color = gdk_color_copy (src->shadow_color);
+      dest->shadow_color_set = 1;
     }
 }
 
@@ -231,6 +237,8 @@ moblin_netbook_rc_style_init (MoblinNetbookRcStyle *rc_style)
   rc_style->radius = 0;
   rc_style->border_color = NULL;
   rc_style->shadow_color = NULL;
+
+  rc_style->radius_set = 0;
 }
 
 void
