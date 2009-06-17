@@ -633,45 +633,6 @@ moblin_netbook_draw_extension (GtkStyle * style, GdkWindow * window,
   /* reduce with and height since we are using them for co-ordinate values */
   width--; height--;
 
-
-  /* active tab hilight stripe */
-#if 0 /* not wanted any more :-( */
-  if (state_type == GTK_STATE_NORMAL)
-    {
-      double strip_width = RADIUS - 0.5;
-      switch (gap_side)
-        {
-        case GTK_POS_BOTTOM: /* top tab */
-          cairo_move_to (cr, x, y + strip_width);
-          cairo_arc (cr, x + strip_width, y + strip_width, strip_width, M_PI, M_PI * 1.5);
-          cairo_arc (cr, x + width - strip_width, y + strip_width, strip_width, M_PI * 1.5, 0);
-          cairo_line_to (cr, x + width, y + strip_width);
-          break;
-        case GTK_POS_TOP: /* bottom tab */
-          cairo_move_to (cr, x, y + height - strip_width);
-          cairo_arc_negative (cr, x + strip_width, y + height - strip_width, strip_width, M_PI, M_PI * 0.5);
-          cairo_arc_negative (cr, x + width - strip_width, y + height - strip_width, strip_width, M_PI * 0.5, 0);
-          cairo_line_to (cr, x + width, y + height - strip_width);
-          break;
-        case GTK_POS_LEFT: /* right tab */
-          cairo_move_to (cr, x + width - strip_width, y);
-          cairo_arc (cr, x + width - strip_width, y + strip_width, strip_width, M_PI * 1.5, 0);
-          cairo_arc (cr, x + width - strip_width, y + height - strip_width, strip_width, 0, M_PI * 0.5);
-          cairo_line_to (cr, x + width - strip_width, y + height);
-          break;
-        case GTK_POS_RIGHT: /* left tab */
-          cairo_move_to (cr, x + strip_width, y);
-          cairo_arc_negative (cr, x + strip_width, y + strip_width, strip_width, M_PI * 1.5, M_PI);
-          cairo_arc_negative (cr, x + strip_width, y + height - strip_width, strip_width, M_PI, M_PI * 0.5);
-          cairo_line_to (cr, x + strip_width, y + height);
-          break;
-        }
-      gdk_cairo_set_source_color (cr, &style->bg[GTK_STATE_SELECTED]);
-      cairo_fill (cr);
-    }
-#endif
-
-
   /* tab border */
   switch (gap_side)
   {
