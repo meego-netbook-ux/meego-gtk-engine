@@ -67,6 +67,7 @@ style "default"
   engine "moblin-netbook-engine"
   {
     radius = 3
+    border-color = "#8d8d8d"
   }
 }
 
