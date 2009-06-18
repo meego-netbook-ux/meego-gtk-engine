@@ -42,7 +42,7 @@ static struct
 }
 moblin_rc_symbols[] =
 {
-    { "border-color", TOKEN_BORDER_COLOR },
+    { "border",       TOKEN_BORDER_COLOR },
     { "radius",       TOKEN_RADIUS },
     { "shadow-color", TOKEN_SHADOW_COLOR },
     { NULL, 0 }
@@ -69,6 +69,37 @@ moblin_get_token (GScanner *scanner, guint expected)
       g_scanner_get_next_token (scanner);
       return G_TOKEN_NONE;
     }
+}
+
+static guint
+moblin_parse_border_color (GScanner *scanner, MoblinNetbookRcStyle *rc_style)
+{
+  guint token;
+  GtkStateType state_type;
+  GdkColor color;
+
+  /* border-color */
+  g_scanner_get_next_token (scanner);
+
+
+  /* [state] */
+  token = gtk_rc_parse_state (scanner, &state_type);
+  if (token != G_TOKEN_NONE)
+    return token;
+
+  /* = */
+  token = moblin_get_token (scanner, G_TOKEN_EQUAL_SIGN);
+  if (token != G_TOKEN_NONE)
+    return token;
+
+  token = gtk_rc_parse_color_full (scanner, (GtkRcStyle *) rc_style, &color);
+  if (token != G_TOKEN_NONE)
+    return token;
+
+  rc_style->border_color[state_type] = color;
+  rc_style->border_color_set[state_type] = TRUE;
+
+  return G_TOKEN_NONE;
 }
 
 static guint
@@ -107,19 +138,7 @@ moblin_netbook_rc_style_parse (GtkRcStyle  *rc_style,
       switch (token)
         {
         case TOKEN_BORDER_COLOR:
-          g_scanner_get_next_token (scanner);
-
-          token = moblin_get_token (scanner, G_TOKEN_EQUAL_SIGN);
-          if (token != G_TOKEN_NONE)
-            break;
-
-          token = gtk_rc_parse_color_full (scanner, rc_style, &color);
-          if (token != G_TOKEN_NONE)
-            break;
-
-          if (mb_style->border_color)
-            gdk_color_free (mb_style->border_color);
-          mb_style->border_color = gdk_color_copy (&color);
+          token = moblin_parse_border_color (scanner, mb_style);
           break;
 
         case TOKEN_RADIUS:
@@ -178,6 +197,7 @@ moblin_netbook_rc_style_merge (GtkRcStyle *adest,
 {
   MoblinNetbookRcStyle *dest;
   MoblinNetbookRcStyle *src;
+  gint state;
 
   /* chain up */
   GTK_RC_STYLE_CLASS (moblin_netbook_rc_style_parent_class)->merge (adest, asrc);
@@ -198,12 +218,13 @@ moblin_netbook_rc_style_merge (GtkRcStyle *adest,
       dest->radius_set = 1;
     }
 
-  if (src->border_color && !dest->border_color_set)
+  for (state = 0; state < 5; state++)
     {
-      if (dest->border_color)
-        gdk_color_free (dest->border_color);
-      dest->border_color = gdk_color_copy (src->border_color);
-      dest->border_color_set = 1;
+      if (!dest->border_color_set[state] && src->border_color_set[state])
+        {
+          dest->border_color_set[state] = TRUE;
+          dest->border_color[state] = src->border_color[state];
+        }
     }
 
   if (src->shadow_color && !dest->shadow_color_set)
@@ -219,12 +240,6 @@ static void
 moblin_netbook_rc_style_finalize (GObject *object)
 {
   MoblinNetbookRcStyle *style = MOBLIN_NETBOOK_RC_STYLE (object);
-
-  if (style->border_color)
-    {
-      gdk_color_free (style->border_color);
-      style->border_color = 0;
-    }
 
   if (style->shadow_color)
     {
@@ -256,7 +271,6 @@ moblin_netbook_rc_style_init (MoblinNetbookRcStyle *rc_style)
 {
   /* set up defaults */
   rc_style->radius = 0;
-  rc_style->border_color = NULL;
   rc_style->shadow_color = NULL;
 
   rc_style->radius_set = 0;

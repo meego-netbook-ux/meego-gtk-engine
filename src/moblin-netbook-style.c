@@ -50,10 +50,10 @@ _moblin_netbook_style_register_type (GTypeModule *module)
 
 
 static inline void
-moblin_netbook_set_border_color (cairo_t *cr, GtkStyle *style)
+moblin_netbook_set_border_color (cairo_t *cr, GtkStyle *style, GtkStateType state)
 {
   if (MOBLIN_NETBOOK_STYLE (style)->border_color)
-    gdk_cairo_set_source_color (cr, MOBLIN_NETBOOK_STYLE (style)->border_color);
+    gdk_cairo_set_source_color (cr, &(MOBLIN_NETBOOK_STYLE (style)->border_color[state]));
 }
 
 
@@ -367,7 +367,7 @@ moblin_netbook_draw_box (DRAW_ARGS)
     {
       /* border */
       moblin_netbook_rounded_rectangle (cr, x, y, width, height, radius);
-      moblin_netbook_set_border_color (cr, style);
+      moblin_netbook_set_border_color (cr, style, state_type);
       cairo_stroke (cr);
     }
 
@@ -457,7 +457,7 @@ moblin_netbook_draw_check (GtkStyle * style, GdkWindow * window,
 
 
   /* draw the border */
-  moblin_netbook_set_border_color (cr, style);
+  moblin_netbook_set_border_color (cr, style, state_type);
   moblin_netbook_rounded_rectangle (cr, x, y, width, height, radius);
   cairo_stroke (cr);
   
@@ -525,7 +525,7 @@ moblin_netbook_draw_option (GtkStyle * style, GdkWindow * window,
 
   /* draw the border */
   cairo_arc (cr, cx, cy, radius, 0, M_PI * 2);
-  moblin_netbook_set_border_color (cr, style);
+  moblin_netbook_set_border_color (cr, style, state_type);
   cairo_stroke (cr);
 
   /*** draw check mark ***/
@@ -558,7 +558,7 @@ moblin_netbook_draw_box_gap (GtkStyle * style, GdkWindow * window,
   cairo_set_line_width (cr, LINE_WIDTH);
   cairo_translate (cr, 0.5, 0.5);
 
-  moblin_netbook_set_border_color (cr, style);
+  moblin_netbook_set_border_color (cr, style, state_type);
 
   /* start off with a rectangle... */
   cairo_rectangle (cr, x, y, width -1, height -1);
@@ -656,7 +656,7 @@ moblin_netbook_draw_extension (GtkStyle * style, GdkWindow * window,
       break;
   }
 
-  moblin_netbook_set_border_color (cr, style);
+  moblin_netbook_set_border_color (cr, style, state_type);
   cairo_stroke (cr);
 
   cairo_destroy (cr);
@@ -684,7 +684,7 @@ moblin_netbook_draw_vline (GtkStyle *style, GdkWindow *window, GtkStateType stat
   cairo_move_to (cr, x + LINE_WIDTH / 2.0, y1);
   cairo_line_to (cr, x + LINE_WIDTH / 2.0, y2);
 
-  moblin_netbook_set_border_color (cr, style);
+  moblin_netbook_set_border_color (cr, style, state_type);
   cairo_stroke (cr);
 
   cairo_destroy (cr);
@@ -705,7 +705,7 @@ moblin_netbook_draw_hline (GtkStyle *style, GdkWindow *window,  GtkStateType sta
   cairo_set_line_width (cr, LINE_WIDTH);
   cairo_set_line_cap (cr, CAIRO_LINE_CAP_ROUND);
 
-  moblin_netbook_set_border_color (cr, style);
+  moblin_netbook_set_border_color (cr, style, state_type);
   cairo_move_to (cr, x1, y + LINE_WIDTH / 2.0);
   cairo_line_to (cr, x2, y + LINE_WIDTH / 2.0);
   cairo_stroke (cr);
@@ -800,6 +800,7 @@ static void
 moblin_netbook_init_from_rc (GtkStyle   *style,
                              GtkRcStyle *rc_style)
 {
+  int i;
   MoblinNetbookStyle *mb_style;
   MoblinNetbookRcStyle *mb_rc_style;
 
@@ -810,24 +811,25 @@ moblin_netbook_init_from_rc (GtkStyle   *style,
 
   mb_style->radius = mb_rc_style->radius;
 
-  if (mb_rc_style->border_color)
-    mb_style->border_color = gdk_color_copy (mb_rc_style->border_color);
+  for (i = 0; i <= 5; i++)
+    mb_style->border_color[i] = mb_rc_style->border_color[i];
 
   if (mb_rc_style->shadow_color)
-  mb_style->shadow_color = gdk_color_copy (mb_rc_style->shadow_color);
+    mb_style->shadow_color = gdk_color_copy (mb_rc_style->shadow_color);
 }
 
 static void
 moblin_netbook_style_copy (GtkStyle *dest,
                            GtkStyle *src)
 {
+  int i;
   MoblinNetbookStyle *mb_dest = MOBLIN_NETBOOK_STYLE (dest);
   MoblinNetbookStyle *mb_src = MOBLIN_NETBOOK_STYLE (src);
 
   mb_dest->radius = mb_src->radius;
 
-  if (mb_src->border_color)
-    mb_dest->border_color = gdk_color_copy (mb_src->border_color);
+  for (i = 0; i <= 5; i++)
+    mb_dest->border_color[i] = mb_src->border_color[i];
 
   if (mb_src->shadow_color)
     mb_dest->shadow_color = gdk_color_copy (mb_src->shadow_color);
@@ -839,12 +841,6 @@ static void
 moblin_netbook_style_finalise (GObject *style)
 {
   MoblinNetbookStyle *mb_style = MOBLIN_NETBOOK_STYLE (style);
-
-  if (mb_style->border_color)
-    {
-      gdk_color_free (mb_style->border_color);
-      mb_style->border_color = NULL;
-    }
 
   if (mb_style->shadow_color)
     {

@@ -61,7 +61,7 @@ struct _MoblinNetbookStyle
   GtkStyle parent_instance;
 
   gint radius;
-  GdkColor *border_color;
+  GdkColor border_color[5];
   GdkColor *shadow_color;
 
 };

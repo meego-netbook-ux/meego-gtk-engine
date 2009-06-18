@@ -41,14 +41,14 @@ struct _MoblinNetbookRcStyle
   GtkRcStyle parent_instance;
 
   /* engine options */
-  gint      radius;
-  GdkColor *border_color;
+  gint     radius;
+  GdkColor border_color[5];
   GdkColor *shadow_color;
 
   /* flags for merge */
   gboolean radius_set : 1;
-  gboolean border_color_set : 1;
   gboolean shadow_color_set : 1;
+  gboolean border_color_set[5];
 };
 
 struct _MoblinNetbookRcStyleClass
