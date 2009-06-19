@@ -101,10 +101,20 @@ style "button"
     border[PRELIGHT] = @blue_d
     shadow = 0.15
   }
-
 }
 widget_class "*Button*" style "button"
 class "GtkScale" style "button"
+
+style "entry"
+{
+  xthickness = 3
+  ythickness = 3
+  engine "moblin-netbook-engine"
+  {
+    shadow = 0.15
+  }
+}
+class "GtkEntry" style "entry"
 
 style "checkbutton"
 {
