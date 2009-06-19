@@ -84,31 +84,6 @@ moblin_netbook_rounded_rectangle (cairo_t *cr, gdouble x, gdouble y, gdouble wid
 }
 
 static void
-moblin_netbook_entry_shadow (cairo_t *cr, int x, int y, int width, int height, GdkColor *border_color, int radius)
-{
-  cairo_set_line_width (cr, LINE_WIDTH);
-  cairo_translate (cr, 0.5, 0.5);
-
-  /* draw the inner shadow */
-  cairo_set_source_rgba (cr, 0, 0, 0, 0.15);
-  moblin_netbook_rounded_rectangle (cr, x + 1, y + 1, width - 1, height - 2,
-                                    radius);
-  cairo_stroke (cr);
-
-  /* draw the border */
-  if (border_color)
-    gdk_cairo_set_source_color (cr, border_color);
-  moblin_netbook_rounded_rectangle (cr, x, y, width, height - 1, radius);
-  cairo_stroke (cr);
-
-  /* draw the outer shadow */
-  cairo_set_source_rgba (cr, 0, 0, 0, 0.07);
-  cairo_move_to (cr, x + 4, y + height - 1);
-  cairo_line_to (cr, x + width - 5, y + height - 1);
-  cairo_stroke (cr);
-}
-
-static void
 moblin_netbook_draw_box (DRAW_ARGS)
 {
   cairo_t *cr;
@@ -347,8 +322,8 @@ static void
 moblin_netbook_draw_shadow (DRAW_ARGS)
 {
   cairo_t *cr;
-  GdkColor *border_color = MOBLIN_NETBOOK_STYLE (style)->border_color;
-  gint radius = MOBLIN_NETBOOK_STYLE (style)->radius;
+  MoblinNetbookStyle *mb_style = MOBLIN_NETBOOK_STYLE (style);
+  gdouble radius = mb_style->radius;
 
   DEBUG;
 
@@ -359,7 +334,7 @@ moblin_netbook_draw_shadow (DRAW_ARGS)
 
   cr = gdk_cairo_create (window);
   CAIRO_CLIP ();
-
+#if 0
   /* FIXME: for RTL */
   if (widget && DETAIL ("entry") && (GTK_IS_SPIN_BUTTON (widget) || GTK_IS_COMBO_BOX_ENTRY (widget->parent)))
       width += 10;
@@ -374,8 +349,30 @@ moblin_netbook_draw_shadow (DRAW_ARGS)
       gtk_widget_queue_draw_area (button, button->allocation.x, button->allocation.y,
                                   button->allocation.width,button->allocation.height);
   }
+#endif
 
-  moblin_netbook_entry_shadow (cr, x, y, width, height, border_color, radius);
+  cairo_translate (cr, 0.5, 0.5);
+  cairo_set_line_width (cr, 1.0);
+
+  if (mb_style->shadow != 0.0)
+    {
+      /* outer shadow */
+      moblin_netbook_rounded_rectangle (cr, x, y, width, height,
+                                        radius + 1);
+      cairo_set_source_rgba (cr, 0, 0, 0, mb_style->shadow);
+      cairo_rectangle (cr, x, y, width, height);
+      cairo_stroke (cr);
+
+      /* reduce size for outer shadow */
+      height--;
+      width--;
+    }
+
+  /* border */
+  moblin_netbook_rounded_rectangle (cr, x, y, width, height, radius);
+  moblin_netbook_set_border_color (cr, style, state_type);
+  cairo_stroke (cr);
+
   cairo_destroy (cr);
 }
 
