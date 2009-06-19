@@ -833,7 +833,6 @@ moblin_netbook_style_copy (GtkStyle *dest,
 static void
 moblin_netbook_style_class_init (MoblinNetbookStyleClass *klass)
 {
-  GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkStyleClass *style_class = GTK_STYLE_CLASS (klass);
 
   style_class->init_from_rc = moblin_netbook_init_from_rc;

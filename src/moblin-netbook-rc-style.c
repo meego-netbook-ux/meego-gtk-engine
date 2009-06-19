@@ -112,7 +112,6 @@ moblin_netbook_rc_style_parse (GtkRcStyle  *rc_style,
   guint old_scope;
   int i;
   MoblinNetbookRcStyle *mb_style = MOBLIN_NETBOOK_RC_STYLE (rc_style);
-  GdkColor color;
 
   if (!scope_id)
     scope_id = g_quark_from_string ("moblin-gtk-engine");
@@ -236,7 +235,6 @@ moblin_netbook_rc_style_merge (GtkRcStyle *adest,
 static void
 moblin_netbook_rc_style_class_init (MoblinNetbookRcStyleClass *klass)
 {
-  GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkRcStyleClass *rc_style_class = GTK_RC_STYLE_CLASS (klass);
 
   rc_style_class->create_style = moblin_netbook_rc_style_create_style;
