@@ -87,6 +87,7 @@ style "button"
   GtkButton::child-displacement-x = 1
   GtkButton::child-displacement-y = 1
   GtkButton::displace-focus = 1
+  GtkButton::inner-border = { 4, 4, 4, 4 }
 
   GtkWidget::focus-padding = 0
   GtkWidget::focus-line-width = 2
