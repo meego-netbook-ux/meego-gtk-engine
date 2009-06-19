@@ -89,6 +89,7 @@ style "button"
   {
     radius = 4
     border[PRELIGHT] = @blue_d
+    shadow = 0.15
   }
 
 }
