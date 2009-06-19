@@ -112,19 +112,14 @@ static void
 moblin_netbook_draw_box (DRAW_ARGS)
 {
   cairo_t *cr;
-  GdkColor *border_color = MOBLIN_NETBOOK_STYLE (style)->border_color;
-  gboolean add_shadow = FALSE;
-  gint radius = MOBLIN_NETBOOK_STYLE (style)->radius;
-  
+  MoblinNetbookStyle *mb_style = MOBLIN_NETBOOK_STYLE (style);
+  gint radius = mb_style->radius;
+
   DEBUG;
 
   if (DETAIL ("paned") || DETAIL ("buttondefault"))
     return;
-    
-  if (DETAIL ("button") || DETAIL ("vscale") || DETAIL ("hscale"))
-  {
-    add_shadow = TRUE;
-  }
+
 
   /* scrollbar troughs are a plain rectangle */
   if (widget && GTK_IS_SCROLLBAR (widget) && DETAIL ("trough"))
@@ -307,61 +302,32 @@ moblin_netbook_draw_box (DRAW_ARGS)
   }
   else
   {
-    if (add_shadow && shadow_type == GTK_SHADOW_OUT)
+    if (mb_style->shadow)
       {
-        /* outer shadow */
-        cairo_move_to (cr, x + radius, y + height - 1);
-        cairo_line_to (cr, x + width - radius - 1, y + height - 1);
-        cairo_set_source_rgba (cr, 0, 0, 0, 0.07);
-        cairo_stroke (cr);
+        if (shadow_type == GTK_SHADOW_OUT)
+          {
+            /* outer shadow */
+            moblin_netbook_rounded_rectangle (cr, x, y, width, height, radius + 1);
+            cairo_set_source_rgba (cr, 0, 0, 0, mb_style->shadow);
+            cairo_stroke (cr);
 
-        /* reduce height for outer shadow */
-        height--;
+            /* reduce size for outer shadow */
+            height--;
+            width--;
+          }
+        else if (shadow_type == GTK_SHADOW_IN)
+          {
+            x++;
+            y++;
+            width--;
+            height--;
+          }
       }
 
     /* background fill */
     moblin_netbook_rounded_rectangle (cr, x, y, width, height, radius);
     gdk_cairo_set_source_color (cr, &style->bg[state_type]);
     cairo_fill (cr);
-
-    if (shadow_type == GTK_SHADOW_IN && border_color)
-      {
-          cairo_move_to (cr, x + 1, y + 1);
-          cairo_line_to (cr, x + width - 1, y + 1);
-          cairo_set_source_rgba (cr,
-                                 border_color->red / 0xffff,
-                                 border_color->green / 0xffff,
-                                 border_color->blue / 0xffff,
-                                 0.1);
-          cairo_stroke (cr);
-
-          cairo_move_to (cr, x + 1, y + 2);
-          cairo_line_to (cr, x + width - 1, y + 2);
-          cairo_set_source_rgba (cr,
-                                 border_color->red / 0xffff,
-                                 border_color->green / 0xffff,
-                                 border_color->blue / 0xffff,
-                                 0.05);
-          cairo_stroke (cr);
-       
-          cairo_move_to (cr, x + 1, y + 1);
-          cairo_line_to (cr, x + 1, y + height);
-          cairo_set_source_rgba (cr,
-                                 border_color->red / 0xffff,
-                                 border_color->green / 0xffff,
-                                 border_color->blue / 0xffff,
-                                 0.1);
-          cairo_stroke (cr);
-
-          cairo_move_to (cr, x + 2, y + 1);
-          cairo_line_to (cr, x + 2, y + height);
-          cairo_set_source_rgba (cr,
-                                 border_color->red / 0xffff,
-                                 border_color->green / 0xffff,
-                                 border_color->blue / 0xffff,
-                                 0.05);
-          cairo_stroke (cr);
-      }
 
   if (shadow_type != GTK_SHADOW_NONE)
     {

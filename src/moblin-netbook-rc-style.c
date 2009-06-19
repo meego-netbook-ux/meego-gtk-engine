@@ -162,10 +162,6 @@ moblin_netbook_rc_style_parse (GtkRcStyle  *rc_style,
           if (token != G_TOKEN_NONE)
             break;
 
-          token = gtk_rc_parse_color_full (scanner, rc_style, &color);
-          if (token != G_TOKEN_NONE)
-            break;
-
           token = moblin_get_token (scanner, G_TOKEN_FLOAT);
           if (token != G_TOKEN_NONE)
             break;
@@ -230,7 +226,7 @@ moblin_netbook_rc_style_merge (GtkRcStyle *adest,
         }
     }
 
-  if (src->shadow_set && !dest->shadow_set)
+  if (!dest->shadow_set && src->shadow_set)
     {
       dest->shadow = src->shadow;
       dest->shadow_set = TRUE;
