@@ -680,6 +680,47 @@ moblin_netbook_draw_hline (GtkStyle *style, GdkWindow *window,  GtkStateType sta
 }
 
 static void
+moblin_netbook_draw_focus (GtkStyle     *style,
+                           GdkWindow    *window,
+                           GtkStateType  state_type,
+                           GdkRectangle *area,
+                           GtkWidget    *widget,
+                           const gchar  *detail,
+                           gint          x,
+                           gint          y,
+                           gint          width,
+                           gint          height)
+{
+  cairo_t *cr;
+  gint line_width;
+  MoblinNetbookStyle *mb_style = MOBLIN_NETBOOK_STYLE (style);
+
+  cr = gdk_cairo_create (window);
+
+  if (widget)
+    gtk_widget_style_get (widget, "focus-line-width", &line_width, NULL);
+  else
+    line_width = 2;
+
+  cairo_translate (cr, line_width / 2.0, line_width / 2.0);
+  width -= (line_width / 2.0);
+  height -= (line_width / 2.0);
+
+  if (mb_style->shadow)
+    {
+      width--;
+      height--;
+    }
+
+  moblin_netbook_rounded_rectangle (cr, x, y, width, height, line_width);
+  cairo_set_line_width (cr, 2.0);
+  gdk_cairo_set_source_color (cr, &style->bg[GTK_STATE_SELECTED]);
+  cairo_stroke (cr);
+
+  cairo_destroy (cr);
+}
+
+static void
 moblin_netbook_draw_arrow (GtkStyle *style,
                  GdkWindow *window,
                  GtkStateType state_type,
@@ -819,7 +860,7 @@ moblin_netbook_style_class_init (MoblinNetbookStyleClass *klass)
   style_class->draw_extension = moblin_netbook_draw_extension;
   style_class->draw_hline = moblin_netbook_draw_hline;
   style_class->draw_vline = moblin_netbook_draw_vline;
-  /* style_class->draw_focus = moblin_netbook_draw_focus; */
+  style_class->draw_focus = moblin_netbook_draw_focus;
   style_class->draw_arrow = moblin_netbook_draw_arrow;
 }
 
