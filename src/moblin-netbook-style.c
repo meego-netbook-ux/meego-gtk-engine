@@ -809,7 +809,7 @@ moblin_netbook_init_from_rc (GtkStyle   *style,
 
   mb_style->radius = mb_rc_style->radius;
 
-  for (i = 0; i <= 5; i++)
+  for (i = 0; i < 5; i++)
     mb_style->border_color[i] = mb_rc_style->border_color[i];
 
   mb_style->shadow = mb_rc_style->shadow;
@@ -825,7 +825,7 @@ moblin_netbook_style_copy (GtkStyle *dest,
 
   mb_dest->radius = mb_src->radius;
 
-  for (i = 0; i <= 5; i++)
+  for (i = 0; i < 5; i++)
     mb_dest->border_color[i] = mb_src->border_color[i];
 
   mb_dest->shadow = mb_src->shadow;
