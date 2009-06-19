@@ -43,11 +43,11 @@ struct _MoblinNetbookRcStyle
   /* engine options */
   gint     radius;
   GdkColor border_color[5];
-  GdkColor *shadow_color;
+  gdouble  shadow;
 
   /* flags for merge */
   gboolean radius_set : 1;
-  gboolean shadow_color_set : 1;
+  gboolean shadow_set : 1;
   gboolean border_color_set[5];
 };
 

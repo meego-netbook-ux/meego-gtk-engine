@@ -62,7 +62,7 @@ struct _MoblinNetbookStyle
 
   gint radius;
   GdkColor border_color[5];
-  GdkColor *shadow_color;
+  gdouble shadow;
 
 };
 

@@ -32,7 +32,7 @@ enum
 {
   TOKEN_BORDER_COLOR = G_TOKEN_LAST + 1,
   TOKEN_RADIUS,
-  TOKEN_SHADOW_COLOR,
+  TOKEN_SHADOW,
 };
 
 static struct
@@ -42,9 +42,9 @@ static struct
 }
 moblin_rc_symbols[] =
 {
-    { "border",       TOKEN_BORDER_COLOR },
-    { "radius",       TOKEN_RADIUS },
-    { "shadow-color", TOKEN_SHADOW_COLOR },
+    { "border", TOKEN_BORDER_COLOR },
+    { "radius", TOKEN_RADIUS },
+    { "shadow", TOKEN_SHADOW },
     { NULL, 0 }
 };
 
@@ -155,7 +155,7 @@ moblin_netbook_rc_style_parse (GtkRcStyle  *rc_style,
           mb_style->radius = scanner->value.v_int;
           break;
 
-        case TOKEN_SHADOW_COLOR:
+        case TOKEN_SHADOW:
           g_scanner_get_next_token (scanner);
 
           token = moblin_get_token (scanner, G_TOKEN_EQUAL_SIGN);
@@ -166,9 +166,12 @@ moblin_netbook_rc_style_parse (GtkRcStyle  *rc_style,
           if (token != G_TOKEN_NONE)
             break;
 
-          if (mb_style->shadow_color)
-            gdk_color_free (mb_style->shadow_color);
-          mb_style->shadow_color = gdk_color_copy (&color);
+          token = moblin_get_token (scanner, G_TOKEN_FLOAT);
+          if (token != G_TOKEN_NONE)
+            break;
+
+          mb_style->shadow = scanner->value.v_float;
+          mb_style->shadow_set = TRUE;
           break;
 
         default:
@@ -227,24 +230,10 @@ moblin_netbook_rc_style_merge (GtkRcStyle *adest,
         }
     }
 
-  if (src->shadow_color && !dest->shadow_color_set)
+  if (src->shadow_set && !dest->shadow_set)
     {
-      if (dest->shadow_color)
-        gdk_color_free (dest->shadow_color);
-      dest->shadow_color = gdk_color_copy (src->shadow_color);
-      dest->shadow_color_set = 1;
-    }
-}
-
-static void
-moblin_netbook_rc_style_finalize (GObject *object)
-{
-  MoblinNetbookRcStyle *style = MOBLIN_NETBOOK_RC_STYLE (object);
-
-  if (style->shadow_color)
-    {
-      gdk_color_free (style->shadow_color);
-      style->shadow_color = NULL;
+      dest->shadow = src->shadow;
+      dest->shadow_set = TRUE;
     }
 }
 
@@ -253,8 +242,6 @@ moblin_netbook_rc_style_class_init (MoblinNetbookRcStyleClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkRcStyleClass *rc_style_class = GTK_RC_STYLE_CLASS (klass);
-
-  object_class->finalize = moblin_netbook_rc_style_finalize;
 
   rc_style_class->create_style = moblin_netbook_rc_style_create_style;
   rc_style_class->parse = moblin_netbook_rc_style_parse;
@@ -271,7 +258,7 @@ moblin_netbook_rc_style_init (MoblinNetbookRcStyle *rc_style)
 {
   /* set up defaults */
   rc_style->radius = 0;
-  rc_style->shadow_color = NULL;
+  rc_style->shadow = 0;
 
   rc_style->radius_set = 0;
 }

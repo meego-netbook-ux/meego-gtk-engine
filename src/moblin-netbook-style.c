@@ -814,8 +814,7 @@ moblin_netbook_init_from_rc (GtkStyle   *style,
   for (i = 0; i <= 5; i++)
     mb_style->border_color[i] = mb_rc_style->border_color[i];
 
-  if (mb_rc_style->shadow_color)
-    mb_style->shadow_color = gdk_color_copy (mb_rc_style->shadow_color);
+  mb_style->shadow = mb_rc_style->shadow;
 }
 
 static void
@@ -831,22 +830,9 @@ moblin_netbook_style_copy (GtkStyle *dest,
   for (i = 0; i <= 5; i++)
     mb_dest->border_color[i] = mb_src->border_color[i];
 
-  if (mb_src->shadow_color)
-    mb_dest->shadow_color = gdk_color_copy (mb_src->shadow_color);
+  mb_dest->shadow = mb_src->shadow;
 
   GTK_STYLE_CLASS (moblin_netbook_style_parent_class)->copy (dest, src);
-}
-
-static void
-moblin_netbook_style_finalise (GObject *style)
-{
-  MoblinNetbookStyle *mb_style = MOBLIN_NETBOOK_STYLE (style);
-
-  if (mb_style->shadow_color)
-    {
-      gdk_color_free (mb_style->shadow_color);
-      mb_style->shadow_color = NULL;
-    }
 }
 
 static void
@@ -854,8 +840,6 @@ moblin_netbook_style_class_init (MoblinNetbookStyleClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkStyleClass *style_class = GTK_STYLE_CLASS (klass);
-
-  object_class->finalize = moblin_netbook_style_finalise;
 
   style_class->init_from_rc = moblin_netbook_init_from_rc;
   style_class->copy = moblin_netbook_style_copy;
