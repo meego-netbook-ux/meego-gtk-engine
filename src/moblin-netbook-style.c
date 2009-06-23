@@ -63,6 +63,12 @@ moblin_netbook_rounded_rectangle (cairo_t *cr, gdouble x, gdouble y, gdouble wid
   if (width < 1 || height < 1)
     return;
 
+  if (radius == 0)
+    {
+      cairo_rectangle (cr, x, y, width, height);
+      return;
+    }
+
   /* this allows for calculating end co-ordinates */
   width--;
   height--;
