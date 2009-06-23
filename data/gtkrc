@@ -25,6 +25,7 @@ style "default"
   ythickness = 3
 
   GtkMenu::vertical_padding = 0
+  GtkMenuBar::shadow_type = GTK_SHADOW_NONE
 
   GtkRange::trough_border = 2
   GtkScrollbar::slider_width = 20
@@ -40,6 +41,7 @@ style "default"
   GtkButton::inner-border = { 0, 0, 0, 2 }
 
   GtkToolbar::internal_padding = 2
+  GtkToolbar::shadow_type = GTK_SHADOW_NONE
 
   GtkCheckButton::indicator_size = 15
   GtkCheckMenuItem::indicator_size = 15
