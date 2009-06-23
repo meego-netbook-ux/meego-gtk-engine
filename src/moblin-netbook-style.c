@@ -274,51 +274,47 @@ moblin_netbook_draw_box (DRAW_ARGS)
       return;
     }
 
-  /* menu and toolbars get no borders */
-  if (DETAIL ("menubar") || DETAIL ("toolbar"))
-  {
-    cairo_rectangle (cr, x - 0.5, y - 0.5, width, height);
-    gdk_cairo_set_source_color (cr, &style->bg[state_type]);
-    cairo_fill (cr);
-  }
-  else
-  {
-    if (mb_style->shadow)
-      {
-        if (shadow_type == GTK_SHADOW_OUT)
-          {
-            /* outer shadow */
-            moblin_netbook_rounded_rectangle (cr, x, y, width, height, radius + 1);
-            cairo_set_source_rgba (cr, 0, 0, 0, mb_style->shadow);
-            cairo_stroke (cr);
-
-            /* reduce size for outer shadow */
-            height--;
-            width--;
-          }
-        else if (shadow_type == GTK_SHADOW_IN)
-          {
-            x++;
-            y++;
-            width--;
-            height--;
-          }
-      }
-
-    /* background fill */
-    moblin_netbook_rounded_rectangle (cr, x, y, width, height, radius);
-    gdk_cairo_set_source_color (cr, &style->bg[state_type]);
-    cairo_fill (cr);
-
-  if (shadow_type != GTK_SHADOW_NONE)
+  if (mb_style->shadow)
     {
-      /* border */
+      if (shadow_type == GTK_SHADOW_OUT)
+        {
+          /* outer shadow */
+          moblin_netbook_rounded_rectangle (cr, x, y, width, height, radius + 1);
+          cairo_set_source_rgba (cr, 0, 0, 0, mb_style->shadow);
+          cairo_stroke (cr);
+
+          /* reduce size for outer shadow */
+          height--;
+          width--;
+        }
+      else if (shadow_type == GTK_SHADOW_IN)
+        {
+          x++;
+          y++;
+          width--;
+          height--;
+        }
+    }
+
+
+
+  if (shadow_type == GTK_SHADOW_NONE)
+    {
+      /* at least initialise the background */
+      gtk_style_apply_default_background (style, window, TRUE,
+                                          state_type, area, x, y, width, height);
+    }
+  else
+    {
+      /* fill */
       moblin_netbook_rounded_rectangle (cr, x, y, width, height, radius);
+      gdk_cairo_set_source_color (cr, &style->bg[state_type]);
+      cairo_fill_preserve (cr);
+
+      /* border */
       moblin_netbook_set_border_color (cr, style, state_type);
       cairo_stroke (cr);
     }
-
-  }
 
   cairo_destroy (cr);
 
