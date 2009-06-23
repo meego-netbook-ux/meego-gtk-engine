@@ -358,9 +358,8 @@ moblin_netbook_draw_shadow (DRAW_ARGS)
     {
       /* outer shadow */
       moblin_netbook_rounded_rectangle (cr, x, y, width, height,
-                                        radius + 1);
+                                        radius + 1.0);
       cairo_set_source_rgba (cr, 0, 0, 0, mb_style->shadow);
-      cairo_rectangle (cr, x, y, width, height);
       cairo_stroke (cr);
 
       /* reduce size for outer shadow */

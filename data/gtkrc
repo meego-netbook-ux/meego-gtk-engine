@@ -112,6 +112,7 @@ style "entry"
   ythickness = 3
   engine "moblin-netbook-engine"
   {
+    radius = 3
     shadow = 0.15
   }
 }
