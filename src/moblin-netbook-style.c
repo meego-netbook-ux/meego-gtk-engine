@@ -382,44 +382,39 @@ moblin_netbook_draw_shadow (DRAW_ARGS)
 }
 
 static void
-moblin_netbook_draw_check (GtkStyle * style, GdkWindow * window,
-		 GtkStateType state_type, GtkShadowType shadow_type,
-		 GdkRectangle * area, GtkWidget * widget,
-		 const gchar * detail, gint x, gint y, gint width,
-		 gint height)
+moblin_netbook_draw_check (GtkStyle     *style,
+                           GdkWindow    *window,
+                           GtkStateType  state_type,
+                           GtkShadowType shadow_type,
+                           GdkRectangle *area,
+                           GtkWidget    *widget,
+                           const gchar  *detail,
+                           gint          x,
+                           gint          y,
+                           gint          width,
+                           gint          height)
 {
   cairo_t *cr;
   gint radius = MOBLIN_NETBOOK_STYLE (style)->radius;
+
   DEBUG;
 
   cr = gdk_cairo_create (window);
   CAIRO_CLIP();
 
   cairo_translate (cr, 0.5, 0.5);
-  cairo_set_line_width (cr, LINE_WIDTH);
+  cairo_set_line_width (cr, 1.0);
 
   /* fill the background */
   gdk_cairo_set_source_color (cr, &style->base[state_type]);
   moblin_netbook_rounded_rectangle (cr, x, y, width, height, radius);
   cairo_fill (cr);
 
-  /* inner shadow */
-  cairo_set_source_rgba (cr, 0, 0, 0, 0.1);
-  moblin_netbook_rounded_rectangle (cr, x + 1, y + 1, width - 1, height - 1,
-                                    radius);
-  cairo_stroke (cr);
-  
-  cairo_set_source_rgba (cr, 0, 0, 0, 0.05);
-  moblin_netbook_rounded_rectangle (cr, x + 2, y + 2, width - 2, height - 2,
-                                    radius);
-  cairo_stroke (cr);
-
-
   /* draw the border */
   moblin_netbook_set_border_color (cr, style, state_type);
   moblin_netbook_rounded_rectangle (cr, x, y, width, height, radius);
   cairo_stroke (cr);
-  
+
   gdk_cairo_set_source_color (cr, &style->text[state_type]);
 
   /*** draw check mark ***/
@@ -429,7 +424,7 @@ moblin_netbook_draw_check (GtkStyle * style, GdkWindow * window,
     y += 3;
     width -= 5;
     height -= 6;
-    
+
     cairo_set_line_width (cr, 2);
 
     cairo_rectangle (cr, x, y, width, height);
