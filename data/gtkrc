@@ -188,6 +188,10 @@ widget_class "*.GtkTreeView.GtkButton*" style "treeview_headers"
 style "toolbar"
 {
   bg[NORMAL] = shade (0.98, @bg_color)
+  engine "moblin-netbook-engine"
+  {
+    radius = 0
+  }
 }
 class "GtkToolbar" style "toolbar"
 
