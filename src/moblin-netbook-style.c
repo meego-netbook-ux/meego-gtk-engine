@@ -664,17 +664,17 @@ moblin_netbook_draw_focus (GtkStyle     *style,
     line_width = 2;
 
   cairo_translate (cr, line_width / 2.0, line_width / 2.0);
-  width -= (line_width / 2.0);
-  height -= (line_width / 2.0);
+  width -= line_width;
+  height -= line_width;
 
   if (mb_style->shadow)
     {
-      width--;
-      height--;
+      width -= 1;
+      height -= 1;
     }
 
   moblin_netbook_rounded_rectangle (cr, x, y, width, height, line_width);
-  cairo_set_line_width (cr, 2.0);
+  cairo_set_line_width (cr, line_width);
   gdk_cairo_set_source_color (cr, &style->bg[GTK_STATE_SELECTED]);
   cairo_stroke (cr);
 
