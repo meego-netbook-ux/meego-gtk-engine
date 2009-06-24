@@ -69,10 +69,6 @@ moblin_netbook_rounded_rectangle (cairo_t *cr, gdouble x, gdouble y, gdouble wid
       return;
     }
 
-  /* this allows for calculating end co-ordinates */
-  width--;
-  height--;
-
   if (width < radius * 2)
   {
     radius = width / 2;
@@ -387,8 +383,10 @@ moblin_netbook_draw_check (GtkStyle     *style,
   cr = gdk_cairo_create (window);
   CAIRO_CLIP();
 
-  cairo_translate (cr, 0.5, 0.5);
   cairo_set_line_width (cr, 1.0);
+  cairo_translate (cr, 0.5, 0.5);
+  width--;
+  height--;
 
   /* fill the background */
   gdk_cairo_set_source_color (cr, &style->base[state_type]);
