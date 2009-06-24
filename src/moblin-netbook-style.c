@@ -118,26 +118,6 @@ moblin_netbook_draw_box (DRAW_ARGS)
       return;
     }
 
-  if (DETAIL ("menuitem"))
-    {
-      cr = gdk_cairo_create (window);
-
-      CAIRO_CLIP ();
-
-      cairo_move_to (cr, x, y + height - radius);
-      cairo_arc (cr, x + radius, y + radius, radius, M_PI, M_PI * 1.5);
-      cairo_arc (cr, x + width - radius, y + radius, radius, M_PI * 1.5, 0);
-      cairo_arc (cr, x + width - radius, y + height - radius, radius, 0, M_PI * 0.5);
-      cairo_arc (cr, x + radius, y + height - radius, radius, M_PI * 0.5, M_PI);
-
-      gdk_cairo_set_source_color (cr, &style->bg[state_type]);
-      cairo_fill (cr);
-
-      cairo_destroy (cr);
-
-      return;
-    }
-
   if (width <= 0 && DETAIL ("menu"))
   {
     /* we're allowed to set a mask on the window here */
