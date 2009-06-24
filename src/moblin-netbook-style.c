@@ -195,26 +195,23 @@ moblin_netbook_draw_box (DRAW_ARGS)
   {
     GtkWidget *entry;
 
-    entry = g_object_get_data (G_OBJECT (widget->parent), "moblin-netbook-combo-entry");
+    entry = g_object_get_data (G_OBJECT (widget->parent),
+                               "moblin-netbook-combo-entry");
+    g_object_set_data (G_OBJECT (widget->parent),
+                       "moblin-netbook-combo-button", widget);
+    g_object_set_data (G_OBJECT (widget->parent),
+                       "moblin-netbook-combo-button-shadow",
+                       GINT_TO_POINTER (shadow_type));
+
+
     if (GTK_IS_ENTRY (entry))
     {
-      gtk_widget_queue_draw_area (entry, entry->allocation.x, entry->allocation.y,
-                                  entry->allocation.width,entry->allocation.height);
+      gtk_widget_queue_draw (entry);
     }
-
-    g_object_set_data (G_OBJECT (widget->parent), "moblin-netbook-combo-button", widget);
-
-    cr = gdk_cairo_create (window);
-
-
-    CAIRO_CLIP ();
 
     /* FIXME: RTL */
     width += 10;
     x -= 10;
-
-    cairo_destroy (cr);
-    return;
   }
 
   if (widget
@@ -313,33 +310,48 @@ moblin_netbook_draw_shadow (DRAW_ARGS)
 
   cr = gdk_cairo_create (window);
   CAIRO_CLIP ();
-#if 0
+
   /* FIXME: for RTL */
-  if (widget && DETAIL ("entry") && (GTK_IS_SPIN_BUTTON (widget) || GTK_IS_COMBO_BOX_ENTRY (widget->parent)))
+  if (widget && DETAIL ("entry")
+      && (GTK_IS_SPIN_BUTTON (widget)
+          || GTK_IS_COMBO_BOX_ENTRY (widget->parent)))
       width += 10;
 
   if (widget && DETAIL ("entry") && GTK_IS_COMBO_BOX_ENTRY (widget->parent))
   {
     GtkWidget *button;
-    g_object_set_data (G_OBJECT (widget->parent), "moblin-netbook-combo-entry", widget);
+    g_object_set_data (G_OBJECT (widget->parent),
+                       "moblin-netbook-combo-entry", widget);
 
-    button = g_object_get_data (G_OBJECT (widget->parent), "moblin-netbook-combo-button");
-    if (GTK_IS_BUTTON (button))
-      gtk_widget_queue_draw_area (button, button->allocation.x, button->allocation.y,
-                                  button->allocation.width,button->allocation.height);
+    button = g_object_get_data (G_OBJECT (widget->parent),
+                                "moblin-netbook-combo-button");
+
+    shadow_type = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (widget->parent),
+                                                      "moblin-netbook-combo-button-shadow"));
+
+    width += 10;
   }
-#endif
 
   cairo_translate (cr, 0.5, 0.5);
-  cairo_set_line_width (cr, 1.0);
+  width--;
+  height--;
 
+  cairo_set_line_width (cr, 1.0);
   if (mb_style->shadow != 0.0)
     {
-      /* outer shadow */
-      moblin_netbook_rounded_rectangle (cr, x, y, width, height,
-                                        radius + 1.0);
-      cairo_set_source_rgba (cr, 0, 0, 0, mb_style->shadow);
-      cairo_stroke (cr);
+      if (shadow_type == GTK_SHADOW_OUT)
+        {
+          /* outer shadow */
+          moblin_netbook_rounded_rectangle (cr, x, y, width, height,
+                                            radius + 1.0);
+          cairo_set_source_rgba (cr, 0, 0, 0, mb_style->shadow);
+          cairo_stroke (cr);
+        }
+      else if (shadow_type == GTK_SHADOW_IN)
+        {
+          x++;
+          y++;
+        }
 
       /* reduce size for outer shadow */
       height--;
