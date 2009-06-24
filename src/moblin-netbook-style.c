@@ -429,11 +429,17 @@ moblin_netbook_draw_check (GtkStyle     *style,
 
 
 static void
-moblin_netbook_draw_option (GtkStyle * style, GdkWindow * window,
-		  GtkStateType state_type, GtkShadowType shadow_type,
-		  GdkRectangle * area, GtkWidget * widget,
-		  const gchar * detail, gint x, gint y, gint width,
-		  gint height)
+moblin_netbook_draw_option (GtkStyle     *style,
+                            GdkWindow    *window,
+                            GtkStateType  state_type,
+                            GtkShadowType shadow_type,
+                            GdkRectangle *area,
+                            GtkWidget    *widget,
+                            const gchar  *detail,
+                            gint          x,
+                            gint          y,
+                            gint          width,
+                            gint          height)
 {
   cairo_t *cr;
   gint cx, cy, radius;
@@ -445,6 +451,8 @@ moblin_netbook_draw_option (GtkStyle * style, GdkWindow * window,
 
   cairo_set_line_width (cr, 1);
   cairo_translate (cr, 0.5, 0.5);
+  width--;
+  height--;
 
   /* define radius and centre coordinates */
   if (width % 2) width--;
@@ -456,11 +464,6 @@ moblin_netbook_draw_option (GtkStyle * style, GdkWindow * window,
   gdk_cairo_set_source_color (cr, &style->base[state_type]);
   cairo_arc (cr, cx, cy, radius, 0, M_PI * 2);
   cairo_fill (cr);
-  
-  /* inner shadow */
-  cairo_arc (cr, cx, cy, radius - 1, M_PI * 0.75, M_PI * 1.75);
-  cairo_set_source_rgba (cr, 0, 0, 0, 0.2);
-  cairo_stroke (cr);
 
   /* draw the border */
   cairo_arc (cr, cx, cy, radius, 0, M_PI * 2);
