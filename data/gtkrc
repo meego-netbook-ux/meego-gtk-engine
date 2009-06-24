@@ -40,7 +40,7 @@ style "default"
   # allow for bottom shadow in buttons
   GtkButton::inner-border = { 0, 0, 0, 2 }
 
-  GtkToolbar::internal_padding = 2
+  GtkToolbar::internal_padding = 6
   GtkToolbar::shadow_type = GTK_SHADOW_NONE
 
   GtkCheckButton::indicator_size = 15
@@ -86,6 +86,9 @@ class "GtkWidget" style "default"
 
 style "button"
 {
+
+  bg [NORMAL] = "#ffffff"
+
   GtkButton::child-displacement-x = 1
   GtkButton::child-displacement-y = 1
   GtkButton::displace-focus = 1
@@ -99,7 +102,7 @@ style "button"
 
   engine "moblin-netbook-engine"
   {
-    radius = 4
+    radius = 3
     border[PRELIGHT] = @blue_d
     border[ACTIVE] = @blue_d
     shadow = 0.15
@@ -126,12 +129,13 @@ style "checkbutton"
   fg [PRELIGHT] = @fg_color
   fg [ACTIVE] = @fg_color
 
-  bg [NORMAL] = @bg_color
-  bg [PRELIGHT] = @bg_color
+# Just testing this...
+  bg [NORMAL] = "#0ff000"
+  bg [PRELIGHT] = "#000ff0"
 
-  text [NORMAL] = @selected_bg_color
-  text [ACTIVE] = @selected_bg_color
-  text [PRELIGHT] = @selected_bg_color
+  text [NORMAL] = "#ff0000"
+  text [ACTIVE] = "#00ff00"
+  text [PRELIGHT] = "#0000ff"
 
   engine "moblin-netbook-engine"
   {
@@ -141,6 +145,7 @@ style "checkbutton"
 widget_class "*CheckButton*" style "checkbutton"
 widget_class "*RadioButton*" style "checkbutton"
 widget_class "*ToolButton*" style "checkbutton"
+
 
 style "menuitem"
 {
@@ -265,3 +270,38 @@ style "mux-frame"
   bg[NORMAL]="#ffffff"
 }
 class "MuxFrame" style "mux-frame"
+
+
+
+
+style "mux-toolbarbutton"
+{
+  bg [PRELIGHT] = "#434343"
+  bg [ACTIVE] = "#434343"
+  engine "moblin-netbook-engine"
+  {
+    border[PRELIGHT] = "#434343"
+    border[ACTIVE] = "#434343"
+    radius = 3
+  }
+  xthickness = 8
+  ythickness = 8
+}
+widget_class "*<GtkToolbar>.*Button.*"  style "mux-toolbarbutton"
+
+style "font"
+{
+  font_name = "Liberation Sans 8"
+}
+widget_class "*" style "font"
+gtk-font-name = "Liberation Sans 8"
+
+
+
+style "mux-window"
+{
+  bg [NORMAL] = "#f9f9f9"
+}
+widget_class "GtkWindow" style "mux-window"
+
+
