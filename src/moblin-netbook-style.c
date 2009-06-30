@@ -31,13 +31,6 @@
 #define DEBUG // g_printf ("%s: detail = '%s'; state = %d; x:%d; y:%d; w:%d; h:%d;\n", __FUNCTION__, detail, state_type, x, y, width, height);
 #define DETAIL(foo) (detail && strcmp (foo, detail) == 0)
 
-#define CAIRO_CLIP()  \
-  if (area)                                                               \
-    cairo_rectangle (cr, area->x, area->y, area->width, area->height);    \
-  else                                                                    \
-    cairo_rectangle (cr, x, y, width, height);    \
-  cairo_clip (cr);
-
 #define LINE_WIDTH 1
 
 G_DEFINE_DYNAMIC_TYPE (MoblinNetbookStyle, moblin_netbook_style, GTK_TYPE_STYLE)
@@ -48,6 +41,21 @@ _moblin_netbook_style_register_type (GTypeModule *module)
   moblin_netbook_style_register_type (module);
 }
 
+static cairo_t*
+moblin_netbook_cairo_create (GdkWindow *window, GdkRectangle *area)
+{
+  cairo_t *cr;
+
+  cr = gdk_cairo_create (window);
+
+  if (area)
+    {
+      cairo_rectangle (cr, area->x, area->y, area->width, area->height);
+      cairo_clip (cr);
+    }
+
+  return cr;
+}
 
 static inline void
 moblin_netbook_set_border_color (cairo_t *cr, GtkStyle *style, GtkStateType state)
@@ -101,9 +109,7 @@ moblin_netbook_draw_box (DRAW_ARGS)
   /* scrollbar troughs are a plain rectangle */
   if (widget && GTK_IS_SCROLLBAR (widget) && DETAIL ("trough"))
     {
-      cr = gdk_cairo_create (window);
-
-      CAIRO_CLIP ();
+      cr = moblin_netbook_cairo_create (window, area);
 
       cairo_rectangle (cr, x, y, width, height);
       gdk_cairo_set_source_color (cr, &style->bg[state_type]);
@@ -155,9 +161,7 @@ moblin_netbook_draw_box (DRAW_ARGS)
   /*** treeview headers ***/
   if (widget && GTK_IS_TREE_VIEW (widget->parent))
   {
-    cr = gdk_cairo_create (window);
-
-    CAIRO_CLIP ();
+    cr = moblin_netbook_cairo_create (window, area);
 
     cairo_rectangle (cr, x, y, width, height);
     gdk_cairo_set_source_color (cr, &style->bg[state_type]);
@@ -175,9 +179,7 @@ moblin_netbook_draw_box (DRAW_ARGS)
 
   if (DETAIL ("spinbutton"))
   {
-    cr = gdk_cairo_create (window);
-
-    CAIRO_CLIP ();
+    cr = moblin_netbook_cairo_create (window, area);
 
     /* FIXME: for RTL */
     width += 10;
@@ -228,9 +230,7 @@ moblin_netbook_draw_box (DRAW_ARGS)
         }
     }
 
-  cr = gdk_cairo_create (window);
-
-  CAIRO_CLIP ();
+  cr = moblin_netbook_cairo_create (window, area);
 
   cairo_set_line_width (cr, LINE_WIDTH);
 
@@ -304,8 +304,7 @@ moblin_netbook_draw_shadow (DRAW_ARGS)
 
   SANITIZE_SIZE;
 
-  cr = gdk_cairo_create (window);
-  CAIRO_CLIP ();
+  cr = moblin_netbook_cairo_create (window, area);
 
   /* FIXME: for RTL */
   if (widget && DETAIL ("entry")
@@ -380,8 +379,7 @@ moblin_netbook_draw_check (GtkStyle     *style,
 
   DEBUG;
 
-  cr = gdk_cairo_create (window);
-  CAIRO_CLIP();
+  cr = moblin_netbook_cairo_create (window, area);
 
   cairo_set_line_width (cr, 1.0);
   cairo_translate (cr, 0.5, 0.5);
@@ -444,8 +442,7 @@ moblin_netbook_draw_option (GtkStyle     *style,
 
   DEBUG;
 
-  cr = gdk_cairo_create (window);
-  CAIRO_CLIP();
+  cr = moblin_netbook_cairo_create (window, area);
 
   cairo_set_line_width (cr, 1);
   cairo_translate (cr, 0.5, 0.5);
@@ -491,9 +488,7 @@ moblin_netbook_draw_box_gap (GtkStyle * style, GdkWindow * window,
   if (shadow_type == GTK_SHADOW_NONE)
     return;
 
-
-  cr = gdk_cairo_create (window);
-  CAIRO_CLIP();
+  cr = moblin_netbook_cairo_create (window, area);
 
   cairo_set_line_width (cr, LINE_WIDTH);
   cairo_translate (cr, 0.5, 0.5);
@@ -556,8 +551,7 @@ moblin_netbook_draw_extension (GtkStyle * style, GdkWindow * window,
   gtk_style_apply_default_background (style, window, TRUE, state_type, area,
                                       x, y, width, height);
 
-  cr = gdk_cairo_create (window);
-  CAIRO_CLIP();
+  cr = moblin_netbook_cairo_create (window, area);
 
   /* set up for line drawing */
   cairo_set_line_width (cr, LINE_WIDTH);
@@ -713,9 +707,7 @@ moblin_netbook_draw_arrow (GtkStyle *style,
 
   DEBUG;
 
-
-  cr = gdk_cairo_create (window);
-  CAIRO_CLIP();
+  cr = moblin_netbook_cairo_create (window, area);
 
   cairo_set_line_width (cr, 2);
 
