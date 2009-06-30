@@ -386,6 +386,11 @@ moblin_netbook_draw_check (GtkStyle     *style,
   width--;
   height--;
 
+  if (shadow_type == GTK_SHADOW_IN)
+    {
+      state_type = GTK_STATE_SELECTED;
+    }
+
   /* fill the background */
   gdk_cairo_set_source_color (cr, &style->base[state_type]);
   moblin_netbook_rounded_rectangle (cr, x, y, width, height, radius);
@@ -448,6 +453,11 @@ moblin_netbook_draw_option (GtkStyle     *style,
   cairo_translate (cr, 0.5, 0.5);
   width--;
   height--;
+
+  if (shadow_type == GTK_SHADOW_IN)
+    {
+      state_type = GTK_STATE_SELECTED;
+    }
 
   /* define radius and centre coordinates */
   if (width % 2) width--;
