@@ -106,6 +106,11 @@ moblin_netbook_draw_box (DRAW_ARGS)
     return;
 
 
+  /* we want hover and focused widgets to look the same */
+  if (widget && GTK_WIDGET_HAS_FOCUS (widget))
+    state_type = GTK_STATE_PRELIGHT;
+
+
   /* scrollbar troughs are a plain rectangle */
   if (widget && GTK_IS_SCROLLBAR (widget) && DETAIL ("trough"))
     {
