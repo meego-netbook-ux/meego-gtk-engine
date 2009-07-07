@@ -25,7 +25,8 @@
 #include "moblin-netbook-style.h"
 
 
-G_DEFINE_DYNAMIC_TYPE (MoblinNetbookRcStyle, moblin_netbook_rc_style, GTK_TYPE_RC_STYLE)
+G_DEFINE_DYNAMIC_TYPE (MoblinNetbookRcStyle, moblin_netbook_rc_style,
+                       GTK_TYPE_RC_STYLE)
 
 
 enum
@@ -38,14 +39,14 @@ enum
 static struct
 {
   gchar *name;
-  guint  token;
+  guint token;
 }
 moblin_rc_symbols[] =
 {
-    { "border", TOKEN_BORDER_COLOR },
-    { "radius", TOKEN_RADIUS },
-    { "shadow", TOKEN_SHADOW },
-    { NULL, 0 }
+  { "border", TOKEN_BORDER_COLOR },
+  { "radius", TOKEN_RADIUS },
+  { "shadow", TOKEN_SHADOW },
+  { NULL, 0 }
 };
 
 static GtkStyle *
@@ -55,7 +56,8 @@ moblin_netbook_rc_style_create_style (GtkRcStyle *rc_style)
 }
 
 static guint
-moblin_get_token (GScanner *scanner, guint expected)
+moblin_get_token (GScanner *scanner,
+                  guint     expected)
 {
   guint token;
 
@@ -72,7 +74,8 @@ moblin_get_token (GScanner *scanner, guint expected)
 }
 
 static guint
-moblin_parse_border_color (GScanner *scanner, MoblinNetbookRcStyle *rc_style)
+moblin_parse_border_color (GScanner             *scanner,
+                           MoblinNetbookRcStyle *rc_style)
 {
   guint token;
   GtkStateType state_type;
@@ -127,7 +130,8 @@ moblin_netbook_rc_style_parse (GtkRcStyle  *rc_style,
           g_scanner_scope_add_symbol (scanner,
                                       scope_id,
                                       moblin_rc_symbols[i].name,
-                                      GINT_TO_POINTER (moblin_rc_symbols[i].token));
+                                      GINT_TO_POINTER (moblin_rc_symbols[i].
+                                                       token));
         }
     }
 
@@ -198,7 +202,8 @@ moblin_netbook_rc_style_merge (GtkRcStyle *adest,
   gint state;
 
   /* chain up */
-  GTK_RC_STYLE_CLASS (moblin_netbook_rc_style_parent_class)->merge (adest, asrc);
+  GTK_RC_STYLE_CLASS (moblin_netbook_rc_style_parent_class)->merge (adest,
+                                                                    asrc);
 
   /* we can't handle merge unless both src and dest are our class */
   if (!(MOBLIN_NETBOOK_IS_RC_STYLE (adest) &&

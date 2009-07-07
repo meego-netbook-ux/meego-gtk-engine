@@ -20,5 +20,7 @@
 
 #include <gtk/gtk.h>
 
-void moblin_netbook_shade_colour (GdkColor *a, GdkColor *b, gdouble   k);
+void moblin_netbook_shade_colour (GdkColor *a,
+                                  GdkColor *b,
+                                  gdouble   k);
 

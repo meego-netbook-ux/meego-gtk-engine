@@ -26,12 +26,26 @@
 
 G_BEGIN_DECLS
 
-#define MOBLIN_NETBOOK_TYPE_RC_STYLE              moblin_netbook_rc_style_get_type()
-#define MOBLIN_NETBOOK_RC_STYLE(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), MOBLIN_NETBOOK_TYPE_RC_STYLE, MoblinNetbookRcStyle))
-#define MOBLIN_NETBOOK_RC_STYLE_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), MOBLIN_NETBOOK_TYPE_RC_STYLE, MoblinNetbookRcStyleClass))
-#define MOBLIN_NETBOOK_IS_RC_STYLE(object)        (G_TYPE_CHECK_INSTANCE_TYPE ((object), MOBLIN_NETBOOK_TYPE_RC_STYLE))
-#define MOBLIN_NETBOOK_IS_RC_STYLE_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), MOBLIN_NETBOOK_TYPE_RC_STYLE))
-#define MOBLIN_NETBOOK_RC_STYLE_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), MOBLIN_NETBOOK_TYPE_RC_STYLE, MoblinNetbookRcStyleClass))
+#define MOBLIN_NETBOOK_TYPE_RC_STYLE \
+  moblin_netbook_rc_style_get_type()
+#define MOBLIN_NETBOOK_RC_STYLE(object)           (G_TYPE_CHECK_INSTANCE_CAST (( \
+                                                                                 object), \
+                                                                               MOBLIN_NETBOOK_TYPE_RC_STYLE, \
+                                                                               MoblinNetbookRcStyle))
+#define MOBLIN_NETBOOK_RC_STYLE_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST (( \
+                                                                              klass), \
+                                                                            MOBLIN_NETBOOK_TYPE_RC_STYLE, \
+                                                                            MoblinNetbookRcStyleClass))
+#define MOBLIN_NETBOOK_IS_RC_STYLE(object)        (G_TYPE_CHECK_INSTANCE_TYPE (( \
+                                                                                 object), \
+                                                                               MOBLIN_NETBOOK_TYPE_RC_STYLE))
+#define MOBLIN_NETBOOK_IS_RC_STYLE_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE (( \
+                                                                              klass), \
+                                                                            MOBLIN_NETBOOK_TYPE_RC_STYLE))
+#define MOBLIN_NETBOOK_RC_STYLE_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS (( \
+                                                                                obj), \
+                                                                              MOBLIN_NETBOOK_TYPE_RC_STYLE, \
+                                                                              MoblinNetbookRcStyleClass))
 
 typedef struct _MoblinNetbookRcStyle MoblinNetbookRcStyle;
 typedef struct _MoblinNetbookRcStyleClass MoblinNetbookRcStyleClass;
@@ -41,9 +55,9 @@ struct _MoblinNetbookRcStyle
   GtkRcStyle parent_instance;
 
   /* engine options */
-  gint     radius;
+  gint radius;
   GdkColor border_color[5];
-  gdouble  shadow;
+  gdouble shadow;
 
   /* flags for merge */
   gboolean radius_set : 1;

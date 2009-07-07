@@ -24,34 +24,47 @@
 #include <gtk/gtk.h>
 
 #define DRAW_ARGS    GtkStyle       *style, \
-                     GdkWindow      *window, \
-                     GtkStateType    state_type, \
-                     GtkShadowType   shadow_type, \
-                     GdkRectangle   *area, \
-                     GtkWidget      *widget, \
-                     const gchar    *detail, \
-                     gint            x, \
-                     gint            y, \
-                     gint            width, \
-                     gint            height
+  GdkWindow      *window, \
+  GtkStateType state_type, \
+  GtkShadowType shadow_type, \
+  GdkRectangle   *area, \
+  GtkWidget      *widget, \
+  const gchar    *detail, \
+  gint x, \
+  gint y, \
+  gint width, \
+  gint height
 
-#define SANITIZE_SIZE					\
-  g_return_if_fail (width  >= -1);			\
-  g_return_if_fail (height >= -1);			\
+#define SANITIZE_SIZE                                   \
+  g_return_if_fail (width  >= -1);                      \
+  g_return_if_fail (height >= -1);                      \
                                                         \
-  if ((width == -1) && (height == -1))			\
-    gdk_drawable_get_size (window, &width, &height);	\
-  else if (width == -1)					\
-    gdk_drawable_get_size (window, &width, NULL);	\
-  else if (height == -1)				\
+  if ((width == -1) && (height == -1)) \
+    gdk_drawable_get_size (window, &width, &height);\
+  else if (width == -1) \
+    gdk_drawable_get_size (window, &width, NULL);\
+  else if (height == -1) \
     gdk_drawable_get_size (window, NULL, &height);
 
 #define MOBLIN_NETBOOK_TYPE_STYLE              moblin_netbook_style_get_type()
-#define MOBLIN_NETBOOK_STYLE(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), MOBLIN_NETBOOK_TYPE_STYLE, MoblinNetbookStyle))
-#define MOBLIN_NETBOOK_STYLE_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), MOBLIN_NETBOOK_TYPE_STYLE, MoblinNetbookStyleClass))
-#define MOBLIN_NETBOOK_IS_STYLE(object)        (G_TYPE_CHECK_INSTANCE_TYPE ((object), MOBLIN_NETBOOK_TYPE_STYLE))
-#define MOBLIN_NETBOOK_IS_STYLE_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), MOBLIN_NETBOOK_TYPE_STYLE))
-#define MOBLIN_NETBOOK_STYLE_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), MOBLIN_NETBOOK_TYPE_STYLE, MoblinNetbookStyleClass))
+#define MOBLIN_NETBOOK_STYLE(object)           (G_TYPE_CHECK_INSTANCE_CAST (( \
+                                                                              object), \
+                                                                            MOBLIN_NETBOOK_TYPE_STYLE, \
+                                                                            MoblinNetbookStyle))
+#define MOBLIN_NETBOOK_STYLE_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST (( \
+                                                                           klass), \
+                                                                         MOBLIN_NETBOOK_TYPE_STYLE, \
+                                                                         MoblinNetbookStyleClass))
+#define MOBLIN_NETBOOK_IS_STYLE(object)        (G_TYPE_CHECK_INSTANCE_TYPE (( \
+                                                                              object), \
+                                                                            MOBLIN_NETBOOK_TYPE_STYLE))
+#define MOBLIN_NETBOOK_IS_STYLE_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE (( \
+                                                                           klass), \
+                                                                         MOBLIN_NETBOOK_TYPE_STYLE))
+#define MOBLIN_NETBOOK_STYLE_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS (( \
+                                                                             obj), \
+                                                                           MOBLIN_NETBOOK_TYPE_STYLE, \
+                                                                           MoblinNetbookStyleClass))
 
 typedef struct _MoblinNetbookStyle MoblinNetbookStyle;
 typedef struct _MoblinNetbookStyleClass MoblinNetbookStyleClass;
