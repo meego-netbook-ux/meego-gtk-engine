@@ -30,8 +30,6 @@ style "default"
   GtkRange::trough_border = 2
   GtkScrollbar::slider_width = 20
   GtkScrollbar::stepper_size = 20
-  GtkScale::slider_length = 28
-  GtkScale::slider_width = 17
 
   GtkProgressBar::xspacing = 0
   GtkProgressBar::yspacing = 0
@@ -119,7 +117,28 @@ style "button"
   }
 }
 widget_class "*Button*" style "button"
-class "GtkScale" style "button"
+
+style "scale"
+{
+  GtkScale::slider_length = 27
+  GtkScale::slider_width = 16
+  GtkWidget::focus-line-width = 0
+
+  # handle colour
+  bg[NORMAL] = "#fff"
+  bg[PRELIGHT] = "#fff"
+
+  #trough color
+  bg[ACTIVE] = "#fff"
+  bg[SELECTED] = "#fff"
+
+  engine "moblin-netbook-engine"
+  {
+    radius = 3
+    border[PRELIGHT] = @blue_d
+  }
+}
+class "GtkScale" style "scale"
 
 style "entry"
 {
@@ -183,7 +202,6 @@ style "scrollbar"
   bg[INSENSITIVE] = @bg_color
 }
 class "GtkScrollbar" style "scrollbar"
-class "GtkScale" style "scrollbar"
 
 style "treeview_headers"
 {
