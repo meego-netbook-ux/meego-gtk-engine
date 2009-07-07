@@ -30,8 +30,8 @@ style "default"
   GtkRange::trough_border = 2
   GtkScrollbar::slider_width = 20
   GtkScrollbar::stepper_size = 20
-  GtkScale::slider_length = 23
-  GtkScale::slider_width = 14
+  GtkScale::slider_length = 28
+  GtkScale::slider_width = 17
 
   GtkProgressBar::xspacing = 0
   GtkProgressBar::yspacing = 0
