@@ -87,7 +87,17 @@ class "GtkWidget" style "default"
 style "button"
 {
 
-  bg [NORMAL] = "#ffffff"
+  bg [NORMAL] = "#fff"
+  fg [NORMAL] = "#000"
+
+  bg [PRELIGHT] = "#fff"
+  fg [PRELIGHT] = "#000"
+
+  bg [ACTIVE] = "#fff"
+  fg [ACTIVE] = "#000"
+
+  bg [INSENSITIVE] = "#f1f1f1"
+  fg [INSENSITIVE] = "#bdc1b8"
 
   GtkButton::child-displacement-x = 1
   GtkButton::child-displacement-y = 1
@@ -280,15 +290,6 @@ style "mux-toolbarbutton"
   ythickness = 8
 }
 widget_class "*<GtkToolbar>.*Button.*"  style "mux-toolbarbutton"
-
-style "font"
-{
-  font_name = "Liberation Sans 8"
-}
-widget_class "*" style "font"
-gtk-font-name = "Liberation Sans 8"
-
-
 
 style "mux-window"
 {
