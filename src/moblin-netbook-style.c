@@ -282,15 +282,20 @@ moblin_netbook_draw_box (DRAW_ARGS)
           || DETAIL ("trough-fill-level-full"))
       && GTK_IS_SCALE (widget))
     {
+      if (mb_style->shadow)
+        {
+          width--;
+          height--;
+        }
       if (width > height)
         {
-          height = 5;
-          y += 6;
+          y = y + (height / 2.0 - 2);
+          height = 4;
         }
       else
         {
-          width = 5;
-          x += 6;
+          x = x + (width / 2.0 - 2);
+          width = 4;
         }
     }
 
