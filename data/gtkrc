@@ -129,14 +129,6 @@ style "checkbutton"
   fg [PRELIGHT] = @fg_color
   fg [ACTIVE] = @fg_color
 
-# Just testing this...
-  bg [NORMAL] = "#0ff000"
-  bg [PRELIGHT] = "#000ff0"
-
-  text [NORMAL] = "#ff0000"
-  text [ACTIVE] = "#00ff00"
-  text [PRELIGHT] = "#0000ff"
-
   engine "moblin-netbook-engine"
   {
     radius = 2
