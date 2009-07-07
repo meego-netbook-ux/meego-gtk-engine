@@ -94,6 +94,65 @@ moblin_netbook_rounded_rectangle (cairo_t *cr, gdouble x, gdouble y, gdouble wid
 }
 
 static void
+moblin_netbook_draw_grip (cairo_t *cr,
+                          gboolean vertical,
+                          gdouble x,
+                          gdouble y,
+                          gdouble width,
+                          gdouble height)
+{
+  gdouble cx, cy;
+  gint n_strips = 3;
+  gint strip_w = 3;
+  gint strip_h = 8 - strip_w;
+  gint strip_padding = 2;
+  gint grip_w = (n_strips * strip_w) + ((n_strips - 1) * strip_padding);
+  gint i;
+
+  cairo_save (cr);
+
+  cairo_set_line_width (cr, strip_w);
+  cairo_set_line_cap (cr, CAIRO_LINE_CAP_ROUND);
+
+  if (!vertical)
+    {
+      cx = x + (width / 2.0) - grip_w / 2.0 + strip_w / 2.0;
+      cy = y + (height / 2.0) - (strip_h / 2.0);
+
+      for (i = 0; i < n_strips; i++)
+        {
+          gdouble position;
+
+          position = cx + (i * (strip_w + strip_padding));
+
+          cairo_move_to (cr, position, cy);
+          cairo_line_to (cr, position, cy + strip_h);
+
+          cairo_stroke (cr);
+        }
+    }
+  else
+    {
+      cy = y + (height / 2.0) - grip_w / 2.0 + strip_w / 2.0;
+      cx = x + (width / 2.0) - (strip_h / 2.0);
+
+      for (i = 0; i < n_strips; i++)
+        {
+          gdouble position;
+
+          position = cy + (i * (strip_w + strip_padding));
+
+          cairo_move_to (cr, cx, position);
+          cairo_line_to (cr, cx + strip_h, position);
+
+          cairo_stroke (cr);
+        }
+    }
+
+  cairo_restore (cr);
+}
+
+static void
 moblin_netbook_draw_box (DRAW_ARGS)
 {
   cairo_t *cr;
@@ -282,15 +341,23 @@ moblin_netbook_draw_box (DRAW_ARGS)
   if (shadow_type != GTK_SHADOW_NONE)
     {
       /* border */
-      cairo_translate (cr, 0.5, 0.5);
-      width--; height--;
-
-      moblin_netbook_rounded_rectangle (cr, x, y, width, height, radius);
+      moblin_netbook_rounded_rectangle (cr, x + 0.5, y + 0.5,
+                                        width - 1, height - 1, radius);
       moblin_netbook_set_border_color (cr, style, state_type);
       cairo_stroke (cr);
     }
 
-
+  /* add a grip to handles */
+  if (DETAIL ("light-switch-handle") || DETAIL ("hscale"))
+    {
+      gdk_cairo_set_source_color (cr, &style->mid[state_type]);
+      moblin_netbook_draw_grip (cr, FALSE, x, y, width, height);
+    }
+  else if (DETAIL ("vscale"))
+    {
+      gdk_cairo_set_source_color (cr, &style->mid[state_type]);
+      moblin_netbook_draw_grip (cr, TRUE, x, y, width, height);
+    }
   cairo_destroy (cr);
 
 }
