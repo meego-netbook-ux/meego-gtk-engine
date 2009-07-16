@@ -17,12 +17,34 @@ gtk_color_scheme = "bg_color:#f9f9f9;fg_color:#2b2b2b;text_color:#2b2b2b;base_co
 
 style "default"
 {
-
-  GtkWidget::cursor-color    = @selected_bg_color
+  GtkWidget::link_color = "#febf00"
+  GtkWidget::visited_link_color = "#febf00"
+  GtkWidget::cursor-color = @selected_bg_color
   GtkWidget::secondary-cursor-color = @selected_bg_color
 
-  xthickness = 3
-  ythickness = 3
+  GtkHTML::spell_error_color = "#febf00"
+  GtkHTML::link_color = "#febf00"
+  GtkHTML::alink_color = "#febf00"
+  GtkHTML::vlink_color = "#febf00"
+
+  GtkScrolledWindow::scrollbar-spacing = 3
+
+  GtkTreeView::allow-rules = 1
+  GtkTreeView::even-row-color = "#ffffff"
+  GtkTreeView::odd-row-color = "#eeeeee"
+  GtkTextView::error-underline-color = "#febf00"
+
+  NautilusIconContainer::selection_box_color = @blue_l
+  NautilusIconContainer::dark_info_color = @blue_d
+  NautilusIconContainer::normal_icon_render_mode = "1"
+  NautilusIconContainer::prelight_icon_color = "#000000"
+  NautilusIconContainer::prelight_icon_brightness = 0
+  NautilusIconContainer::prelight_icon_brightness = 150
+
+  GtkNotebook::tab-overlap = 0
+
+  xthickness = 4
+  ythickness = 4
 
   GtkMenu::vertical_padding = 0
   GtkMenuBar::shadow_type = GTK_SHADOW_NONE
@@ -39,7 +61,7 @@ style "default"
   # allow for bottom shadow in buttons
   GtkButton::inner-border = { 0, 0, 0, 2 }
 
-  GtkToolbar::internal_padding = 6
+  GtkToolbar::internal_padding = 4
   GtkToolbar::shadow_type = GTK_SHADOW_NONE
 
   GtkCheckButton::indicator_size = 15
