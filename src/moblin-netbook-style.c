@@ -522,47 +522,43 @@ moblin_netbook_draw_check (GtkStyle     *style,
   cr = moblin_netbook_cairo_create (window, area);
 
   cairo_set_line_width (cr, 1.0);
-  cairo_translate (cr, 0.5, 0.5);
-  width--;
-  height--;
 
   if (shadow_type == GTK_SHADOW_IN)
     {
       state_type = GTK_STATE_SELECTED;
     }
 
+  /* we don't support anything other than 15x15 */
+  width = 15;
+  height = 15;
+
+  moblin_netbook_rounded_rectangle (cr, x + 0.5, y + 0.5,
+                                    width - 1, height - 1, radius);
+
   /* fill the background */
   gdk_cairo_set_source_color (cr, &style->base[state_type]);
-  moblin_netbook_rounded_rectangle (cr, x, y, width, height, radius);
-  cairo_fill (cr);
+  cairo_fill_preserve (cr);
 
   /* draw the border */
   moblin_netbook_set_border_color (cr, style, state_type);
-  moblin_netbook_rounded_rectangle (cr, x, y, width, height, radius);
   cairo_stroke (cr);
 
   gdk_cairo_set_source_color (cr, &style->text[state_type]);
 
-  /*** draw check mark ***/
+  /* draw a tick when checked */
   if (shadow_type == GTK_SHADOW_IN)
     {
-      x += 2;
-      y += 3;
-      width -= 5;
-      height -= 6;
+      cairo_translate (cr, x, y);
 
-      cairo_set_line_width (cr, 2);
+      cairo_move_to (cr, 3, 6);
+      cairo_line_to (cr, 6, 9);
+      cairo_line_to (cr, 12, 3);
+      cairo_line_to (cr, 12, 6);
+      cairo_line_to (cr, 6, 12);
+      cairo_line_to (cr, 3, 9);
+      cairo_line_to (cr, 3, 6);
 
-      cairo_rectangle (cr, x, y, width, height);
-      cairo_clip (cr);
-      y += 1;
-      height -= 2;
-
-      cairo_move_to (cr, x, y + height * 0.53);
-      cairo_line_to (cr, x + width * 0.3, y + height);
-      cairo_line_to (cr, x + width, y);
-
-      cairo_stroke (cr);
+      cairo_fill (cr);
     }
   cairo_destroy (cr);
 
