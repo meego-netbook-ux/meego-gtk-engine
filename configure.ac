@@ -1,4 +1,4 @@
-AC_INIT([moblin-gtk-engine], [0.3.0])
+AC_INIT([moblin-gtk-engine], [0.3.1])
 AC_CONFIG_SRCDIR([README])
 AM_CONFIG_HEADER(config.h)
 
