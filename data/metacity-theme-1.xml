@@ -54,22 +54,22 @@
 <constant name="ButtonIPad" value="4"/>
 
 <draw_ops name="focus_outline">
-  <rectangle color="#202e31"
+  <rectangle color="#182325"
              x="0" y="0"
              width="width-1"
              height="height-1" />
-  <rectangle color="#202e31"
+  <rectangle color="#182325"
              x="1" y="1"
              width="width-3"
              height="height-3" />
 </draw_ops>
 
 <draw_ops name="title_bg">
-  <rectangle color="#202e31" filled="true"
+  <rectangle color="#182325" filled="true"
              x="0" y="0"
              width="width"
              height="height"/>
-  <rectangle color="#202e31" filled="true"
+  <rectangle color="#182325" filled="true"
              x="0" y="0"
              width="width"
              height="top_height"/> 
@@ -81,7 +81,7 @@
 </draw_ops>
 
 <draw_ops name="title_unfocused">
-  <rectangle color="#202e31" filled="true"
+  <rectangle color="#182325" filled="true"
              x="0" y="0"
              width="width"
              height="height"/>
