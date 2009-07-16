@@ -266,13 +266,9 @@ moblin_netbook_draw_box (GtkStyle     *style,
 
   if (DETAIL ("spinbutton"))
     {
-      cr = moblin_netbook_cairo_create (window, area);
-
       /* FIXME: for RTL */
       width += 10;
       x -= 10;
-
-      return;
     }
 
   /*** combo boxes ***/

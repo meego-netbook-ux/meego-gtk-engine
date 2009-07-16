@@ -125,9 +125,9 @@ style "button"
   GtkButton::displace-focus = 1
   GtkButton::inner-border = { 4, 4, 4, 4 }
 
+  # this enables the focus indicator to be flush with the border
   GtkWidget::focus-padding = 0
   GtkWidget::focus-line-width = 2
-
   xthickness = 1
   ythickness = 1
 
@@ -139,7 +139,7 @@ style "button"
     shadow = 0.15
   }
 }
-widget_class "*Button*" style "button"
+class "GtkButton" style "button"
 
 style "scale"
 {
