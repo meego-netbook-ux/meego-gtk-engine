@@ -53,6 +53,7 @@ style "default"
   GtkScrollbar::stepper_size = 28
   GtkScrollbar::arrow-scaling = 0.4
   GtkScrollbar::trough-border = 0
+  GtkScrollbar::min-slider-length = 64
 
   GtkProgressBar::xspacing = 0
   GtkProgressBar::yspacing = 0
