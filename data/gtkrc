@@ -27,9 +27,10 @@ style "default"
   GtkMenu::vertical_padding = 0
   GtkMenuBar::shadow_type = GTK_SHADOW_NONE
 
-  GtkRange::trough_border = 2
-  GtkScrollbar::slider_width = 20
-  GtkScrollbar::stepper_size = 20
+  GtkScrollbar::slider_width = 28
+  GtkScrollbar::stepper_size = 28
+  GtkScrollbar::arrow-scaling = 0.4
+  GtkScrollbar::trough-border = 0
 
   GtkProgressBar::xspacing = 0
   GtkProgressBar::yspacing = 0

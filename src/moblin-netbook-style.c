@@ -322,6 +322,31 @@ moblin_netbook_draw_box (GtkStyle     *style,
         }
     }
 
+
+  /* scrollbar buttons */
+  if (DETAIL ("hscrollbar") || DETAIL ("vscrollbar"))
+    {
+      x += 3;
+      y += 3;
+      width -= 6;
+      height -= 6;
+    }
+
+  /* scrollbar slider */
+  if (DETAIL ("slider"))
+    {
+      if (width > height)
+        {
+          y += 3;
+          height -= 6;
+        }
+      else
+        {
+          x += 3;
+          width -= 6;
+        }
+    }
+
   cr = moblin_netbook_cairo_create (window, area);
 
   cairo_set_line_width (cr, LINE_WIDTH);
@@ -872,15 +897,13 @@ moblin_netbook_draw_arrow (GtkStyle     *style,
 
   gdk_cairo_set_source_color (cr, &style->fg[state_type]);
 
-  if (DETAIL ("vscrollbar"))
+  /* add padding around scrollbar buttons */
+  if (DETAIL ("vscrollbar") || DETAIL ("hscrollbar"))
     {
-      x += (width - 6) / 2;
-      width = 6;
-    }
-  else if (DETAIL ("hscrollbar") || DETAIL ("menuitem"))
-    {
-      y += (height - 6) / 2;
-      height = 6;
+      x += 3;
+      width -= 4;
+      y += 3;
+      height -= 4;
     }
 
   /* ensure we have odd number of pixels for width or height to allow for
@@ -888,6 +911,7 @@ moblin_netbook_draw_arrow (GtkStyle     *style,
    */
   if (width % 2) width--;
   if (height % 2) height--;
+
 
   switch (arrow_type)
     {
