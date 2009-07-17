@@ -1,12 +1,8 @@
 # Moblin Netbook GTK+ theme
 
-# Colours:
-#   green: 66cc33
-#   dark gray: cbccc9
-#   light gray: eeeeec
-
 gtk_button_images = 0
 gtk_menu_images = 0
+
 # blue_l             #a0e4f8
 # blue	             #5dcff2
 # blue_d             #009bce
