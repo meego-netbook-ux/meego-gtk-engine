@@ -27,9 +27,6 @@ style "default"
   GtkHTML::alink_color = "#febf00"
   GtkHTML::vlink_color = "#febf00"
 
-  GtkScrolledWindow::scrollbar-spacing = 3
-
-  GtkTreeView::allow-rules = 1
   GtkTreeView::even-row-color = "#ffffff"
   GtkTreeView::odd-row-color = "#eeeeee"
   GtkTextView::error-underline-color = "#febf00"
