@@ -215,9 +215,17 @@ class "GtkProgressBar" style "progressbar"
 
 style "scrollbar"
 {
-  fg[NORMAL] = shade (2.5, @fg_color)
+  fg[NORMAL] = @grey
   bg[ACTIVE] = shade (0.9, @bg_color)
   bg[INSENSITIVE] = @bg_color
+
+  fg[PRELIGHT] = @blue_d
+
+  engine "moblin-netbook-engine"
+  {
+    radius = 3
+    border[PRELIGHT] = @blue_d
+  }
 }
 class "GtkScrollbar" style "scrollbar"
 

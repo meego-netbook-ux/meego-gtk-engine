@@ -322,10 +322,10 @@ moblin_netbook_draw_box (GtkStyle     *style,
   /* scrollbar buttons */
   if (DETAIL ("hscrollbar") || DETAIL ("vscrollbar"))
     {
-      x += 3;
-      y += 3;
-      width -= 6;
-      height -= 6;
+      x += 2;
+      y += 2;
+      width -= 4;
+      height -= 4;
     }
 
   /* scrollbar slider */
@@ -333,13 +333,13 @@ moblin_netbook_draw_box (GtkStyle     *style,
     {
       if (width > height)
         {
-          y += 3;
-          height -= 6;
+          y += 2;
+          height -= 4;
         }
       else
         {
-          x += 3;
-          width -= 6;
+          x += 2;
+          width -= 4;
         }
     }
 
