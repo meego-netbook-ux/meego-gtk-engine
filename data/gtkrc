@@ -1,5 +1,8 @@
 # Moblin Netbook GTK+ theme
 
+# turn off underlines in menus
+gtk-enable-mnemonics = 0
+
 gtk_button_images = 0
 gtk_menu_images = 0
 
