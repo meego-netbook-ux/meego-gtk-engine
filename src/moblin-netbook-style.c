@@ -232,6 +232,9 @@ moblin_netbook_draw_box (GtkStyle     *style,
       /* FIXME: for RTL */
       width += 10;
       x -= 10;
+
+      /* always draw button as shadow out to match the entry */
+      shadow_type = GTK_SHADOW_OUT;
     }
 
   /*** combo boxes ***/
@@ -243,10 +246,9 @@ moblin_netbook_draw_box (GtkStyle     *style,
                                  "moblin-netbook-combo-entry");
       g_object_set_data (G_OBJECT (widget->parent),
                          "moblin-netbook-combo-button", widget);
-      g_object_set_data (G_OBJECT (widget->parent),
-                         "moblin-netbook-combo-button-shadow",
-                         GINT_TO_POINTER (shadow_type));
 
+      /* always draw combo box entry buttons as shadow out to match the entry */
+      shadow_type = GTK_SHADOW_OUT;
 
       if (GTK_IS_ENTRY (entry))
         {
@@ -419,10 +421,6 @@ moblin_netbook_draw_shadow (GtkStyle     *style,
       button = g_object_get_data (G_OBJECT (widget->parent),
                                   "moblin-netbook-combo-button");
 
-      pointer = g_object_get_data (G_OBJECT (widget->parent),
-                                   "moblin-netbook-combo-button-shadow");
-      shadow_type = GPOINTER_TO_INT (pointer);
-
       width += 10;
     }
 
@@ -433,19 +431,12 @@ moblin_netbook_draw_shadow (GtkStyle     *style,
   cairo_set_line_width (cr, 1.0);
   if (mb_style->shadow != 0.0)
     {
-      if (shadow_type == GTK_SHADOW_OUT)
-        {
-          /* outer shadow */
-          moblin_netbook_rounded_rectangle (cr, x, y, width, height,
-                                            radius + 1.0);
-          cairo_set_source_rgba (cr, 0, 0, 0, mb_style->shadow);
-          cairo_stroke (cr);
-        }
-      else if (shadow_type == GTK_SHADOW_IN)
-        {
-          x++;
-          y++;
-        }
+      /* outer shadow */
+      moblin_netbook_rounded_rectangle (cr, x, y, width, height,
+                                        radius + 1.0);
+      cairo_set_source_rgba (cr, 0, 0, 0, mb_style->shadow);
+      cairo_stroke (cr);
+
 
       /* reduce size for outer shadow */
       height--;
