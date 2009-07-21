@@ -61,6 +61,7 @@ style "default"
   GtkCheckButton::indicator_size = 15
   GtkCheckMenuItem::indicator_size = 15
 
+  GtkPaned::handle-size = 6
 
   fg [NORMAL] = @fg_color
   fg [PRELIGHT] = @fg_color

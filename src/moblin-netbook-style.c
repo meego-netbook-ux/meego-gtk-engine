@@ -432,7 +432,6 @@ moblin_netbook_draw_shadow (GtkStyle     *style,
   if (widget && DETAIL ("entry") && GTK_IS_COMBO_BOX_ENTRY (widget->parent))
     {
       GtkWidget *button;
-      gpointer pointer;
 
       g_object_set_data (G_OBJECT (widget->parent),
                          "moblin-netbook-combo-entry", widget);
@@ -916,6 +915,52 @@ moblin_netbook_draw_arrow (GtkStyle     *style,
 }
 
 static void
+moblin_netbook_draw_handle (GtkStyle           *style,
+                            GdkWindow          *window,
+                            GtkStateType        state_type,
+                            GtkShadowType      *shadow_type,
+                            GdkRectangle       *area,
+                            GtkWidget          *widget,
+                            const gchar        *detail,
+                            gint                x,
+                            gint                y,
+                            gint                width,
+                            gint                height,
+                            GtkOrientation      orientation)
+{
+  cairo_t *cr;
+  gdouble cx, cy, radius;
+
+  DEBUG;
+
+  cr = moblin_netbook_cairo_create (window, area);
+
+  cx = x + width / 2;
+  cy = y + height / 2;
+
+  if (orientation == GTK_ORIENTATION_HORIZONTAL)
+    {
+      radius = height / 2 - 1;
+
+      cairo_arc (cr, cx, cy, radius, 0, M_PI * 360);
+      cairo_arc (cr, cx - radius * 3, cy, radius, 0, M_PI * 360);
+      cairo_arc (cr, cx + radius * 3, cy, radius, 0, M_PI * 360);
+    }
+  else
+    {
+      radius = width / 2 - 1;
+
+      cairo_arc (cr, cx, cy, radius, 0, M_PI * 360);
+      cairo_arc (cr, cx, cy - radius * 3, radius, 0, M_PI * 360);
+      cairo_arc (cr, cx, cy + radius * 3, radius, 0, M_PI * 360);
+    }
+
+  moblin_netbook_set_border_color (cr, style, state_type);
+  cairo_fill (cr);
+  cairo_destroy (cr);
+}
+
+static void
 moblin_netbook_init_from_rc (GtkStyle   *style,
                              GtkRcStyle *rc_style)
 {
@@ -979,6 +1024,7 @@ moblin_netbook_style_class_init (MoblinNetbookStyleClass *klass)
   style_class->draw_vline = moblin_netbook_draw_vline;
   style_class->draw_focus = moblin_netbook_draw_focus;
   style_class->draw_arrow = moblin_netbook_draw_arrow;
+  style_class->draw_handle = moblin_netbook_draw_handle;
 }
 
 static void
