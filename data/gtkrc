@@ -200,6 +200,11 @@ widget_class "*MenuItem*" style "menuitem"
 style "menu"
 {
   bg[NORMAL] = lighter (@bg_color)
+
+  engine "moblin-netbook-engine"
+  {
+    radius = 0
+  }
 }
 class "GtkMenu" style "menu"
 

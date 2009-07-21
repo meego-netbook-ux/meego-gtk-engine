@@ -206,44 +206,7 @@ moblin_netbook_draw_box (GtkStyle     *style,
       return;
     }
 
-  if (width <= 0 && DETAIL ("menu"))
-    {
-      /* we're allowed to set a mask on the window here */
-      GdkBitmap *bm;
-      cairo_t *cm;
-      GtkWidget *toplevel;
-
-      SANITIZE_SIZE; /* get the correct sizes */
-
-      bm = (GdkBitmap *) gdk_pixmap_new (NULL, width, height, 1);
-      cm = gdk_cairo_create (bm);
-
-      /* fill the pixmap black */
-      cairo_save (cm);
-      cairo_rectangle (cm, 0, 0, width, height);
-      cairo_set_operator (cm, CAIRO_OPERATOR_CLEAR);
-      cairo_fill (cm);
-      cairo_restore (cm);
-
-      /* create the mask as a white region */
-      cairo_set_source_rgb (cm, 1.0, 1.0, 1.0);
-      moblin_netbook_rounded_rectangle (cm, 0, 0, width + 1, height + 1,
-                                        radius);
-      cairo_fill (cm);
-      cairo_destroy (cm);
-
-      /* set the mask on the top level widget... */
-      toplevel = gtk_widget_get_toplevel (widget);
-
-      gtk_widget_shape_combine_mask (toplevel, bm, 0, 0);
-      g_object_unref (bm);
-
-    }
-  else
-    {
-      SANITIZE_SIZE;
-    }
-
+  SANITIZE_SIZE;
 
   /*** treeview headers ***/
   if (widget && GTK_IS_TREE_VIEW (widget->parent))
