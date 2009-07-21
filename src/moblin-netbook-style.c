@@ -408,17 +408,18 @@ moblin_netbook_draw_shadow (GtkStyle     *style,
 
   cr = moblin_netbook_cairo_create (window, area);
 
-  /* initilise the background in the corners to the colour of the parent widget */
-  if (radius > 0 && widget && widget->parent)
+  /* initilise the background in the corners to the colour of the widget */
+  if (widget)
     {
       cairo_rectangle (cr, x, y, width, height);
       if (mb_style->shadow)
-        moblin_netbook_rounded_rectangle (cr, x, y, width - 1, height - 1, radius);
+        moblin_netbook_rounded_rectangle (cr, x, y, width - 1, height - 1,
+                                          radius);
       else
         moblin_netbook_rounded_rectangle (cr, x, y, width, height, radius);
 
+      gdk_cairo_set_source_color (cr, &widget->style->bg[state_type]);
       cairo_set_fill_rule (cr, CAIRO_FILL_RULE_EVEN_ODD);
-      gdk_cairo_set_source_color (cr, &widget->parent->style->bg[state_type]);
       cairo_fill (cr);
     }
 

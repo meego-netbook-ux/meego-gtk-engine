@@ -242,17 +242,6 @@ style "treeview_headers"
 }
 widget_class "*.GtkTreeView.GtkButton*" style "treeview_headers"
 
-style "toolbar"
-{
-  bg[NORMAL] = shade (0.98, @bg_color)
-
-  engine "moblin-netbook-engine"
-  {
-    radius = 0
-  }
-}
-class "GtkToolbar" style "toolbar"
-
 style "toolbar-handlebox"
 {
   bg[NORMAL] = "#434343"
@@ -393,11 +382,26 @@ style "menubar"
 {
   bg[NORMAL] = "#202e31"
   fg[NORMAL] = "#ffffff"
+
+  engine "moblin-netbook-engine"
+  {
+    radius = 0
+  }
 }
 class "GtkMenuBar" style "menubar"
 class "GtkToolbar" style "menubar"
-class "GtkToolItem" style "menubar"
-widget_class "*.GtkMenuBar.*" style "menubar"
+
+style "toolbar-child" = "menubar"
+{
+  engine "moblin-netbook-engine"
+  {
+    radius = 3
+    shadow = 0.0
+  }
+}
+class "GtkToolItem" style "toolbar-child"
+widget_class "*.GtkMenuBar.*" style "toolbar-child"
+widget_class "*.GtkToolbar.*" style "toolbar-child"
 
 style "arrow"
 {
