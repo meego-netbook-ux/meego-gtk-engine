@@ -25,10 +25,14 @@
 #include "moblin-netbook-rc-style.h"
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <math.h>
 #include <string.h>
 
-#define DEBUG // g_printf ("%s: detail = '%s'; state = %d; x:%d; y:%d; w:%d; h:%d;\n", __FUNCTION__, detail, state_type, x, y, width, height);
+
+static int do_debug = 0;
+
+#define DEBUG if (do_debug) printf ("%s: detail = '%s'; state = %d; x:%d; y:%d; w:%d; h:%d;\n", __FUNCTION__, detail, state_type, x, y, width, height);
 #define DETAIL(foo) (detail && strcmp (foo, detail) == 0)
 
 #define LINE_WIDTH 1
@@ -954,6 +958,11 @@ static void
 moblin_netbook_style_class_init (MoblinNetbookStyleClass *klass)
 {
   GtkStyleClass *style_class = GTK_STYLE_CLASS (klass);
+
+  /* Set debugging if required. We only need to do this once per instance, so
+   * it is safe to do in the class-init */
+  do_debug = (getenv ("MOBLIN_NETBOOK_ENGINE_DEBUG") > 0);
+
 
   style_class->init_from_rc = moblin_netbook_init_from_rc;
   style_class->copy = moblin_netbook_style_copy;
