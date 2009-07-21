@@ -805,7 +805,7 @@ moblin_netbook_draw_focus (GtkStyle     *style,
   if (widget)
     gtk_widget_style_get (widget, "focus-line-width", &line_width, NULL);
   else
-    line_width = 2;
+    line_width = 1;
 
   cairo_translate (cr, line_width / 2.0, line_width / 2.0);
   width -= line_width;

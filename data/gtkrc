@@ -178,6 +178,7 @@ style "checkbutton"
   engine "moblin-netbook-engine"
   {
     radius = 2
+    shadow = 0.0
   }
 }
 widget_class "*CheckButton*" style "checkbutton"
