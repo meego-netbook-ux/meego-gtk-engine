@@ -99,6 +99,31 @@ style "default"
 
 class "GtkWidget" style "default"
 
+# Work around for http://bugzilla.gnome.org/show_bug.cgi?id=382646
+# Note that the work around assumes that the combobox is _not_ in
+# appears-as-list mode.
+# Similar hack also in the menuitem style.
+# This style does not affect GtkComboBoxEntry, it does have an effect
+# on comboboxes in appears-as-list mode though.
+style "clearlooks-text-is-fg-color-workaround"
+{
+  text[NORMAL]      = @fg_color
+  text[PRELIGHT]    = @fg_color
+  text[SELECTED]    = @fg_color
+  text[ACTIVE]      = @fg_color
+  text[INSENSITIVE] = darker (@bg_color)
+}
+widget_class "*.<GtkComboBox>.<GtkCellView>"   style "clearlooks-text-is-fg-color-workaround"
+style "clearlooks-menuitem-text-is-fg-color-workaround"
+{
+  text[NORMAL]        = @fg_color
+  text[PRELIGHT]      = @selected_fg_color
+  text[SELECTED]      = @selected_fg_color
+  text[ACTIVE]        = @fg_color
+  text[INSENSITIVE]   = darker (@bg_color)
+}
+widget "*.gtk-combobox-popup-menu.*"   style "clearlooks-menuitem-text-is-fg-color-workaround"
+
 style "button"
 {
 
@@ -252,6 +277,18 @@ style "toolbar-handlebox"
   }
 }
 class "GtkHandleBox" style "toolbar-handlebox"
+
+style "toolbar-combobox"
+{
+  bg[NORMAL] = "#434343"
+
+  text [NORMAL] = "#ffffff"
+  text [PRELIGHT] = "#ffffff"
+  text [ACTIVE] = "#ffffff"
+  xthickness = 8
+  ythickness = 8
+}
+widget_class "*<GtkToolbar>.*Combo*"  style "toolbar-combobox"
 
 style "toolbar-arrow"
 {
@@ -417,30 +454,6 @@ style "combo-box-entry-arrow"
 widget_class "*.GtkComboBoxEntry*GtkArrow" style "combo-box-entry-arrow"
 widget_class "*.GtkSpinButton" style "combo-box-entry-arrow"
 
-# Work around for http://bugzilla.gnome.org/show_bug.cgi?id=382646
-# Note that the work around assumes that the combobox is _not_ in
-# appears-as-list mode.
-# Similar hack also in the menuitem style.
-# This style does not affect GtkComboBoxEntry, it does have an effect
-# on comboboxes in appears-as-list mode though.
-style "clearlooks-text-is-fg-color-workaround"
-{
-	text[NORMAL]      = @fg_color
-	text[PRELIGHT]    = @fg_color
-	text[SELECTED]    = @fg_color
-	text[ACTIVE]      = @fg_color
-	text[INSENSITIVE] = darker (@bg_color)
-}
-widget_class "*.<GtkComboBox>.<GtkCellView>"   style "clearlooks-text-is-fg-color-workaround"
-style "clearlooks-menuitem-text-is-fg-color-workaround"
-{
-	text[NORMAL]        = @fg_color
-	text[PRELIGHT]      = @selected_fg_color
-	text[SELECTED]      = @selected_fg_color
-	text[ACTIVE]        = @fg_color
-	text[INSENSITIVE]   = darker (@bg_color)
-}
-widget "*.gtk-combobox-popup-menu.*"   style "clearlooks-menuitem-text-is-fg-color-workaround"
 
 style "notebook"
 {
@@ -487,5 +500,6 @@ style "mux-window"
   bg [NORMAL] = "#f9f9f9"
 }
 widget_class "GtkWindow" style "mux-window"
+
 
 
