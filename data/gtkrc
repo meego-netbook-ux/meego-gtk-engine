@@ -261,6 +261,23 @@ style "scrollbar"
 }
 class "GtkScrollbar" style "scrollbar"
 
+style "statusbar-resize"
+{
+  # this colour is used for resize grips in moblin-gtk-engine
+  bg[ACTIVE] = @grey
+}
+class "GtkStatusbar" style "statusbar-resize"
+
+style "statusbar"
+{
+  engine "moblin-netbook-engine"
+  {
+    border [NORMAL] = @bg_color
+    radius = 3
+  }
+}
+widget_class "*<GtkStatusbar>*" style "statusbar"
+
 style "treeview_headers"
 {
   bg[NORMAL] = @bg_color

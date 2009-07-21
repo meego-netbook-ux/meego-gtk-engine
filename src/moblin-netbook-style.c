@@ -961,6 +961,58 @@ moblin_netbook_draw_handle (GtkStyle           *style,
 }
 
 static void
+moblin_netbook_draw_resize_grip (GtkStyle           *style,
+                                 GdkWindow          *window,
+                                 GtkStateType        state_type,
+                                 GdkRectangle       *area,
+                                 GtkWidget          *widget,
+                                 const gchar        *detail,
+                                 GdkWindowEdge       edge,
+                                 gint                x,
+                                 gint                y,
+                                 gint                width,
+                                 gint                height)
+{
+  cairo_t *cr;
+  gdouble cx, cy, radius, spacing;
+
+  DEBUG;
+
+  /* FIXME: fix other window edge types */
+
+  cr = moblin_netbook_cairo_create (window, area);
+
+  radius = 2;
+
+  /* bottom right */
+  cx = x + width - radius;
+  cy = y + height - radius;
+
+  spacing = radius * 2 + 2;
+  gdk_cairo_set_source_color (cr, &style->bg[GTK_STATE_ACTIVE]);
+
+  cairo_arc (cr, cx, cy - spacing * 2, radius, 0, M_PI * 360);
+  cairo_fill (cr);
+
+  cairo_arc (cr, cx, cy - spacing, radius, 0, M_PI * 360);
+  cairo_fill (cr);
+
+  cairo_arc (cr, cx, cy, radius, 0, M_PI * 360);
+  cairo_fill (cr);
+
+  cairo_arc (cr, cx - spacing, cy - spacing, radius, 0, M_PI * 360);
+  cairo_fill (cr);
+
+  cairo_arc (cr, cx - spacing, cy, radius, 0, M_PI * 360);
+  cairo_fill (cr);
+
+  cairo_arc (cr, cx - spacing * 2, cy, radius, 0, M_PI * 360);
+  cairo_fill (cr);
+
+  cairo_destroy (cr);
+}
+
+static void
 moblin_netbook_init_from_rc (GtkStyle   *style,
                              GtkRcStyle *rc_style)
 {
@@ -1025,6 +1077,7 @@ moblin_netbook_style_class_init (MoblinNetbookStyleClass *klass)
   style_class->draw_focus = moblin_netbook_draw_focus;
   style_class->draw_arrow = moblin_netbook_draw_arrow;
   style_class->draw_handle = moblin_netbook_draw_handle;
+  style_class->draw_resize_grip = moblin_netbook_draw_resize_grip;
 }
 
 static void
