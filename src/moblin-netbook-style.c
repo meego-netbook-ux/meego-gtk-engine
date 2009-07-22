@@ -675,6 +675,7 @@ moblin_netbook_draw_extension (GtkStyle       *style,
                                GtkPositionType gap_side)
 {
   cairo_t *cr;
+  cairo_pattern_t *pattern;
   gint radius = MOBLIN_NETBOOK_STYLE (style)->radius;
 
   /* initialise the background */
@@ -703,10 +704,17 @@ moblin_netbook_draw_extension (GtkStyle       *style,
       cairo_line_to (cr, x + width, y);
       break;
     case GTK_POS_BOTTOM: /* top tab */
-      cairo_move_to (cr, x, y + height);
-      cairo_arc (cr, x + radius, y + radius, radius, M_PI, M_PI * 1.5);
-      cairo_arc (cr, x + width - radius, y + radius, radius, M_PI * 1.5, 0);
-      cairo_line_to (cr, x + width, y + height);
+      height++; /* add overlap */
+      if (state_type == GTK_STATE_NORMAL)
+        cairo_arc_negative (cr, x, y + height - radius, radius, M_PI / 2.0, 0);
+      else
+        cairo_move_to (cr, x + radius, y + height);
+      cairo_arc (cr, x + radius * 2, y + radius, radius, M_PI, M_PI * 1.5);
+      cairo_arc (cr, x + width - radius * 2, y + radius, radius, M_PI * 1.5, 0);
+      if (state_type == GTK_STATE_NORMAL)
+        cairo_arc_negative (cr, x + width, y + height - radius, radius, M_PI, M_PI / 2.0);
+      else
+        cairo_line_to (cr, x + width - radius, y + height);
       break;
     case GTK_POS_LEFT:  /* right tab */
       cairo_move_to (cr, x, y);
@@ -722,6 +730,18 @@ moblin_netbook_draw_extension (GtkStyle       *style,
                           M_PI * 0.5);
       cairo_line_to (cr, x + width, y + height);
       break;
+    }
+
+  if (state_type == GTK_STATE_NORMAL)
+    {
+      pattern = cairo_pattern_create_linear (x, y, x, y +height);
+      cairo_pattern_add_color_stop_rgb (pattern, 0,
+                                        0xf9/255.0, 0xf9/255.0,0xf9/255.0);
+      cairo_pattern_add_color_stop_rgb (pattern, 1,
+                                        0xe6/255.0, 0xe6/255.0,0xe6/255.0);
+      cairo_set_source (cr, pattern);
+      cairo_fill_preserve (cr);
+      cairo_pattern_destroy (pattern);
     }
 
   moblin_netbook_set_border_color (cr, style, state_type);

@@ -37,8 +37,6 @@ style "default"
   NautilusIconContainer::prelight_icon_brightness = 0
   NautilusIconContainer::prelight_icon_brightness = 150
 
-  GtkNotebook::tab-overlap = 0
-
   xthickness = 4
   ythickness = 4
 
@@ -496,9 +494,16 @@ widget_class "*.GtkSpinButton" style "combo-box-entry-arrow"
 
 style "notebook"
 {
+  GtkNotebook::tab-overlap = 0
+  GtkNotebook::tab-curvature = 9
+  GtkNotebook::focus-line-width = 0
+  ythickness = 2
+  xthickness = 2
+
   engine "moblin-netbook-engine"
   {
     radius = 6
+    border [ACTIVE] = lighter (@grey)
   }
 }
 class "GtkNotebook" style "notebook"
