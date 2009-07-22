@@ -494,7 +494,7 @@ widget_class "*.GtkSpinButton" style "combo-box-entry-arrow"
 
 style "notebook"
 {
-  GtkNotebook::tab-overlap = 0
+  GtkNotebook::tab-overlap = 6
   GtkNotebook::tab-curvature = 9
   GtkNotebook::focus-line-width = 0
   ythickness = 2
