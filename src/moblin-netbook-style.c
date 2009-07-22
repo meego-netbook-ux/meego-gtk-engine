@@ -940,7 +940,7 @@ moblin_netbook_draw_handle (GtkStyle           *style,
 
   if (orientation == GTK_ORIENTATION_HORIZONTAL)
     {
-      radius = height / 2 - 1;
+      radius = height / 2 - 2;
 
       cairo_arc (cr, cx, cy, radius, 0, M_PI * 360);
       cairo_arc (cr, cx - radius * 3, cy, radius, 0, M_PI * 360);
@@ -948,7 +948,7 @@ moblin_netbook_draw_handle (GtkStyle           *style,
     }
   else
     {
-      radius = width / 2 - 1;
+      radius = width / 2 - 2;
 
       cairo_arc (cr, cx, cy, radius, 0, M_PI * 360);
       cairo_arc (cr, cx, cy - radius * 3, radius, 0, M_PI * 360);

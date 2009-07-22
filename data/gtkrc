@@ -64,7 +64,7 @@ style "default"
   GtkCheckButton::indicator_size = 15
   GtkCheckMenuItem::indicator_size = 15
 
-  GtkPaned::handle-size = 6
+  GtkPaned::handle-size = 8
 
   fg [NORMAL] = @fg_color
   fg [PRELIGHT] = @fg_color
@@ -185,6 +185,16 @@ style "scale"
   }
 }
 class "GtkScale" style "scale"
+
+style "paned"
+{
+  engine "moblin-netbook-engine"
+  {
+    border [NORMAL] = lighter (@grey)
+    border [PRELIGHT] = lighter (@grey)
+  }
+}
+class "GtkPaned" style "paned"
 
 style "entry"
 {
