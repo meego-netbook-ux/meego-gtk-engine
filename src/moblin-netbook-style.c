@@ -202,7 +202,7 @@ moblin_netbook_draw_box (GtkStyle     *style,
       cr = moblin_netbook_cairo_create (window, area);
 
       cairo_rectangle (cr, x, y, width, height);
-      gdk_cairo_set_source_color (cr, &style->bg[state_type]);
+      gdk_cairo_set_source_color (cr, &style->base[state_type]);
       cairo_fill (cr);
 
       cairo_destroy (cr);

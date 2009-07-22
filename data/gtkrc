@@ -250,16 +250,24 @@ class "GtkProgressBar" style "progressbar"
 
 style "scrollbar"
 {
-  fg[NORMAL] = @grey
-  bg[ACTIVE] = shade (0.9, @bg_color)
-  bg[INSENSITIVE] = @bg_color
+  # arrow colours
+  fg [NORMAL] = @grey
+  fg [INSENSITIVE] = @grey
+  fg [PRELIGHT] = @blue_d
+  fg [ACTIVE] = @blue_d
 
-  fg[PRELIGHT] = @blue_d
+  # stepper colours
+  bg [ACTIVE] = @bg_color
+  bg [INSENSITIVE] = @bg_color
+
+  # trough color
+  base [ACTIVE] = "#e5e5e5"
 
   engine "moblin-netbook-engine"
   {
     radius = 3
-    border[PRELIGHT] = @blue_d
+    border [PRELIGHT] = @blue_d
+    border [ACTIVE] = @blue_d
   }
 }
 class "GtkScrollbar" style "scrollbar"
