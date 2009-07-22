@@ -322,8 +322,12 @@ moblin_netbook_draw_box (GtkStyle     *style,
       || DETAIL ("trough-fill-level"))
     {
       gdk_cairo_set_source_color (cr, &style->base[GTK_STATE_SELECTED]);
-      moblin_netbook_rounded_rectangle (cr, x+1, y+1, width-2, height-2,
-                                        radius);
+
+      if (width > height)
+        cairo_rectangle (cr, x, y + 1, width, height - 2);
+      else
+        cairo_rectangle (cr, x + 1, y, width - 2, height);
+
       cairo_fill (cr);
       cairo_destroy (cr);
       return;
