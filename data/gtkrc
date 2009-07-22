@@ -32,7 +32,6 @@ style "default"
 
   NautilusIconContainer::selection_box_color = @blue_l
   NautilusIconContainer::dark_info_color = @blue_d
-  NautilusIconContainer::normal_icon_render_mode = "1"
   NautilusIconContainer::prelight_icon_color = "#000000"
   NautilusIconContainer::prelight_icon_brightness = 0
   NautilusIconContainer::prelight_icon_brightness = 150
