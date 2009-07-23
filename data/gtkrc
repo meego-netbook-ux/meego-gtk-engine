@@ -275,23 +275,6 @@ widget_class "*.GtkTreeView*" style "treeview"
 
 
 
-style "menubar"
-{
-  bg[NORMAL] = "#202e31"
-  fg[NORMAL] = "#ffffff"
-  text[NORMAL] = "#ffffff"
-  base[NORMAL] = "#ffffff"
-  engine "moblin-netbook-engine"
-  {
-    border[NORMAL] = "#202e31"
-    radius = 3
-  }
-}
-class "GtkMenuBar" style "menubar"
-class "GtkToolItem" style "menubar"
-widget_class "*.GtkMenuBar.*" style "menubar"
-
-
 style "menu"
 {
   GtkMenu::vertical_padding = 0
@@ -329,6 +312,46 @@ style "toolbar"
   }
 }
 class "GtkToolbar" style "toolbar"
+
+
+
+
+
+style "menubar"
+{
+  bg[NORMAL] = "#202e31"
+  fg[NORMAL] = "#ffffff"
+  GtkMenuBar::shadow_type = GTK_SHADOW_NONE
+
+  engine "moblin-netbook-engine"
+  {
+    radius = 0
+  }
+}
+class "GtkMenuBar" style "menubar"
+class "GtkToolbar" style "menubar"
+
+
+
+
+
+style "toolbar-child" = "menubar"
+{
+ engine "moblin-netbook-engine"
+ {
+ radius = 3
+ shadow = 0.0
+ }
+}
+class "GtkToolItem" style "toolbar-child"
+widget_class "*.GtkMenuBar.*" style "toolbar-child"
+widget_class "*.GtkToolbar.*" style "toolbar-child"
+
+
+
+
+
+
 
 
 
