@@ -31,8 +31,14 @@
 
 
 static int do_debug = 0;
+static void print_widget_path (GtkWidget *widget);
 
-#define DEBUG if (do_debug) printf ("%s: detail = '%s'; state = %d; x:%d; y:%d; w:%d; h:%d;\n", __FUNCTION__, detail, state_type, x, y, width, height);
+
+#define DEBUG \
+  if (do_debug == 1) \
+    printf ("%s: detail = '%s'; state = %d; x:%d; y:%d; w:%d; h:%d;\n", __FUNCTION__, detail, state_type, x, y, width, height); \
+  else if (do_debug == 2 && widget) print_widget_path (widget);
+
 #define DETAIL(foo) (detail && strcmp (foo, detail) == 0)
 
 #define LINE_WIDTH 1
@@ -44,6 +50,28 @@ void
 _moblin_netbook_style_register_type (GTypeModule *module)
 {
   moblin_netbook_style_register_type (module);
+}
+
+static void
+print_widget_path (GtkWidget *widget)
+{
+  static GtkWidget *previous = NULL;
+  gchar *path;
+
+  /* prevent printing lots of duplicates */
+  if (previous == widget)
+    return;
+  previous = widget;
+
+  g_printf ("class: %s\n", G_OBJECT_CLASS_NAME (G_OBJECT_GET_CLASS (widget)));
+
+  gtk_widget_path (widget, NULL, &path, NULL);
+  g_printf ("widget: %s\n", path);
+  g_free (path);
+
+  gtk_widget_class_path (widget, NULL, &path, NULL);
+  g_printf ("widget_class: %s\n\n", path);
+  g_free (path);
 }
 
 static cairo_t*
@@ -1080,10 +1108,13 @@ static void
 moblin_netbook_style_class_init (MoblinNetbookStyleClass *klass)
 {
   GtkStyleClass *style_class = GTK_STYLE_CLASS (klass);
+  const gchar *debug;
 
   /* Set debugging if required. We only need to do this once per instance, so
    * it is safe to do in the class-init */
-  do_debug = (getenv ("MOBLIN_NETBOOK_ENGINE_DEBUG") > 0);
+  debug = getenv ("MOBLIN_NETBOOK_ENGINE_DEBUG");
+  if (debug)
+    do_debug = atoi (debug);
 
 
   style_class->init_from_rc = moblin_netbook_init_from_rc;
