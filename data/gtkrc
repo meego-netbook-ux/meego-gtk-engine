@@ -411,7 +411,6 @@ widget_class "*<GtkToolbar>.*utton*"  style "toolbar-button"
 
 style "spinbutton" = "button"
 {
-  bg[NORMAL] =  "#E6E6E6"
   text[NORMAL] = @fg_color
   text[PRELIGHT] = "#ffffff"
   fg[NORMAL] = @grey # Arrow colour
