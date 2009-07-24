@@ -78,6 +78,8 @@ style "button"
   GtkButton::inner-border = { 0, 0, 0, 2 }
 
   bg [NORMAL] = "#ffffff"
+  bg [PRELIGHT] = "#ffffff"
+  bg [ACTIVE] = "#ffffff"
   bg [INSENSITIVE] = "#f1f1f1"
 
   GtkButton::child-displacement-x = 1
