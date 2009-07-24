@@ -1064,6 +1064,183 @@ moblin_netbook_draw_resize_grip (GtkStyle           *style,
   cairo_destroy (cr);
 }
 
+/* this function is copied from the mist gtk engine */
+static void
+moblin_netbook_draw_layout (GtkStyle        *style,
+                            GdkWindow       *window,
+                            GtkStateType     state_type,
+                            gboolean         use_text,
+                            GdkRectangle    *area,
+                            GtkWidget       *widget,
+                            const char      *detail,
+                            int              x,
+                            int              y,
+                            PangoLayout      *layout)
+{
+  GdkGC *gc;
+
+  gc = use_text ? style->text_gc[state_type] : style->fg_gc[state_type];
+
+  if (area)
+    {
+      gdk_gc_set_clip_rectangle (gc, area);
+    }
+
+  gdk_draw_layout (window, gc, x, y, layout);
+
+  if (area)
+    {
+      gdk_gc_set_clip_rectangle (gc, NULL);
+    }
+}
+
+/* this function is copied from the mist gtk engine */
+static GdkPixbuf *
+set_transparency (const GdkPixbuf *pixbuf, gdouble alpha_percent)
+{
+  GdkPixbuf *target;
+  guchar *data, *current;
+  guint x, y, rowstride, height, width;
+
+  g_return_val_if_fail (pixbuf != NULL, NULL);
+  g_return_val_if_fail (GDK_IS_PIXBUF (pixbuf), NULL);
+
+  /* Returns a copy of pixbuf with it's non-completely-transparent pixels to
+     have an alpha level "alpha_percent" of their original value. */
+
+  target = gdk_pixbuf_add_alpha (pixbuf, FALSE, 0, 0, 0);
+
+  if (alpha_percent == 1.0)
+    return target;
+  width = gdk_pixbuf_get_width (target);
+  height = gdk_pixbuf_get_height (target);
+  rowstride = gdk_pixbuf_get_rowstride (target);
+  data = gdk_pixbuf_get_pixels (target);
+
+  for (y = 0; y < height; y++)
+    {
+      for (x = 0; x < width; x++)
+        {
+          /* The "4" is the number of chars per pixel, in this case, RGBA,
+             the 3 means "skip to the alpha" */
+          current = data + (y * rowstride) + (x * 4) + 3; 
+          *(current) = (guchar) (*(current) * alpha_percent);
+        }
+    }
+
+  return target;
+}
+
+/* this function is copied from the mist gtk engine */
+static GdkPixbuf*
+scale_or_ref (GdkPixbuf *src,
+              int width,
+              int height)
+{
+  if (width == gdk_pixbuf_get_width (src) &&
+      height == gdk_pixbuf_get_height (src))
+    {
+      return g_object_ref (src);
+    }
+  else
+    {
+      return gdk_pixbuf_scale_simple (src,
+                                      width, height,
+                                      GDK_INTERP_BILINEAR);
+    }
+}
+
+/* this function is copied from the mist gtk engine */
+static GdkPixbuf *
+moblin_netbook_render_icon (GtkStyle            *style,
+                            const GtkIconSource *source,
+                            GtkTextDirection     direction,
+                            GtkStateType         state,
+                            GtkIconSize          size,
+                            GtkWidget           *widget,
+                            const char          *detail)
+{
+  int width = 1;
+  int height = 1;
+  GdkPixbuf *scaled;
+  GdkPixbuf *stated;
+  GdkPixbuf *base_pixbuf;
+  GdkScreen *screen;
+  GtkSettings *settings;
+
+  /* Oddly, style can be NULL in this function, because
+   * GtkIconSet can be used without a style and if so
+   * it uses this function.
+   */
+
+  base_pixbuf = gtk_icon_source_get_pixbuf (source);
+
+  g_return_val_if_fail (base_pixbuf != NULL, NULL);
+
+  if (widget && gtk_widget_has_screen (widget))
+    {
+      screen = gtk_widget_get_screen (widget);
+      settings = gtk_settings_get_for_screen (screen);
+    }
+  else if (style->colormap)
+    {
+      screen = gdk_colormap_get_screen (style->colormap);
+      settings = gtk_settings_get_for_screen (screen);
+    }
+  else
+    {
+      settings = gtk_settings_get_default ();
+      GTK_NOTE (MULTIHEAD,
+                g_warning ("Using the default screen for gtk_default_render_icon()"));
+    }
+
+
+  if (size != (GtkIconSize) -1
+      && !gtk_icon_size_lookup_for_settings (settings, size, &width, &height))
+    {
+      g_warning (G_STRLOC ": invalid icon size '%d'", size);
+      return NULL;
+    }
+
+  /* If the size was wildcarded, and we're allowed to scale, then scale;
+   * otherwise, leave it alone.
+   */
+  if (size != (GtkIconSize)-1 && gtk_icon_source_get_size_wildcarded (source))
+    scaled = scale_or_ref (base_pixbuf, width, height);
+  else
+    scaled = g_object_ref (base_pixbuf);
+
+  /* If the state was wildcarded, then generate a state. */
+  if (gtk_icon_source_get_state_wildcarded (source))
+    {
+      if (state == GTK_STATE_INSENSITIVE)
+        {
+          stated = set_transparency (scaled, 0.3);
+          gdk_pixbuf_saturate_and_pixelate (stated, stated,
+                                            0.1, FALSE);
+
+          g_object_unref (scaled);
+        }
+      else if (state == GTK_STATE_PRELIGHT)
+        {
+          stated = gdk_pixbuf_copy (scaled);
+
+          gdk_pixbuf_saturate_and_pixelate (scaled, stated,
+                                            1.2, FALSE);
+
+          g_object_unref (scaled);
+        }
+      else
+        {
+          stated = scaled;
+        }
+    }
+  else
+    stated = scaled;
+
+  return stated;
+}
+
 static void
 moblin_netbook_init_from_rc (GtkStyle   *style,
                              GtkRcStyle *rc_style)
@@ -1133,6 +1310,8 @@ moblin_netbook_style_class_init (MoblinNetbookStyleClass *klass)
   style_class->draw_arrow = moblin_netbook_draw_arrow;
   style_class->draw_handle = moblin_netbook_draw_handle;
   style_class->draw_resize_grip = moblin_netbook_draw_resize_grip;
+  style_class->draw_layout = moblin_netbook_draw_layout;
+  style_class->render_icon = moblin_netbook_render_icon;
 }
 
 static void
