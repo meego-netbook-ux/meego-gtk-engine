@@ -568,6 +568,8 @@ style "toolbar-combobox"
 {
 
   bg[NORMAL] = "#434343"
+  bg[PRELIGHT] = "#434343"
+  bg[ACTIVE] = "#434343"
 
   text [NORMAL] = "#ffffff"
   text [PRELIGHT] = "#ffffff"
