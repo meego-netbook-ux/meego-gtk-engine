@@ -388,6 +388,19 @@ moblin_netbook_draw_box (GtkStyle     *style,
   gdk_cairo_set_source_color (cr, &style->bg[state_type]);
   cairo_fill (cr);
 
+  /* extra hilight for "button" widgets, also used as focus rectangle since
+   * state_type is set to prelight for focused widgets (see above) */
+  if (state_type == GTK_STATE_PRELIGHT && DETAIL ("button")
+      && !(widget && GTK_IS_COMBO_BOX_ENTRY (widget->parent)))
+    {
+      cairo_set_line_width (cr, 2.0);
+      moblin_netbook_rounded_rectangle (cr, x + 2, y + 2, width - 4,
+                                        height - 4, radius - 1);
+      gdk_cairo_set_source_color (cr, &style->bg[GTK_STATE_SELECTED]);
+      cairo_stroke (cr);
+      cairo_set_line_width (cr, 1.0);
+    }
+
   if (shadow_type != GTK_SHADOW_NONE)
     {
       /* border */
@@ -858,6 +871,10 @@ moblin_netbook_draw_focus (GtkStyle     *style,
   cairo_t *cr;
   gint line_width;
   MoblinNetbookStyle *mb_style = MOBLIN_NETBOOK_STYLE (style);
+
+  /* button draws it's own focus */
+  if (DETAIL ("button"))
+      return;
 
   cr = gdk_cairo_create (window);
 
