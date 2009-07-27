@@ -140,12 +140,16 @@ style "checkbutton"
   fg [ACTIVE] = @fg_color
   bg [PRELIGHT] = "#ffffff"
 
+  text[INSENSITIVE] = @grey
+  base[INSENSITIVE] = "#f1f1f1"
+
   engine "moblin-netbook-engine"
   {
     radius = 2
     shadow = 0.0
     border[PRELIGHT] = @blue_d
     border[SELECTED] = @blue_d
+    border[INSENSITIVE] = "#d7d9d4"
   }
 
 }
