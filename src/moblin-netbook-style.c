@@ -63,8 +63,6 @@ print_widget_path (GtkWidget *widget)
     return;
   previous = widget;
 
-  g_printf ("class: %s\n", G_OBJECT_CLASS_NAME (G_OBJECT_GET_CLASS (widget)));
-
   gtk_widget_path (widget, NULL, &path, NULL);
   g_printf ("widget: %s\n", path);
   g_free (path);
