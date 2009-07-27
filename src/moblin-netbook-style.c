@@ -534,7 +534,7 @@ moblin_netbook_draw_check (GtkStyle     *style,
 
   cairo_set_line_width (cr, 1.0);
 
-  if (shadow_type == GTK_SHADOW_IN)
+  if (shadow_type == GTK_SHADOW_IN && state_type != GTK_STATE_INSENSITIVE)
     {
       state_type = GTK_STATE_SELECTED;
     }
@@ -601,7 +601,7 @@ moblin_netbook_draw_option (GtkStyle     *style,
   width--;
   height--;
 
-  if (shadow_type == GTK_SHADOW_IN)
+  if (shadow_type == GTK_SHADOW_IN && state_type != GTK_STATE_INSENSITIVE)
     {
       state_type = GTK_STATE_SELECTED;
     }
