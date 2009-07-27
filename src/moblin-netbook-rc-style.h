@@ -70,6 +70,7 @@ struct _MoblinNetbookRcStyleClass
   GtkRcStyleClass parent_class;
 };
 
+GType moblin_netbook_rc_style_get_type (void);
 void _moblin_netbook_rc_style_register_type (GTypeModule *engine);
 
 G_END_DECLS

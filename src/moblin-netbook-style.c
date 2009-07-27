@@ -64,11 +64,11 @@ print_widget_path (GtkWidget *widget)
   previous = widget;
 
   gtk_widget_path (widget, NULL, &path, NULL);
-  g_printf ("widget: %s\n", path);
+  printf ("widget: %s\n", path);
   g_free (path);
 
   gtk_widget_class_path (widget, NULL, &path, NULL);
-  g_printf ("widget_class: %s\n\n", path);
+  printf ("widget_class: %s\n\n", path);
   g_free (path);
 }
 
@@ -985,7 +985,7 @@ static void
 moblin_netbook_draw_handle (GtkStyle           *style,
                             GdkWindow          *window,
                             GtkStateType        state_type,
-                            GtkShadowType      *shadow_type,
+                            GtkShadowType       shadow_type,
                             GdkRectangle       *area,
                             GtkWidget          *widget,
                             const gchar        *detail,

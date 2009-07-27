@@ -84,6 +84,7 @@ struct _MoblinNetbookStyleClass
   GtkStyleClass parent_class;
 };
 
+GType moblin_netbook_style_get_type (void);
 void _moblin_netbook_style_register_type (GTypeModule *module);
 
 #endif /* _MOBLIN_NETBOOK_STYLE_H_ */
