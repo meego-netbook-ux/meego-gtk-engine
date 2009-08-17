@@ -326,7 +326,7 @@ moblin_netbook_draw_box (GtkStyle     *style,
   /* scrollbar slider */
   if (DETAIL ("slider"))
     {
-      if (width > height)
+      if (widget && GTK_IS_HSCROLLBAR (widget))
         {
           y += 2;
           height -= 4;
