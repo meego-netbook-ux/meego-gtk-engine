@@ -117,6 +117,11 @@ class "NautilusIconContainer" style "nautilus-icon-container"
 style "entry"
 {
 
+  GtkEntry::state-hint = 1
+
+  text [ACTIVE] = @text_color
+  base [ACTIVE] = @base_color
+
   xthickness = 3
   ythickness = 3
 
@@ -678,3 +683,4 @@ style "tooltip"
 widget_class "*.*tooltips*.*.GtkToggleButton" style "tooltip"
 widget "*.*gtk-tooltips*" style "tooltip"
 widget "*gtk-tooltip*" style "tooltip"
+
