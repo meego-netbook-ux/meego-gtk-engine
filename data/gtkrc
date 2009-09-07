@@ -9,8 +9,6 @@ gtk_menu_images = 0
 style "default"
 {
 
-  font_name = "Droid Sans 9"
-
   GtkWidget::link_color = "#febf00"
   GtkWidget::visited_link_color = "#febf00"
   GtkWidget::cursor-color    = @blue_d
