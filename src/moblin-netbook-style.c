@@ -265,6 +265,9 @@ moblin_netbook_draw_box (GtkStyle     *style,
 
       /* always draw button as shadow out to match the entry */
       shadow_type = GTK_SHADOW_OUT;
+
+      /* draw the buttons with the same state type as the entry */
+      state_type = widget->state;
     }
 
   /*** combo boxes ***/
