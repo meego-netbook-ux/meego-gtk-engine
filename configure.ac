@@ -2,6 +2,8 @@ AC_INIT([moblin-gtk-engine], [1.0.0])
 AC_CONFIG_SRCDIR([README])
 AM_CONFIG_HEADER(config.h)
 
+m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])])
+
 AM_INIT_AUTOMAKE
 
 AC_PROG_CC
