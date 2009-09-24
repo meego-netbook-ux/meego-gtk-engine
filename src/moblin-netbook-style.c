@@ -486,11 +486,14 @@ moblin_netbook_draw_shadow (GtkStyle     *style,
                                   "moblin-netbook-combo-button");
 
 
-      if (GTK_WIDGET_HAS_FOCUS (button))
-        state_type = GTK_STATE_PRELIGHT;
-      else
-        /* try and keep the button and entry in the same state */
-        gtk_widget_set_state (button, state_type);
+      if (button)
+        {
+          if (GTK_WIDGET_HAS_FOCUS (button))
+            state_type = GTK_STATE_PRELIGHT;
+          else
+            /* try and keep the button and entry in the same state */
+            gtk_widget_set_state (button, state_type);
+        }
 
 
       width += 10;
