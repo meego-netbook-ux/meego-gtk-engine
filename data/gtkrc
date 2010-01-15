@@ -415,6 +415,12 @@ style "toolbar-button"
 }
 widget_class "*<GtkToolbar>.*utton*"  style "toolbar-button"
 
+style "nautilus-pathbar-arrow-button" = "toolbar-button"
+{
+  xthickness = 2
+  ythickness = 2
+}
+widget_class "*.NautilusPathBar.GtkButton" style "nautilus-pathbar-arrow-button"
 
 
 style "spinbutton" = "button"
