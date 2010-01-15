@@ -1115,7 +1115,26 @@ moblin_netbook_draw_layout (GtkStyle        *style,
       gdk_gc_set_clip_rectangle (gc, area);
     }
 
-  gdk_draw_layout (window, gc, x, y, layout);
+  if (DETAIL ("accellabel") && state_type == GTK_STATE_NORMAL)
+    {
+      cairo_t *cr;
+
+      cr = moblin_netbook_cairo_create (window, area);
+
+      cairo_set_source_rgba (cr,
+                             style->fg[state_type].red / 65535.0,
+                             style->fg[state_type].green / 65535.0,
+                             style->fg[state_type].blue / 65535.0,
+                             0.5);
+      cairo_move_to (cr, x, y);
+      pango_cairo_show_layout (cr, layout);
+      cairo_stroke (cr);
+
+      cairo_destroy (cr);
+
+    }
+  else
+    gdk_draw_layout (window, gc, x, y, layout);
 
   if (area)
     {
