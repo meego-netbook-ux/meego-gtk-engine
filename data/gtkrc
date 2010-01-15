@@ -314,15 +314,14 @@ style "toolbar"
   GtkToolbar::internal_padding = 4
   GtkToolbar::shadow_type = GTK_SHADOW_NONE
 
+  fg[NORMAL] = "#ffffff"
   bg[NORMAL] = "#202E31"
-  text [NORMAL] = "#ffffff"
-  base [NORMAL] = "#ffffff"
   engine "moblin-netbook-engine"
   {
     radius = 0
   }
 }
-class "GtkToolbar" style "toolbar"
+widget_class "*Toolbar*" style "toolbar"
 
 
 
@@ -684,3 +683,11 @@ widget_class "*.*tooltips*.*.GtkToggleButton" style "tooltip"
 widget "*.*gtk-tooltips*" style "tooltip"
 widget "*gtk-tooltip*" style "tooltip"
 
+widget_class "*Panel*" style "toolbar"
+
+style "panel-button" = "toolbar-button"
+{
+  xthickness = 3
+  ythickness = 3
+}
+widget_class "*Panel*Button*"  style "panel-button"
