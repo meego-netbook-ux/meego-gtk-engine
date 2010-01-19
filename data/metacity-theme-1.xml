@@ -54,22 +54,22 @@
 <constant name="ButtonIPad" value="4"/>
 
 <draw_ops name="focus_outline">
-  <rectangle color="#182325"
+  <rectangle color="#65939b"
              x="0" y="0"
              width="width-1"
              height="height-1" />
-  <rectangle color="#182325"
+  <rectangle color="#65939b"
              x="1" y="1"
              width="width-3"
              height="height-3" />
 </draw_ops>
 
 <draw_ops name="title_bg">
-  <rectangle color="#182325" filled="true"
+  <rectangle color="#65939b" filled="true"
              x="0" y="0"
              width="width"
              height="height"/>
-  <rectangle color="#182325" filled="true"
+  <rectangle color="#65939b" filled="true"
              x="0" y="0"
              width="width"
              height="top_height"/> 
@@ -81,7 +81,7 @@
 </draw_ops>
 
 <draw_ops name="title_unfocused">
-  <rectangle color="#182325" filled="true"
+  <rectangle color="#65939b" filled="true"
              x="0" y="0"
              width="width"
              height="height"/>
@@ -106,7 +106,7 @@
 </draw_ops>
 
 <draw_ops name="title_text_unfocused">
-  <title color="#666666"
+  <title color="#fff"
          x="0"
          y="(((height - title_height) / 2) `max` 0)"/>
 </draw_ops>
@@ -116,24 +116,24 @@
 <!-- we only care about a close icon -->
 
 <draw_ops name="close_button_icon">
-  <line color="#bbbbbb" width="2"
+  <line color="#fff" width="2"
         x1="ButtonIPad" y1="ButtonIPad" x2="width-ButtonIPad-1" y2="height - ButtonIPad-1"/>
-  <line color="#bbbbbb" width="1"
+  <line color="#fff" width="1"
         x1="ButtonIPad" y1="ButtonIPad" x2="width-ButtonIPad" y2="height - ButtonIPad"/>
-  <line color="#bbbbbb" width="2"
+  <line color="#fff" width="2"
         x1="ButtonIPad" y1="height - ButtonIPad-1" x2="width-ButtonIPad-1" y2="ButtonIPad"/>
-  <line color="#bbbbbb" width="1"
+  <line color="#fff" width="1"
         x1="ButtonIPad" y1="height - ButtonIPad-1" x2="width-ButtonIPad" y2="ButtonIPad - 1"/>
 </draw_ops>
 
 <draw_ops name="close_button_icon_unfocused">
-  <line color="#666666" width="2"
+  <line color="#fff" width="2"
         x1="ButtonIPad" y1="ButtonIPad" x2="width-ButtonIPad-1" y2="height - ButtonIPad-1"/>
-  <line color="#666666" width="1"
+  <line color="#fff" width="1"
         x1="ButtonIPad" y1="ButtonIPad" x2="width-ButtonIPad" y2="height - ButtonIPad"/>
-  <line color="#666666" width="2"
+  <line color="#fff" width="2"
         x1="ButtonIPad" y1="height - ButtonIPad-1" x2="width-ButtonIPad-1" y2="ButtonIPad"/>
-  <line color="#666666" width="1"
+  <line color="#fff" width="1"
         x1="ButtonIPad" y1="height - ButtonIPad-1" x2="width-ButtonIPad" y2="ButtonIPad - 1"/>
 </draw_ops>
 
