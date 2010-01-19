@@ -1328,8 +1328,15 @@ moblin_netbook_draw_expander (GtkStyle         *style,
   cairo_line_to (cr, x + 10, y + 6);
   cairo_stroke (cr);
 
-  if (expander_style == 0)
+  if (expander_style != GTK_EXPANDER_EXPANDED)
     {
+      if (expander_style == GTK_EXPANDER_SEMI_COLLAPSED
+          || expander_style == GTK_EXPANDER_SEMI_EXPANDED)
+        if (state_type == GTK_STATE_PRELIGHT || state_type == GTK_STATE_ACTIVE)
+          cairo_set_source_rgba (cr, 1, 1, 1, 0.5);
+        else
+          cairo_set_source_rgba (cr, 0, 0.6, 0.8, 0.5);
+
       cairo_move_to (cr, x + 6, y + 2);
       cairo_line_to (cr, x + 6, y + 10);
       cairo_stroke (cr);
