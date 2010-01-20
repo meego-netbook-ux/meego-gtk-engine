@@ -81,11 +81,11 @@
 
 
 <draw_ops name="title_bg">
-  <rectangle color="#598d96" filled="true"
+  <rectangle color="#349dbc" filled="true"
              x="0" y="0"
              width="width"
              height="height"/>
-  <rectangle color="#598d96" filled="true"
+  <rectangle color="#349dbc" filled="true"
              x="0" y="0"
              width="width"
              height="top_height"/> 
@@ -97,7 +97,7 @@
 </draw_ops>
 
 <draw_ops name="title_unfocused">
-  <rectangle color="#598d96" filled="true"
+  <rectangle color="#349dbc" filled="true"
              x="0" y="0"
              width="width"
              height="height"/>
