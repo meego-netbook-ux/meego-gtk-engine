@@ -9,7 +9,7 @@
   <!-- Based on the Mist theme by Dave Camp, Copyright 2002 Ximian, Inc -->
 </info>
  
-<frame_geometry name="normal" rounded_top_left="true" rounded_top_right="true" rounded_bottom_left="false" rounded_bottom_right="false">
+<frame_geometry name="normal" rounded_top_left="true" rounded_top_right="true" rounded_bottom_left="true" rounded_bottom_right="true">
   <distance name="left_width" value="1"/>
   <distance name="right_width" value="1"/>
   <distance name="bottom_height" value="1"/>
@@ -81,11 +81,11 @@
 
 
 <draw_ops name="title_bg">
-  <rectangle color="#41c4eb" filled="true"
+  <rectangle color="#349dbc" filled="true"
              x="0" y="0"
              width="width"
              height="height"/>
-  <rectangle color="#41c4eb" filled="true"
+  <rectangle color="#349dbc" filled="true"
              x="0" y="0"
              width="width"
              height="top_height"/> 

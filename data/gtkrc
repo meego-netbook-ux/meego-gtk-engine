@@ -3,7 +3,7 @@
 # Authors: Thomas Wood
 #          Hylke Bons
 
-gtk_color_scheme="bg_color:#f9f9f9;fg_color:#2b2b2b;text_color:#2b2b2b;base_color:#fff;selected_bg_color:#41c4eb;selected_fg_color:#fff;grey:#8d8d8d;blue_l:#febf00;blue:#292929;blue_d:#009bce;toolbar_color:#555;menubar_color:#41c4eb"
+gtk_color_scheme="bg_color:#f9f9f9;fg_color:#2b2b2b;text_color:#2b2b2b;base_color:#fff;selected_bg_color:#41c4eb;selected_fg_color:#fff;grey:#8d8d8d;blue_l:#febf00;blue:#292929;blue_d:#009bce;toolbar_color:#555;menubar_color:#349dbc"
 
 gtk_button_images = 0
 gtk_menu_images = 0
