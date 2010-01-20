@@ -10,9 +10,9 @@
 </info>
  
 <frame_geometry name="normal" rounded_top_left="true" rounded_top_right="true" rounded_bottom_left="false" rounded_bottom_right="false">
-  <distance name="left_width" value="2"/>
-  <distance name="right_width" value="2"/>
-  <distance name="bottom_height" value="2"/>
+  <distance name="left_width" value="1"/>
+  <distance name="right_width" value="1"/>
+  <distance name="bottom_height" value="1"/>
   <distance name="left_titlebar_edge" value="10"/>
   <distance name="right_titlebar_edge" value="1"/>
   <aspect_ratio name="button" value="1"/>
@@ -54,24 +54,24 @@
 <constant name="ButtonIPad" value="4"/>
 
 <draw_ops name="focus_outline">
-  <rectangle color="#436a70"
+  <rectangle color="#06769b"
              x="0" y="0"
              width="width-1"
              height="height-1" />
 
 	<!-- top left -->
-	<line color="#436a70" x1="1" y1="3" x2="1" y2="3"/>
-	<line color="#436a70" x1="1" y1="4" x2="1" y2="4"/>
-	<line color="#436a70" x1="2" y1="2" x2="2" y2="2"/>
-	<line color="#436a70" x1="3" y1="1" x2="3" y2="1"/>
-	<line color="#436a70" x1="4" y1="1" x2="4" y2="1"/>
+	<line color="#06769b" x1="1" y1="3" x2="1" y2="3"/>
+	<line color="#06769b" x1="1" y1="4" x2="1" y2="4"/>
+	<line color="#06769b" x1="2" y1="2" x2="2" y2="2"/>
+	<line color="#06769b" x1="3" y1="1" x2="3" y2="1"/>
+	<line color="#06769b" x1="4" y1="1" x2="4" y2="1"/>
 
 	<!-- top right -->
-	<line color="#436a70" x1="width-2" y1="3" x2="width-2" y2="3"/>
-	<line color="#436a70" x1="width-2" y1="4" x2="width-2" y2="4"/>
-	<line color="#436a70" x1="width-3" y1="2" x2="width-3" y2="2"/>
-	<line color="#436a70" x1="width-4" y1="1" x2="width-4" y2="1"/>
-	<line color="#436a70" x1="width-5" y1="1" x2="width-5" y2="1"/>
+	<line color="#06769b" x1="width-2" y1="3" x2="width-2" y2="3"/>
+	<line color="#06769b" x1="width-2" y1="4" x2="width-2" y2="4"/>
+	<line color="#06769b" x1="width-3" y1="2" x2="width-3" y2="2"/>
+	<line color="#06769b" x1="width-4" y1="1" x2="width-4" y2="1"/>
+	<line color="#06769b" x1="width-5" y1="1" x2="width-5" y2="1"/>
 </draw_ops>
 
 
@@ -81,11 +81,11 @@
 
 
 <draw_ops name="title_bg">
-  <rectangle color="#0897c6" filled="true"
+  <rectangle color="#41c4eb" filled="true"
              x="0" y="0"
              width="width"
              height="height"/>
-  <rectangle color="#0897c6" filled="true"
+  <rectangle color="#41c4eb" filled="true"
              x="0" y="0"
              width="width"
              height="top_height"/> 

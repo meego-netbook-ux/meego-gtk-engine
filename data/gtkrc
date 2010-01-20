@@ -177,7 +177,7 @@ style "menuitem"
   fg[PRELIGHT] = "white"
   bg[PRELIGHT] = mix(0.8, @menubar_color, "black")
 
-  fg[INSENSITIVE] = mix(0.8, @menubar_color, "white")
+  fg[INSENSITIVE] = "#bbb"
   base[SELECTED] = @menubar_color
 
   xthickness = 5
@@ -301,7 +301,7 @@ style "menu"
   bg[NORMAL] = lighter (@bg_color)
   engine "moblin-netbook-engine"
   {
-    radius = 0
+    radius = 1
   }
 }
 class "GtkMenu" style "menu"
@@ -425,6 +425,7 @@ style "toolbar-button"
     border[ACTIVE] = mix(0.88, @toolbar_color, "white")
     border[SELECTED] = mix(0.88, @toolbar_color, "white")
     radius = 3
+    shadow = 0.0
   }
   xthickness = 5
   ythickness = 5
