@@ -54,22 +54,38 @@
 <constant name="ButtonIPad" value="4"/>
 
 <draw_ops name="focus_outline">
-  <rectangle color="#6fb0bb"
+  <rectangle color="#436a70"
              x="0" y="0"
              width="width-1"
              height="height-1" />
-  <rectangle color="#6fb0bb"
-             x="1" y="1"
-             width="width-3"
-             height="height-3" />
+
+	<!-- top left -->
+	<line color="#436a70" x1="1" y1="3" x2="1" y2="3"/>
+	<line color="#436a70" x1="1" y1="4" x2="1" y2="4"/>
+	<line color="#436a70" x1="2" y1="2" x2="2" y2="2"/>
+	<line color="#436a70" x1="3" y1="1" x2="3" y2="1"/>
+	<line color="#436a70" x1="4" y1="1" x2="4" y2="1"/>
+
+	<!-- top right -->
+	<line color="#436a70" x1="width-2" y1="3" x2="width-2" y2="3"/>
+	<line color="#436a70" x1="width-2" y1="4" x2="width-2" y2="4"/>
+	<line color="#436a70" x1="width-3" y1="2" x2="width-3" y2="2"/>
+	<line color="#436a70" x1="width-4" y1="1" x2="width-4" y2="1"/>
+	<line color="#436a70" x1="width-5" y1="1" x2="width-5" y2="1"/>
 </draw_ops>
 
+
+
+
+
+
+
 <draw_ops name="title_bg">
-  <rectangle color="#6fb0bb" filled="true"
+  <rectangle color="#598d96" filled="true"
              x="0" y="0"
              width="width"
              height="height"/>
-  <rectangle color="#6fb0bb" filled="true"
+  <rectangle color="#598d96" filled="true"
              x="0" y="0"
              width="width"
              height="top_height"/> 
@@ -81,7 +97,7 @@
 </draw_ops>
 
 <draw_ops name="title_unfocused">
-  <rectangle color="#6fb0bb" filled="true"
+  <rectangle color="#598d96" filled="true"
              x="0" y="0"
              width="width"
              height="height"/>
