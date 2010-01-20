@@ -177,7 +177,7 @@ style "menuitem"
   fg[PRELIGHT] = "white"
   bg[PRELIGHT] = mix(0.8, @menubar_color, "black")
 
-  fg[INSENSITIVE] = "#bbbbbb"
+  fg[INSENSITIVE] = mix(0.8, @menubar_color, "white")
   base[SELECTED] = @menubar_color
 
   xthickness = 5
@@ -343,7 +343,7 @@ style "menubar"
   fg[NORMAL] = "#ffffff"
   bg[PRELIGHT] = mix(0.8, @menubar_color, "black")
 	fg[PRELIGHT] = "#ffffff"
-	fg[INSENSITIVE] = mix(1.4, @menubar_color, "#fff")
+	fg[INSENSITIVE] = mix(0.8, @menubar_color, "black")
 
   GtkMenuBar::shadow_type = GTK_SHADOW_NONE
 
@@ -706,13 +706,13 @@ style "tooltip"
   text[ACTIVE]        = "#ffffff"
   text[INSENSITIVE]   = "#ffffff"
 
-  bg[NORMAL]          = @menubar_color
+  bg[NORMAL]          = @toolbar_color
   fg[NORMAL]          = "#ffffff"
 
-  bg[ACTIVE]          = @menubar_color
+  bg[ACTIVE]          = @toolbar_color
   fg[ACTIVE]          = "#ffffff"
 
-  bg[SELECTED]        = @menubar_color
+  bg[SELECTED]        = @toolbar_color
   fg[SELECTED]        = "#00ff00"
 
 }
