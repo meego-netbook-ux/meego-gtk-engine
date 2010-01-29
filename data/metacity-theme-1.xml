@@ -9,29 +9,29 @@
   <!-- Based on the Mist theme by Dave Camp, Copyright 2002 Ximian, Inc -->
 </info>
  
-<frame_geometry name="normal" rounded_top_left="true" rounded_top_right="true" rounded_bottom_left="true" rounded_bottom_right="true">
-  <distance name="left_width" value="1"/>
-  <distance name="right_width" value="1"/>
-  <distance name="bottom_height" value="1"/>
+<frame_geometry name="normal" rounded_top_left="true" rounded_top_right="true" rounded_bottom_left="false" rounded_bottom_right="false">
+  <distance name="left_width" value="0"/>
+  <distance name="right_width" value="0"/>
+  <distance name="bottom_height" value="4"/>
   <distance name="left_titlebar_edge" value="10"/>
   <distance name="right_titlebar_edge" value="1"/>
   <aspect_ratio name="button" value="1"/>
-  <distance name="title_vertical_pad" value="2"/>
+  <distance name="title_vertical_pad" value="7"/>
   <border name="title_border" left="0" right="6" top="6" bottom="6"/>
   <border name="button_border" left="6" right="6" top="6" bottom="6"/>
 </frame_geometry>
 
 <frame_geometry name="normal_maximized" parent="normal" rounded_top_left="false" rounded_top_right="false" rounded_bottom_left="false" rounded_bottom_right="false">
-	<distance name="left_width" value="0"/>
-	<distance name="right_width" value="0"/>
+	<distance name="left_width" value="1"/>
+	<distance name="right_width" value="1"/>
 	<distance name="bottom_height" value="0"/>
 	<distance name="left_titlebar_edge" value="10"/>
 	<distance name="right_titlebar_edge" value="0"/>
 </frame_geometry>
 
-<frame_geometry name="normal_small_borders" parent="normal" rounded_top_left="true" rounded_top_right="true" rounded_bottom_left="false" rounded_bottom_right="false">
-  <distance name="left_width" value="0"/>
-  <distance name="right_width" value="0"/>
+<frame_geometry name="normal_small_borders" parent="normal" rounded_top_left="true" rounded_top_right="true" rounded_bottom_left="true" rounded_bottom_right="true">
+  <distance name="left_width" value="1"/>
+  <distance name="right_width" value="1"/>
   <distance name="bottom_height" value="0"/>
   <distance name="left_titlebar_edge" value="10"/>
   <distance name="right_titlebar_edge" value="0"/>
@@ -51,27 +51,27 @@
 </frame_geometry>
 
 <!-- button inside padding -->
-<constant name="ButtonIPad" value="4"/>
+<constant name="ButtonIPad" value="7"/>
 
 <draw_ops name="focus_outline">
-  <rectangle color="#06769b"
+  <rectangle color="shade/gtk:bg[SELECTED]/0.8"
              x="0" y="0"
              width="width-1"
              height="height-1" />
 
 	<!-- top left -->
-	<line color="#06769b" x1="1" y1="3" x2="1" y2="3"/>
-	<line color="#06769b" x1="1" y1="4" x2="1" y2="4"/>
-	<line color="#06769b" x1="2" y1="2" x2="2" y2="2"/>
-	<line color="#06769b" x1="3" y1="1" x2="3" y2="1"/>
-	<line color="#06769b" x1="4" y1="1" x2="4" y2="1"/>
+	<line color="shade/gtk:bg[SELECTED]/0.8" x1="1" y1="3" x2="1" y2="3"/>
+	<line color="shade/gtk:bg[SELECTED]/0.8" x1="1" y1="4" x2="1" y2="4"/>
+	<line color="shade/gtk:bg[SELECTED]/0.8" x1="2" y1="2" x2="2" y2="2"/>
+	<line color="shade/gtk:bg[SELECTED]/0.8" x1="3" y1="1" x2="3" y2="1"/>
+	<line color="shade/gtk:bg[SELECTED]/0.8" x1="4" y1="1" x2="4" y2="1"/>
 
 	<!-- top right -->
-	<line color="#06769b" x1="width-2" y1="3" x2="width-2" y2="3"/>
-	<line color="#06769b" x1="width-2" y1="4" x2="width-2" y2="4"/>
-	<line color="#06769b" x1="width-3" y1="2" x2="width-3" y2="2"/>
-	<line color="#06769b" x1="width-4" y1="1" x2="width-4" y2="1"/>
-	<line color="#06769b" x1="width-5" y1="1" x2="width-5" y2="1"/>
+	<line color="shade/gtk:bg[SELECTED]/0.8" x1="width-2" y1="3" x2="width-2" y2="3"/>
+	<line color="shade/gtk:bg[SELECTED]/0.8" x1="width-2" y1="4" x2="width-2" y2="4"/>
+	<line color="shade/gtk:bg[SELECTED]/0.8" x1="width-3" y1="2" x2="width-3" y2="2"/>
+	<line color="shade/gtk:bg[SELECTED]/0.8" x1="width-4" y1="1" x2="width-4" y2="1"/>
+	<line color="shade/gtk:bg[SELECTED]/0.8" x1="width-5" y1="1" x2="width-5" y2="1"/>
 </draw_ops>
 
 
@@ -81,11 +81,11 @@
 
 
 <draw_ops name="title_bg">
-  <rectangle color="#349dbc" filled="true"
+  <rectangle color="gtk:bg[SELECTED]" filled="true"
              x="0" y="0"
              width="width"
              height="height"/>
-  <rectangle color="#349dbc" filled="true"
+  <rectangle color="gtk:bg[SELECTED]" filled="true"
              x="0" y="0"
              width="width"
              height="top_height"/> 
@@ -116,6 +116,9 @@
 <!-- Title Text -->
 
 <draw_ops name="title_text">
+  <title color="shade/gtk:bg[SELECTED]/0.8"
+         x="1"
+         y="(((height - title_height) / 2) `max` 0)+1"/>
   <title color="#ffffff"
          x="0"
          y="(((height - title_height) / 2) `max` 0)"/>

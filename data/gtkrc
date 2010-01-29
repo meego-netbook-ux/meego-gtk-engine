@@ -3,7 +3,7 @@
 # Authors: Thomas Wood
 #          Hylke Bons
 
-gtk_color_scheme="bg_color:#f9f9f9;fg_color:#2b2b2b;text_color:#2b2b2b;base_color:#fff;selected_bg_color:#41c4eb;selected_fg_color:#fff;grey:#8d8d8d;blue_l:#febf00;blue:#292929;blue_d:#009bce;toolbar_color:#555;menubar_color:#349dbc"
+gtk_color_scheme="bg_color:#fbfbfb;fg_color:#2b2b2b;text_color:#2b2b2b;base_color:#fff;selected_bg_color:#0897c6;selected_fg_color:#fff;grey:#8d8d8d;blue:#0897c6;toolbar_color:#f1f1f1;menubar_color:#464646"
 
 gtk_button_images = 0
 gtk_menu_images = 0
@@ -11,17 +11,17 @@ gtk_menu_images = 0
 style "default"
 {
 
-  GtkWidget::link_color = @menubar_color
-  GtkWidget::visited_link_color = @menubar_color
-  GtkWidget::cursor-color    = @menubar_color
+  GtkWidget::link_color = @blue
+  GtkWidget::visited_link_color = @blue
+  GtkWidget::cursor-color    = @blue
   GtkWidget::secondary-cursor-color = "#febf00"
   GtkWidget::focus-padding = 0
   GtkWidget::focus-line-width = 2
 
   GtkHTML::spell_error_color = @menubar_color
-  GtkHTML::link_color = @menubar_color
-  GtkHTML::alink_color = @menubar_color
-  GtkHTML::vlink_color = @menubar_color
+  GtkHTML::link_color = @blue
+  GtkHTML::alink_color = @blue
+  GtkHTML::vlink_color = @blue
 
   GtkExpander::expander-size = 16
   GtkTreeView::expander-size = 16
@@ -43,7 +43,7 @@ style "default"
   bg [PRELIGHT] = @bg_color
   bg [ACTIVE] = @bg_color
   bg [INSENSITIVE] = "#f1f1f1"
-  bg [SELECTED] = @selected_bg_color
+  bg [SELECTED] = @menubar_color
 
   text [NORMAL] = @text_color
   text [PRELIGHT] = @selected_fg_color
@@ -98,7 +98,7 @@ style "button"
     border[PRELIGHT] = @menubar_color
     border[ACTIVE] = @menubar_color
     border[INSENSITIVE] = "#d7d9d4"
-    shadow = 0.15
+
   }
 }
 widget_class "*Button*" style "button"
@@ -106,9 +106,9 @@ widget_class "*Button*" style "button"
 
 style "nautilus-icon-container"
 {
-  base[SELECTED] = @menubar_color
-  NautilusIconContainer::selection_box_color = mix(0.8, @menubar_color, "black")
-  NautilusIconContainer::dark_info_color = @menubar_color
+  base[SELECTED] = @blue
+  NautilusIconContainer::selection_box_color = @blue
+  NautilusIconContainer::dark_info_color = @blue
   NautilusIconContainer::light_info_color = "#fff"
   NautilusIconContainer::prelight_icon_color = "#000000"
   NautilusIconContainer::prelight_icon_brightness = 150
@@ -131,7 +131,6 @@ style "entry"
   engine "moblin-netbook-engine"
   {
     radius = 3
-    shadow = 0.15
   }
 
 }
@@ -142,7 +141,7 @@ style "checkbutton"
 
   GtkCheckButton::indicator_size = 15
 
-  base[SELECTED] = @menubar_color
+  base[SELECTED] = @blue
   text[SELECTED] = "white"
 
   fg [NORMAL] = @fg_color
@@ -158,7 +157,7 @@ style "checkbutton"
     radius = 2
     shadow = 0.0
     border[PRELIGHT] = @menubar_color
-    border[SELECTED] = mix(0.8, @menubar_color, "black") # Border of a selected checkbutton
+
     border[INSENSITIVE] = "#d7d9d4"
   }
 
@@ -175,13 +174,13 @@ style "menuitem"
   GtkCheckMenuItem::indicator_size = 15
 
   fg[PRELIGHT] = "white"
-  bg[PRELIGHT] = mix(0.8, @menubar_color, "black")
+  bg[PRELIGHT] = "#0897c6"
 
   fg[INSENSITIVE] = "#bbb"
-  base[SELECTED] = @menubar_color
+  base[SELECTED] = @blue
 
-  xthickness = 5
-  ythickness = 5
+  xthickness = 6
+  ythickness = 6
 
   engine "moblin-netbook-engine"
   {
@@ -198,8 +197,8 @@ style "progressbar"
   GtkProgressBar::xspacing = 0
   GtkProgressBar::yspacing = 0
 
-  xthickness = 0
-  ythickness = 0
+  xthickness = 5
+  ythickness = 5
   bg[NORMAL] = "white"
   fg[NORMAL] = "blue"
   base[NORMAL] = "orange"
@@ -287,9 +286,8 @@ widget_class "*.GtkTreeView.GtkButton*" style "treeview_headers"
 
 style "treeview"
 {
-  fg[SELECTED] = @menubar_color
-  bg[SELECTED] = @menubar_color
-  text[SELECTED] = @fg_color
+  text[SELECTED] = @selected_fg_color
+  xthickness = 10
 }
 widget_class "*.GtkTreeView*" style "treeview"
 
@@ -297,11 +295,13 @@ widget_class "*.GtkTreeView*" style "treeview"
 
 style "menu"
 {
+	bg[NORMAL] = "#fff"
   GtkMenu::vertical_padding = 0
-  bg[NORMAL] = lighter (@bg_color)
+  xthickness = 0
+  ythickness = 6
   engine "moblin-netbook-engine"
   {
-    radius = 1
+    radius = 2
   }
 }
 class "GtkMenu" style "menu"
@@ -320,12 +320,13 @@ widget_class "*Menu*.*Sepa*"  style "menu-separator"
 style "toolbar"
 {
 
-  GtkToolbar::internal_padding = 4
+  GtkToolbar::internal_padding = 2
   GtkToolbar::shadow_type = GTK_SHADOW_NONE
-  xthickness = 5
+  xthickness = 0
 
-  fg[NORMAL] = "#ffffff"
-  bg[NORMAL] = @toolbar_color
+
+  bg[NORMAL] = "#f1f1f1"
+
   engine "moblin-netbook-engine"
   {
     radius = 0
@@ -341,11 +342,14 @@ style "menubar"
 {
   bg[NORMAL] = @menubar_color
   fg[NORMAL] = "#ffffff"
-  bg[PRELIGHT] = mix(0.8, @menubar_color, "black")
+  bg[PRELIGHT] = "#0897c6"
 	fg[PRELIGHT] = "#ffffff"
 	fg[INSENSITIVE] = mix(0.8, @menubar_color, "black")
 
   GtkMenuBar::shadow_type = GTK_SHADOW_NONE
+  
+  ythickness = 5
+  xthickness = 5
 
   engine "moblin-netbook-engine"
   {
@@ -404,31 +408,31 @@ widget_class "*<GtkToolbar>.*GtkArrow*"  style "toolbar-arrow"
 style "toolbar-button"
 {
   bg[NORMAL] =  @toolbar_color
-  bg [PRELIGHT] = mix(0.88, @toolbar_color, "white")
+  bg [PRELIGHT] = "#fbfbfb"
   bg [ACTIVE] = mix(0.88, @toolbar_color, "white")
   bg [SELECTED] = mix(0.88, @toolbar_color, "white")
   base [PRELIGHT] = "orange"
   base [ACTIVE] = "yellow"
   base [SELECTED] = "green"
-  text[NORMAL] = "#ffffff"
+  text[NORMAL] = "#000"
   text[SELECTED] = "#ffffff"
   text[ACTIVE] = "#ffffff"
   text[PRELIGHT] = "#ffffff"
   fg[INSENSITIVE] = mix(0.88, @toolbar_color, "white")
-  fg[NORMAL] = "#ffffff"
-  fg[ACTIVE] = "#ffffff"
-  fg[PRELIGHT] = "#ffffff"
+  fg[NORMAL] = "#000"
+  fg[ACTIVE] = "#000"
+  fg[PRELIGHT] = "#000"
   engine "moblin-netbook-engine"
   {
-    border[NORMAL] = mix(0.88, @toolbar_color, "white")
-    border[PRELIGHT] = mix(0.88, @toolbar_color, "white")
-    border[ACTIVE] = mix(0.88, @toolbar_color, "white")
-    border[SELECTED] = mix(0.88, @toolbar_color, "white")
+    border[NORMAL] = mix(0.88, @toolbar_color, "black")
+    border[PRELIGHT] = mix(0.88, @toolbar_color, "black")
+    border[ACTIVE] = mix(0.88, @toolbar_color, "black")
+    border[SELECTED] = mix(0.88, @toolbar_color, "black")
     radius = 3
     shadow = 0.0
   }
-  xthickness = 5
-  ythickness = 5
+  xthickness = 1
+  ythickness = 1
   
 
 }
@@ -505,18 +509,22 @@ widget_class "*<GtkToolbar>.*Spin*"  style "toolbar-spinbutton"
 
 style "toolbar-togglebutton" = "toolbar-button"
 {
-  fg[NORMAL] = "#ffffff"
-  text[NORMAL] = "#ffffff"
-  bg[NORMAL] =  mix(0.88, @toolbar_color, "white")
+
+	fg[ACTIVE] = "#fff"
 
 
-  ythickness = 3
+  bg[NORMAL] =  "#fbfbfb"
+  bg[ACTIVE] =  @blue
+
+
+  ythickness = 0
 
   engine "moblin-netbook-engine"
   {
-    border[NORMAL] = mix(0.88, @toolbar_color, "white")
-    border[PRELIGHT] = mix(0.88, @toolbar_color, "white")
-    border[ACTIVE] = mix(0.88, @toolbar_color, "white")
+    border[NORMAL] = "#b3b6b7"
+    border[PRELIGHT] = mix(0.88, @toolbar_color, "black")
+    border[ACTIVE] = "#fff"
+
     radius = 3
   }
 }
@@ -609,20 +617,18 @@ widget_class "*Combo*"  style "combobox"
 style "toolbar-combobox"
 {
 
-  bg[NORMAL] = mix(0.88, @toolbar_color, "white")
-  bg[PRELIGHT] = mix(0.88, @toolbar_color, "white")
-  bg[ACTIVE] = mix(0.88, @toolbar_color, "white")
+  bg[NORMAL] = "#fbfbfb"
+  bg[PRELIGHT] = "#fbfbfb"
+  bg[ACTIVE] = "#fbfbfb"
 
-  text [NORMAL] = "#ffffff"
-  text [PRELIGHT] = "#ffffff"
-  text [ACTIVE] = "#ffffff"
-  xthickness = 8
-  ythickness = 8
+  xthickness = 5
+  ythickness = 5
   engine "moblin-netbook-engine"
   {
-    border[NORMAL] = mix(0.88, @toolbar_color, "white")
-    border[PRELIGHT] = mix(0.88, @toolbar_color, "white")
-    border[ACTIVE] = mix(0.88, @toolbar_color, "white")
+    border[NORMAL] = "#b3b6b7"
+    border[PRELIGHT] = @blue
+    border[ACTIVE] = @blue
+    border[SELECTED] = @blue
     radius = 3
   }
 }
@@ -630,13 +636,7 @@ widget_class "*<GtkToolbar>.*Combo*"  style "toolbar-combobox"
 
 
 
-style "toolbar-arrow" = "toolbar-button"
-{
-  fg[NORMAL] = "#fff"
-  fg[PRELIGHT] = "#fff"
-  fg[INSENSITIVE] = "#434343"
-}
-widget_class "*<GtkToolbar>.*GtkArrow*"  style "toolbar-arrow"
+
 
 
 
