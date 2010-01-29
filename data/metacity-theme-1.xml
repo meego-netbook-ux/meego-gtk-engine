@@ -97,11 +97,15 @@
 </draw_ops>
 
 <draw_ops name="title_unfocused">
-  <rectangle color="#0897c6" filled="true"
+  <rectangle color="gtk:bg[SELECTED]" filled="true"
              x="0" y="0"
              width="width"
              height="height"/>
-  <include name="focus_outline"/>
+  <rectangle color="gtk:bg[SELECTED]" filled="true"
+             x="0" y="0"
+             width="width"
+             height="top_height"/> 
+
 </draw_ops>
 
 <draw_ops name="title_maximised">
