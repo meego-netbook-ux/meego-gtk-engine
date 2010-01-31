@@ -47,18 +47,18 @@ style "default"
   bg [PRELIGHT] = @bg_color
   bg [ACTIVE] = @bg_color
   bg [INSENSITIVE] = "#f1f1f1"
-  bg [SELECTED] = @menubar_color
+  bg [SELECTED] = @blue
 
   text [NORMAL] = @text_color
   text [PRELIGHT] = @selected_fg_color
   text [SELECTED] = @selected_fg_color
-  text [ACTIVE] = @fg_color
+  text [ACTIVE] = @selected_fg_color
   text [INSENSITIVE] = shade (2.5, @fg_color)
 
   base [NORMAL] = @base_color
   base [PRELIGHT] = @base_color
   base [SELECTED] = @selected_bg_color
-  base [ACTIVE] = shade (0.8, @bg_color)
+  base [ACTIVE] = @selected_bg_color
   base [INSENSITIVE] = "#f1f1f1"
 
   engine "moblin-netbook-engine"
@@ -83,7 +83,6 @@ style "button"
 
   # Allow for bottom shadow in buttons
   GtkButton::inner-border = { 0, 0, 0, 0 }
-
   bg [NORMAL] = "#ffffff"
   bg [PRELIGHT] = "#ffffff"
   bg [ACTIVE] = "#ffffff"
@@ -92,15 +91,16 @@ style "button"
   GtkButton::child-displacement-y = 1
   GtkButton::displace-focus = 1
   GtkButton::inner-border = { 4, 4, 4, 4 }
+  bg [SELECTED] = shade (1.5, @blue)
 
-  xthickness = 1
-  ythickness = 1
+  xthickness = 3
+  ythickness = 3
 
   engine "moblin-netbook-engine"
   {
     radius = 3
-    border[PRELIGHT] = @menubar_color
-    border[ACTIVE] = @menubar_color
+    border[PRELIGHT] = shade (0.85, @blue)
+    border[ACTIVE] = @blue
     border[INSENSITIVE] = "#d7d9d4"
   }
 }
@@ -113,7 +113,7 @@ style "nautilus-icon-container"
   NautilusIconContainer::selection_box_color = @blue
   NautilusIconContainer::dark_info_color = @blue
   NautilusIconContainer::light_info_color = "#fff"
-  NautilusIconContainer::prelight_icon_color = "#000000"
+  NautilusIconContainer::prelight_icon_color = "#2b2b2b"
   NautilusIconContainer::prelight_icon_brightness = 150
 }
 class "NautilusIconContainer" style "nautilus-icon-container"
@@ -134,6 +134,7 @@ style "entry"
   engine "moblin-netbook-engine"
   {
     radius = 3
+    border [ACTIVE] = @blue
   }
 
 }
@@ -200,13 +201,19 @@ style "progressbar"
   GtkProgressBar::xspacing = 0
   GtkProgressBar::yspacing = 0
 
-  xthickness = 5
-  ythickness = 5
+  xthickness = 3
+  ythickness = 3
   bg[NORMAL] = "white"
   fg[NORMAL] = "blue"
   base[NORMAL] = "orange"
-  bg[PRELIGHT] = @menubar_color
+  bg[PRELIGHT] = @blue
+  engine "moblin-netbook-engine"
+  {
 
+       
+            border [PRELIGHT] = @blue
+      radius = 2
+  }
 }
 class "GtkProgressBar" style "progressbar"
 
@@ -217,12 +224,12 @@ style "scrollbar"
   GtkScrollbar::stepper_size = 28
   GtkScrollbar::arrow-scaling = 0.4
   GtkScrollbar::trough-border = 0
-  GtkScrollbar::min-slider-length = 64
+  GtkScrollbar::min-slider-length = 32
 
   fg [NORMAL] = @grey
   fg [INSENSITIVE] = @grey
-  fg [PRELIGHT] = @menubar_color
-  fg [ACTIVE] = @menubar_color
+  fg [PRELIGHT] = @blue
+  fg [ACTIVE] = @blue
 
   # stepper colours
   bg [ACTIVE] = @bg_color
@@ -234,9 +241,9 @@ style "scrollbar"
   engine "moblin-netbook-engine"
   {
     radius = 3
-    border[PRELIGHT] = @menubar_color
+    border[PRELIGHT] = @blue
     border[INSENSITIVE] = @grey
-    border[ACTIVE] = @menubar_color
+    border[ACTIVE] = @blue
   }
 }
 class "GtkScrollbar" style "scrollbar"
@@ -263,18 +270,25 @@ style "scale"
   GtkScale::slider_width = 16
   GtkWidget::focus-line-width = 0
 
+
   # handle colour
   bg[NORMAL] = "#fff"
   bg[PRELIGHT] = "#fff"
 
   #trough color
-  bg[ACTIVE] = "red"
-  bg[SELECTED] = "red"
+  bg[ACTIVE] = @blue
+  bg[SELECTED] = @blue
+  bg[INSENSITIVE] = @blue
+
+  fg [ACTIVE] = "red"
 
   engine "moblin-netbook-engine"
   {
     radius = 3
-    border[PRELIGHT] = @menubar_color
+    border[ACTIVE] = shade (0.8, @blue)
+        border[PRELIGHT] = shade (0.8, @blue)
+    border[SELECTED] = "red"
+    
   }
 }
 class "GtkScale" style "scale"
@@ -293,7 +307,6 @@ style "treeview"
   xthickness = 10
 }
 widget_class "*.GtkTreeView*" style "treeview"
-
 
 
 style "menu"
@@ -410,16 +423,16 @@ style "toolbar-button"
   bg [ACTIVE] = mix(0.88, @toolbar_color, "white")
   bg [SELECTED] = mix(0.88, @toolbar_color, "white")
   base [PRELIGHT] = "orange"
-  base [ACTIVE] = "yellow"
+
   base [SELECTED] = "green"
-  text[NORMAL] = "#000"
+  text[NORMAL] = "#2b2b2b"
   text[SELECTED] = "#ffffff"
   text[ACTIVE] = "#ffffff"
   text[PRELIGHT] = "#ffffff"
   fg[INSENSITIVE] = mix(0.88, @toolbar_color, "white")
-  fg[NORMAL] = "#000"
-  fg[ACTIVE] = "#000"
-  fg[PRELIGHT] = "#000"
+  fg[NORMAL] = "#2b2b2b"
+  fg[ACTIVE] = "#2b2b2b"
+  fg[PRELIGHT] = "#2b2b2b"
   engine "moblin-netbook-engine"
   {
     border[NORMAL] = mix(0.88, @toolbar_color, "black")
@@ -470,38 +483,38 @@ style "spinbutton" = "button"
   engine "moblin-netbook-engine"
   {
     border[NORMAL] = @grey
-    border[PRELIGHT] = @grey
-    border[ACTIVE] = @grey
+    border[PRELIGHT] = @blue
+    border[ACTIVE] = @blue
     radius = 3
   }
 }
 widget_class "*Spin*"  style "spinbutton"
 
-
-style "toolbar-spinbutton" = "toolbar-button"
+style "togglebutton" = "button"
 {
-  bg[NORMAL] =  mix(0.8, @toolbar_color, "white")
-  text[NORMAL] = "#ffffff"
-  text[PRELIGHT] = "#ffffff"
-  fg[NORMAL] = "#ffffff" # Arrow colour
-  fg[ACTIVE] = "#ffffff"
-  fg[PRELIGHT] = "#ffffff"
-  base[NORMAL] = mix(0.8, @toolbar_color, "white")
-  base[SELECTED] = @menubar_color
-  text[SELECTED] = "#ffffff"
+  fg[NORMAL] = @fg_color
+  fg[PRELIGHT] = "#fff"
+  fg[ACTIVE] = "#fff"
+  fg[SELECTED] = "#fff"
+  
+  bg[NORMAL] = @bg_color
+	bg[ACTIVE] = @blue
+	bg[PRELIGHT] = @blue
+	bg[SELECTED] = @blue
 
-  xthickness = 5
-  ythickness = 5
+
 
   engine "moblin-netbook-engine"
   {
-    border[NORMAL] = mix(0.8, @toolbar_color, "white")
-    border[PRELIGHT] = mix(0.8, @toolbar_color, "white")
-    border[ACTIVE] = mix(0.8, @toolbar_color, "white")
+    border[NORMAL] = @grey
+    border[PRELIGHT] = @blue
+    border[ACTIVE] = @blue
+    border[SELECTED] = @blue
     radius = 3
   }
 }
-widget_class "*<GtkToolbar>.*Spin*"  style "toolbar-spinbutton"
+widget_class "*Toggle*"  style "togglebutton"
+
 
 
 style "toolbar-togglebutton" = "toolbar-button"
@@ -512,7 +525,7 @@ style "toolbar-togglebutton" = "toolbar-button"
 
   bg[NORMAL] =  "#fbfbfb"
   bg[ACTIVE] =  @blue
-
+	text[NORMAL] = "#fff"
 
   ythickness = 0
 
@@ -520,7 +533,7 @@ style "toolbar-togglebutton" = "toolbar-button"
   {
     border[NORMAL] = "#b3b6b7"
     border[PRELIGHT] = mix(0.88, @toolbar_color, "black")
-    border[ACTIVE] = "#fff"
+    border[ACTIVE] = @blue
 
     radius = 3
   }
@@ -535,10 +548,11 @@ class "GtkArrow" style "arrow"
 
 style "combo-box-entry-arrow"
 {
-  fg[PRELIGHT] = shade (2.5, @fg_color)
-  fg[ACTIVE] = shade (2.5, @fg_color)
+  fg[PRELIGHT] = @blue
+  fg[ACTIVE] = @blue
+  fg[NORMAL] = @blue
 }
-widget_class "*.GtkComboBoxEntry*GtkArrow" style "combo-box-entry-arrow"
+widget_class "*.GtkComboBox*GtkArrow" style "combo-box-entry-arrow"
 
 
 
@@ -567,7 +581,7 @@ class "GtkNotebook" style "notebook"
 style "mux-banner"
 {
   base[NORMAL] = "#eeeeec"
-  text[NORMAL] = "#000000"
+  text[NORMAL] = "#2b2b2b"
 }
 class "MuxBanner" style "mux-banner"
 
