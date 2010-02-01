@@ -4,10 +4,15 @@
 #          Hylke Bons
 
 
-gtk_color_scheme = "bg_color:#fbfbfb;fg_color:#2b2b2b;text_color:#2b2b2b;base_color:#fff;selected_bg_color:#0897c6;selected_fg_color:#fff;grey:#8d8d8d;blue:#0897c6;toolbar_color:#f1f1f1;menubar_color:#464646;frame_color:#333333;inactive_frame_color:#414141;"
-
 gtk_button_images = 0
 gtk_menu_images = 0
+
+
+gtk-icon-sizes = "gtk-menu=16,16:panel-menu=24,24:panel=16,16:gtk-button=16,16:gtk-large-toolbar=24,24"
+
+gtk_color_scheme = "bg_color:#fbfbfb;fg_color:#2b2b2b;text_color:#2b2b2b;base_color:#fff;selected_bg_color:#0897c6;selected_fg_color:#fff;grey:#8d8d8d;blue:#0897c6;toolbar_color:#f1f1f1;menubar_color:#464646;frame_color:#333333;inactive_frame_color:#414141;"
+
+
 
 style "default"
 {
@@ -105,6 +110,7 @@ style "button"
   }
 }
 widget_class "*Button*" style "button"
+widget_class "*InfoBar*" style "button"
 
 # Nautilus stuff
 style "nautilus-icon-container"
@@ -397,12 +403,12 @@ widget_class "*.GtkToolbar.*" style "toolbar-child"
 # Toolbar Handleboxes
 style "toolbar-handlebox"
 {
-  bg[NORMAL] = shade(0.9, @toolbar_color)
+  bg[NORMAL] = @toolbar_color
 
   engine "moblin-netbook-engine"
   {
     radius = 0
-    border[NORMAL] = mix(0.8, @toolbar_color, "white")
+    border[NORMAL] = shade(1.5, @grey)
   }
 }
 class "GtkHandleBox" style "toolbar-handlebox"
@@ -416,34 +422,24 @@ style "toolbar-arrow"
 widget_class "*<GtkToolbar>.*GtkArrow*"  style "toolbar-arrow"
 
 
-style "toolbar-button"
+style "toolbar-button" = "button"
 {
-  bg[NORMAL] =  @toolbar_color
-  bg [PRELIGHT] = "#fbfbfb"
-  bg [ACTIVE] = mix(0.88, @toolbar_color, "white")
-  bg [SELECTED] = mix(0.88, @toolbar_color, "white")
-  base [PRELIGHT] = "orange"
-
-  base [SELECTED] = "green"
-  text[NORMAL] = "#2b2b2b"
-  text[SELECTED] = "#ffffff"
-  text[ACTIVE] = "#ffffff"
-  text[PRELIGHT] = "#ffffff"
-  fg[INSENSITIVE] = mix(0.88, @toolbar_color, "white")
-  fg[NORMAL] = "#2b2b2b"
-  fg[ACTIVE] = "#2b2b2b"
-  fg[PRELIGHT] = "#2b2b2b"
-  engine "moblin-netbook-engine"
-  {
-    border[NORMAL] = mix(0.88, @toolbar_color, "black")
-    border[PRELIGHT] = mix(0.88, @toolbar_color, "black")
-    border[ACTIVE] = mix(0.88, @toolbar_color, "black")
-    border[SELECTED] = mix(0.88, @toolbar_color, "black")
-    radius = 3
-    shadow = 0.0
-  }
+	fg [NORMAL] = @fg_color
+	fg [PRELIGHT] = @fg_color
+	fg [ACTIVE] = @fg_color
+	fg [SELECTED] = @fg_color
+	
   xthickness = 1
   ythickness = 1
+  
+  engine "moblin-netbook-engine"
+  {
+
+    border[PRELIGHT] = shade(0.85, @blue)
+    border[ACTIVE] = shade(0.85, @blue)
+    border[SELECTED] = shade(0.85, @blue)
+    radius = 3
+  }
   
 
 }
@@ -563,14 +559,14 @@ style "notebook"
 {
 
   GtkNotebook::tab-overlap = 6
-  GtkNotebook::tab-curvature = 9
+  GtkNotebook::tab-curvature = 0
   GtkNotebook::focus-line-width = 0
   ythickness = 4
-  xthickness = 7
+  xthickness = 8
 
   engine "moblin-netbook-engine"
   {
-    radius = 6
+    radius = 3
     border [ACTIVE] = lighter (@grey)
   }
 
@@ -595,34 +591,30 @@ class "MuxFrame" style "mux-frame"
 
 style "combobox" = "button"
 {
-  xthickness = 4
-  ythickness = 4
-}
-widget_class "*Combo*"  style "combobox"
-
-style "toolbar-combobox"
-{
-
-  bg[NORMAL] = "#fbfbfb"
-  bg[PRELIGHT] = "#fbfbfb"
-  bg[ACTIVE] = "#fbfbfb"
-
   xthickness = 5
   ythickness = 5
+  text [PRELIGHT] = @fg_color
+  
   engine "moblin-netbook-engine"
   {
-    border[NORMAL] = "#b3b6b7"
     border[PRELIGHT] = @blue
-    border[ACTIVE] = @blue
-    border[SELECTED] = @blue
     radius = 3
   }
 }
-widget_class "*<GtkToolbar>.*Combo*"  style "toolbar-combobox"
+widget_class "*Combo*"  style "combobox"
 
 
 
 
+
+style "nautilus_location" {
+
+	bg[NORMAL] = shade(1.5, @grey)
+	text[NORMAL] = @selected_fg_color
+
+}
+
+widget "*.*nautilus-extra-view-widget" style : highest "nautilus_location"
 
 
 
@@ -642,7 +634,7 @@ style "toolbar-separator"
 {
   engine "moblin-netbook-engine"
   {
-    border[NORMAL] = mix(0.88, @toolbar_color, "white")
+    border[NORMAL] = mix(0.2, @menubar_color, "white")
   }
 }
 widget_class "*<GtkToolbar>.*eparator*"  style "toolbar-separator"
