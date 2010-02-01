@@ -324,7 +324,7 @@ style "menu"
   ythickness = 6
   engine "moblin-netbook-engine"
   {
-    radius = 2
+    radius = 1
   }
 }
 class "GtkMenu" style "menu"
@@ -390,7 +390,7 @@ style "toolbar-child" = "menubar"
 {
   engine "moblin-netbook-engine"
   {
-    radius = 3
+    radius = 1
     shadow = 0.0
   }
 }
