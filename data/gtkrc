@@ -102,8 +102,8 @@ style "button"
   text [NORMAL] = @fg_color
   text [PRELIGHT] = @fg_color
 
-  xthickness = 3
-  ythickness = 3
+  xthickness = 4
+  ythickness = 4
 
   engine "moblin-netbook-engine"
   {
@@ -138,8 +138,8 @@ style "entry"
   text [ACTIVE] = @text_color
   base [ACTIVE] = @base_color
 
-  xthickness = 3
-  ythickness = 3
+  xthickness = 4
+  ythickness = 4
 
   engine "moblin-netbook-engine"
   {
@@ -371,8 +371,8 @@ style "menubar"
 
   GtkMenuBar::shadow_type = GTK_SHADOW_NONE
   
-  ythickness = 5
-  xthickness = 5
+  ythickness = 4
+  xthickness = 4
 
   engine "moblin-netbook-engine"
   {
@@ -474,8 +474,8 @@ style "spinbutton" = "button"
   text[SELECTED] = "#ffffff"
   base[SELECTED] = @blue
 
-  xthickness = 5
-  ythickness = 5
+  xthickness = 4
+  ythickness = 4
 
   engine "moblin-netbook-engine"
   {
@@ -592,8 +592,8 @@ class "MuxFrame" style "mux-frame"
 
 style "combobox" = "button"
 {
-  xthickness = 5
-  ythickness = 5
+  xthickness = 4
+  ythickness = 4
   text [PRELIGHT] = @fg_color
   text [NORMAL] = @fg_color
   fg [NORMAL] = @blue
@@ -663,8 +663,8 @@ class "GtkStatusbar" style "statusbar-resize"
 style "statusbar"
 {
 
-  xthickness = 3
-  ythickness = 3
+  xthickness = 4
+  ythickness = 4
 
   engine "moblin-netbook-engine"
   {
@@ -678,8 +678,8 @@ widget_class "*<GtkStatusbar>*" style "statusbar"
 
 style "tooltip"
 {
-  xthickness = 9
-  ythickness = 9
+  xthickness = 4
+  ythickness = 4
 
   text[NORMAL]        = "#fff"
   text[PRELIGHT]      = "#fff"
@@ -705,8 +705,8 @@ widget "*gtk-tooltip*" style "tooltip"
 widget_class "*Panel*" style "toolbar"
 style "panel-button" = "toolbar-button"
 {
-  xthickness = 3
-  ythickness = 3
+  xthickness = 4
+  ythickness = 4
 }
 widget_class "*Panel*Button*"  style "panel-button"
 
