@@ -548,6 +548,7 @@ style "combobox" = "button"
   xthickness = 4
   ythickness = 4
 
+
   text [PRELIGHT] = @fg_color
   text [NORMAL] = @fg_color
   fg [NORMAL] = @blue
@@ -562,6 +563,24 @@ style "combobox" = "button"
   }
 }
 widget_class "*Combo*"  style "combobox"
+
+
+
+
+style "optionbox" = "combobox"
+{
+  fg [NORMAL] = @fg_color
+  fg [PRELIGHT] = @fg_color
+
+  engine "moblin-netbook-engine"
+  {
+    border [NORMAL] = @grey
+    border [PRELIGHT] = @blue
+    border [ACTIVE] = @blue
+    radius = 3
+  }
+}
+widget_class "*Option*"  style "optionbox"
 
 
 style "nautilus_location" {
