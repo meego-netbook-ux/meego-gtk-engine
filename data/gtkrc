@@ -352,26 +352,13 @@ style "menubar"
 
   engine "moblin-netbook-engine"
   {
-    radius = 0
-  }
-}
-class "GtkMenuBar" style "menubar"
-class "GtkToolbar" style "menubar"
-
-
-style "toolbar-child" = "menubar"
-{
-	xthickness = 5
-	ythickness = 5
-  engine "moblin-netbook-engine"
-  {
     radius = 1
-    shadow = 0.0
+    border [NORMAL] = "red"
   }
 }
-class "GtkToolItem" style "toolbar-child"
-widget_class "*.GtkMenuBar.*" style "toolbar-child"
-widget_class "*.GtkToolbar.*" style "toolbar-child"
+# Strange magic, two classes needed to style everything properly
+widget_class "*.GtkMenuBar.*" style "menubar"
+class "GtkMenuBar" style "menubar"
 
 
 # Toolbar Handleboxes
@@ -505,7 +492,7 @@ widget_class "*.GtkComboBox*GtkArrow" style "combo-box-entry-arrow"
 
 style "notebook"
 {
-  GtkNotebook::tab-overlap = 7
+  GtkNotebook::tab-overlap = 0
   GtkNotebook::tab-curvature = 12
   GtkNotebook::focus-line-width = 0
   ythickness = 4
@@ -545,9 +532,8 @@ class "MuxBanner" style "mux-banner"
 
 style "combobox" = "button"
 {
-  xthickness = 4
-  ythickness = 4
-
+  xthickness = 5
+  ythickness = 5
 
   text [PRELIGHT] = @fg_color
   text [NORMAL] = @fg_color
