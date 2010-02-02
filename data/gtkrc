@@ -1,7 +1,4 @@
-# Blinn Theme
-#
-# Authors: Thomas Wood
-#          Hylke Bons
+# Moblin Netbook GTK+ theme
 
 gtk_button_images = 0
 gtk_menu_images = 0
@@ -9,7 +6,6 @@ gtk_menu_images = 0
 gtk-icon-sizes = "gtk-menu=16,16:panel-menu=24,24:panel=16,16:gtk-button=16,16:gtk-large-toolbar=24,24"
 
 gtk_color_scheme = "bg_color:#fbfbfb;fg_color:#2b2b2b;text_color:#2b2b2b;base_color:#fff;selected_bg_color:#44c5e5;selected_fg_color:#fff;grey:#8d8d8d;blue:#44c5e5;toolbar_color:#f1f1f1;menubar_color:#464646;frame_color:#333333;inactive_frame_color:#414141;"
-
 
 style "default"
 {
