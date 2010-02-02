@@ -265,20 +265,18 @@ style "scale"
 
   # handle colour
   bg [NORMAL] = "#fff"
-  bg [PRELIGHT] = "#fff"
+  bg [PRELIGHT] = @blue
 
   #trough color
   bg [ACTIVE] = @blue
   bg [SELECTED] = @blue
   bg [INSENSITIVE] = "#f1f1f1"
 
-  fg [ACTIVE] = "red"
-
   engine "moblin-netbook-engine"
   {
     radius = 3
     border [ACTIVE] = shade (0.8, @blue)
-        border [PRELIGHT] = shade (0.8, @blue)
+    border [PRELIGHT] = shade (0.8, @blue)
     border [SELECTED] = "red"
     
   }
@@ -507,15 +505,15 @@ widget_class "*.GtkComboBox*GtkArrow" style "combo-box-entry-arrow"
 
 style "notebook"
 {
-  GtkNotebook::tab-overlap = 3
+  GtkNotebook::tab-overlap = 7
   GtkNotebook::tab-curvature = 12
   GtkNotebook::focus-line-width = 0
   ythickness = 4
-  xthickness = 8
+  xthickness = 4
 
   engine "moblin-netbook-engine"
   {
-    radius = 3
+    radius = 2
     border [ACTIVE] = lighter (@grey)
   }
 }
