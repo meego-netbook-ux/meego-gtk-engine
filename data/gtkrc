@@ -116,8 +116,8 @@ style "nautilus-icon-container"
 {
   base [SELECTED] = @blue
   NautilusIconContainer::selection_box_color = @blue
-  NautilusIconContainer::dark_info_color = @blue
-  NautilusIconContainer::light_info_color = "#fff"
+  NautilusIconContainer::dark_info_color = shade (0.6, @blue)
+  NautilusIconContainer::light_info_color = shade (0.6, @blue)
   NautilusIconContainer::prelight_icon_color = "#2b2b2b"
   NautilusIconContainer::prelight_icon_brightness = 150
 }
@@ -492,7 +492,7 @@ widget_class "*.GtkComboBox*GtkArrow" style "combo-box-entry-arrow"
 
 style "notebook"
 {
-  GtkNotebook::tab-overlap = 0
+  GtkNotebook::tab-overlap = 1
   GtkNotebook::tab-curvature = 12
   GtkNotebook::focus-line-width = 0
   ythickness = 4
