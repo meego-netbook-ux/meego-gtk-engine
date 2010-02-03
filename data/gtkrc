@@ -496,7 +496,7 @@ style "notebook"
 
   engine "moblin-netbook-engine"
   {
-    radius = 2
+    radius = 3
     border [ACTIVE] = lighter (@grey)
   }
 }
@@ -684,3 +684,25 @@ style "clearlooks-menuitem-text-is-fg-color-workaround"
   text [INSENSITIVE]   = darker (@bg_color)
 }
 widget "*.gtk-combobox-popup-menu.*"   style "clearlooks-menuitem-text-is-fg-color-workaround"
+
+
+style "moblin-toolbar"
+{
+  bg[NORMAL] = "#333"
+	fg[NORMAL] = "#fff"
+	xthickness = 6
+	ythickness = 6
+}
+class "MoblinToolbar" style "moblin-toolbar"
+
+
+style "moblin-toolbar-child"
+{
+	xthickness = 6
+	ythickness = 6
+	bg [PRELIGHT] = "#666"
+	engine "moblin-netbook-engine" {
+		border [PRELIGHT] = "#666"
+	}
+}
+widget class "MoblinToolbar.*Button" style "moblin-toolbar-child"
