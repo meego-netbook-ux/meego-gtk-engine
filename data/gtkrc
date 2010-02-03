@@ -705,4 +705,4 @@ style "moblin-toolbar-child"
 		border [PRELIGHT] = "#666"
 	}
 }
-widget class "MoblinToolbar.*Button" style "moblin-toolbar-child"
+widget_class "MoblinToolbar.*Button" style "moblin-toolbar-child"
