@@ -300,7 +300,7 @@ style "menu"
 {
 	bg [NORMAL] = "#fff"
   GtkMenu::vertical_padding = 0
-  xthickness = 0
+  xthickness = 1
   ythickness = 6
   engine "moblin-netbook-engine"
   {
@@ -410,6 +410,7 @@ style "toolbar-button" = "button"
   }
 }
 widget_class "*<GtkToolbar>.*utton*"  style "toolbar-button"
+
 
 style "nautilus-pathbar-arrow-button" = "toolbar-button"
 {
@@ -706,3 +707,14 @@ style "moblin-toolbar-child"
 	}
 }
 widget_class "MoblinToolbar.*Button" style "moblin-toolbar-child"
+
+
+                style "notebook-close-button-style"
+                {
+                  GtkWidget::focus-padding = 0
+                  GtkWidget::focus-line-width = 0
+                  xthickness = 10
+                  ythickness = 10
+                  fg [NORMAL] = "red"
+                }
+                widget_class "*GtkNotebook*GtkButton" "notebook-close-button-style" 
