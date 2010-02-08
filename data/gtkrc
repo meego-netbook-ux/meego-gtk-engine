@@ -2,6 +2,7 @@
 
 gtk_button_images = 0
 gtk_menu_images = 0
+gtk-enable-mnemonics = 0
 
 gtk-icon-sizes = "gtk-menu=16,16:panel-menu=24,24:panel=16,16:gtk-button=16,16:gtk-large-toolbar=24,24"
 
@@ -707,14 +708,3 @@ style "moblin-toolbar-child"
 	}
 }
 widget_class "MoblinToolbar.*Button" style "moblin-toolbar-child"
-
-
-                style "notebook-close-button-style"
-                {
-                  GtkWidget::focus-padding = 0
-                  GtkWidget::focus-line-width = 0
-                  xthickness = 10
-                  ythickness = 10
-                  fg [NORMAL] = "red"
-                }
-                widget_class "*GtkNotebook*GtkButton" "notebook-close-button-style" 
