@@ -121,25 +121,6 @@ style "nautilus-icon-container"
 class "NautilusIconContainer" style "nautilus-icon-container"
 
 
-style "entry"
-{
-  GtkEntry::state-hint = 1
-
-  text [ACTIVE] = @text_color
-  base [ACTIVE] = @base_color
-
-  xthickness = 4
-  ythickness = 4
-
-  engine "moblin-netbook-engine"
-  {
-    radius = 3
-    border [ACTIVE] = @blue
-  }
-}
-class "GtkEntry" style "entry"
-
-
 style "checkbutton"
 {
   GtkCheckButton::indicator_size = 15
@@ -708,3 +689,23 @@ style "moblin-toolbar-child"
 	}
 }
 widget_class "MoblinToolbar.*Button" style "moblin-toolbar-child"
+
+
+style "entry"
+{
+  GtkEntry::state-hint = 1
+
+  text [ACTIVE] = @text_color
+  base [ACTIVE] = @base_color
+
+  xthickness = 4
+  ythickness = 4
+
+  engine "moblin-netbook-engine"
+  {
+    radius = 3
+    border [ACTIVE] = @blue
+  }
+}
+class "GtkEntry" style "entry"
+widget_class "*<GtkToolbar>.*GtkEntry*"  style "entry"
