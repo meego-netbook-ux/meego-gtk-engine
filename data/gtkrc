@@ -684,7 +684,9 @@ style "moblin-toolbar-child"
 	xthickness = 6
 	ythickness = 6
 	bg[NORMAL] = "#333"
-	bg [PRELIGHT] = "#666"
+	fg[NORMAL] = "#fff"
+	bg[PRELIGHT] = "#666"
+	fg[PRELIGHT] = "#fff"
 
 	engine "moblin-netbook-engine" {
 		border [NORMAL] = "#333"
