@@ -95,7 +95,7 @@ style "button"
   text [PRELIGHT] = @fg_color
 
   xthickness = 4
-  ythickness = 4
+  ythickness = 1
 
   engine "moblin-netbook-engine"
   {
