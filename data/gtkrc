@@ -115,7 +115,7 @@ style "nautilus-icon-container"
   NautilusIconContainer::selection_box_color = @blue
   NautilusIconContainer::dark_info_color = shade (0.6, @blue)
   NautilusIconContainer::light_info_color = shade (0.6, @blue)
-  NautilusIconContainer::prelight_icon_color = "#2b2b2b"
+  NautilusIconContainer::prelight_icon_color = "#ff0000"
   NautilusIconContainer::prelight_icon_brightness = 150
 }
 class "NautilusIconContainer" style "nautilus-icon-container"
@@ -711,4 +711,4 @@ style "entry"
   }
 }
 class "GtkEntry" style "entry"
-widget_class "*<GtkToolbar>.*GtkEntry*"  style "entry"
+widget_class "*GtkEntry*"  style "entry"

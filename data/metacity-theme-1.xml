@@ -139,24 +139,13 @@
 <!-- we only care about a close icon -->
 
 <draw_ops name="close_button_icon">
-  <line color="#fff" width="2"
+  <line color="#bbb" width="2"
         x1="ButtonIPad" y1="ButtonIPad" x2="width-ButtonIPad-1" y2="height - ButtonIPad-1"/>
-  <line color="#fff" width="1"
+  <line color="#bbb" width="1"
         x1="ButtonIPad" y1="ButtonIPad" x2="width-ButtonIPad" y2="height - ButtonIPad"/>
-  <line color="#fff" width="2"
+  <line color="#bbb" width="2"
         x1="ButtonIPad" y1="height - ButtonIPad-1" x2="width-ButtonIPad-1" y2="ButtonIPad"/>
-  <line color="#fff" width="1"
-        x1="ButtonIPad" y1="height - ButtonIPad-1" x2="width-ButtonIPad" y2="ButtonIPad - 1"/>
-</draw_ops>
-
-<draw_ops name="close_button_icon_unfocused">
-  <line color="#fff" width="2"
-        x1="ButtonIPad" y1="ButtonIPad" x2="width-ButtonIPad-1" y2="height - ButtonIPad-1"/>
-  <line color="#fff" width="1"
-        x1="ButtonIPad" y1="ButtonIPad" x2="width-ButtonIPad" y2="height - ButtonIPad"/>
-  <line color="#fff" width="2"
-        x1="ButtonIPad" y1="height - ButtonIPad-1" x2="width-ButtonIPad-1" y2="ButtonIPad"/>
-  <line color="#fff" width="1"
+  <line color="#bbb" width="1"
         x1="ButtonIPad" y1="height - ButtonIPad-1" x2="width-ButtonIPad" y2="ButtonIPad - 1"/>
 </draw_ops>
 
@@ -178,10 +167,10 @@
    <include name="close_button_icon_prelight"/>
 </draw_ops>
 <draw_ops name="close_button_pressed">
-  <include name="close_button_icon_unfocused"/>
+  <include name="close_button_icon"/>
 </draw_ops>
 <draw_ops name="close_button_unfocused">
-  <include name="close_button_icon_unfocused"/>
+  <include name="close_button_icon"/>
 </draw_ops>
 
 <draw_ops name="blank">
@@ -193,6 +182,7 @@
   <piece position="title" draw_ops="title_text_unfocused"/>
   <button function="close" state="normal" draw_ops="close_button_unfocused"/>
   <button function="close" state="pressed" draw_ops="close_button_pressed"/>
+  <button function="close" state="prelight" draw_ops="close_button_prelight"/>
   <button function="maximize" state="normal" draw_ops="blank"/>
   <button function="maximize" state="pressed" draw_ops="blank"/>
   <button function="minimize" state="normal" draw_ops="blank"/>
@@ -213,6 +203,7 @@
   <piece position="title" draw_ops="title_text_unfocused"/>
   <button function="close" state="normal" draw_ops="close_button_unfocused"/>
   <button function="close" state="pressed" draw_ops="close_button_pressed"/>
+  <button function="close" state="prelight" draw_ops="close_button_prelight"/>
   <button function="maximize" state="normal" draw_ops="blank"/>
   <button function="maximize" state="pressed" draw_ops="blank"/>
   <button function="minimize" state="normal" draw_ops="blank"/>
@@ -273,6 +264,6 @@
 <window type="utility" style_set="normal"/>
 <window type="border" style_set="border"/>
 
-<menu_icon function="close" state="normal" draw_ops="close_button_icon_unfocused"/>
+<menu_icon function="close" state="normal" draw_ops="close_button_icon"/>
 
 </metacity_theme>
