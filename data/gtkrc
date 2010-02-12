@@ -671,24 +671,27 @@ widget "*.gtk-combobox-popup-menu.*"   style "clearlooks-menuitem-text-is-fg-col
 
 style "moblin-toolbar"
 {
-  bg[NORMAL] = "#333"
+	bg[NORMAL] = "#333"
 	fg[NORMAL] = "#fff"
 	xthickness = 6
 	ythickness = 6
 }
-class "MoblinToolbar" style "moblin-toolbar"
+widget "*moblin-toolbar" style "moblin-toolbar"
 
 
 style "moblin-toolbar-child"
 {
 	xthickness = 6
 	ythickness = 6
+	bg[NORMAL] = "#333"
 	bg [PRELIGHT] = "#666"
+
 	engine "moblin-netbook-engine" {
+		border [NORMAL] = "#333"
 		border [PRELIGHT] = "#666"
 	}
 }
-widget_class "MoblinToolbar.*Button" style "moblin-toolbar-child"
+widget "*moblin-toolbar.*" style "moblin-toolbar-child"
 
 
 style "entry"
