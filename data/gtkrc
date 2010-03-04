@@ -632,13 +632,13 @@ widget "*.*gtk-tooltips*" style "tooltip"
 widget "*gtk-tooltip*" style "tooltip"
 
 # The GNOME Panel
-widget_class "*Panel*" style "toolbar"
+widget_class "PanelToplevel.*" style "toolbar"
 style "panel-button" = "toolbar-button"
 {
-  xthickness = 4
-  ythickness = 4
+  xthickness = 2
+  ythickness = 2
 }
-widget_class "*Panel*Button*"  style "panel-button"
+widget_class "*.PanelApplet.*Button*"  style "panel-button"
 
 
 # Work around for http://bugzilla.gnome.org/show_bug.cgi?id=382646
