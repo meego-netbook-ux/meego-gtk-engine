@@ -388,7 +388,31 @@ moblin_netbook_draw_box (GtkStyle     *style,
 
   /* fill */
   moblin_netbook_rounded_rectangle (cr, x, y, width, height, radius);
-  gdk_cairo_set_source_color (cr, &style->bg[state_type]);
+
+  if (DETAIL ("light-switch-trough"))
+    {
+      cairo_pattern_t *crp;
+
+      crp = cairo_pattern_create_linear (x, y, x, height);
+
+      /* FIXME: these colours really should not be defined here */
+
+      if (state_type == GTK_STATE_SELECTED)
+        {
+          cairo_pattern_add_color_stop_rgb (crp, 0, 0.365, 0.820, 0.953);
+          cairo_pattern_add_color_stop_rgb (crp, 1, 0.627, 0.894, 0.973);
+        }
+      else
+        {
+          cairo_pattern_add_color_stop_rgb (crp, 0, 0.937, 0.941, 0.929);
+          cairo_pattern_add_color_stop_rgb (crp, 1, 1.0, 1.0, 1.0);
+        }
+
+      cairo_set_source (cr, crp);
+    }
+  else
+    gdk_cairo_set_source_color (cr, &style->bg[state_type]);
+
   cairo_fill (cr);
 
   /* extra hilight for "button" widgets, also used as focus rectangle since
