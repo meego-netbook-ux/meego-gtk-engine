@@ -13,7 +13,7 @@
   <distance name="left_width" value="1"/>
   <distance name="right_width" value="1"/>
   <distance name="bottom_height" value="4"/>
-  <distance name="left_titlebar_edge" value="10"/>
+  <distance name="left_titlebar_edge" value="1"/>
   <distance name="right_titlebar_edge" value="1"/>
   <aspect_ratio name="button" value="1"/>
   <distance name="title_vertical_pad" value="7"/>
@@ -25,7 +25,7 @@
 	<distance name="left_width" value="1"/>
 	<distance name="right_width" value="1"/>
 	<distance name="bottom_height" value="0"/>
-	<distance name="left_titlebar_edge" value="10"/>
+	<distance name="left_titlebar_edge" value="1"/>
 	<distance name="right_titlebar_edge" value="0"/>
 </frame_geometry>
 
@@ -33,7 +33,7 @@
   <distance name="left_width" value="1"/>
   <distance name="right_width" value="1"/>
   <distance name="bottom_height" value="0"/>
-  <distance name="left_titlebar_edge" value="10"/>
+  <distance name="left_titlebar_edge" value="1"/>
   <distance name="right_titlebar_edge" value="0"/>
 </frame_geometry>
 
@@ -121,22 +121,57 @@
 
 <draw_ops name="title_text">
   <title color="#333333"
-         x="1"
+         x="10"
          y="(((height - title_height) / 2) `max` 0)+1"/>
   <title color="#ffffff"
-         x="0"
+         x="10"
          y="(((height - title_height) / 2) `max` 0)"/>
 </draw_ops>
 
 <draw_ops name="title_text_unfocused">
   <title color="#fff"
-         x="0"
+         x="10"
          y="(((height - title_height) / 2) `max` 0)"/>
 </draw_ops>
 
 <!-- Buttons -->
 
-<!-- we only care about a close icon -->
+<!-- Maximise -->
+<draw_ops name="maximize_button_icon">
+  <rectangle color="#666" filled="false" x="ButtonIPad" y="ButtonIPad" width="width-ButtonIPad*2-1" height="height-ButtonIPad*2-1"/>
+  <line color="#666" width="1" x1="ButtonIPad + 1" y1="ButtonIPad + 1" x2="width-ButtonIPad" y2="ButtonIPad + 1"/>
+</draw_ops>
+
+<draw_ops name="maximize_button_icon_prelight">
+  <rectangle color="#bbb" filled="false" x="ButtonIPad" y="ButtonIPad" width="width-ButtonIPad*2-1" height="height-ButtonIPad*2-1"/>
+  <line color="#bbb" width="1" x1="ButtonIPad + 1" y1="ButtonIPad + 1" x2="width-ButtonIPad" y2="ButtonIPad + 1"/>
+</draw_ops>
+
+<!-- Minimise -->
+<draw_ops name="minimize_button_icon">
+  <rectangle color="#666" filled="true" x="ButtonIPad" y="height - ButtonIPad - 2" width="width-ButtonIPad*2" height="2"/>
+</draw_ops>
+
+<draw_ops name="minimize_button_icon_prelight">
+  <rectangle color="#bbb" filled="true" x="ButtonIPad" y="height - ButtonIPad - 2" width="width-ButtonIPad*2" height="2"/>
+</draw_ops>
+
+<!-- Restore -->
+<draw_ops name="restore_button_icon">
+  <rectangle color="#666" filled="false" x="ButtonIPad + 2" y="ButtonIPad + 2" width="width-ButtonIPad*2-5" height="height-ButtonIPad*2-5"/>
+  <line color="#666" width="1" x1="ButtonIPad + 3" y1="ButtonIPad + 3" x2="width-ButtonIPad - 3" y2="ButtonIPad + 3"/>
+</draw_ops>
+
+<draw_ops name="restore_button_icon_prelight">
+  <rectangle color="#bbb" filled="false" x="ButtonIPad + 2" y="ButtonIPad + 2" width="width-ButtonIPad*2-5" height="height-ButtonIPad*2-5"/>
+  <line color="#bbb" width="1" x1="ButtonIPad + 3" y1="ButtonIPad + 3" x2="width-ButtonIPad - 3" y2="ButtonIPad + 3"/>
+</draw_ops>
+
+<!-- Menu Icon -->
+<draw_ops name="menu_button_icon"> 
+  <!-- <gtk_arrow state="selected" shadow="none" arrow="down" x="4" y="8" width="width - 16" height="height - 16"/> -->
+  <icon x="0" y ="0" width="width" height="height"/>
+</draw_ops>
 
 <draw_ops name="close_button_icon">
   <line color="#bbb" width="2"
@@ -183,12 +218,14 @@
   <button function="close" state="normal" draw_ops="close_button_unfocused"/>
   <button function="close" state="pressed" draw_ops="close_button_pressed"/>
   <button function="close" state="prelight" draw_ops="close_button_prelight"/>
-  <button function="maximize" state="normal" draw_ops="blank"/>
-  <button function="maximize" state="pressed" draw_ops="blank"/>
-  <button function="minimize" state="normal" draw_ops="blank"/>
-  <button function="minimize" state="pressed" draw_ops="blank"/>
-  <button function="menu" state="normal" draw_ops="blank"/>
-  <button function="menu" state="pressed" draw_ops="blank"/>
+  <button function="maximize" state="normal" draw_ops="maximize_button_icon"/>
+  <button function="maximize" state="pressed" draw_ops="maximize_button_icon"/>
+  <button function="maximize" state="prelight" draw_ops="maximize_button_icon_prelight"/>
+  <button function="minimize" state="normal" draw_ops="minimize_button_icon"/>
+  <button function="minimize" state="pressed" draw_ops="minimize_button_icon"/>
+  <button function="minimize" state="prelight" draw_ops="minimize_button_icon_prelight"/>
+  <button function="menu" state="normal" draw_ops="menu_button_icon"/>
+  <button function="menu" state="pressed" draw_ops="menu_button_icon"/>
 </frame_style>
 
 <frame_style name="focused" geometry="normal" parent="normal">
@@ -204,12 +241,14 @@
   <button function="close" state="normal" draw_ops="close_button_unfocused"/>
   <button function="close" state="pressed" draw_ops="close_button_pressed"/>
   <button function="close" state="prelight" draw_ops="close_button_prelight"/>
-  <button function="maximize" state="normal" draw_ops="blank"/>
-  <button function="maximize" state="pressed" draw_ops="blank"/>
-  <button function="minimize" state="normal" draw_ops="blank"/>
-  <button function="minimize" state="pressed" draw_ops="blank"/>
-  <button function="menu" state="normal" draw_ops="blank"/>
-  <button function="menu" state="pressed" draw_ops="blank"/>
+  <button function="maximize" state="normal" draw_ops="restore_button_icon"/>
+  <button function="maximize" state="pressed" draw_ops="restore_button_icon"/>
+  <button function="maximize" state="prelight" draw_ops="restore_button_icon_prelight"/>
+  <button function="minimize" state="normal" draw_ops="minimize_button_icon"/>
+  <button function="minimize" state="pressed" draw_ops="minimize_button_icon"/>
+  <button function="minimize" state="prelight" draw_ops="minimize_button_icon_prelight"/>
+  <button function="menu" state="normal" draw_ops="menu_button_icon"/>
+  <button function="menu" state="pressed" draw_ops="menu_button_icon"/>
 </frame_style>
 
 <frame_style name="focused_maximized" geometry="normal_maximized" parent="normal_maximized">
