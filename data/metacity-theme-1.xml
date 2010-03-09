@@ -17,7 +17,7 @@
   <distance name="right_titlebar_edge" value="1"/>
   <aspect_ratio name="button" value="1"/>
   <distance name="title_vertical_pad" value="7"/>
-  <border name="title_border" left="0" right="6" top="6" bottom="6"/>
+  <border name="title_border" left="10" right="6" top="6" bottom="6"/>
   <border name="button_border" left="6" right="6" top="6" bottom="6"/>
 </frame_geometry>
 
@@ -120,17 +120,14 @@
 <!-- Title Text -->
 
 <draw_ops name="title_text">
-  <title color="#333333"
-         x="10"
-         y="(((height - title_height) / 2) `max` 0)+1"/>
   <title color="#ffffff"
-         x="10"
+         x="0"
          y="(((height - title_height) / 2) `max` 0)"/>
 </draw_ops>
 
 <draw_ops name="title_text_unfocused">
   <title color="#fff"
-         x="10"
+         x="0"
          y="(((height - title_height) / 2) `max` 0)"/>
 </draw_ops>
 
