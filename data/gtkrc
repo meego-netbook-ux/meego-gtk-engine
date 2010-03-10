@@ -713,7 +713,15 @@ style "moblin-toolbar-button"
 	}
 }
 widget "*moblin-toolbar.*GtkButton" style "moblin-toolbar-button"
+widget "*moblin-toolbar.*button" style "moblin-toolbar-button"
 
+style "moblin-close-button"
+{
+  xthickness = 0
+  ythickness = 0
+  GtkButton::inner-border = { 0, 0, 0, 0 }
+}
+widget "*moblin-toolbar.*.moblin-close-button" style "moblin-close-button"
 
 style "entry"
 {
