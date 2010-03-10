@@ -1332,7 +1332,8 @@ moblin_netbook_draw_expander (GtkStyle         *style,
   y -= 6;
 
 
-  cairo_set_source_rgba (cr, 0.6, 0.6, 0.6, 0.6);
+  cairo_set_source_rgb (cr, 0.6, 0.6, 0.6);
+  cairo_set_line_width (cr, 1.0);
   moblin_netbook_rounded_rectangle (cr, x, y, 12, 12, 2 );
   cairo_stroke_preserve (cr);
 
@@ -1348,6 +1349,7 @@ moblin_netbook_draw_expander (GtkStyle         *style,
   else
     cairo_set_source_rgba (cr, 0, 0.6, 0.8, 1);
 
+  cairo_set_line_width (cr, 2.0);
   cairo_move_to (cr, x + 2, y + 6);
   cairo_line_to (cr, x + 10, y + 6);
   cairo_stroke (cr);
