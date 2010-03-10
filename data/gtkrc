@@ -695,6 +695,25 @@ style "moblin-toolbar-child"
 }
 widget "*moblin-toolbar.*" style "moblin-toolbar-child"
 
+style "moblin-toolbar-button"
+{
+	xthickness = 6
+	ythickness = 6
+	bg[NORMAL] = "#666"
+	fg[NORMAL] = "#fff"
+	bg[PRELIGHT] = "#777"
+	fg[PRELIGHT] = "#fff"
+	bg[SELECTED] = "#777"
+
+	engine "moblin-netbook-engine"
+	{
+		border [NORMAL] = "#777"
+		border [PRELIGHT] = "#888"
+		radius = 3
+	}
+}
+widget "*moblin-toolbar.*GtkButton" style "moblin-toolbar-button"
+
 
 style "entry"
 {
