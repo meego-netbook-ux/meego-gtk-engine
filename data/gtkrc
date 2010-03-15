@@ -720,6 +720,16 @@ style "moblin-close-button"
   xthickness = 0
   ythickness = 0
   GtkButton::inner-border = { 0, 0, 0, 0 }
+
+  bg[NORMAL] = "#333"
+  fg[NORMAL] = "#fff"
+
+  engine "moblin-netbook-engine"
+  {
+    border[NORMAL] = "#333"
+    radius = 3
+  }
+
 }
 widget "*moblin-toolbar.*.moblin-close-button" style "moblin-close-button"
 
