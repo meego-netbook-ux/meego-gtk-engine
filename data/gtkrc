@@ -751,3 +751,11 @@ style "entry"
 }
 class "GtkEntry" style "entry"
 widget_class "*GtkEntry*"  style "entry"
+
+# style to make the date picker in Evolution appointement window the same
+# height as the other items in the row
+style "EDateEditEntry"
+{
+  ythickness = 10 
+}
+widget_class "*.EDateEdit.GtkEntry" style "EDateEditEntry"
