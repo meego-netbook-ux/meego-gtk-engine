@@ -732,6 +732,7 @@ style "moblin-close-button"
 
 }
 widget "*moblin-toolbar.*.moblin-close-button" style "moblin-close-button"
+widget "*moblin-toolbar.*.moblin-settings-button" style "moblin-close-button"
 
 style "entry"
 {
