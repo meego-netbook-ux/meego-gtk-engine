@@ -16,13 +16,19 @@ libmoblin_netbook_engine_la_SOURCES =   \
 libmoblin_netbook_engine_la_LDFLAGS = -module -avoid-version -no-undefined -Werror
 libmoblin_netbook_engine_la_LIBADD = $(GTK_LIBS)
 
-themedir = $(datadir)/themes/Moblin-Netbook
+themedir = $(datadir)/themes/Netbook
 
-gtkthemedir = $(themedir)/gtk-2.0
-dist_gtktheme_DATA = data/gtkrc
+install-data-local:
+	@$(NORMAL_INSTALL)
+	$(MKDIR_P) $(DESTDIR)$(themedir)/gtk-2.0/Assets
+	$(MKDIR_P) $(DESTDIR)$(themedir)/metacity-1
+	$(INSTALL_DATA) $(top_srcdir)/data/Netbook/gtk-2.0/Assets/*.png $(DESTDIR)$(themedir)/gtk-2.0/Assets
+	$(INSTALL_DATA) $(top_srcdir)/data/Netbook/gtk-2.0/gtkrc $(DESTDIR)$(themedir)/gtk-2.0
+	$(INSTALL_DATA) $(top_srcdir)/data/Netbook/metacity-1/* $(DESTDIR)$(themedir)/metacity-1
+	$(INSTALL_DATA) $(top_srcdir)/data/Netbook/index.theme $(DESTDIR)$(themedir)/index.theme
 
-metacitythemedir = $(themedir)/metacity-1
-dist_metacitytheme_DATA = data/metacity-theme-1.xml
+uninstall-local:
+	@$(NORMAL_UNINSTALL)
+	-rm -rf $(DESTDIR)$(themedir)
 
-indexthemedir = $(themedir)/
-dist_indextheme_DATA = data/index.theme
+EXTRA_DIST=data/Netbook
