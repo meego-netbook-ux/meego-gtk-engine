@@ -6,7 +6,7 @@ gtk-auto-mnemonics = 1
 
 gtk-icon-sizes = "gtk-menu=16,16:panel-menu=24,24:panel=16,16:gtk-button=16,16:gtk-large-toolbar=24,24"
 
-gtk_color_scheme = "bg_color:#eeecec;fg_color:#556168;text_color:#556168;base_color:#fff;selected_bg_color:#44c5e5;selected_fg_color:#fff;grey:#8d8d8d;green:#a2cb3d;toolbar_color:#dadcd9;menubar_color:#dadcd9;frame_color:#333333;inactive_frame_color:#414141;"
+gtk_color_scheme = "bg_color:#eeecec;fg_color:#556168;text_color:#556168;base_color:#fff;selected_bg_color:#a2cb3d;selected_fg_color:#fff;grey:#8d8d8d;green:#a2cb3d;toolbar_color:#dadcd9;menubar_color:#dadcd9;frame_color:#333333;inactive_frame_color:#414141;"
 
 style "default"
 {
@@ -24,12 +24,12 @@ style "default"
   GtkHTML::spell_error_color = @green  
 
   GtkWidget::focus-padding = 0
-  GtkWidget::focus-line-width = 2
+  GtkWidget::focus-line-width = 0
 
   GtkExpander::expander-size = 16
   GtkTreeView::expander-size = 16
 
-  GtkTextView::error-underline-color = "#febf00"
+  GtkTextView::error-underline-color = @green
 
   xthickness = 4
   ythickness = 3
@@ -428,7 +428,7 @@ style "scrollbar" {
 				state = NORMAL
             recolorable = TRUE # what does that mean? it's not implemented!
             file = "Assets/scroll-hhandle.png"
-            border = { 5, 5, 15, 22 } # = {Left, Right, Top, Bottom} 
+            border = { 15, 22, 5, 5 } # = {Left, Right, Top, Bottom} 
             stretch = TRUE # this stretches the image
         }
         image {
@@ -437,7 +437,7 @@ style "scrollbar" {
             orientation = HORIZONTAL
             recolorable = TRUE # what does that mean? it's not implemented!
             file = "Assets/scroll-hhandle-hover.png"
-            border = { 5, 5, 15, 22 } # = {Left, Right, Top, Bottom} 
+            border = { 15, 22, 5, 5 } # = {Left, Right, Top, Bottom} 
             stretch = TRUE # this stretches the image
         }
 
@@ -874,7 +874,7 @@ style "menuitem"
   GtkCheckMenuItem::indicator_size = 15
   GtkMenuItem::arrow-scaling = 0.4
   fg [PRELIGHT] = "white"
-  bg [PRELIGHT] = "#dadcd9"
+  bg [PRELIGHT] = @green
 	fg [NORMAL] = @text_color
   fg [INSENSITIVE] = "#bbb"
   base [SELECTED] = @green
@@ -963,7 +963,7 @@ style "toolbar"
   GtkToolbar::shadow_type = GTK_SHADOW_NONE
   xthickness = 0
 
-  bg [NORMAL] = "#dadcd9"
+
 
   engine "pixmap" 
     {
@@ -1042,7 +1042,6 @@ style "toolbar-button" = "button"
 
 xthickness = 7
 ythickness = 7
-  
 
 }
 widget_class "*<GtkToolbar>.*utton*"  style "toolbar-button"
@@ -1209,34 +1208,6 @@ style "combobox" = "button"
       stretch			= TRUE
     }
 
-    image
-    {
-      function			= TAB
-      recolorable		= TRUE
-      state				= NORMAL
-      overlay_file		= "Assets/combobox-marker.png"
-      overlay_border	= { 0, 0, 0, 0 }
-      overlay_stretch	= FALSE
-    }
-  image
-    {
-      function			= TAB
-      recolorable		= TRUE
-      state				= PRELIGHT
-      overlay_file		= "Assets/combobox-marker.png"
-      overlay_border	= { 0, 0, 0, 0 }
-      overlay_stretch	= FALSE
-    }
-
-  image
-    {
-      function			= TAB
-      recolorable		= TRUE
-      state				= INSENSITIVE
-      overlay_file		= "Assets/combobox-marker-disabled.png"
-      overlay_border	= { 0, 0, 0, 0 }
-      overlay_stretch	= FALSE
-    }
   }
   
 }
@@ -1283,7 +1254,7 @@ style "toolbar-separator"
 {
   engine "moblin-netbook-engine"
   {
-    border [NORMAL] = mix(0.2, @menubar_color, "white")
+    border [NORMAL] = "#DADCD9"
   }
 }
 widget_class "*<GtkToolbar>.*eparator*"  style "toolbar-separator"
@@ -1320,15 +1291,8 @@ style "tooltip"
   xthickness = 9
   ythickness = 7
 
-
   bg [NORMAL]          = @green
-
-
-  bg [ACTIVE]          = @menubar_color
-  fg [ACTIVE]          = "#000"
-
-  bg [SELECTED]        = @menubar_color
-  fg [SELECTED]        = "red"
+  fg [NORMAL]          = "#fff"
 
   engine "moblin-netbook-engine"
   {
@@ -1343,8 +1307,8 @@ widget "*gtk-tooltip*" style "tooltip"
 widget_class "PanelToplevel.*" style "toolbar"
 style "panel-button" = "toolbar-button"
 {
-  xthickness = 2
-  ythickness = 2
+  xthickness = 7
+  ythickness = 7
 }
 widget_class "*.PanelApplet.*Button*"  style "panel-button"
 
@@ -1380,7 +1344,7 @@ widget "*.gtk-combobox-popup-menu.*"   style "clearlooks-menuitem-text-is-fg-col
 
 
 
-
+# Special Toolbars
 
 style "moblin-toolbar"
 {
@@ -1392,22 +1356,7 @@ style "moblin-toolbar"
 widget "*MeeGoToolbar" style "moblin-toolbar"
 widget "*moblin-toolbar" style "moblin-toolbar"
 
-style "moblin-toolbar-child"
-{
-	xthickness = 6
-	ythickness = 6
-	bg[NORMAL] = "#333"
-	fg[NORMAL] = "#fff"
-	bg[PRELIGHT] = "#666"
-	fg[PRELIGHT] = "#fff"
 
-	engine "moblin-netbook-engine" {
-		border [NORMAL] = "#333"
-		border [PRELIGHT] = "#666"
-	}
-}
-widget "*MeeGoToolbar.*" style "moblin-toolbar-child"
-widget "*moblin-toolbar.*" style "moblin-toolbar-child"
 
 style "moblin-toolbar-button"
 {
@@ -1428,13 +1377,16 @@ style "moblin-toolbar-button"
 }
 widget_class "*moblin-toolbar.*GtkButton" style "moblin-toolbar-button"
 widget_class "*moblin-toolbar.*button" style "moblin-toolbar-button"
+widget_class "*moblin-toolbar.*ToolItem" style "moblin-toolbar-button"
 widget_class "*MeeGoToolbar.*GtkButton" style "moblin-toolbar-button"
 widget_class "*MeeGoToolbar.*button" style "moblin-toolbar-button"
+widget_class "*MeeGoToolbar.*ToolItem" style "moblin-toolbar-button"
+
 
 style "moblin-close-button"
 {
-  xthickness = 0
-  ythickness = 0
+  xthickness = 3
+  ythickness = 3
   GtkButton::inner-border = { 0, 0, 0, 0 }
 
 	engine "moblin-netbook-engine"
@@ -1447,17 +1399,9 @@ style "moblin-close-button"
 widget "*moblin-toolbar.*.moblin-close-button" style "moblin-close-button"
 widget "*MeeGoToolbar.*.MeeGoCloseButton" style "moblin-close-button"
 
-style "moblin-settings-button"
+style "moblin-settings-button" = "button"
 {
-  xthickness = 0
-  ythickness = 0
-  GtkButton::inner-border = { 0, 0, 0, 0 }
-	engine "moblin-netbook-engine"
-	{
-		border [NORMAL] = "#777"
-		border [PRELIGHT] = "#888"
-		radius = 3
-	}
+
 }
 widget "*moblin-toolbar.*.moblin-settings-button" style "moblin-settings-button"
 widget "*MeeGoToolbar.*.MeeGoSettingsButton" style "moblin-settings-button"
