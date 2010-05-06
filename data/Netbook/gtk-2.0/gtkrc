@@ -6,7 +6,7 @@ gtk-auto-mnemonics = 1
 
 gtk-icon-sizes = "gtk-menu=16,16:panel-menu=24,24:panel=16,16:gtk-button=16,16:gtk-large-toolbar=24,24"
 
-gtk_color_scheme = "bg_color:#eeecec;fg_color:#556168;text_color:#556168;base_color:#fff;selected_bg_color:#a2cb3d;selected_fg_color:#fff;grey:#8d8d8d;green:#a2cb3d;toolbar_color:#dadcd9;menubar_color:#dadcd9;frame_color:#333333;inactive_frame_color:#414141;"
+gtk_color_scheme = "bg_color:#eeecec;fg_color:#556168;text_color:#556168;base_color:#fff;selected_bg_color:#a2cb3d;selected_fg_color:#fff;grey:#8d8d8d;green:#a2cb3d;toolbar_color:#dadcd9;menubar_color:#dadcd9;frame_color:#dadcd9;inactive_frame_color:#dadcd9;"
 
 style "default"
 {
@@ -25,6 +25,7 @@ style "default"
 
   GtkWidget::focus-padding = 0
   GtkWidget::focus-line-width = 0
+  GtkWidget::shadow-type = GTK_SHADOW_NONE
 
   GtkExpander::expander-size = 16
   GtkTreeView::expander-size = 16
@@ -961,8 +962,8 @@ style "toolbar"
 {
   GtkToolbar::internal_padding = 2
   GtkToolbar::shadow_type = GTK_SHADOW_NONE
-  xthickness = 0
-
+  xthickness = 3
+  ythickness = 3
 
 
   engine "pixmap" 
@@ -1008,7 +1009,6 @@ class "GtkMenuBar" style "menubar"
 style "toolbar-handlebox"
 {
   bg [NORMAL] = @toolbar_color
-
   engine "moblin-netbook-engine"
   {
     radius = 0
@@ -1040,8 +1040,8 @@ widget_class "GtkInfoBar"  style "infobar"
 style "toolbar-button" = "button"
 {
 
-xthickness = 7
-ythickness = 7
+xthickness = 5
+ythickness = 5
 
 }
 widget_class "*<GtkToolbar>.*utton*"  style "toolbar-button"
@@ -1167,6 +1167,7 @@ class "MuxBanner" style "mux-banner"
 style "combobox" = "button"
 {
 	xthickness = 10
+	GtkComboBox::arrow-size = 0
 
   engine "pixmap"
   {
@@ -1175,8 +1176,8 @@ style "combobox" = "button"
       function			= BOX
       recolorable		= TRUE
       state				= PRELIGHT
-      file				= "Assets/button-hover.png"
-      border			= { 5, 5, 5, 5}
+      file				= "Assets/combobox-hover.png"
+      border			= { 5, 28, 5, 5}
       stretch			= TRUE
     }
     image
@@ -1184,8 +1185,8 @@ style "combobox" = "button"
       function			= BOX
       recolorable		= TRUE
       state				= NORMAL
-      file				= "Assets/button.png"
-      border			= { 5, 5, 5, 5}
+      file				= "Assets/combobox.png"
+      border			= { 5, 28, 5, 5}
       stretch			= TRUE
     }
 
@@ -1195,7 +1196,7 @@ style "combobox" = "button"
       recolorable		= TRUE
       state				= ACTIVE
       file				= "Assets/button-active.png"
-      border			= { 5, 5, 5, 5}
+      border			= { 5, 28, 5, 5}
       stretch			= TRUE
     }
  image
@@ -1203,8 +1204,8 @@ style "combobox" = "button"
       function			= BOX
       recolorable		= TRUE
       state				= INSENSITIVE
-      file				= "Assets/button-disabled.png"
-      border			= { 5, 5, 5, 5}
+      file				= "Assets/combobox-disabled.png"
+      border			= { 5, 28, 5, 5}
       stretch			= TRUE
     }
 
@@ -1212,6 +1213,8 @@ style "combobox" = "button"
   
 }
 widget_class "*Combo*"  style "combobox"
+
+
 
 
 
@@ -1346,12 +1349,14 @@ widget "*.gtk-combobox-popup-menu.*"   style "clearlooks-menuitem-text-is-fg-col
 
 # Special Toolbars
 
-style "moblin-toolbar"
+style "moblin-toolbar" = "toolbar"
 {
-	bg[NORMAL] = "#333"
-	fg[NORMAL] = "#fff"
-	xthickness = 6
-	ythickness = 6
+
+# add background
+  bg_pixmap [NORMAL] = "Assets/toolbar.png"
+  ythickness = 10
+  GtkToolbar::internal_padding = 10
+
 }
 widget "*MeeGoToolbar" style "moblin-toolbar"
 widget "*moblin-toolbar" style "moblin-toolbar"
@@ -1360,24 +1365,13 @@ widget "*moblin-toolbar" style "moblin-toolbar"
 
 style "moblin-toolbar-button"
 {
-	xthickness = 6
-	ythickness = 6
-	bg[NORMAL] = "#666"
-	fg[NORMAL] = "#fff"
-	bg[PRELIGHT] = "#777"
-	fg[PRELIGHT] = "#fff"
-	bg[SELECTED] = "#777"
+	xthickness = 5
+	ythickness = 5
 
-	engine "moblin-netbook-engine"
-	{
-		border [NORMAL] = "#666"
-		border [PRELIGHT] = "#777"
-		radius = 3
-	}
 }
-widget_class "*moblin-toolbar.*GtkButton" style "moblin-toolbar-button"
-widget_class "*moblin-toolbar.*button" style "moblin-toolbar-button"
-widget_class "*moblin-toolbar.*ToolItem" style "moblin-toolbar-button"
+widget_class "*moblin-toolbar.*GtkButton*" style "moblin-toolbar-button"
+widget_class "*moblin-toolbar.*button*" style "moblin-toolbar-button"
+widget_class "*moblin-toolbar.*ToolItem*" style "moblin-toolbar-button"
 widget_class "*MeeGoToolbar.*GtkButton" style "moblin-toolbar-button"
 widget_class "*MeeGoToolbar.*button" style "moblin-toolbar-button"
 widget_class "*MeeGoToolbar.*ToolItem" style "moblin-toolbar-button"
@@ -1385,16 +1379,7 @@ widget_class "*MeeGoToolbar.*ToolItem" style "moblin-toolbar-button"
 
 style "moblin-close-button"
 {
-  xthickness = 3
-  ythickness = 3
-  GtkButton::inner-border = { 0, 0, 0, 0 }
-
-	engine "moblin-netbook-engine"
-	{
-		border [NORMAL] = "#666"
-		border [PRELIGHT] = "#777"
-		radius = 3
-	}
+ 
 }
 widget "*moblin-toolbar.*.moblin-close-button" style "moblin-close-button"
 widget "*MeeGoToolbar.*.MeeGoCloseButton" style "moblin-close-button"
@@ -1406,20 +1391,6 @@ style "moblin-settings-button" = "button"
 widget "*moblin-toolbar.*.moblin-settings-button" style "moblin-settings-button"
 widget "*MeeGoToolbar.*.MeeGoSettingsButton" style "moblin-settings-button"
 
-style "moblin-close-button"
-{
-  bg[NORMAL] = "#333"
-  fg[NORMAL] = "#fff"
-
-  engine "moblin-netbook-engine"
-  {
-    border[NORMAL] = "#333"
-    radius = 3
-  }
-
-}
-widget "*moblin-toolbar.*.moblin-close-button" style "moblin-close-button"
-widget "*moblin-toolbar.*.moblin-settings-button" style "moblin-close-button"
 
 
 
