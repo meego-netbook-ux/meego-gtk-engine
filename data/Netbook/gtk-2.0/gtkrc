@@ -1098,7 +1098,9 @@ widget_class "*Toggle*"  style "togglebutton"
 
 style "arrow"
 {
-  fg [NORMAL] = @green
+  fg [NORMAL] = "#fff"
+  xthickness = 0
+  ythickness = 0
 }
 class "GtkArrow" style "arrow"
 
