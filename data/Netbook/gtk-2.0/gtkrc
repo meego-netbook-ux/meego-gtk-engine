@@ -6,7 +6,8 @@ gtk-auto-mnemonics = 1
 
 gtk-icon-sizes = "gtk-menu=16,16:panel-menu=24,24:panel=16,16:gtk-button=16,16:gtk-large-toolbar=24,24"
 
-gtk_color_scheme = "bg_color:#eeecec;fg_color:#556168;text_color:#556168;base_color:#fff;selected_bg_color:#a2cb3d;selected_fg_color:#fff;grey:#8d8d8d;green:#a2cb3d;toolbar_color:#dadcd9;menubar_color:#dadcd9;frame_color:#dadcd9;inactive_frame_color:#dadcd9;"
+gtk_color_scheme = "bg_color:#eeecec;fg_color:#556168;text_color:#556168;base_color:#fff;selected_bg_color:#a2cb3d;selected_fg_color:#fff;grey:#8d8d8d;green:#a2cb3d;toolbar_color:#adb2ac;menubar_color:#dadcd9;frame_color:#dadcd9;inactive_frame_color:#dadcd9;"
+
 
 style "default"
 {
@@ -194,7 +195,7 @@ style "sliderh"
   }
 }
 
-widget_class "*GtkHScale*" style "sliderh"
+class "GtkHScale" style "sliderh"
 
 
 
@@ -264,8 +265,7 @@ style "sliderv"
   }
 }
 
-widget_class "*GtkVScale*" style "sliderv"
-
+class "GtkVScale" style "sliderv"
 
 
 
@@ -965,6 +965,7 @@ style "toolbar"
   xthickness = 3
   ythickness = 3
 
+  bg[NORMAL] = @toolbar_color
 
   engine "pixmap" 
     {
@@ -1099,6 +1100,8 @@ widget_class "*Toggle*"  style "togglebutton"
 style "arrow"
 {
   fg [NORMAL] = @green
+  xthickness = 0
+  ythickness = 0
 }
 class "GtkArrow" style "arrow"
 
