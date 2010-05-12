@@ -16,7 +16,7 @@
 		<distance name="right_titlebar_edge" value="4"/>
 		<distance name="button_width" value="36"/>
 		<distance name="button_height" value="34"/>
-		<distance name="title_vertical_pad" value="22"/>
+		<distance name="title_vertical_pad" value="20"/>
 		<border name="title_border" left="0" right="0" top="1" bottom="0"/>
 		<border name="button_border" left="0" right="1" top="1" bottom="0"/>
 	</frame_geometry>
@@ -25,7 +25,7 @@
 	<frame_geometry name="border" has_title="false" parent="normal"/> 
 
 	<draw_ops name="bg_titlebar_focused">
-		<image filename="background.png" x="1" y="1" width="2560" height="38" />
+		<image filename="background.png" x="1" y="1" width="2560" height="76" />
 	</draw_ops>
 
 	<draw_ops name="bg_bottom_focused">

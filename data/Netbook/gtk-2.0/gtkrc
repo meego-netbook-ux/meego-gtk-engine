@@ -6,7 +6,7 @@ gtk-auto-mnemonics = 1
 
 gtk-icon-sizes = "gtk-menu=16,16:panel-menu=24,24:panel=16,16:gtk-button=16,16:gtk-large-toolbar=24,24"
 
-gtk_color_scheme = "bg_color:#eeecec;fg_color:#556168;text_color:#556168;base_color:#fff;selected_bg_color:#a2cb3d;selected_fg_color:#fff;grey:#8d8d8d;green:#a2cb3d;toolbar_color:#adb2ac;menubar_color:#dadcd9;frame_color:#dadcd9;inactive_frame_color:#dadcd9;"
+gtk_color_scheme = "bg_color:#eeecec;fg_color:#556168;text_color:#556168;base_color:#fff;selected_bg_color:#a2cb3d;selected_fg_color:#fff;grey:#8d8d8d;green:#a2cb3d;toolbar_color:#dadcd9;menubar_color:#dadcd9;frame_color:#dadcd9;inactive_frame_color:#dadcd9;"
 
 
 style "default"
@@ -28,8 +28,8 @@ style "default"
   GtkWidget::focus-line-width = 0
   GtkWidget::shadow-type = GTK_SHADOW_NONE
 
-  GtkExpander::expander-size = 16
-  GtkTreeView::expander-size = 16
+  GtkExpander::expander-size = 20
+  GtkTreeView::expander-size = 20
 
   GtkTextView::error-underline-color = @green
 
@@ -76,6 +76,20 @@ style "default"
 
 }
 class "GtkWidget" style "default"
+
+
+style "panelwindow"
+{
+  bg[NORMAL] = "#fff"
+}
+widget "MplPanelGtk" style "panelwindow"
+
+
+style "scrolledwindow" {
+	bg [NORMAL] = "#fff"
+}
+widget "MplPanelGtk.*.GtkViewport" style "scrolledwindow"
+widget "*.GtkViewport" style "scrolledwindow"
 
 
 style "button"
@@ -126,6 +140,110 @@ style "button"
     }
 
 } widget_class "*Button*" style "button"
+
+
+style "textarea"
+{
+
+  fg [NORMAL] = @fg_color
+  fg [PRELIGHT] = @fg_color
+
+
+    engine "moblin-netbook-engine" {
+ 		radius = 3
+ 		border [NORMAL] = @grey
+    }
+
+} widget_class "*TextArea*" style "textarea"
+
+
+
+
+
+style "expander"
+{
+
+    engine "pixmap" {
+
+        image {
+            function = EXPANDER
+            expander_style = COLLAPSED
+				state = NORMAL
+            file = "Assets/plusbox-plus.png"
+        }
+        
+        image {
+            function = EXPANDER
+            expander_style = EXPANDED
+				state = NORMAL
+            file = "Assets/plusbox-minus.png"
+        }
+
+    }
+
+} widget "*GtkExpander" style "expander"
+
+
+
+
+
+style "lightswitch"
+{
+
+    engine "pixmap" {
+
+        image {
+            function = BOX
+            detail = "light-switch-handle"
+				state = NORMAL
+            file = "Assets/toggle-handle.png"
+            stretch = TRUE
+        }
+        
+        image {
+            function = BOX
+            detail = "light-switch-handle"
+				state = ACTIVE
+            file = "Assets/toggle-handle-focus.png"
+            stretch = TRUE
+        }
+        
+        image {
+            function = BOX
+            detail = "light-switch-handle"
+				state = PRELIGHT
+            file = "Assets/toggle-handle-hover.png"
+            stretch = TRUE
+        }
+        
+        image {
+            function = BOX
+            detail = "light-switch-handle"
+				state = INSENSITIVE
+            file = "Assets/toggle-handle-disabled.png"
+            stretch = TRUE
+        }
+        
+        image {
+            function = BOX
+            detail = "light-switch-trough"
+				state = NORMAL
+            file = "Assets/toggle-background.png"
+            stretch = TRUE
+        }
+        
+        image {
+            function = BOX
+            detail = "light-switch-trough"
+				state = INSENSITIVE
+            file = "Assets/toggle-background-disabled.png"
+            stretch = TRUE
+        }
+
+    }
+
+} widget "**GtkLightswitch" style "lightswitch"
+
 
 
 
@@ -960,26 +1078,10 @@ widget_class "*Menu*.*Sepa*"  style "menu-separator"
 
 style "toolbar"
 {
-  GtkToolbar::internal_padding = 2
+
   GtkToolbar::shadow_type = GTK_SHADOW_NONE
-  xthickness = 3
-  ythickness = 3
 
   bg[NORMAL] = @toolbar_color
-
-  engine "pixmap" 
-    {
-	#This is the image used to draw an unchecked box.
-        image 
-	{
-            function        = FLAT_BOX
-            recolorable     = TRUE
-            state = NORMAL
-            file    = "Assets/toolbar.png"
-            stretch = TRUE
-	    border = {2, 2, 2, 2}
-        }
-}
 
 
 }
