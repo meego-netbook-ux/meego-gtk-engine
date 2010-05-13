@@ -80,9 +80,10 @@ class "GtkWidget" style "default"
 
 style "panelwindow"
 {
-  bg[NORMAL] = "#fff"
+  bg [NORMAL] = "#fff"
+  fg [NORMAL] = @text_color
 }
-widget "MplPanelGtk" style "panelwindow"
+widget "MplPanelGtk*" style "panelwindow"
 
 
 style "scrolledwindow" {
@@ -178,10 +179,54 @@ style "expander"
 				state = NORMAL
             file = "Assets/plusbox-minus.png"
         }
+        
+        image {
+            function = EXPANDER
+            expander_style = SEMI_COLLAPSED
+            file = "Assets/plusbox-plus.png"
+        }
+        
+        image {
+            function = EXPANDER
+            expander_style = SEMI_EXPANDED
+            file = "Assets/plusbox-minus.png"
+        }
+        
+        image {
+            function = EXPANDER
+            expander_style = COLLAPSED
+				state = ACTIVE
+            file = "Assets/plusbox-plus.png"
+        }
+        
+        image {
+            function = EXPANDER
+            expander_style = EXPANDED
+				state = ACTIVE
+            file = "Assets/plusbox-minus.png"
+        }
+        
+        image {
+            function = EXPANDER
+            expander_style = EXPANDED
+				state = PRELIGHT
+            file = "Assets/plusbox-minus-hover.png"
+        }
+        
+        image {
+            function = EXPANDER
+            expander_style = COLLAPSED
+				state = PRELIGHT
+            file = "Assets/plusbox-plus-hover.png"
+        }
 
     }
 
-} widget "*GtkExpander" style "expander"
+} widget "*" style "expander"
+
+
+
+
 
 
 
@@ -189,15 +234,17 @@ style "expander"
 
 style "lightswitch"
 {
+  xthickness = 0
+  ythickness = 0
+
 
     engine "pixmap" {
 
         image {
             function = BOX
             detail = "light-switch-handle"
-				state = NORMAL
+
             file = "Assets/toggle-handle.png"
-            stretch = TRUE
         }
         
         image {
@@ -205,7 +252,7 @@ style "lightswitch"
             detail = "light-switch-handle"
 				state = ACTIVE
             file = "Assets/toggle-handle-focus.png"
-            stretch = TRUE
+
         }
         
         image {
@@ -213,7 +260,7 @@ style "lightswitch"
             detail = "light-switch-handle"
 				state = PRELIGHT
             file = "Assets/toggle-handle-hover.png"
-            stretch = TRUE
+
         }
         
         image {
@@ -221,7 +268,7 @@ style "lightswitch"
             detail = "light-switch-handle"
 				state = INSENSITIVE
             file = "Assets/toggle-handle-disabled.png"
-            stretch = TRUE
+
         }
         
         image {
@@ -229,7 +276,15 @@ style "lightswitch"
             detail = "light-switch-trough"
 				state = NORMAL
             file = "Assets/toggle-background.png"
-            stretch = TRUE
+
+        }
+        
+        image {
+            function = BOX
+            detail = "light-switch-trough"
+				state = SELECTED
+            file = "Assets/toggle-background-active.png"
+
         }
         
         image {
@@ -242,7 +297,7 @@ style "lightswitch"
 
     }
 
-} widget "**GtkLightswitch" style "lightswitch"
+} class "*LightSwitch" style "lightswitch"
 
 
 
