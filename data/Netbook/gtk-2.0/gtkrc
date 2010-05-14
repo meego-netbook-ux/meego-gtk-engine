@@ -169,14 +169,14 @@ style "expander"
         image {
             function = EXPANDER
             expander_style = COLLAPSED
-				state = NORMAL
+	    state = NORMAL
             file = "Assets/plusbox-plus.png"
         }
         
         image {
             function = EXPANDER
             expander_style = EXPANDED
-				state = NORMAL
+	    state = NORMAL
             file = "Assets/plusbox-minus.png"
         }
         
@@ -195,34 +195,36 @@ style "expander"
         image {
             function = EXPANDER
             expander_style = COLLAPSED
-				state = ACTIVE
+	    state = ACTIVE
             file = "Assets/plusbox-plus.png"
         }
         
         image {
             function = EXPANDER
             expander_style = EXPANDED
-				state = ACTIVE
+            state = ACTIVE
             file = "Assets/plusbox-minus.png"
         }
         
         image {
             function = EXPANDER
             expander_style = EXPANDED
-				state = PRELIGHT
+            state = PRELIGHT
             file = "Assets/plusbox-minus-hover.png"
         }
         
         image {
             function = EXPANDER
             expander_style = COLLAPSED
-				state = PRELIGHT
+	    state = PRELIGHT
             file = "Assets/plusbox-plus-hover.png"
         }
 
     }
 
-} widget "*" style "expander"
+}
+class "GtkTreeView" style "expander"
+class "GtkExpander" style "expander"
 
 
 
