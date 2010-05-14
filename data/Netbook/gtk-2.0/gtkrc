@@ -155,7 +155,10 @@ style "textarea"
  		border [NORMAL] = @grey
     }
 
-} widget_class "*TextArea*" style "textarea"
+}
+widget "*TextArea*" style "textarea"
+widget "*TextView*" style "textarea"
+
 
 
 
