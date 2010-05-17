@@ -600,6 +600,16 @@ style "scrollbar" {
             border = { 5, 5, 15, 22 } # = {Left, Right, Top, Bottom} 
             stretch = TRUE # this stretches the image
         }
+        
+        image {
+            function = SLIDER
+				state = INSENSITIVE
+            orientation = VERTICAL
+            recolorable = TRUE # what does that mean? it's not implemented!
+            file = "Assets/scroll-vhandle-disabled.png"
+            border = { 5, 5, 15, 22 } # = {Left, Right, Top, Bottom} 
+            stretch = TRUE # this stretches the image
+        }
 
         image {
             function = SLIDER
@@ -617,6 +627,16 @@ style "scrollbar" {
             recolorable = TRUE # what does that mean? it's not implemented!
             file = "Assets/scroll-hhandle-hover.png"
             border = { 15, 22, 5, 5 } # = {Left, Right, Top, Bottom} 
+            stretch = TRUE # this stretches the image
+        }
+        
+        image {
+            function = SLIDER
+				state = INSENSITIVE
+            orientation = HORIZONTAL
+            recolorable = TRUE # what does that mean? it's not implemented!
+            file = "Assets/scroll-hhandle-disabled.png"
+            border = { 5, 5, 15, 22 } # = {Left, Right, Top, Bottom} 
             stretch = TRUE # this stretches the image
         }
 
