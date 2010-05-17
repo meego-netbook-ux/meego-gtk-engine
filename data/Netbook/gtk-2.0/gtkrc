@@ -90,7 +90,6 @@ style "scrolledwindow" {
 	bg [NORMAL] = "#fff"
 }
 widget "MplPanelGtk.*.GtkViewport" style "scrolledwindow"
-widget "*.GtkViewport" style "scrolledwindow"
 
 
 style "button"
@@ -1338,7 +1337,7 @@ style "mux-frame"
 {
   bg [NORMAL] = "#ffffff"
 }
-class "MuxFrame" style "mux-frame"
+widget_class "*MuxFrame*" style "mux-frame"
 
 
 style "mux-banner"
