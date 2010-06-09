@@ -141,6 +141,11 @@ style "button"
 
 } widget_class "*Button*" style "button"
 
+style "chrome-button"
+{
+    xthickness = 10
+    ythickness =  4
+} widget_class "*.<GtkChromeButton>" style "chrome-button"
 
 style "textarea"
 {
