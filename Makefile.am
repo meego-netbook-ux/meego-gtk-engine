@@ -2,9 +2,9 @@ INCLUDES = $(GTK_CFLAGS) $(DEVELOPMENT_CFLAGS)
 
 enginedir = $(libdir)/gtk-2.0/$(GTK_VERSION)/engines
 
-engine_LTLIBRARIES = libmoblin-netbook-engine.la
+engine_LTLIBRARIES = libmeego-netbook.la
 
-libmoblin_netbook_engine_la_SOURCES =   \
+libmeego_netbook_la_SOURCES =   \
 	./src/moblin-netbook-style.c    \
 	./src/moblin-netbook-style.h    \
 	./src/moblin-netbook-rc-style.c \
@@ -13,8 +13,8 @@ libmoblin_netbook_engine_la_SOURCES =   \
 	./src/moblin-netbook-utils.c    \
 	./src/moblin-netbook-utils.h
 
-libmoblin_netbook_engine_la_LDFLAGS = -module -avoid-version -no-undefined -Werror
-libmoblin_netbook_engine_la_LIBADD = $(GTK_LIBS)
+libmeego_netbook_la_LDFLAGS = -module -avoid-version -no-undefined -Werror
+libmeego_netbook_la_LIBADD = $(GTK_LIBS)
 
 themedir = $(datadir)/themes/Netbook
 

@@ -64,7 +64,7 @@ style "default"
   base [ACTIVE] = @selected_bg_color
   base [INSENSITIVE] = "#f1f1f1"
   GtkWidget::focus-line-width = 0
-  engine "moblin-netbook-engine"
+  engine "meego-netbook"
   {
     radius = 3
     border [NORMAL] = @grey
@@ -154,7 +154,7 @@ style "textarea"
   fg [PRELIGHT] = @fg_color
 
 
-    engine "moblin-netbook-engine" {
+    engine "meego-netbook" {
  		radius = 3
  		border [NORMAL] = @grey
     }
@@ -1085,7 +1085,7 @@ style "menuitem"
   xthickness = 6
   ythickness = 4
 
-  engine "moblin-netbook-engine"
+  engine "meego-netbook"
   {
     radius = 0
   }
@@ -1103,7 +1103,7 @@ style "paned"
 {
   GtkPaned::handle-size = 8
 
-  engine "moblin-netbook-engine"
+  engine "meego-netbook"
   {
     border [NORMAL] = lighter (@grey)
     border [PRELIGHT] = lighter (@grey)
@@ -1142,7 +1142,7 @@ style "menu"
   GtkMenu::vertical_padding = 0
   xthickness = 2
   ythickness = 2
-  engine "moblin-netbook-engine"
+  engine "meego-netbook"
   {
     radius = 2
   }
@@ -1152,7 +1152,7 @@ class "GtkMenu" style "menu"
 
 style "menu-separator"
 {
-  engine "moblin-netbook-engine"
+  engine "meego-netbook"
   {
     border [NORMAL] = "#dddddd"
   }
@@ -1182,7 +1182,7 @@ style "menubar"
   ythickness = 5
   GtkMenuBar::shadow_type = GTK_SHADOW_NONE
 
-  engine "moblin-netbook-engine"
+  engine "meego-netbook"
   {
     radius = 0
   }
@@ -1196,7 +1196,7 @@ class "GtkMenuBar" style "menubar"
 style "toolbar-handlebox"
 {
   bg [NORMAL] = @toolbar_color
-  engine "moblin-netbook-engine"
+  engine "meego-netbook"
   {
     radius = 0
     border [NORMAL] = @toolbar_color
@@ -1239,7 +1239,7 @@ style "nautilus-pathbar-arrow-button" = "toolbar-button"
   bg [NORMAL] = mix(0.88, @toolbar_color, "white")
   xthickness = 2
   ythickness = 2
-  engine "moblin-netbook-engine"
+  engine "meego-netbook"
   {
     border [NORMAL] = mix(0.88, @toolbar_color, "white")
     border [PRELIGHT] = mix(0.88, @toolbar_color, "white")
@@ -1261,7 +1261,7 @@ style "spinbutton" = "button"
   xthickness = 4
   ythickness = 4
   
-  engine "moblin-netbook-engine"
+  engine "meego-netbook"
   {
     border [NORMAL] = @grey
     border [PRELIGHT] = @green
@@ -1309,7 +1309,7 @@ style "notebook"
   ythickness = 4
   xthickness = 4
 
-  engine "moblin-netbook-engine"
+  engine "meego-netbook"
   {
     radius = 3
     border [ACTIVE] = lighter (@grey)
@@ -1321,7 +1321,7 @@ style "frame"
 {
 
 
-  engine "moblin-netbook-engine"
+  engine "meego-netbook"
   {
     radius = 2
     border [ACTIVE] = lighter (@grey)
@@ -1413,7 +1413,7 @@ style "optionbox" = "combobox"
   fg [NORMAL] = @fg_color
   fg [PRELIGHT] = @fg_color
 
-  engine "moblin-netbook-engine"
+  engine "meego-netbook"
   {
     border [NORMAL] = @grey
     border [PRELIGHT] = @green
@@ -1433,7 +1433,7 @@ widget "*.*nautilus-extra-view-widget" style : highest "nautilus_location"
 
 style "separator"
 {
-  engine "moblin-netbook-engine"
+  engine "meego-netbook"
   {
     border [NORMAL] = "#dddddd"
     radius = 3
@@ -1444,7 +1444,7 @@ widget_class "*Separator*"  style "separator"
 
 style "toolbar-separator"
 {
-  engine "moblin-netbook-engine"
+  engine "meego-netbook"
   {
     border [NORMAL] = "#DADCD9"
   }
@@ -1469,7 +1469,7 @@ style "statusbar"
   fg [NORMAL] = @fg_color
   fg [PRELIGHT] = @fg_color
 
-  engine "moblin-netbook-engine"
+  engine "meego-netbook"
   {
     radius = 3
     border [NORMAL] = @bg_color
@@ -1486,7 +1486,7 @@ style "tooltip"
   bg [NORMAL]          = @green
   fg [NORMAL]          = "#fff"
 
-  engine "moblin-netbook-engine"
+  engine "meego-netbook"
   {
     border [NORMAL] = @green
   }
