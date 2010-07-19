@@ -1,4 +1,4 @@
-AC_INIT([moblin-gtk-engine], [1.2.2])
+AC_INIT([meego-netbook-theme], [0.1])
 AC_CONFIG_SRCDIR([README])
 AM_CONFIG_HEADER(config.h)
 
