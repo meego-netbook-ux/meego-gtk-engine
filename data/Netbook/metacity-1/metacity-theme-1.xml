@@ -43,6 +43,10 @@
 		<title x="6" y="(((height - title_height -1) / 2) `max` 0) + 2" color="#3b3b3a"/>
 	</draw_ops>
 
+	<draw_ops name="title_unfocused"> 
+		<title x="6" y="(((height - title_height -1) / 2) `max` 0) + 2" color="#7b7b7a"/>
+	</draw_ops>
+
 	<draw_ops name="titlebar_normal_focused"> 
 		<include name="bg_titlebar_focused"/>
 		<include name="lines_border_focused"/>
@@ -103,7 +107,7 @@
 	<frame_style name="normal_unfocused" geometry="normal"> 
 		<piece position="entire_background" draw_ops="normal_focused"/>
 		<piece position="titlebar" draw_ops="titlebar_normal_focused"/>
-		<piece position="title" draw_ops="title_all"/>
+		<piece position="title" draw_ops="title_unfocused"/>
 		<button function="close" state="normal" draw_ops="button_close_normal"/>
 		<button function="close" state="prelight" draw_ops="button_close_prelight"/>
 		<button function="close" state="pressed" draw_ops="button_close_pressed"/>
@@ -139,7 +143,7 @@
 	<frame_style name="maximized_unfocused" geometry="maximized"> 
 		<piece position="entire_background" draw_ops="normal_focused"/>
 		<piece position="titlebar" draw_ops="titlebar_normal_focused"/>
-		<piece position="title" draw_ops="title_all"/>
+		<piece position="title" draw_ops="title_unfocused"/>
 		<button function="close" state="normal" draw_ops="button_close_normal"/>
 		<button function="close" state="prelight" draw_ops="button_close_prelight"/>
 		<button function="close" state="pressed" draw_ops="button_close_pressed"/>
@@ -207,7 +211,7 @@
 	<frame_style name="utility_unfocused" geometry="utility"> 
 		<piece position="entire_background" draw_ops="normal_focused"/>
 		<piece position="titlebar" draw_ops="titlebar_normal_focused"/>
-		<piece position="title" draw_ops="title_all"/>
+		<piece position="title" draw_ops="title_unfocused"/>
 		<button function="close" state="normal" draw_ops="button_close_normal"/>
 		<button function="close" state="prelight" draw_ops="button_close_prelight"/>
 		<button function="close" state="pressed" draw_ops="button_close_pressed"/>
