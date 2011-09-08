@@ -56,8 +56,6 @@ style "default"
   text [ACTIVE] = @selected_fg_color
   text [INSENSITIVE] = shade (1.3, @grey)
 
-
-  
   base [NORMAL] = @base_color
   base [PRELIGHT] = @base_color
   base [SELECTED] = @selected_bg_color
@@ -1592,3 +1590,20 @@ style "EDateEditEntry"
   ythickness = 10 
 }
 widget_class "*.EDateEdit.GtkEntry" style "EDateEditEntry"
+
+
+# style to make chrome look acceptable
+style "chrome-gtk-frame"
+{
+    ChromeGtkFrame::frame-color = "#b0afa6"
+    ChromeGtkFrame::inactive-frame-color = "#f1f1f1"
+
+    ChromeGtkFrame::frame-gradient-size = 14
+    ChromeGtkFrame::frame-gradient-color = "#5c5b56"
+
+    ChromeGtkFrame::scrollbar-trough-color = @bg_color
+   ChromeGtkFrame::scrollbar-slider-prelight-color = "#F8F6F2"
+   ChromeGtkFrame::scrollbar-slider-normal-color = "#E7E0D3"
+}
+
+class "ChromeGtkFrame" style "chrome-gtk-frame"
