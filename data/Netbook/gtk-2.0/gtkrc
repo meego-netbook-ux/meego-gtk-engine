@@ -6,8 +6,7 @@ gtk-auto-mnemonics = 1
 
 gtk-icon-sizes = "gtk-menu=16,16:panel-menu=24,24:panel=16,16:gtk-button=16,16:gtk-large-toolbar=24,24"
 
-gtk_color_scheme = "bg_color:#eeecec;fg_color:#556168;text_color:#556168;base_color:#fff;selected_bg_color:#a2cb3d;selected_fg_color:#fff;grey:#8d8d8d;green:#a2cb3d;toolbar_color:#dadcd9;menubar_color:#dadcd9;frame_color:#dadcd9;inactive_frame_color:#dadcd9;"
-
+gtk_color_scheme = "bg_color:#eeecec;fg_color:#556168;text_color:#556168;base_color:#fff;selected_bg_color:#a2cb3d;selected_fg_color:#fff;grey:#8d8d8d;green:#a2cb3d;toolbar_color:#dadcd9;menubar_color:#dadcd9;frame_color:#dadcd9;inactive_frame_color:#dadcd9;info_fg_color:#6e6a5e;info_bg_color:#fff6da;warning_fg_color:#6e6a5e;warning_bg_color:#fff6da;question_fg_color:#6e6a5e;question_bg_color:#fff6da;error_fg_color:white;error_bg_color:#f79c9b;"
 
 style "default"
 {
@@ -1211,16 +1210,7 @@ style "toolbar-arrow"
 }
 widget_class "*<GtkToolbar>.*GtkArrow*"  style "toolbar-arrow"
 
-style "infobar"
-{
-  bg [NORMAL] = @green
-  bg [NORMAL] = @green
-  base [NORMAL] = @green
-  text [NORMAL] = @green
-  
-}
-widget_class "GtkInfobar"  style "infobar"
-widget_class "GtkInfoBar"  style "infobar"
+
 
 
 style "toolbar-button" = "button"
@@ -1579,8 +1569,17 @@ style "moblin-settings-button" = "button"
 widget "*moblin-toolbar.*.moblin-settings-button" style "moblin-settings-button"
 widget "*MeeGoToolbar.*.MeeGoSettingsButton" style "moblin-settings-button"
 
+# style 
+style "search-entry"
+{
+  
+  base [INSENSITIVE] = "#f1f1f1"
+  bg [NORMAL]          = "#f1f1f1"
+  fg [NORMAL]          = "#f1f1f1"
 
+}
 
+widget "*.search-alignment.search-entry" style "search-entry"
 
 
 # style to make the date picker in Evolution appointement window the same
