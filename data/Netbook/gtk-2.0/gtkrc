@@ -60,7 +60,7 @@ style "default"
   base [SELECTED] = @selected_bg_color
   base [ACTIVE] = @selected_bg_color
   base [INSENSITIVE] = "#f1f1f1"
-  GtkWidget::focus-line-width = 0
+  GtkWidget::focus-line-width = 1
   engine "meego-netbook"
   {
     radius = 3
@@ -1601,8 +1601,7 @@ style "chrome-gtk-frame"
     ChromeGtkFrame::frame-gradient-color = "#5c5b56"
 
     ChromeGtkFrame::scrollbar-trough-color = @bg_color
-   ChromeGtkFrame::scrollbar-slider-prelight-color = "#F8F6F2"
-   ChromeGtkFrame::scrollbar-slider-normal-color = "#E7E0D3"
+    ChromeGtkFrame::scrollbar-slider-prelight-color = "#F8F6F2"
+    ChromeGtkFrame::scrollbar-slider-normal-color = "#E7E0D3"
 }
-
 class "ChromeGtkFrame" style "chrome-gtk-frame"
